@@ -67,8 +67,8 @@ class TestIsCacheValid:
         cache_path = tmp_path / "cache.pkl"
         input_path.touch()
         cache_path.touch()
-        # Cache is newer (touch again)
-        cache_path.touch()
+        # Cache is newer - write to cache to ensure it's newer
+        cache_path.write_text("cached data")
         assert is_cache_valid(cache_path, input_path)
 
     def test_stale_cache(self, tmp_path: Path) -> None:
@@ -77,8 +77,8 @@ class TestIsCacheValid:
         cache_path = tmp_path / "cache.pkl"
         input_path.touch()
         cache_path.touch()
-        # Input is newer
-        input_path.touch()
+        # Input is newer - write to input to make it newer
+        input_path.write_text("new data")
         assert not is_cache_valid(cache_path, input_path)
 
     def test_nonexistent_cache(self, tmp_path: Path) -> None:
