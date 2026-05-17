@@ -26,8 +26,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
-          # Install Latin sentence splitter model
-          pip install la_senter
+          # Install Latin sentence splitter model from Hugging Face
+          pip install huggingface_hub
+          python -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='UniversalDependencies/la_senter-ud-2.5-191005', filename='la_senter-ud-2.5-191005.tar.gz', repo_type='model')"
 
       - name: Run tests with coverage
         run: |
