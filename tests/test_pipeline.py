@@ -175,12 +175,10 @@ class TestEndToEndYsengrimus:
             udpipe_response = pickle.load(f)
 
         # Step 3: Configure pipeline
-        # Use the pre-defined common adverbs file from Liber-Regum
+        # Use the pre-defined common adverbs file from test fixtures
         # This matches how the expected output was generated
         common_adverbs_path = (
-            Path(__file__).parent.parent.parent
-            / "Liber-Regum"
-            / "common_adverbs_quesplit.txt"
+            Path(__file__).parent / "fixtures" / "common_adverbs_quesplit.txt"
         )
         config = MaskingConfig(
             cache_dir=ysengrimus_cache_dir,
