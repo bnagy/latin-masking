@@ -1,4 +1,4 @@
-"""Command-line interface for udpipe-masking."""
+"""Command-line interface for latin-masking."""
 
 from __future__ import annotations
 
@@ -15,10 +15,10 @@ def _cmd_process(args: argparse.Namespace) -> int:
     """Handle the process subcommand."""
     config = MaskingConfig(
         model=args.model,
-        cache_dir=Path.home() / ".cache" / "udpipe-masking",
+        cache_dir=Path.home() / ".cache" / "latin-masking",
     )
     if args.regenerate:
-        config.cache_dir = Path("/tmp/udpipe-masking-nocache")
+        config.cache_dir = Path("/tmp/latin-masking-nocache")
 
     if args.quesplit:
         result = run_pipeline_with_quesplit(args.input, args.output, config=config)

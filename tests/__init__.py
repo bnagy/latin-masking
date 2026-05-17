@@ -1,1 +1,1 @@
-"""Tests for udpipe-masking package."""
+"""Tests for latin-masking package."""

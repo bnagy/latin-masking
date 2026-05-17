@@ -1,4 +1,4 @@
-# udpipe-masking
+# latin-masking
 
 A self-contained Python package for Latin text processing pipeline:
 plain text → sentence splitting → -que clitic splitting → UDPipe POS tagging →
@@ -7,14 +7,14 @@ CoNLL-U parsing → UV/IJ normalization → adverb dictionary generation → POS
 ## Installation
 
 ```bash
-pip install udpipe-masking
+pip install latin-masking
 ```
 
 Or install from source:
 
 ```bash
-git clone https://github.com/yourname/udpipe-masking.git
-cd udpipe-masking
+git clone https://github.com/bnagy/latin-masking.git
+cd latin-masking
 pip install -e ".[dev]"
 ```
 
@@ -111,13 +111,13 @@ ADV NOUN VERB ADV
 Run tests:
 
 ```bash
-pytest tests/ -v --cov=udpipe_masking
+pytest tests/ -v --cov=latin_masking
 ```
 
 Type checking:
 
 ```bash
-mypy src/udpipe_masking
+mypy src/latin_masking
 ```
 
 ## License

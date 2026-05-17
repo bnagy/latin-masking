@@ -1,4 +1,4 @@
-"""Type definitions, dataclasses, and custom exceptions for udpipe-masking."""
+"""Type definitions, dataclasses, and custom exceptions for latin-masking."""
 
 from __future__ import annotations
 
@@ -101,7 +101,7 @@ class MaskingConfig:
     common_adverbs_path: Path | None = None
     replacement_dict_path: Path | None = None
     cache_dir: Path = field(
-        default_factory=lambda: Path.home() / ".cache" / "udpipe-masking"
+        default_factory=lambda: Path.home() / ".cache" / "latin-masking"
     )
     presegmented: bool = False
     strip_punct: bool = True

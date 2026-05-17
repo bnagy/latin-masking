@@ -1,4 +1,4 @@
-"""udpipe-masking: A self-contained Python package for Latin text processing pipeline.
+"""latin-masking: A self-contained Python package for Latin text processing pipeline.
 
 This package provides tools for:
 - Sentence splitting (spaCy la_senter + NLTK fallback)

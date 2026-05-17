@@ -1,4 +1,4 @@
-"""Shared fixtures for udpipe-masking tests."""
+"""Shared fixtures for latin-masking tests."""
 
 from __future__ import annotations
 
