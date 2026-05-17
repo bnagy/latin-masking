@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from udpipe_masking.mask import (
+from latin_masking.mask import (
     collect_lowercase_words,
     mask_corpus,
     mask_sentence,

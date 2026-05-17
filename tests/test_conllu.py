@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from udpipe_masking.conllu import (
+from latin_masking.conllu import (
     iter_conllu_sentences,
     parse_conllu,
     parse_conllu_light,

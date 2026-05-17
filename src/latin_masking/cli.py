@@ -7,8 +7,8 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from udpipe_masking.types import MaskingConfig
-from udpipe_masking.pipeline import run_pipeline, run_pipeline_with_quesplit
+from latin_masking.types import MaskingConfig
+from latin_masking.pipeline import run_pipeline, run_pipeline_with_quesplit
 
 
 def _cmd_process(args: argparse.Namespace) -> int:
@@ -32,7 +32,7 @@ def _cmd_process(args: argparse.Namespace) -> int:
 
 def _cmd_split_sentences(args: argparse.Namespace) -> int:
     """Handle the split-sentences subcommand."""
-    from udpipe_masking.sentences import split_sentences
+    from latin_masking.sentences import split_sentences
 
     with open(args.input, "r", encoding="utf-8") as f:
         text = f.read()
@@ -54,7 +54,7 @@ def _cmd_split_sentences(args: argparse.Namespace) -> int:
 
 def _cmd_split_que(args: argparse.Namespace) -> int:
     """Handle the split-que subcommand."""
-    from udpipe_masking.clitics import load_que_words, split_que
+    from latin_masking.clitics import load_que_words, split_que
 
     que_words = []
     if args.que_words:
@@ -71,14 +71,14 @@ def _cmd_split_que(args: argparse.Namespace) -> int:
 
 def _cmd_generate_adverbs(args: argparse.Namespace) -> int:
     """Handle the generate-adverbs subcommand."""
-    from udpipe_masking.client import process_text
-    from udpipe_masking.adverbs import (
+    from latin_masking.client import process_text
+    from latin_masking.adverbs import (
         collect_adverbs,
         normalize_adverb_counts,
         generate_adverb_list,
         save_adverb_list,
     )
-    from udpipe_masking.conllu import parse_conllu
+    from latin_masking.conllu import parse_conllu
 
     all_adverbs: Counter[str] = Counter()
     for input_path in args.input:
@@ -109,10 +109,10 @@ def _cmd_generate_adverbs(args: argparse.Namespace) -> int:
 
 def _cmd_mask(args: argparse.Namespace) -> int:
     """Handle the mask subcommand."""
-    from udpipe_masking.client import process_text
-    from udpipe_masking.conllu import parse_conllu
-    from udpipe_masking.mask import two_pass_mask
-    from udpipe_masking.adverbs import load_adverb_list
+    from latin_masking.client import process_text
+    from latin_masking.conllu import parse_conllu
+    from latin_masking.mask import two_pass_mask
+    from latin_masking.adverbs import load_adverb_list
 
     common_adverbs = set()
     if args.adverbs:

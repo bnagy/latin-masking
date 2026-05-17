@@ -7,19 +7,19 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from udpipe_masking.pipeline import (
+from latin_masking.pipeline import (
     process_file,
     run_pipeline,
     run_pipeline_with_quesplit,
 )
-from udpipe_masking.types import MaskingConfig
+from latin_masking.types import MaskingConfig
 
 
 class TestProcessFile:
     """Tests for process_file function."""
 
-    @patch("udpipe_masking.pipeline.process_text")
-    @patch("udpipe_masking.conllu.parse_conllu")
+    @patch("latin_masking.pipeline.process_text")
+    @patch("latin_masking.conllu.parse_conllu")
     def test_process_file_basic(
         self, mock_parse: MagicMock, mock_process: MagicMock, tmp_path: Path
     ) -> None:
@@ -43,7 +43,7 @@ class TestProcessFile:
 class TestRunPipeline:
     """Tests for run_pipeline function."""
 
-    @patch("udpipe_masking.pipeline.process_file")
+    @patch("latin_masking.pipeline.process_file")
     def test_run_pipeline(self, mock_process: MagicMock, tmp_path: Path) -> None:
         """Test running the full pipeline."""
         input_file = tmp_path / "test.txt"
@@ -64,7 +64,7 @@ class TestRunPipeline:
 class TestRunPipelineWithQuesplit:
     """Tests for run_pipeline_with_quesplit function."""
 
-    @patch("udpipe_masking.pipeline.process_file")
+    @patch("latin_masking.pipeline.process_file")
     def test_run_pipeline_with_quesplit(
         self, mock_process: MagicMock, tmp_path: Path
     ) -> None:
@@ -156,7 +156,7 @@ class TestEndToEndYsengrimus:
 
         import pickle
 
-        from udpipe_masking.sentences import split_sentences
+        from latin_masking.sentences import split_sentences
 
         # Step 1: Verify sentence splitting
         raw_text = ysengrimus_input.read_text()
@@ -198,8 +198,8 @@ class TestEndToEndYsengrimus:
         # Step 5: Mock the cache loading to return our cached response
         # We need to mock both is_cache_valid and load_cached_response
         with (
-            patch("udpipe_masking.pipeline.is_cache_valid") as mock_valid,
-            patch("udpipe_masking.pipeline.load_cached_response") as mock_load,
+            patch("latin_masking.pipeline.is_cache_valid") as mock_valid,
+            patch("latin_masking.pipeline.load_cached_response") as mock_load,
         ):
             mock_valid.return_value = True
             mock_load.return_value = udpipe_response
@@ -209,7 +209,7 @@ class TestEndToEndYsengrimus:
             que_words_path = (
                 Path(__file__).parent.parent
                 / "src"
-                / "udpipe_masking"
+                / "latin_masking"
                 / "data"
                 / "que_conj_words.txt"
             )
@@ -266,7 +266,7 @@ class TestEndToEndYsengrimus:
         if not ysengrimus_sentences_expected.exists():
             pytest.skip("Expected sentences file not found")
 
-        from udpipe_masking.sentences import split_sentences
+        from latin_masking.sentences import split_sentences
 
         # Read raw text
         raw_text = ysengrimus_input.read_text()

@@ -9,7 +9,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from udpipe_masking.cli import (
+from latin_masking.cli import (
     _cmd_generate_adverbs,
     _cmd_mask,
     _cmd_process,
@@ -17,13 +17,13 @@ from udpipe_masking.cli import (
     _cmd_split_sentences,
     main,
 )
-from udpipe_masking.types import MaskingConfig
+from latin_masking.types import MaskingConfig
 
 
 class TestCmdProcess:
     """Tests for _cmd_process function."""
 
-    @patch("udpipe_masking.cli.run_pipeline")
+    @patch("latin_masking.cli.run_pipeline")
     def test_process_command(self, mock_run: MagicMock, tmp_path: Path) -> None:
         """Test process subcommand."""
         input_file = tmp_path / "input.txt"
@@ -48,7 +48,7 @@ class TestCmdProcess:
         assert result == 0
         mock_run.assert_called_once()
 
-    @patch("udpipe_masking.cli.run_pipeline_with_quesplit")
+    @patch("latin_masking.cli.run_pipeline_with_quesplit")
     def test_process_command_with_quesplit(
         self, mock_run: MagicMock, tmp_path: Path
     ) -> None:
@@ -190,7 +190,7 @@ class TestCmdMask:
 class TestMain:
     """Tests for main function."""
 
-    @patch("udpipe_masking.cli._cmd_process")
+    @patch("latin_masking.cli._cmd_process")
     def test_main_process_command(self, mock_cmd: MagicMock, tmp_path: Path) -> None:
         """Test main with process command."""
         input_file = tmp_path / "input.txt"
@@ -209,7 +209,7 @@ class TestMain:
         assert result == 0
         mock_cmd.assert_called_once()
 
-    @patch("udpipe_masking.cli._cmd_split_sentences")
+    @patch("latin_masking.cli._cmd_split_sentences")
     def test_main_split_sentences_command(
         self, mock_cmd: MagicMock, tmp_path: Path
     ) -> None:
@@ -226,7 +226,7 @@ class TestMain:
         assert result == 0
         mock_cmd.assert_called_once()
 
-    @patch("udpipe_masking.cli._cmd_split_que")
+    @patch("latin_masking.cli._cmd_split_que")
     def test_main_split_que_command(self, mock_cmd: MagicMock, tmp_path: Path) -> None:
         """Test main with split-que command."""
         input_file = tmp_path / "input.txt"
@@ -241,7 +241,7 @@ class TestMain:
         assert result == 0
         mock_cmd.assert_called_once()
 
-    @patch("udpipe_masking.cli._cmd_generate_adverbs")
+    @patch("latin_masking.cli._cmd_generate_adverbs")
     def test_main_generate_adverbs_command(
         self, mock_cmd: MagicMock, tmp_path: Path
     ) -> None:
@@ -258,7 +258,7 @@ class TestMain:
         assert result == 0
         mock_cmd.assert_called_once()
 
-    @patch("udpipe_masking.cli._cmd_mask")
+    @patch("latin_masking.cli._cmd_mask")
     def test_main_mask_command(self, mock_cmd: MagicMock, tmp_path: Path) -> None:
         """Test main with mask command."""
         input_file = tmp_path / "input.txt"

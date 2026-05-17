@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from udpipe_masking.clitics import load_que_words, load_que_whitelist, split_que
+from latin_masking.clitics import load_que_words, load_que_whitelist, split_que
 
 
 class TestSplitQue:

@@ -7,7 +7,7 @@ from typing import Iterator
 
 import pandas as pd
 
-from udpipe_masking.types import ConlluFrame
+from latin_masking.types import ConlluFrame
 
 
 def _cap_diff(x: int) -> str:

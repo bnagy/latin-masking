@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from udpipe_masking.normalize import normalize_ch_h, normalize_uv_ij
+from latin_masking.normalize import normalize_ch_h, normalize_uv_ij
 
 
 class TestNormalizeUvIj:

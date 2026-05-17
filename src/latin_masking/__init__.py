@@ -9,7 +9,7 @@ This package provides tools for:
 - POS masking
 """
 
-from udpipe_masking.types import (
+from latin_masking.types import (
     MaskingConfig,
     PipelineResult,
     UDPipeAPIError,

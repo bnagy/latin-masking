@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from udpipe_masking.normalize import normalize_ch_h, normalize_uv_ij
+from latin_masking.normalize import normalize_ch_h, normalize_uv_ij
 
 
 def mask_sentence(

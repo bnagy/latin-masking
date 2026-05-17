@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from udpipe_masking.cache import (
+from latin_masking.cache import (
     get_cache_path,
     is_cache_valid,
     load_cached_response,

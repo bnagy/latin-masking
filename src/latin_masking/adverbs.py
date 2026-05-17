@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from udpipe_masking.normalize import normalize_uv_ij
+from latin_masking.normalize import normalize_uv_ij
 
 
 def collect_adverbs(parsed_sentences: list[pd.DataFrame]) -> Counter[str]:

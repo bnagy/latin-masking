@@ -13,7 +13,7 @@ from typing import Any
 
 import pandas as pd
 
-from udpipe_masking.types import UDPipeAPIError, UDPipeError, UDPipeInputError
+from latin_masking.types import UDPipeAPIError, UDPipeError, UDPipeInputError
 
 logger = logging.getLogger(__name__)
 
@@ -243,6 +243,6 @@ def process_text(
         return str(result) if isinstance(result, str) else ""
 
     # Import here to avoid circular dependency
-    from udpipe_masking.conllu import parse_conllu
+    from latin_masking.conllu import parse_conllu
 
     return parse_conllu(response["result"])

@@ -6,22 +6,22 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from udpipe_masking.adverbs import (
+from latin_masking.adverbs import (
     collect_adverbs,
     generate_adverb_list,
     load_adverb_list,
     normalize_adverb_counts,
 )
-from udpipe_masking.cache import (
+from latin_masking.cache import (
     get_cache_path,
     is_cache_valid,
     load_cached_response,
     save_cached_response,
 )
-from udpipe_masking.clitics import load_que_words, split_que
-from udpipe_masking.client import process_text
-from udpipe_masking.mask import two_pass_mask
-from udpipe_masking.types import MaskingConfig, PipelineResult
+from latin_masking.clitics import load_que_words, split_que
+from latin_masking.client import process_text
+from latin_masking.mask import two_pass_mask
+from latin_masking.types import MaskingConfig, PipelineResult
 
 logger = logging.getLogger(__name__)
 
@@ -76,7 +76,7 @@ def process_file(
         return {"sentences": 0, "cache_hit": cache_hit}
 
     # Parse response
-    from udpipe_masking.conllu import parse_conllu
+    from latin_masking.conllu import parse_conllu
 
     frames, texts = parse_conllu(response)
 

@@ -6,8 +6,8 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from udpipe_masking.client import list_models, process_text, remove_macrons
-from udpipe_masking.types import UDPipeError, UDPipeInputError
+from latin_masking.client import list_models, process_text, remove_macrons
+from latin_masking.types import UDPipeError, UDPipeInputError
 
 
 class TestRemoveMacrons:
@@ -39,7 +39,7 @@ class TestProcessText:
         with pytest.raises(UDPipeInputError):
             process_text("   ")
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_successful_processing(self, mock_request: MagicMock) -> None:
         """Test successful text processing."""
         mock_request.return_value = {
@@ -49,7 +49,7 @@ class TestProcessText:
         result = process_text("test", raw=True)
         assert "# text" in result
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_presegmented_mode(self, mock_request: MagicMock) -> None:
         """Test presegmented mode."""
         mock_request.return_value = {
@@ -63,7 +63,7 @@ class TestProcessText:
 class TestListModels:
     """Tests for list_models function."""
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_list_models(self, mock_request: MagicMock) -> None:
         """Test listing available models."""
         mock_request.return_value = {"models": ["latin-ittb", "latin-ud"]}
@@ -75,7 +75,7 @@ class TestListModels:
 class TestProcessTextEdgeCases:
     """Tests for process_text edge cases."""
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_strip_punctuation(self, mock_request: MagicMock) -> None:
         """Test punctuation stripping."""
         mock_request.return_value = {
@@ -85,7 +85,7 @@ class TestProcessTextEdgeCases:
         result = process_text("test [word] <here>", raw=True)
         assert result is not None
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_remove_macrons_flag(self, mock_request: MagicMock) -> None:
         """Test macron removal flag."""
         mock_request.return_value = {
@@ -95,7 +95,7 @@ class TestProcessTextEdgeCases:
         result = process_text("mārcus", remove_macrons_flag=True, raw=True)
         assert result is not None
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_raw_false_returns_parsed(self, mock_request: MagicMock) -> None:
         """Test raw=False returns parsed DataFrames."""
         mock_request.return_value = {
@@ -106,7 +106,7 @@ class TestProcessTextEdgeCases:
         assert isinstance(result, tuple)
         assert len(result) == 2
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_missing_model_in_response_raises_udpipe_error(
         self, mock_request: MagicMock
     ) -> None:
@@ -116,7 +116,7 @@ class TestProcessTextEdgeCases:
         with pytest.raises(UDPipeError):
             process_text("test", raw=True)
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_missing_result_in_response_raises_udpipe_error(
         self, mock_request: MagicMock
     ) -> None:
@@ -155,7 +155,7 @@ class TestRemoveMacronsEdgeCases:
 class TestProcessTextRawFalse:
     """Tests for process_text with raw=False (parsed output)."""
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_parsed_output_structure(self, mock_request: MagicMock) -> None:
         """Test that raw=False returns tuple of (frames, texts)."""
         mock_request.return_value = {
@@ -169,7 +169,7 @@ class TestProcessTextRawFalse:
         assert isinstance(frames, list)
         assert isinstance(texts, list)
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_parsed_output_with_multiple_sentences(
         self, mock_request: MagicMock
     ) -> None:
@@ -189,7 +189,7 @@ class TestProcessTextRawFalse:
 class TestProcessTextPresegmented:
     """Tests for process_text with presegmented mode."""
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_presegmented_tokenizer_modified(self, mock_request: MagicMock) -> None:
         """Test that presegmented mode modifies tokenizer argument."""
         mock_request.return_value = {
@@ -213,7 +213,7 @@ class TestProcessTextPresegmented:
 class TestProcessTextStripPunctuation:
     """Tests for process_text punctuation stripping."""
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_brackets_stripped(self, mock_request: MagicMock) -> None:
         """Test that brackets are stripped from input."""
         mock_request.return_value = {
@@ -229,7 +229,7 @@ class TestProcessTextStripPunctuation:
         assert "[" not in params["data"]
         assert "]" not in params["data"]
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_angle_brackets_stripped(self, mock_request: MagicMock) -> None:
         """Test that angle brackets are stripped from input."""
         mock_request.return_value = {
@@ -244,7 +244,7 @@ class TestProcessTextStripPunctuation:
         assert "<" not in params["data"]
         assert ">" not in params["data"]
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_curly_braces_stripped(self, mock_request: MagicMock) -> None:
         """Test that curly braces are stripped from input."""
         mock_request.return_value = {
@@ -259,7 +259,7 @@ class TestProcessTextStripPunctuation:
         assert "{" not in params["data"]
         assert "}" not in params["data"]
 
-    @patch("udpipe_masking.client._perform_request")
+    @patch("latin_masking.client._perform_request")
     def test_dagger_stripped(self, mock_request: MagicMock) -> None:
         """Test that dagger symbol is stripped from input."""
         mock_request.return_value = {

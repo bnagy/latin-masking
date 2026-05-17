@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from udpipe_masking.adverbs import (
+from latin_masking.adverbs import (
     collect_adverbs,
     generate_adverb_list,
     load_adverb_list,

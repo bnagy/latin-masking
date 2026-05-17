@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from udpipe_masking.sentences import (
+from latin_masking.sentences import (
     has_sufficient_punctuation,
     preprocess_text,
     split_paren_content,
