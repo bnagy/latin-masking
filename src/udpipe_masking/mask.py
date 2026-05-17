@@ -1,0 +1,127 @@
+"""POS masking for Latin text."""
+
+from __future__ import annotations
+
+import pandas as pd
+
+from udpipe_masking.normalize import normalize_ch_h, normalize_uv_ij
+
+
+def mask_sentence(
+    words: list[str],
+    pos_tags: list[str],
+    *,
+    common_adverbs: set[str],
+) -> list[str]:
+    """Apply masking rules to one sentence.
+
+    - NOUN/VERB/ADJ/PROPN/NUM/AUX → POS tag
+    - ADV → lowercased normalized word (if in common_adverbs) else "ADV"
+    - Everything else → lowercased normalized word
+
+    UV/IJ normalization (v→u, j→i) is applied universally after lowercasing.
+
+    Args:
+        words: List of words in the sentence.
+        pos_tags: List of POS tags corresponding to words.
+        common_adverbs: Set of common adverbs to keep unmasked.
+
+    Returns:
+        List of masked tokens.
+
+    """
+    pos_mask_tags = {"NOUN", "VERB", "ADJ", "PROPN", "NUM", "AUX"}
+    final = []
+
+    for i, w in enumerate(words):
+        # Step 1: Strip leading ( and trailing ) from tokens
+        w_clean = w.lstrip("(").rstrip(")")
+
+        # Step 2: Apply ch→h normalization (mihi→michi, nihil→nichil)
+        w_norm = normalize_ch_h(w_clean)
+
+        # Step 3: Apply POS masking
+        if pos_tags[i] in pos_mask_tags:
+            final.append(pos_tags[i])
+        elif pos_tags[i] == "ADV":
+            # Normalize adverb for lookup (v→u, j→i) to match adverbs file format
+            w_norm_lower = normalize_uv_ij(w_norm.lower())
+            if w_norm_lower in common_adverbs:
+                final.append(w_norm_lower)
+            else:
+                final.append("ADV")
+        else:
+            # Lowercase and normalize all non-POS, non-ADV tokens
+            final.append(normalize_uv_ij(w_norm.lower()))
+
+    return final
+
+
+def mask_corpus(
+    parsed_sentences: list[pd.DataFrame],
+    *,
+    common_adverbs: set[str],
+) -> list[str]:
+    """Process all sentences and return masked lines.
+
+    Args:
+        parsed_sentences: List of DataFrames from CoNLL-U parsing.
+        common_adverbs: Set of common adverbs to keep unmasked.
+
+    Returns:
+        List of masked sentences.
+
+    """
+    processed_sentences = []
+
+    for sentence in parsed_sentences:
+        words = list(sentence["word"])
+        pos_tags = list(sentence["POS"])
+
+        masked = mask_sentence(
+            words,
+            pos_tags,
+            common_adverbs=common_adverbs,
+        )
+        processed_sentences.append(" ".join(masked))
+
+    return processed_sentences
+
+
+def collect_lowercase_words(masked_sentences: list[str]) -> set[str]:
+    """Extract non-POS, non-ADV tokens from masked output.
+
+    Args:
+        masked_sentences: List of masked sentence strings.
+
+    Returns:
+        Set of lowercase words.
+
+    """
+    lowercase_words: set[str] = set()
+    pos_tags = {"NOUN", "VERB", "ADJ", "PROPN", "NUM", "AUX", "ADV"}
+
+    for sent in masked_sentences:
+        for token in sent.split():
+            if token not in pos_tags:
+                lowercase_words.add(token)
+
+    return lowercase_words
+
+
+def two_pass_mask(
+    parsed_sentences: list[pd.DataFrame],
+    *,
+    common_adverbs: set[str],
+) -> list[str]:
+    """Single-pass masking with universal UV/IJ normalization.
+
+    Args:
+        parsed_sentences: List of DataFrames from CoNLL-U parsing.
+        common_adverbs: Set of common adverbs to keep unmasked.
+
+    Returns:
+        List of masked sentences.
+
+    """
+    return mask_corpus(parsed_sentences, common_adverbs=common_adverbs)
