@@ -27,7 +27,7 @@ dependencies = [
     "spacy>=3.7.0",
     "nltk>=3.8",
     "pandas>=2.0.0",
-    "la-senter>=3.8.0",
+    "la-senter",
 ]
 
 [project.optional-dependencies]
