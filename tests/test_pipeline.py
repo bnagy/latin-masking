@@ -219,11 +219,10 @@ class TestEndToEndYsengrimus:
             )
 
         # Step 7: Verify output
-        # The intermediate file is named {stem}_sentences.txt, and the pipeline adds _sentences again
-        output_file = (
-            tmp_path
-            / f"{ysengrimus_input.stem}_sentences_sentences.quesplit_sentences.masked.txt"
-        )
+        # intermediate_path.stem = "ysengrimus_raw_sentences"
+        # run_pipeline_with_quesplit creates {stem}.quesplit.txt
+        # process_file creates {stem}.masked.txt
+        output_file = tmp_path / f"{intermediate_path.stem}.quesplit.masked.txt"
         assert output_file.exists(), f"Output file not found: {output_file}"
 
         actual_lines = output_file.read_text().strip().split("\n")

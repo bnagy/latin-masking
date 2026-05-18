@@ -192,7 +192,7 @@ def run_pipeline_with_quesplit(
             text, _ = split_que(text, que_words)
 
         # Write intermediate file
-        intermediate_path = output_dir / f"{input_path.stem}_sentences.quesplit.txt"
+        intermediate_path = output_dir / f"{input_path.stem}.quesplit.txt"
         with open(intermediate_path, "w", encoding="utf-8") as f:
             f.write(text)
 

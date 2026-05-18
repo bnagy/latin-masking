@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from latin_masking.sentences import (
     has_sufficient_punctuation,
+    normalize_whitespace,
     preprocess_text,
     split_paren_content,
     split_sentences,
@@ -29,6 +30,40 @@ class TestHasSufficientPunctuation:
         """Test text with mixed punctuation."""
         text = "One. Two? Three! Four; Five."
         assert has_sufficient_punctuation(text)
+
+
+class TestNormalizeWhitespace:
+    """Tests for normalize_whitespace function."""
+
+    def test_multiple_newlines(self) -> None:
+        """Test multiple newlines are collapsed to single space."""
+        text = "Line one\n\n\nLine two"
+        result = normalize_whitespace(text)
+        assert result == "Line one Line two"
+
+    def test_multiple_tabs(self) -> None:
+        """Test multiple tabs are collapsed to single space."""
+        text = "Word1\t\t\tWord2"
+        result = normalize_whitespace(text)
+        assert result == "Word1 Word2"
+
+    def test_mixed_whitespace(self) -> None:
+        """Test mixed whitespace (newlines, tabs, spaces) is normalized."""
+        text = "Word1\n\t \n\tWord2"
+        result = normalize_whitespace(text)
+        assert result == "Word1 Word2"
+
+    def test_preserves_single_spaces(self) -> None:
+        """Test that single spaces are preserved."""
+        text = "Word1 Word2 Word3"
+        result = normalize_whitespace(text)
+        assert result == "Word1 Word2 Word3"
+
+    def test_leading_trailing_whitespace(self) -> None:
+        """Test leading and trailing whitespace is removed."""
+        text = "  Word1  \n  Word2  "
+        result = normalize_whitespace(text)
+        assert result == "Word1 Word2"
 
 
 class TestPreprocessText:

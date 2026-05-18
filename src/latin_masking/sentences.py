@@ -61,6 +61,24 @@ def prevent_colon_split(doc: Any) -> Any:
     return doc
 
 
+def normalize_whitespace(text: str) -> str:
+    """Normalize whitespace in text by collapsing multiple whitespace chars.
+
+    Replaces multiple newlines, tabs, and spaces with a single space.
+    This handles files with irregular formatting.
+
+    Args:
+        text: Text to normalize.
+
+    Returns:
+        Text with normalized whitespace.
+
+    """
+    # Replace all whitespace sequences (including newlines, tabs) with single space
+    # and strip leading/trailing whitespace
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def has_sufficient_punctuation(text: str) -> bool:
     """Check if text has enough punctuation to indicate sentence boundaries.
 
@@ -162,6 +180,9 @@ def split_sentences(text: str) -> list[str]:
         List of sentence strings.
 
     """
+    # Normalize whitespace first (handle extra newlines/tabs)
+    text = normalize_whitespace(text)
+
     # Preprocess text before sentence segmentation
     text, paren_map = preprocess_text(text)
 
