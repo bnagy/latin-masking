@@ -96,7 +96,7 @@ class MaskingConfig:
 
     """
 
-    model: str = "latin-ittb-ud-2.5-191005"
+    model: str = "latin-evalatin24-240520"
     adverb_threshold: int = 200
     common_adverbs_path: Path | None = None
     replacement_dict_path: Path | None = None

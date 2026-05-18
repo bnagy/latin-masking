@@ -13,15 +13,35 @@ from latin_masking.pipeline import run_pipeline, run_pipeline_with_quesplit
 
 def _cmd_process(args: argparse.Namespace) -> int:
     """Handle the process subcommand."""
+    # Default cache dir is a udpipe_cache subdirectory in the input file's directory
+    if args.cache_dir:
+        cache_dir = args.cache_dir
+    elif args.regenerate:
+        cache_dir = Path("/tmp/latin-masking-nocache")
+    else:
+        # Use udpipe_cache subdirectory in the directory containing the first input file
+        cache_dir = (
+            args.input[0].parent / "udpipe_cache"
+            if args.input
+            else Path.cwd() / "udpipe_cache"
+        )
     config = MaskingConfig(
         model=args.model,
-        cache_dir=Path.home() / ".cache" / "latin-masking",
+        cache_dir=cache_dir,
     )
-    if args.regenerate:
-        config.cache_dir = Path("/tmp/latin-masking-nocache")
+
+    # Use default blacklist if --quesplit is set but no custom blacklist provided
+    que_blacklist_path = args.que_blacklist
+    if args.quesplit and que_blacklist_path is None:
+        que_blacklist_path = Path(__file__).parent / "data" / "que_blacklist.txt"
 
     if args.quesplit:
-        result = run_pipeline_with_quesplit(args.input, args.output, config=config)
+        result = run_pipeline_with_quesplit(
+            args.input,
+            args.output,
+            config=config,
+            que_blacklist_path=que_blacklist_path,
+        )
     else:
         result = run_pipeline(args.input, args.output, config=config)
 
@@ -175,10 +195,16 @@ def main() -> int:
         "--output", "-o", type=Path, required=True, help="Output directory"
     )
     process_parser.add_argument(
-        "--model", "-m", default="latin-ittb-ud-2.5-191005", help="UDPipe model"
+        "--model", "-m", default="latin-evalatin24-240520", help="UDPipe model"
+    )
+    process_parser.add_argument(
+        "--cache-dir", type=Path, help="Directory for caching UDPipe responses"
     )
     process_parser.add_argument(
         "--quesplit", action="store_true", help="Enable -que splitting"
+    )
+    process_parser.add_argument(
+        "--que-blacklist", type=Path, help="Path to -que blacklist file"
     )
     process_parser.add_argument(
         "--regenerate", action="store_true", help="Force regeneration (ignore cache)"

@@ -80,7 +80,7 @@ class TestRunPipelineWithQuesplit:
 
         config = MaskingConfig()
         result = run_pipeline_with_quesplit(
-            [input_file], tmp_path, config=config, que_words_path=None
+            [input_file], tmp_path, config=config, que_blacklist_path=None
         )
 
         assert result.sentences_processed == 1
@@ -203,19 +203,19 @@ class TestEndToEndYsengrimus:
             mock_load.return_value = udpipe_response
 
             # Step 6: Run the full pipeline with -que splitting
-            # Use the default que words file
-            que_words_path = (
+            # Use the default que blacklist file
+            que_blacklist_path = (
                 Path(__file__).parent.parent
                 / "src"
                 / "latin_masking"
                 / "data"
-                / "que_conj_words.txt"
+                / "que_blacklist.txt"
             )
             _result = run_pipeline_with_quesplit(
                 [intermediate_path],
                 tmp_path,
                 config=config,
-                que_words_path=que_words_path,
+                que_blacklist_path=que_blacklist_path,
             )
 
         # Step 7: Verify output

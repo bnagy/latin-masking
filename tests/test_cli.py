@@ -37,6 +37,8 @@ class TestCmdProcess:
             regenerate=False,
             quesplit=False,
             unsafe_certs_ok=True,
+            que_blacklist=None,
+            cache_dir=None,
         )
 
         mock_run.return_value = MagicMock(
@@ -64,6 +66,8 @@ class TestCmdProcess:
             regenerate=False,
             quesplit=True,
             unsafe_certs_ok=True,
+            que_blacklist=None,
+            cache_dir=None,
         )
 
         mock_run.return_value = MagicMock(
@@ -74,6 +78,101 @@ class TestCmdProcess:
 
         assert result == 0
         mock_run.assert_called_once()
+
+    @patch("latin_masking.cli.run_pipeline_with_quesplit")
+    def test_process_command_with_quesplit_uses_default_blacklist(
+        self, mock_run: MagicMock, tmp_path: Path
+    ) -> None:
+        """Test that --quesplit uses default blacklist when no custom path provided."""
+        input_file = tmp_path / "input.txt"
+        input_file.write_text("Test text")
+        output_dir = tmp_path / "output"
+
+        args = argparse.Namespace(
+            input=[input_file],
+            output=output_dir,
+            model="test-model",
+            regenerate=False,
+            quesplit=True,
+            unsafe_certs_ok=True,
+            que_blacklist=None,
+            cache_dir=None,
+        )
+
+        mock_run.return_value = MagicMock(
+            sentences_processed=5, cache_hits=0, uv_replacements=2, adverbs_found=8
+        )
+
+        result = _cmd_process(args)
+
+        assert result == 0
+        # Verify that run_pipeline_with_quesplit was called with the default blacklist path
+        call_args = mock_run.call_args
+        assert call_args[1]["que_blacklist_path"] is not None
+        assert "que_blacklist.txt" in str(call_args[1]["que_blacklist_path"])
+
+    @patch("latin_masking.cli.run_pipeline")
+    def test_process_command_with_custom_cache_dir(
+        self, mock_run: MagicMock, tmp_path: Path
+    ) -> None:
+        """Test process subcommand with custom cache directory."""
+        input_file = tmp_path / "input.txt"
+        input_file.write_text("Test text")
+        output_dir = tmp_path / "output"
+        custom_cache = tmp_path / "custom_cache"
+
+        args = argparse.Namespace(
+            input=[input_file],
+            output=output_dir,
+            model="test-model",
+            regenerate=False,
+            quesplit=False,
+            unsafe_certs_ok=True,
+            que_blacklist=None,
+            cache_dir=custom_cache,
+        )
+
+        mock_run.return_value = MagicMock(
+            sentences_processed=5, cache_hits=2, uv_replacements=1, adverbs_found=10
+        )
+
+        result = _cmd_process(args)
+
+        assert result == 0
+        # Verify that config was created with custom cache dir
+        call_args = mock_run.call_args
+        assert call_args[1]["config"].cache_dir == custom_cache
+
+    @patch("latin_masking.cli.run_pipeline")
+    def test_process_command_default_cache_dir_is_input_dir(
+        self, mock_run: MagicMock, tmp_path: Path
+    ) -> None:
+        """Test that default cache dir is the directory containing input files."""
+        input_file = tmp_path / "input.txt"
+        input_file.write_text("Test text")
+        output_dir = tmp_path / "output"
+
+        args = argparse.Namespace(
+            input=[input_file],
+            output=output_dir,
+            model="test-model",
+            regenerate=False,
+            quesplit=False,
+            unsafe_certs_ok=True,
+            que_blacklist=None,
+            cache_dir=None,
+        )
+
+        mock_run.return_value = MagicMock(
+            sentences_processed=5, cache_hits=2, uv_replacements=1, adverbs_found=10
+        )
+
+        result = _cmd_process(args)
+
+        assert result == 0
+        # Verify that config was created with udpipe_cache subdirectory
+        call_args = mock_run.call_args
+        assert call_args[1]["config"].cache_dir == tmp_path / "udpipe_cache"
 
 
 class TestCmdSplitSentences:

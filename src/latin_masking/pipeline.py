@@ -18,7 +18,7 @@ from latin_masking.cache import (
     load_cached_response,
     save_cached_response,
 )
-from latin_masking.clitics import load_que_words, split_que
+from latin_masking.clitics import load_que_blacklist, split_que_blacklist
 from latin_masking.client import process_text
 from latin_masking.mask import two_pass_mask
 from latin_masking.types import MaskingConfig, PipelineResult
@@ -157,24 +157,26 @@ def run_pipeline_with_quesplit(
     output_dir: Path,
     *,
     config: MaskingConfig,
-    que_words_path: Path | None = None,
+    que_blacklist_path: Path | None = None,
 ) -> PipelineResult:
     """Same as run_pipeline but with -que splitting after sentence splitting.
+
+    Uses blacklist approach: split all -que words EXCEPT those in the blacklist.
 
     Args:
         input_paths: List of input file paths.
         output_dir: Directory for output files.
         config: Pipeline configuration.
-        que_words_path: Path to -que words file.
+        que_blacklist_path: Path to -que blacklist file.
 
     Returns:
         PipelineResult with statistics.
 
     """
-    # Load -que words if provided
-    que_words = []
-    if que_words_path and que_words_path.exists():
-        que_words = load_que_words(que_words_path)
+    # Load -que blacklist if provided
+    que_blacklist: set[str] = set()
+    if que_blacklist_path and que_blacklist_path.exists():
+        que_blacklist = load_que_blacklist(que_blacklist_path)
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -187,9 +189,9 @@ def run_pipeline_with_quesplit(
         with open(input_path, "r", encoding="utf-8") as f:
             text = f.read()
 
-        # Apply -que splitting
-        if que_words:
-            text, _ = split_que(text, que_words)
+        # Apply -que splitting using blacklist approach
+        if que_blacklist:
+            text, _ = split_que_blacklist(text, que_blacklist)
 
         # Write intermediate file
         intermediate_path = output_dir / f"{input_path.stem}.quesplit.txt"
