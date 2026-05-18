@@ -79,15 +79,28 @@ def _cmd_generate_adverbs(args: argparse.Namespace) -> int:
         save_adverb_list,
     )
     from latin_masking.conllu import parse_conllu
+    from latin_masking.cache import get_cache_path, load_cached_response, is_cache_valid
 
+    cache_dir = Path.home() / ".cache" / "latin-masking"
     all_adverbs: Counter[str] = Counter()
     for input_path in args.input:
         with open(input_path, "r", encoding="utf-8") as f:
             text = f.read()
 
-        response = process_text(
-            text, presegmented=True, raw=True, unsafe_certs_ok=args.unsafe_certs_ok
-        )
+        # Check cache first
+        cache_path = get_cache_path(input_path, cache_dir, args.model)
+        response = None
+        if is_cache_valid(cache_path, input_path):
+            response = load_cached_response(cache_path)
+
+        if not response:
+            response = process_text(
+                text,
+                model=args.model,
+                presegmented=True,
+                raw=True,
+                unsafe_certs_ok=args.unsafe_certs_ok,
+            )
         if response:
             frames, _ = parse_conllu(str(response))
             advs = collect_adverbs(frames)
@@ -197,6 +210,15 @@ def main() -> int:
     adv_parser.add_argument("--output", "-o", type=Path, help="Output directory")
     adv_parser.add_argument(
         "--max", type=int, default=200, help="Maximum adverbs to save"
+    )
+    adv_parser.add_argument(
+        "--model", "-m", default="latin-ittb-ud-2.5-191005", help="UDPipe model"
+    )
+    adv_parser.add_argument(
+        "--unsafe-certs-ok",
+        action="store_true",
+        default=True,
+        help="Accept self-signed SSL certificates (default: True for UDPipe)",
     )
 
     # Mask command

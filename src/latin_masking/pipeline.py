@@ -103,7 +103,7 @@ def process_file(
     )
 
     # Write output
-    output_path = output_dir / f"{input_path.stem}_sentences.masked.txt"
+    output_path = output_dir / f"{input_path.stem}.masked.txt"
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(masked_sentences))
 
