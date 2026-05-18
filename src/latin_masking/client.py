@@ -175,9 +175,9 @@ def list_models(service_url: str = DEFAULT_SERVICE_URL) -> list[str]:
 def process_text(
     text: str,
     *,
-    model: str = "latin-ittb-ud-2.5-191005",
-    tokenizer: str = "normalized_spaces",
-    input_type: str = "generic_tokenizer",
+    model: str = "latin-evalatin24-240520",
+    tokenizer: str = "",
+    input_type: str = "conllu",
     presegmented: bool = False,
     strip_punct: bool = True,
     remove_macrons_flag: bool = True,
@@ -222,6 +222,8 @@ def process_text(
         "data": text,
         "model": model,
         "tokenizer": tokenizer,
+        "parser": "",
+        "tagger": "",
     }
 
     if presegmented:
