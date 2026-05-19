@@ -83,6 +83,13 @@ class TestGenerateAdverbList:
         result = generate_adverb_list(counter)
         assert len(result) == 200
 
+    def test_none_returns_all(self) -> None:
+        """Test that None returns all adverbs."""
+        counter = Counter({"a": 10, "b": 8, "c": 6, "d": 4})
+        result = generate_adverb_list(counter, max_adverbs=None)
+        assert len(result) == 4
+        assert result == [("a", 10), ("b", 8), ("c", 6), ("d", 4)]
+
 
 class TestSaveAndLoadAdverbList:
     """Tests for save_adverb_list and load_adverb_list functions."""

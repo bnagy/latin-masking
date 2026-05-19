@@ -45,13 +45,13 @@ def normalize_adverb_counts(counter: Counter[str]) -> Counter[str]:
 
 
 def generate_adverb_list(
-    counter: Counter[str], max_adverbs: int = 200
+    counter: Counter[str], max_adverbs: int | None = 200
 ) -> list[tuple[str, int]]:
     """Get top-N most frequent adverbs.
 
     Args:
         counter: Counter of adverb tokens.
-        max_adverbs: Maximum number of adverbs to return.
+        max_adverbs: Maximum number of adverbs to return. If None, returns all.
 
     Returns:
         List of (adverb, count) tuples.
