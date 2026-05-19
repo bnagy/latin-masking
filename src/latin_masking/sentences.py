@@ -105,7 +105,7 @@ def has_sufficient_punctuation(text: str) -> bool:
 def preprocess_text(text: str) -> tuple[str, dict[str, str]]:
     """Preprocess text before sentence segmentation.
 
-    - Remove quotation marks
+    - Remove quotation marks (including unicode quotes)
     - Remove dashes that follow sentence-terminating punctuation
     - Protect parenthetical content with placeholders
 
@@ -116,8 +116,14 @@ def preprocess_text(text: str) -> tuple[str, dict[str, str]]:
         Tuple of (processed_text, paren_map) for later extraction.
 
     """
-    # Remove quotation marks (various types)
-    text = text.replace('"', "").replace("'", "").replace('"', "").replace("'", "")
+    # Remove all unicode quotation marks (Pi and Pf categories)
+    # Using regex to match all unicode quote marks at once
+    # Includes: " ' « » ' ' " " ‚ „ ‛ ‟ ‹ › and many more
+    text = re.sub(
+        r"[\u0022\u0027\u00AB\u00BB\u2018\u2019\u201A\u201B\u201C\u201D\u201E\u201F\u2039\u203A]",
+        "",
+        text,
+    )
 
     # Protect parenthetical content that starts with ( at word boundary
     paren_map: dict[str, str] = {}
@@ -137,6 +143,22 @@ def preprocess_text(text: str) -> tuple[str, dict[str, str]]:
     # Remove dashes that immediately follow sentence-terminating punctuation
     # Pattern: word. - or word! - or word? - or word; - or word: -
     text = re.sub(r"[.!?;:]+\s*-", "", text)
+
+    # Remove hyphens that are followed by punctuation (OCR artifacts like "- ,")
+    # Pattern: - followed by punctuation without a word character in between
+    text = re.sub(r"-\s*[,.!?;:]", "", text)
+
+    # Remove leading dashes followed by punctuation (OCR artifacts at line starts)
+    # Pattern: - at start of text or after whitespace, followed by punctuation
+    text = re.sub(r"^\s*-\s*[,.!?;:]", "", text)
+    text = re.sub(r"(?<=\s)-\s*[,.!?;:]", "", text)
+
+    # Also remove trailing "- ." patterns (dash-space-period)
+    text = re.sub(r"-\s*\.", ".", text)
+
+    # Remove leading dashes that are OCR artifacts (dash at start of line followed by space)
+    # These are not legitimate em-dashes or hyphens in Latin text
+    text = re.sub(r"^\s*-\s+", "", text)
 
     return text, paren_map
 

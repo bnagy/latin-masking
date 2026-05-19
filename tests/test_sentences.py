@@ -75,6 +75,13 @@ class TestPreprocessText:
         result, _ = preprocess_text(text)
         assert '"' not in result
 
+    def test_unicode_quote_removal(self) -> None:
+        """Test unicode quotation marks are removed."""
+        text = "He said «hello» to me."
+        result, _ = preprocess_text(text)
+        assert "«" not in result
+        assert "»" not in result
+
     def test_dash_after_punctuation(self) -> None:
         """Test dashes after punctuation are removed."""
         text = "Sentence. -Next sentence."
