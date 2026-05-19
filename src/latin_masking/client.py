@@ -8,7 +8,9 @@ import email.policy
 import json
 import logging
 import ssl
+import time
 import unicodedata
+from pathlib import Path
 from typing import Any
 
 import pandas as pd
@@ -19,6 +21,9 @@ logger = logging.getLogger(__name__)
 
 # Default UDPipe service URL
 DEFAULT_SERVICE_URL = "https://lindat.mff.cuni.cz/services/udpipe/api"
+
+# Retry configuration
+MAX_RETRIES = 3
 
 
 def _get_ssl_context(unsafe_certs_ok: bool = False) -> ssl.SSLContext:
@@ -62,7 +67,7 @@ def _perform_request(
     service_url: str = DEFAULT_SERVICE_URL,
     unsafe_certs_ok: bool = True,
 ) -> dict[str, Any]:
-    """Perform HTTP request to UDPipe API.
+    """Perform HTTP request to UDPipe API with retry logic.
 
     Args:
         method: API method name (e.g., 'process', 'models').
@@ -106,55 +111,72 @@ def _perform_request(
         }
 
     ssl_context = _get_ssl_context(unsafe_certs_ok)
-    try:
-        with urllib.request.urlopen(
-            urllib.request.Request(
-                url=f"{service_url}/{method}",
-                headers=request_headers,
-                data=request_data,
-            ),
-            context=ssl_context,
-        ) as request:
-            try:
-                resp = request.read().decode("utf-8")
-                result: dict[str, Any] = json.loads(resp)
-                return result
-            except Exception as e:
-                logger.error(
-                    "Cannot read the response of UDPipe '%s' REST request: %s",
-                    method,
-                    repr(e),
-                )
-                raise UDPipeError(f"Failed to parse response: {e}", e) from e
-    except urllib.error.HTTPError as e:
-        error_body = e.fp.read().decode("utf-8") if e.fp else ""
-        logger.error(
-            "UDPipe HTTP error during '%s' request: %s",
-            method,
-            error_body,
-        )
-        raise UDPipeAPIError(
-            f"HTTP error {e.code}: {error_body}",
-            status_code=e.code,
-            original_error=e,
-        ) from e
-    except urllib.error.URLError as e:
-        logger.error(
-            "SSL/URL error during UDPipe '%s' REST request: %s",
-            method,
-            repr(e),
-        )
-        raise UDPipeAPIError(
-            f"URL error: {e.reason}",
-            original_error=e,
-        ) from e
-    except json.JSONDecodeError as e:
-        logger.error(
-            "Cannot parse the JSON response of UDPipe '%s' REST request: %s",
-            method,
-            e.msg,
-        )
-        raise UDPipeError(f"JSON decode error: {e.msg}", e) from e
+    last_error: Exception | None = None
+
+    for attempt in range(MAX_RETRIES):
+        try:
+            with urllib.request.urlopen(
+                urllib.request.Request(
+                    url=f"{service_url}/{method}",
+                    headers=request_headers,
+                    data=request_data,
+                ),
+                context=ssl_context,
+            ) as request:
+                try:
+                    resp = request.read().decode("utf-8")
+                    result: dict[str, Any] = json.loads(resp)
+                    return result
+                except Exception as e:
+                    logger.error(
+                        "Cannot read the response of UDPipe '%s' REST request: %s",
+                        method,
+                        repr(e),
+                    )
+                    raise UDPipeError(f"Failed to parse response: {e}", e) from e
+        except urllib.error.HTTPError as e:
+            error_body = e.fp.read().decode("utf-8") if e.fp else ""
+            logger.error(
+                "UDPipe HTTP error during '%s' request: %s",
+                method,
+                error_body,
+            )
+            last_error = UDPipeAPIError(
+                f"HTTP error {e.code}: {error_body}",
+                status_code=e.code,
+                original_error=e,
+            )
+        except urllib.error.URLError as e:
+            logger.error(
+                "SSL/URL error during UDPipe '%s' REST request: %s",
+                method,
+                repr(e),
+            )
+            last_error = UDPipeAPIError(
+                f"URL error: {e.reason}",
+                original_error=e,
+            )
+        except json.JSONDecodeError as e:
+            logger.error(
+                "Cannot parse the JSON response of UDPipe '%s' REST request: %s",
+                method,
+                e.msg,
+            )
+            last_error = UDPipeError(f"JSON decode error: {e.msg}", e)
+
+        if attempt < MAX_RETRIES - 1:
+            # Algorithmic backoff: 1, 2, 4, 5, 5, 5, ... (exponential up to 5s cap)
+            backoff = min(2**attempt, 5)
+            logger.info(
+                "Retrying UDPipe '%s' request (attempt %d/%d) after %ds",
+                method,
+                attempt + 2,
+                MAX_RETRIES,
+                backoff,
+            )
+            time.sleep(backoff)
+
+    raise last_error from last_error
 
 
 def list_models(service_url: str = DEFAULT_SERVICE_URL) -> list[str]:
@@ -248,3 +270,95 @@ def process_text(
     from latin_masking.conllu import parse_conllu
 
     return parse_conllu(response["result"])
+
+
+def _process_text_with_cache(
+    text: str,
+    cache_path: Path,
+    source_path: Path,
+    **process_kwargs,
+) -> str | tuple[list[pd.DataFrame], list[str]]:
+    """Process text through UDPipe with automatic caching.
+
+    Checks cache validity before processing, saves result after processing.
+
+    Args:
+        text: Text to process.
+        cache_path: Path to cache file for the response.
+        source_path: Path to source file (for cache validation).
+        **process_kwargs: Additional arguments passed to process_text.
+
+    Returns:
+        Raw CoNLL-U string if raw=True, otherwise tuple of (list of DataFrames, list of texts).
+
+    """
+    from latin_masking.cache import (
+        is_cache_valid,
+        load_cached_response,
+        save_cached_response,
+    )
+
+    if is_cache_valid(cache_path, source_path):
+        return load_cached_response(cache_path)
+
+    response = process_text(text, **process_kwargs)
+    if response:
+        save_cached_response(cache_path, response)
+    return response
+
+
+def process_file_with_cache(
+    input_path: Path,
+    model: str,
+    cache_dir: Path | None = None,
+    force_refresh: bool = False,
+    **process_kwargs,
+) -> str | tuple[list[pd.DataFrame], list[str]]:
+    """Process a file through UDPipe with automatic caching.
+
+    Reads file content, derives cache path automatically, and handles caching.
+
+    Args:
+        input_path: Path to the input file.
+        model: UDPipe model name.
+        cache_dir: Directory for cache files. Defaults to input_path (same directory).
+        force_refresh: If True, bypass cache and re-process.
+        **process_kwargs: Additional arguments passed to process_text.
+
+    Returns:
+        Raw CoNLL-U string if raw=True, otherwise tuple of (list of DataFrames, list of texts).
+
+    Raises:
+        FileNotFoundError: If input file doesn't exist.
+        IsADirectoryError: If input_path is a directory.
+        UnicodeDecodeError: If file encoding is invalid.
+
+    """
+    from latin_masking.cache import (
+        get_cache_path,
+        is_cache_valid,
+        load_cached_response,
+        save_cached_response,
+    )
+
+    if cache_dir is None:
+        cache_dir = input_path
+
+    if not input_path.exists():
+        raise FileNotFoundError(f"Input file not found: {input_path}")
+
+    if input_path.is_dir():
+        raise IsADirectoryError(f"Input path is a directory, not a file: {input_path}")
+
+    cache_path = get_cache_path(input_path, cache_dir, model)
+
+    if not force_refresh and is_cache_valid(cache_path, input_path):
+        return load_cached_response(cache_path)
+
+    with open(input_path, "r", encoding="utf-8") as f:
+        text = f.read()
+
+    response = process_text(text, model=model, **process_kwargs)
+    if response:
+        save_cached_response(cache_path, response)
+    return response

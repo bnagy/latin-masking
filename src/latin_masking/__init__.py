@@ -17,6 +17,7 @@ from latin_masking.clitics import (
     split_que,
     split_que_blacklist,
 )
+from latin_masking.client import process_file_with_cache
 from latin_masking.types import (
     MaskingConfig,
     PipelineResult,
@@ -34,6 +35,7 @@ __all__ = [
     "load_que_words",
     "split_que",
     "split_que_blacklist",
+    "process_file_with_cache",
     "MaskingConfig",
     "PipelineResult",
     "UDPipeAPIError",
