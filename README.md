@@ -6,11 +6,13 @@ CoNLL-U parsing → UV/IJ normalization → adverb dictionary generation → POS
 
 ## Installation
 
+### From GitHub (recommended)
+
 ```bash
-pip install latin-masking
+pip install git+https://github.com/bnagy/latin-masking.git
 ```
 
-Or install from source:
+### From source
 
 ```bash
 git clone https://github.com/bnagy/latin-masking.git
@@ -20,46 +22,60 @@ pip install -e ".[dev]"
 
 ## Quick Start
 
+See `Quickstart.ipynb` for a complete example notebook demonstrating the pipeline.
+
 ### Command Line Interface
 
 ```bash
 # Process text through the full pipeline
-udpipe-mask process input.txt --output ./output
+latin-mask process input.txt --output ./output
 
 # Split text into sentences
-udpipe-mask split-sentences input.txt --output ./output
+latin-mask split-sentences input.txt --output ./output
 
 # Split -que enclitics
-udpipe-mask split-que input.txt --que-words que_words.txt
+latin-mask split-que input.txt --que-words que_words.txt
 
 # Generate adverb list from input
-udpipe-mask generate-adverbs input.txt --output ./output --max 200
+latin-mask generate-adverbs input.txt --output ./output --max 200
 
 # Apply masking to pre-segmented input
-udpipe-mask mask input.txt --adverbs adverbs.txt --output ./output
+latin-mask mask input.txt --adverbs adverbs.txt --output ./output
 ```
 
 ### Python API
 
 ```python
 from pathlib import Path
-from udpipe_masking import MaskingConfig
-from udpipe_masking.pipeline import run_pipeline
+from latin_masking import process_file_with_cache
+from latin_masking.sentences import split_sentences
+from latin_masking.conllu import parse_conllu
+from latin_masking.adverbs import (
+    collect_adverbs,
+    normalize_adverb_counts,
+    generate_adverb_list,
+)
+from latin_masking.clitics import split_que_blacklist
+from latin_masking.mask import two_pass_mask
 
-# Configure the pipeline
-config = MaskingConfig(
-    model="latin-ittb-ud-2.5-191005",
-    adverb_threshold=200,
+# Split text into sentences
+with open("input.txt", "r", encoding="utf-8") as f:
+    text = f.read()
+sentences = split_sentences(text)
+
+# Process with UDPipe and caching
+cache_dir = Path("udpipe_cache")
+response = process_file_with_cache(
+    Path("sentences.txt"),
+    "latin-evalatin24-240520",
+    cache_dir=cache_dir,
+    presegmented=True,
+    raw=True,
 )
 
-# Run the pipeline
-result = run_pipeline(
-    [Path("input.txt")],
-    Path("output/"),
-    config=config,
-)
-
-print(f"Processed {result.sentences_processed} sentences")
+# Parse and collect adverbs
+frames, _ = parse_conllu(response)
+adverbs = collect_adverbs(frames)
 ```
 
 ## Pipeline Stages
@@ -80,18 +96,28 @@ print(f"Processed {result.sentences_processed} sentences")
 
 ## Configuration
 
-The `MaskingConfig` dataclass controls pipeline behavior:
+### Default Model
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `model` | `latin-ittb-ud-2.5-191005` | UDPipe model name |
-| `adverb_threshold` | `200` | Max adverbs to include |
-| `common_adverbs_path` | `None` | Path to pre-generated adverb list |
-| `replacement_dict_path` | `None` | Path to UV/IJ replacement dictionary |
-| `cache_dir` | `~/.cache/udpipe-masking` | Cache directory for API responses |
-| `presegmented` | `False` | Input already has one sentence per line |
-| `strip_punct` | `True` | Strip punctuation from output |
-| `remove_macrons` | `True` | Remove macrons from input |
+The default UDPipe model is `latin-evalatin24-240520`. You can specify a different model with the `--model` flag.
+
+### Caching
+
+The `process_file_with_cache` function automatically caches UDPipe responses:
+
+```python
+response = process_file_with_cache(
+    input_path,
+    "latin-evalatin24-240520",
+    cache_dir=Path("cache"),
+    force_refresh=False,  # Set True to bypass cache
+    presegmented=True,
+    raw=True,
+)
+```
+
+- Cache files are named using a hash of the input path and model name
+- Cache is invalidated when the input file is newer than the cache file
+- Use `force_refresh=True` to re-process even with valid cache
 
 ## Output Format
 
@@ -105,6 +131,46 @@ ADV NOUN VERB ADV
 - `NOUN`, `VERB`, `ADJ`, `PROPN`, `NUM`, `AUX` → replaced with POS tag
 - `ADV` → lowercased word (if in common adverbs) or `ADV`
 - Other tokens → lowercased normalized word
+
+## Troubleshooting
+
+### SSL Certificate Errors
+
+If you encounter SSL certificate errors when connecting to the UDPipe API:
+
+```bash
+# The CLI accepts --unsafe-certs-ok by default
+latin-mask process input.txt --output ./output --unsafe-certs-ok
+
+# Or in Python, pass unsafe_certs_ok=True
+response = process_file_with_cache(
+    input_path,
+    "latin-evalatin24-240520",
+    unsafe_certs_ok=True,
+    ...
+)
+```
+
+### Model Not Found
+
+If you get a "model not found" error, verify the model name:
+
+```bash
+# List available models
+latin-mask generate-adverbs input.txt --model latin-evalatin24-240520
+```
+
+### Cache Issues
+
+If you suspect cache corruption:
+
+```bash
+# Force regeneration
+latin-mask process input.txt --output ./output --regenerate
+
+# Or delete the cache directory
+rm -rf udpipe_cache/
+```
 
 ## Development
 
