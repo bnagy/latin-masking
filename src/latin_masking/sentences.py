@@ -144,22 +144,6 @@ def preprocess_text(text: str) -> tuple[str, dict[str, str]]:
     # Pattern: word. - or word! - or word? - or word; - or word: -
     text = re.sub(r"[.!?;:]+\s*-", "", text)
 
-    # Remove hyphens that are followed by punctuation (OCR artifacts like "- ,")
-    # Pattern: - followed by punctuation without a word character in between
-    text = re.sub(r"-\s*[,.!?;:]", "", text)
-
-    # Remove leading dashes followed by punctuation (OCR artifacts at line starts)
-    # Pattern: - at start of text or after whitespace, followed by punctuation
-    text = re.sub(r"^\s*-\s*[,.!?;:]", "", text)
-    text = re.sub(r"(?<=\s)-\s*[,.!?;:]", "", text)
-
-    # Also remove trailing "- ." patterns (dash-space-period)
-    text = re.sub(r"-\s*\.", ".", text)
-
-    # Remove leading dashes that are OCR artifacts (dash at start of line followed by space)
-    # These are not legitimate em-dashes or hyphens in Latin text
-    text = re.sub(r"^\s*-\s+", "", text)
-
     return text, paren_map
 
 
