@@ -39,6 +39,8 @@ def get_senter() -> Any:
     import la_senter
 
     senter = la_senter.load()
+    # Double the default max_length to handle longer texts (default: 1,000,000)
+    senter.max_length = 2000000
     senter.add_pipe("prevent_colon_split", after="senter")
     return senter
 
