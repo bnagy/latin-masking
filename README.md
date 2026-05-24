@@ -1,18 +1,14 @@
 # latin-masking
 
-A self-contained Python package for Latin text processing pipeline:
-plain text → sentence splitting → -que clitic splitting → UDPipe POS tagging →
-CoNLL-U parsing → UV/IJ normalization → adverb dictionary generation → POS masking.
+A self-contained Python package for Latin text processing: plain text → sentence splitting → adverb generation → -que clitic splitting → UDPipe POS tagging → CoNLL-U parsing → POS masking.
 
 ## Installation
-
-### From GitHub (recommended)
 
 ```bash
 pip install git+https://github.com/bnagy/latin-masking.git
 ```
 
-### From source
+Or from source:
 
 ```bash
 git clone https://github.com/bnagy/latin-masking.git
@@ -22,31 +18,34 @@ pip install -e ".[dev]"
 
 ## Quick Start
 
-See `Quickstart.ipynb` for a complete example notebook demonstrating the pipeline.
+### Command Line
 
-### Command Line Interface
+The CLI tool is `udpipe-mask`. It provides four subcommands:
 
 ```bash
-# Process text through the full pipeline
-latin-mask process input.txt --output ./output
+# Full pipeline: sentence split → adverb generation → -que split → POS tag → mask
+udpipe-mask process input.txt --output ./output --quesplit
 
-# Split text into sentences
-latin-mask split-sentences input.txt --output ./output
+# Sentence splitting only
+udpipe-mask split-sentences input.txt --output ./output
 
-# Split -que enclitics
-latin-mask split-que input.txt --que-words que_words.txt
+# Generate an adverb frequency list from a corpus
+udpipe-mask generate-adverbs input1.txt input2.txt --output ./output --max 200
 
-# Generate adverb list from input
-latin-mask generate-adverbs input.txt --output ./output --max 200
-
-# Apply masking to pre-segmented input
-latin-mask mask input.txt --adverbs adverbs.txt --output ./output
+# Apply POS masking to pre-tagged text
+udpipe-mask mask input.txt --adverbs adverbs.txt --output ./output
 ```
+
+Use `--model` to specify a UDPipe model (default: `latin-evalatin24-240520`). Use `--regenerate` to bypass the cache.
 
 ### Python API
 
+Below is a minimal walkthrough:
+
 ```python
 from pathlib import Path
+from collections import Counter
+
 from latin_masking import process_file_with_cache
 from latin_masking.sentences import split_sentences
 from latin_masking.conllu import parse_conllu
@@ -54,138 +53,126 @@ from latin_masking.adverbs import (
     collect_adverbs,
     normalize_adverb_counts,
     generate_adverb_list,
+    save_adverb_list,
 )
 from latin_masking.clitics import split_que_blacklist
 from latin_masking.mask import two_pass_mask
 
-# Split text into sentences
+INPUT_DIR = Path("./data")
+MODEL = "latin-evalatin24-240520"
+ADVERB_THRESHOLD = 200
+
+# --- Step 1: Sentence splitting ---
 with open("input.txt", "r", encoding="utf-8") as f:
     text = f.read()
 sentences = split_sentences(text)
 
-# Process with UDPipe and caching
-cache_dir = Path("udpipe_cache")
+sentences_file = INPUT_DIR / "input_sentences.txt"
+with open(sentences_file, "w", encoding="utf-8") as f:
+    for sent in sentences:
+        f.write(sent + "\n")
+
+# --- Step 2: Generate common adverbs ---
+cache_dir = INPUT_DIR / "udpipe_cache"
+cache_dir.mkdir(exist_ok=True)
+
 response = process_file_with_cache(
-    Path("sentences.txt"),
-    "latin-evalatin24-240520",
+    sentences_file,
+    MODEL,
     cache_dir=cache_dir,
     presegmented=True,
     raw=True,
+    unsafe_certs_ok=True,
 )
-
-# Parse and collect adverbs
 frames, _ = parse_conllu(response)
 adverbs = collect_adverbs(frames)
+
+# --- Step 3: Build and save the common adverbs list ---
+normalized = normalize_adverb_counts(Counter(adverbs))
+top_adverbs = generate_adverb_list(normalized, ADVERB_THRESHOLD)
+save_adverb_list(top_adverbs, Path("common_adverbs.txt"))
+
+# --- Step 4: -que splitting ---
+from latin_masking.adverbs import load_adverb_list
+
+common_adverbs = load_adverb_list(Path("common_adverbs.txt"), ADVERB_THRESHOLD)
+quesplit_text, n = split_que_blacklist(text, common_adverbs=common_adverbs)
+
+quesplit_file = INPUT_DIR / "input_sentences.quesplit.txt"
+with open(quesplit_file, "w", encoding="utf-8") as f:
+    f.write(quesplit_text)
+
+# --- Step 5: POS tagging and masking ---
+response = process_file_with_cache(
+    quesplit_file,
+    MODEL,
+    cache_dir=cache_dir,
+    presegmented=True,
+    raw=True,
+    unsafe_certs_ok=True,
+)
+frames, _ = parse_conllu(response)
+masked = two_pass_mask(frames, common_adverbs=common_adverbs)
+
+with open("output_masked.txt", "w", encoding="utf-8") as f:
+    f.write("\n".join(masked))
 ```
 
 ## Pipeline Stages
 
-1. **Sentence Splitting**: Uses spaCy `la_senter` with colon handling, falls back to NLTK Punkt for Latin.
+The pipeline runs in this order:
 
-2. **-que Splitting**: Optional splitting of -que enclitics (e.g., "etiamque" → "etiam -que").
+1. **Sentence Splitting** — Uses spaCy `la_senter` with colon handling; falls back to NLTK Punkt for Latin.
+2. **Adverb Generation** — Processes sentences through UDPipe, collects adverbs by frequency, and builds a common-adverbs list. This list is needed in the next step.
+3. **-que Splitting** — Splits -que enclitics (e.g. *efficiuntque* → *efficiunt -que*) using the common-adverbs list as a blacklist, so that words like *itaque*, *neque*, *quoque* are left intact.
+4. **UDPipe Processing** — Sends the -que-split text to the [UDPipe REST API](https://lindat.mff.cuni.cz/services/udpipe/api) for POS tagging and lemmatization.
+5. **CoNLL-U Parsing** — Parses UDPipe output into structured DataFrames.
+6. **POS Masking** — Replaces tokens with their POS tags while preserving common adverbs.
 
-3. **UDPipe Processing**: Sends text to UDPipe REST API for POS tagging and parsing.
+## Caching
 
-4. **CoNLL-U Parsing**: Parses UDPipe output into structured DataFrames.
-
-5. **UV/IJ Normalization**: Normalizes variant spellings (v↔u, i↔j).
-
-6. **Adverb Generation**: Collects and ranks adverbs by frequency.
-
-7. **POS Masking**: Two-pass masking algorithm that preserves common adverbs and normalizes variants.
-
-## Configuration
-
-### Default Model
-
-The default UDPipe model is `latin-evalatin24-240520`. You can specify a different model with the `--model` flag.
-
-### Caching
-
-The `process_file_with_cache` function automatically caches UDPipe responses:
+`process_file_with_cache` automatically caches UDPipe responses to disk as pickle files. The cache filename is derived from a **SHA-256 hash of the file content** and the model name, so the cache remains valid as long as the file content hasn't changed — regardless of modification time.
 
 ```python
 response = process_file_with_cache(
-    input_path,
+    Path("input.txt"),
     "latin-evalatin24-240520",
-    cache_dir=Path("cache"),
-    force_refresh=False,  # Set True to bypass cache
+    cache_dir=Path("udpipe_cache"),
     presegmented=True,
     raw=True,
+    unsafe_certs_ok=True,
+    force_refresh=False,  # set True to bypass cache
 )
 ```
 
-- Cache files are named using a hash of the input path and model name
-- Cache is invalidated when the input file is newer than the cache file
-- Use `force_refresh=True` to re-process even with valid cache
+Cache files are stored in the specified `cache_dir` with names like `input_<hash>.pkl`. To invalidate, either delete the cache file or use `force_refresh=True`.
 
 ## Output Format
 
-The masked output format is one sentence per line, with tokens separated by spaces:
+Masked output is one sentence per line, tokens separated by spaces. Real examples:
 
-```
-PROPN VERB ADP NOUN
-ADV NOUN VERB ADV
-```
+| Original | Masked |
+|---|---|
+| *Cum nequeat Ionathas iram mulcere paternam.* | `cum VERB PROPN NOUN VERB ADJ` |
+| *Vnda tegit terram, tegit aera, sic elementa Hec tria miscentur efficiuntque chaos.* | `NOUN VERB NOUN VERB NOUN sic NOUN hec NUM VERB VERB -que NOUN` |
 
-- `NOUN`, `VERB`, `ADJ`, `PROPN`, `NUM`, `AUX` → replaced with POS tag
-- `ADV` → lowercased word (if in common adverbs) or `ADV`
-- Other tokens → lowercased normalized word
 
-## Troubleshooting
+| Token type | Output |
+|---|---|
+| `NOUN`, `VERB`, `ADJ`, `PROPN`, `NUM`, `AUX` | POS tag (e.g. `NOUN`) |
+| `ADV` (in common list) | lowercased word (e.g. `sic`, `unde`) |
+| `ADV` (not in common list) | `ADV` |
+| Other | lowercased normalized word |
 
-### SSL Certificate Errors
-
-If you encounter SSL certificate errors when connecting to the UDPipe API:
-
-```bash
-# The CLI accepts --unsafe-certs-ok by default
-latin-mask process input.txt --output ./output --unsafe-certs-ok
-
-# Or in Python, pass unsafe_certs_ok=True
-response = process_file_with_cache(
-    input_path,
-    "latin-evalatin24-240520",
-    unsafe_certs_ok=True,
-    ...
-)
-```
-
-### Model Not Found
-
-If you get a "model not found" error, verify the model name:
-
-```bash
-# List available models
-latin-mask generate-adverbs input.txt --model latin-evalatin24-240520
-```
-
-### Cache Issues
-
-If you suspect cache corruption:
-
-```bash
-# Force regeneration
-latin-mask process input.txt --output ./output --regenerate
-
-# Or delete the cache directory
-rm -rf udpipe_cache/
-```
+UV/IJ normalization is applied universally (e.g. *Cum* → `cum`, *Deus* → `deus`).
 
 ## Development
 
-Run tests:
-
 ```bash
 pytest tests/ -v --cov=latin_masking
-```
-
-Type checking:
-
-```bash
 mypy src/latin_masking
 ```
 
 ## License
 
-MIT License
+MIT
