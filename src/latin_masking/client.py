@@ -293,12 +293,11 @@ def _process_text_with_cache(
 
     """
     from latin_masking.cache import (
-        is_cache_valid,
         load_cached_response,
         save_cached_response,
     )
 
-    if is_cache_valid(cache_path, source_path):
+    if cache_path.exists():
         return load_cached_response(cache_path)
 
     response = process_text(text, **process_kwargs)
@@ -336,7 +335,6 @@ def process_file_with_cache(
     """
     from latin_masking.cache import (
         get_cache_path,
-        is_cache_valid,
         load_cached_response,
         save_cached_response,
     )
@@ -352,7 +350,7 @@ def process_file_with_cache(
 
     cache_path = get_cache_path(input_path, cache_dir, model)
 
-    if not force_refresh and is_cache_valid(cache_path, input_path):
+    if not force_refresh and cache_path.exists():
         return load_cached_response(cache_path)
 
     with open(input_path, "r", encoding="utf-8") as f:

@@ -194,13 +194,13 @@ class TestEndToEndYsengrimus:
             f.write("\n".join(actual_sentences))
 
         # Step 5: Mock the cache loading to return our cached response
-        # We need to mock both is_cache_valid and load_cached_response
         with (
-            patch("latin_masking.pipeline.is_cache_valid") as mock_valid,
             patch("latin_masking.pipeline.load_cached_response") as mock_load,
+            patch("latin_masking.pipeline.get_cache_path") as mock_cache_path,
         ):
-            mock_valid.return_value = True
             mock_load.return_value = udpipe_response
+            # Make cache_path.exists() return True
+            mock_cache_path.return_value.exists.return_value = True
 
             # Step 6: Run the full pipeline with -que splitting
             # Use the default que blacklist file
@@ -292,3 +292,94 @@ class TestEndToEndYsengrimus:
                 f"  Got: {actual_normalized[:80]}...\n"
                 f"  Expected: {expected_normalized[:80]}..."
             )
+
+    def test_cache_file_is_used_when_content_matches(
+        self,
+        ysengrimus_sentences_expected: Path,
+        ysengrimus_udpipe_response_quesplit: Path,
+        ysengrimus_cache_dir: Path,
+        tmp_path: Path,
+    ) -> None:
+        """Test that process_file uses a pre-existing cache file (no mocking).
+
+        This is an integration test: it writes a real cache file to disk
+        with the correct content-hash-derived filename, then calls
+        process_file and verifies the cache was hit (process_text never
+        called). This catches regressions where the cache key computation
+        or cache lookup logic changes.
+        """
+        import pickle
+        import shutil
+
+        from latin_masking.cache import get_cache_path
+        from latin_masking.clitics import load_que_blacklist, split_que_blacklist
+
+        if not ysengrimus_sentences_expected.exists():
+            pytest.skip("Expected sentences fixture not found")
+        if not ysengrimus_udpipe_response_quesplit.exists():
+            pytest.skip("Cached UDPipe response (quesplit) not found")
+
+        # Step 1: Start from the sentence-split fixture and apply -que
+        # splitting to reproduce the exact input that the cached response
+        # was generated from.
+        sentences_text = ysengrimus_sentences_expected.read_text()
+        que_blacklist_path = (
+            Path(__file__).parent.parent
+            / "src"
+            / "latin_masking"
+            / "data"
+            / "que_blacklist.txt"
+        )
+        que_blacklist = (
+            load_que_blacklist(que_blacklist_path)
+            if que_blacklist_path.exists()
+            else set()
+        )
+        quesplit_text, _ = split_que_blacklist(sentences_text, que_blacklist)
+
+        # Step 2: Write the quesplit text to a temp file (this is what
+        # run_pipeline_with_quesplit would produce as intermediate output)
+        quesplit_input = tmp_path / "ysengrimus_sentences.quesplit.txt"
+        with open(quesplit_input, "w", encoding="utf-8") as f:
+            f.write(quesplit_text)
+
+        # Step 3: Compute the correct cache path from the content hash
+        # and copy the saved response there.
+        model = "latin-evalatin24-240520"
+        cache_path = get_cache_path(quesplit_input, ysengrimus_cache_dir, model)
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ysengrimus_udpipe_response_quesplit, cache_path)
+        assert cache_path.exists(), "Cache file was not created"
+
+        # Step 4: Load the cached response to verify it is valid
+        with open(cache_path, "rb") as f:
+            cached_response = pickle.load(f)
+        assert isinstance(cached_response, str) and len(cached_response) > 0
+
+        # Step 5: Configure the pipeline to use our pre-populated cache dir
+        common_adverbs_path = (
+            Path(__file__).parent / "fixtures" / "common_adverbs_quesplit.txt"
+        )
+        config = MaskingConfig(
+            cache_dir=ysengrimus_cache_dir,
+            presegmented=True,
+            strip_punct=True,
+            remove_macrons=True,
+            common_adverbs_path=common_adverbs_path,
+            model=model,
+        )
+
+        # Step 6: Run process_file with process_text mocked -- if the cache
+        # is used, process_text should never be called.
+        with patch("latin_masking.pipeline.process_text") as mock_process:
+            result = process_file(quesplit_input, tmp_path, config=config)
+
+        mock_process.assert_not_called()
+        assert result.get("cache_hit") is True
+        assert result.get("sentences", 0) > 0
+
+        # Step 7: Verify the output file was actually written
+        output_file = tmp_path / f"{quesplit_input.stem}.masked.txt"
+        assert output_file.exists(), f"Output file not found: {output_file}"
+        output_lines = output_file.read_text().strip().split("\n")
+        assert len(output_lines) > 0

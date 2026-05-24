@@ -14,7 +14,6 @@ from latin_masking.adverbs import (
 )
 from latin_masking.cache import (
     get_cache_path,
-    is_cache_valid,
     load_cached_response,
     save_cached_response,
 )
@@ -54,7 +53,7 @@ def process_file(
     cache_hit = False
     response: str | None = None
 
-    if is_cache_valid(cache_path, input_path):
+    if cache_path.exists():
         response = load_cached_response(cache_path)
         cache_hit = True
     else:

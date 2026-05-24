@@ -99,7 +99,7 @@ def _cmd_generate_adverbs(args: argparse.Namespace) -> int:
         save_adverb_list,
     )
     from latin_masking.conllu import parse_conllu
-    from latin_masking.cache import get_cache_path, load_cached_response, is_cache_valid
+    from latin_masking.cache import get_cache_path, load_cached_response
 
     cache_dir = Path.home() / ".cache" / "latin-masking"
     all_adverbs: Counter[str] = Counter()
@@ -110,7 +110,7 @@ def _cmd_generate_adverbs(args: argparse.Namespace) -> int:
         # Check cache first
         cache_path = get_cache_path(input_path, cache_dir, args.model)
         response = None
-        if is_cache_valid(cache_path, input_path):
+        if cache_path.exists():
             response = load_cached_response(cache_path)
 
         if not response:

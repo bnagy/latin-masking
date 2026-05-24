@@ -327,68 +327,68 @@ class TestProcessFileWithCache:
     """Tests for process_file_with_cache function."""
 
     @patch("latin_masking.client.process_text")
-    @patch("latin_masking.cache.is_cache_valid")
     @patch("latin_masking.cache.load_cached_response")
     def test_returns_cached_response(
         self,
         mock_load: MagicMock,
-        mock_valid: MagicMock,
         mock_process: MagicMock,
     ) -> None:
-        """Test that cached response is returned when valid."""
+        """Test that cached response is returned when cache file exists."""
         from pathlib import Path
 
         from latin_masking.client import process_file_with_cache
 
-        mock_valid.return_value = True
         mock_load.return_value = "cached result"
 
-        with patch.object(Path, "exists", return_value=True):
-            with patch.object(Path, "is_dir", return_value=False):
-                with patch("builtins.open", mock_open(read_data="test text")):
-                    result = process_file_with_cache(
-                        Path("/source/test.txt"),
-                        "test-model",
-                    )
+        mock_cache_path = MagicMock()
+        mock_cache_path.exists.return_value = True
+
+        with patch("latin_masking.cache.get_cache_path", return_value=mock_cache_path):
+            with patch.object(Path, "exists", return_value=True):
+                with patch.object(Path, "is_dir", return_value=False):
+                    with patch("builtins.open", mock_open(read_data="test text")):
+                        result = process_file_with_cache(
+                            Path("/source/test.txt"),
+                            "test-model",
+                        )
 
         assert result == "cached result"
         mock_process.assert_not_called()
 
     @patch("latin_masking.client.process_text")
-    @patch("latin_masking.cache.is_cache_valid")
     @patch("latin_masking.cache.save_cached_response")
     def test_processes_and_saves(
         self,
         mock_save: MagicMock,
-        mock_valid: MagicMock,
         mock_process: MagicMock,
     ) -> None:
-        """Test that text is processed and saved when cache invalid."""
+        """Test that text is processed and saved when cache missing."""
         from pathlib import Path
 
         from latin_masking.client import process_file_with_cache
 
-        mock_valid.return_value = False
         mock_process.return_value = "new result"
 
-        with patch.object(Path, "exists", return_value=True):
-            with patch.object(Path, "is_dir", return_value=False):
-                with patch("builtins.open", mock_open(read_data="test text")):
-                    result = process_file_with_cache(
-                        Path("/source/test.txt"),
-                        "test-model",
-                    )
+        mock_cache_path = MagicMock()
+        mock_cache_path.exists.return_value = False
+
+        with patch("latin_masking.cache.get_cache_path", return_value=mock_cache_path):
+            with patch.object(Path, "exists", return_value=True):
+                with patch.object(Path, "is_dir", return_value=False):
+                    with patch("builtins.open", mock_open(read_data="test text")):
+                        result = process_file_with_cache(
+                            Path("/source/test.txt"),
+                            "test-model",
+                        )
 
         assert result == "new result"
         mock_save.assert_called_once()
 
     @patch("latin_masking.client.process_text")
-    @patch("latin_masking.cache.is_cache_valid")
     @patch("latin_masking.cache.save_cached_response")
     def test_passes_kwargs_to_process_text(
         self,
         mock_save: MagicMock,
-        mock_valid: MagicMock,
         mock_process: MagicMock,
     ) -> None:
         """Test that kwargs are passed to process_text."""
@@ -396,18 +396,21 @@ class TestProcessFileWithCache:
 
         from latin_masking.client import process_file_with_cache
 
-        mock_valid.return_value = False
         mock_process.return_value = "result"
 
-        with patch.object(Path, "exists", return_value=True):
-            with patch.object(Path, "is_dir", return_value=False):
-                with patch("builtins.open", mock_open(read_data="test text")):
-                    process_file_with_cache(
-                        Path("/source/test.txt"),
-                        "test-model",
-                        presegmented=True,
-                        raw=True,
-                    )
+        mock_cache_path = MagicMock()
+        mock_cache_path.exists.return_value = False
+
+        with patch("latin_masking.cache.get_cache_path", return_value=mock_cache_path):
+            with patch.object(Path, "exists", return_value=True):
+                with patch.object(Path, "is_dir", return_value=False):
+                    with patch("builtins.open", mock_open(read_data="test text")):
+                        process_file_with_cache(
+                            Path("/source/test.txt"),
+                            "test-model",
+                            presegmented=True,
+                            raw=True,
+                        )
 
         mock_process.assert_called_once()
         call_kwargs = mock_process.call_args[1]
@@ -416,12 +419,10 @@ class TestProcessFileWithCache:
         assert call_kwargs["raw"] is True
 
     @patch("latin_masking.client.process_text")
-    @patch("latin_masking.cache.is_cache_valid")
     @patch("latin_masking.cache.save_cached_response")
     def test_force_refresh_bypasses_cache(
         self,
         mock_save: MagicMock,
-        mock_valid: MagicMock,
         mock_process: MagicMock,
     ) -> None:
         """Test that force_refresh=True bypasses cache."""
@@ -430,18 +431,20 @@ class TestProcessFileWithCache:
         from latin_masking.client import process_file_with_cache
 
         mock_process.return_value = "fresh result"
+        mock_cache_path = MagicMock()
+        mock_cache_path.exists.return_value = True
 
-        with patch.object(Path, "exists", return_value=True):
-            with patch.object(Path, "is_dir", return_value=False):
-                with patch("builtins.open", mock_open(read_data="test text")):
-                    result = process_file_with_cache(
-                        Path("/source/test.txt"),
-                        "test-model",
-                        force_refresh=True,
-                    )
+        with patch("latin_masking.cache.get_cache_path", return_value=mock_cache_path):
+            with patch.object(Path, "exists", return_value=True):
+                with patch.object(Path, "is_dir", return_value=False):
+                    with patch("builtins.open", mock_open(read_data="test text")):
+                        result = process_file_with_cache(
+                            Path("/source/test.txt"),
+                            "test-model",
+                            force_refresh=True,
+                        )
 
         assert result == "fresh result"
-        mock_valid.assert_not_called()
 
     def test_missing_input_file_raises_error(self) -> None:
         """Test that missing input file raises FileNotFoundError."""
@@ -458,6 +461,8 @@ class TestProcessFileWithCache:
 
     def test_directory_input_raises_error(self, tmp_path: Path) -> None:
         """Test that directory input raises IsADirectoryError."""
+        from pathlib import Path
+
         from latin_masking.client import process_file_with_cache
 
         with pytest.raises(IsADirectoryError):
@@ -467,12 +472,10 @@ class TestProcessFileWithCache:
             )
 
     @patch("latin_masking.client.process_text")
-    @patch("latin_masking.cache.is_cache_valid")
     @patch("latin_masking.cache.save_cached_response")
     def test_default_cache_dir_same_as_input(
         self,
         mock_save: MagicMock,
-        mock_valid: MagicMock,
         mock_process: MagicMock,
     ) -> None:
         """Test that cache_dir defaults to input_path (same directory)."""
@@ -480,28 +483,30 @@ class TestProcessFileWithCache:
 
         from latin_masking.client import process_file_with_cache
 
-        mock_valid.return_value = False
         mock_process.return_value = "result"
 
-        with patch.object(Path, "exists", return_value=True):
-            with patch.object(Path, "is_dir", return_value=False):
-                with patch("builtins.open", mock_open(read_data="test text")):
-                    process_file_with_cache(
-                        Path("/source/test.txt"),
-                        "test-model",
-                    )
+        mock_cache_path = MagicMock()
+        mock_cache_path.exists.return_value = False
+        mock_cache_path.__str__ = MagicMock(return_value="/source/test.txt/cache.pkl")
 
-        # Verify cache path was created with input_path as cache_dir
-        call_args = mock_valid.call_args[0]
-        assert call_args[1] == Path("/source/test.txt")  # source_path
+        with patch("latin_masking.cache.get_cache_path", return_value=mock_cache_path):
+            with patch.object(Path, "exists", return_value=True):
+                with patch.object(Path, "is_dir", return_value=False):
+                    with patch("builtins.open", mock_open(read_data="test text")):
+                        process_file_with_cache(
+                            Path("/source/test.txt"),
+                            "test-model",
+                        )
+
+        # Verify save was called with a path under input_path
+        call_args = mock_save.call_args[0]
+        assert str(call_args[0]).startswith("/source/test.txt")
 
     @patch("latin_masking.client.process_text")
-    @patch("latin_masking.cache.is_cache_valid")
     @patch("latin_masking.cache.save_cached_response")
     def test_custom_cache_dir(
         self,
         mock_save: MagicMock,
-        mock_valid: MagicMock,
         mock_process: MagicMock,
     ) -> None:
         """Test that custom cache_dir is used."""
@@ -509,29 +514,31 @@ class TestProcessFileWithCache:
 
         from latin_masking.client import process_file_with_cache
 
-        mock_valid.return_value = False
         mock_process.return_value = "result"
 
-        with patch.object(Path, "exists", return_value=True):
-            with patch.object(Path, "is_dir", return_value=False):
-                with patch("builtins.open", mock_open(read_data="test text")):
-                    process_file_with_cache(
-                        Path("/source/test.txt"),
-                        "test-model",
-                        cache_dir=Path("/custom/cache"),
-                    )
+        mock_cache_path = MagicMock()
+        mock_cache_path.exists.return_value = False
+        mock_cache_path.__str__ = MagicMock(return_value="/custom/cache/cache.pkl")
 
-        # Verify cache path uses custom cache_dir
-        call_args = mock_valid.call_args[0]
+        with patch("latin_masking.cache.get_cache_path", return_value=mock_cache_path):
+            with patch.object(Path, "exists", return_value=True):
+                with patch.object(Path, "is_dir", return_value=False):
+                    with patch("builtins.open", mock_open(read_data="test text")):
+                        process_file_with_cache(
+                            Path("/source/test.txt"),
+                            "test-model",
+                            cache_dir=Path("/custom/cache"),
+                        )
+
+        # Verify save was called with a path under custom cache_dir
+        call_args = mock_save.call_args[0]
         assert str(call_args[0]).startswith("/custom/cache")
 
     @patch("latin_masking.client.process_text")
-    @patch("latin_masking.cache.is_cache_valid")
     @patch("latin_masking.cache.save_cached_response")
     def test_encoding_error_propagates(
         self,
         mock_save: MagicMock,
-        mock_valid: MagicMock,
         mock_process: MagicMock,
     ) -> None:
         """Test that UnicodeDecodeError propagates."""
@@ -539,19 +546,23 @@ class TestProcessFileWithCache:
 
         from latin_masking.client import process_file_with_cache
 
-        mock_valid.return_value = False
+        mock_cache_path = MagicMock()
+        mock_cache_path.exists.return_value = False
 
-        # Create a mock that raises UnicodeDecodeError when read() is called
-        mock_file = MagicMock()
-        mock_file.__enter__ = MagicMock(return_value=mock_file)
-        mock_file.__exit__ = MagicMock(return_value=False)
-        mock_file.read.side_effect = UnicodeDecodeError("utf-8", b"", 0, 1, "invalid")
+        with patch("latin_masking.cache.get_cache_path", return_value=mock_cache_path):
+            with patch.object(Path, "exists", return_value=True):
+                with patch.object(Path, "is_dir", return_value=False):
+                    mock_file = MagicMock()
+                    mock_file.__enter__ = MagicMock(return_value=mock_file)
+                    mock_file.__exit__ = MagicMock(return_value=False)
+                    mock_file.read.side_effect = UnicodeDecodeError(
+                        "utf-8", b"", 0, 1, "invalid"
+                    )
 
-        with patch.object(Path, "exists", return_value=True):
-            with patch.object(Path, "is_dir", return_value=False):
-                with patch("builtins.open", return_value=mock_file):
-                    with pytest.raises(UnicodeDecodeError):
-                        process_file_with_cache(
-                            Path("/source/test.txt"),
-                            "test-model",
-                        )
+                    with patch("builtins.open", return_value=mock_file):
+                        with pytest.raises(UnicodeDecodeError):
+                            process_file_with_cache(
+                                Path("/source/test.txt"),
+                                "test-model",
+                            )
+
