@@ -6,23 +6,23 @@ from unittest.mock import MagicMock, patch, mock_open
 
 import pytest
 
-from latin_masking.client import list_models, process_text, remove_macrons
+from latin_masking.client import list_models, process_text, _remove_macrons
 from latin_masking.types import UDPipeError, UDPipeInputError
 
 
 class TestRemoveMacrons:
-    """Tests for remove_macrons function."""
+    """Tests for _remove_macrons function."""
 
     def test_remove_macron(self) -> None:
         """Test macron removal."""
         text = "mārcus"
-        result = remove_macrons(text)
+        result = _remove_macrons(text)
         assert "ā" not in result
 
     def test_no_macrons(self) -> None:
         """Test text without macrons unchanged."""
         text = "marcus"
-        result = remove_macrons(text)
+        result = _remove_macrons(text)
         assert result == text
 
 
@@ -92,7 +92,7 @@ class TestProcessTextEdgeCases:
             "model": "latin-ittb",
             "result": "# text = test\n1\ttest\ttest\tNOUN\t_\t_\t0\troot\t_\t_\n",
         }
-        result = process_text("mārcus", remove_macrons_flag=True, raw=True)
+        result = process_text("mārcus", remove_macrons=True, raw=True)
         assert result is not None
 
     @patch("latin_masking.client._perform_request")
@@ -128,12 +128,12 @@ class TestProcessTextEdgeCases:
 
 
 class TestRemoveMacronsEdgeCases:
-    """Tests for remove_macrons edge cases."""
+    """Tests for _remove_macrons edge cases."""
 
     def test_mixed_macron_no_macron(self) -> None:
         """Test text with mixed macron and non-macron characters."""
         text = "mārcus vīta"
-        result = remove_macrons(text)
+        result = _remove_macrons(text)
         assert "ā" not in result
         assert "ī" not in result
         assert "v" in result
@@ -141,13 +141,13 @@ class TestRemoveMacronsEdgeCases:
     def test_empty_string(self) -> None:
         """Test empty string."""
         text = ""
-        result = remove_macrons(text)
+        result = _remove_macrons(text)
         assert result == ""
 
     def test_only_macrons(self) -> None:
         """Test string with only macron characters."""
         text = "āē"
-        result = remove_macrons(text)
+        result = _remove_macrons(text)
         assert "ā" not in result
         assert "ē" not in result
 
@@ -565,4 +565,3 @@ class TestProcessFileWithCache:
                                 Path("/source/test.txt"),
                                 "test-model",
                             )
-

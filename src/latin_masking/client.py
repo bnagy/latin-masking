@@ -48,7 +48,7 @@ def _get_ssl_context(unsafe_certs_ok: bool = False) -> ssl.SSLContext:
 SSL_CONTEXT = _get_ssl_context(unsafe_certs_ok=True)
 
 
-def remove_macrons(text: str) -> str:
+def _remove_macrons(text: str) -> str:
     """Remove macrons from Latin text.
 
     Args:
@@ -176,7 +176,9 @@ def _perform_request(
             )
             time.sleep(backoff)
 
-    raise last_error from last_error
+    if last_error is not None:
+        raise last_error from last_error
+    raise UDPipeError("UDPipe request failed with no captured error")
 
 
 def list_models(service_url: str = DEFAULT_SERVICE_URL) -> list[str]:
@@ -202,7 +204,7 @@ def process_text(
     input_type: str = "conllu",
     presegmented: bool = False,
     strip_punct: bool = True,
-    remove_macrons_flag: bool = True,
+    remove_macrons: bool = True,
     raw: bool = True,
     service_url: str = DEFAULT_SERVICE_URL,
     unsafe_certs_ok: bool = True,
@@ -216,7 +218,7 @@ def process_text(
         input_type: Input type for UDPipe.
         presegmented: Whether text is already pre-segmented (one sentence per line).
         strip_punct: Whether to strip punctuation characters.
-        remove_macrons_flag: Whether to remove macrons from input.
+        remove_macrons: Whether to remove macrons from input.
         raw: Whether to return raw CoNLL-U response or parsed DataFrames.
         service_url: Base URL for the UDPipe service.
         unsafe_certs_ok: If True, accept self-signed certificates (default: True for UDPipe).
@@ -235,8 +237,8 @@ def process_text(
     if strip_punct:
         text = text.translate(str.maketrans("", "", r"[]<>{}†'\""))
 
-    if remove_macrons_flag:
-        text = remove_macrons(text)
+    if remove_macrons:
+        text = _remove_macrons(text)
 
     data: dict[str, Any] = {
         "input": input_type,
@@ -298,10 +300,12 @@ def _process_text_with_cache(
     )
 
     if cache_path.exists():
-        return load_cached_response(cache_path)
+        cached = load_cached_response(cache_path)
+        if cached is not None:
+            return cached
 
     response = process_text(text, **process_kwargs)
-    if response:
+    if isinstance(response, str):
         save_cached_response(cache_path, response)
     return response
 
@@ -351,12 +355,14 @@ def process_file_with_cache(
     cache_path = get_cache_path(input_path, cache_dir, model)
 
     if not force_refresh and cache_path.exists():
-        return load_cached_response(cache_path)
+        cached = load_cached_response(cache_path)
+        if cached is not None:
+            return cached
 
     with open(input_path, "r", encoding="utf-8") as f:
         text = f.read()
 
     response = process_text(text, model=model, **process_kwargs)
-    if response:
+    if isinstance(response, str):
         save_cached_response(cache_path, response)
     return response

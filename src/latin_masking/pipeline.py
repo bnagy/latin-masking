@@ -63,7 +63,7 @@ def process_file(
             model=config.model,
             presegmented=config.presegmented,
             strip_punct=config.strip_punct,
-            remove_macrons_flag=config.remove_macrons,
+            remove_macrons=config.remove_macrons,
             raw=True,
             unsafe_certs_ok=config.unsafe_certs_ok,
         )
