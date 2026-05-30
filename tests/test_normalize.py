@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from latin_masking.normalize import normalize_ch_h, normalize_uv_ij
+from latin_masking.normalize import normalize_ch_h, normalize_text, normalize_uv_ij
 
 
 class TestNormalizeUvIj:
@@ -51,3 +51,55 @@ class TestNormalizeChH:
         """Test non-matching words return unchanged."""
         assert normalize_ch_h("bonus") == "bonus"
         assert normalize_ch_h("terra") == "terra"
+
+
+class TestNormalizeText:
+    """Tests for normalize_text function."""
+
+    def test_basic_normalization(self) -> None:
+        """Test basic UV/IJ normalization on full text."""
+        text = "jam in horto"
+        result = normalize_text(text)
+        assert result == "iam in horto"
+
+    def test_v_to_u(self) -> None:
+        """Test v→u normalization on full text."""
+        text = "servus vivit"
+        result = normalize_text(text)
+        assert result == "seruus uiuit"
+
+    def test_ch_h_normalization(self) -> None:
+        """Test ch→h normalization on full text."""
+        text = "michi nichil"
+        result = normalize_text(text)
+        assert result == "mihi nihil"
+
+    def test_combined_normalization(self) -> None:
+        """Test combined UV/IJ + ch/h normalization."""
+        text = "jam michi servus"
+        result = normalize_text(text)
+        assert result == "iam mihi seruus"
+
+    def test_preserves_whitespace_structure(self) -> None:
+        """Test that output is single-space separated."""
+        text = "jam   in    horto"
+        result = normalize_text(text)
+        assert result == "iam in horto"
+
+    def test_empty_text(self) -> None:
+        """Test empty text returns empty string."""
+        assert normalize_text("") == ""
+
+    def test_single_token(self) -> None:
+        """Test single token normalization."""
+        assert normalize_text("jam") == "iam"
+
+    def test_no_change_needed(self) -> None:
+        """Test text that needs no normalization."""
+        text = "in horto sedet"
+        assert normalize_text(text) == text
+
+    def test_jamque_normalizes_to_iamque(self) -> None:
+        """Test that jamque normalizes to iamque (not jamaque)."""
+        result = normalize_text("jamque")
+        assert result == "iamque"

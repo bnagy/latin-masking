@@ -15,6 +15,7 @@ from typing import Any
 
 import pandas as pd
 
+from latin_masking.normalize import normalize_text
 from latin_masking.types import UDPipeAPIError, UDPipeError, UDPipeInputError
 
 logger = logging.getLogger(__name__)
@@ -205,6 +206,7 @@ def process_text(
     presegmented: bool = False,
     strip_punct: bool = True,
     remove_macrons: bool = True,
+    normalize: bool = True,
     raw: bool = True,
     service_url: str = DEFAULT_SERVICE_URL,
     unsafe_certs_ok: bool = True,
@@ -219,6 +221,7 @@ def process_text(
         presegmented: Whether text is already pre-segmented (one sentence per line).
         strip_punct: Whether to strip punctuation characters.
         remove_macrons: Whether to remove macrons from input.
+        normalize: Whether to apply UV/IJ + ch/h normalization.
         raw: Whether to return raw CoNLL-U response or parsed DataFrames.
         service_url: Base URL for the UDPipe service.
         unsafe_certs_ok: If True, accept self-signed certificates (default: True for UDPipe).
@@ -233,6 +236,9 @@ def process_text(
     """
     if not text or not text.strip():
         raise UDPipeInputError("Input text is empty")
+
+    if normalize:
+        text = normalize_text(text)
 
     if strip_punct:
         text = text.translate(str.maketrans("", "", r"[]<>{}†'\""))
@@ -315,6 +321,7 @@ def process_file_with_cache(
     model: str,
     cache_dir: Path | None = None,
     force_refresh: bool = False,
+    normalize: bool = True,
     **process_kwargs,
 ) -> str | tuple[list[pd.DataFrame], list[str]]:
     """Process a file through UDPipe with automatic caching.
@@ -326,6 +333,7 @@ def process_file_with_cache(
         model: UDPipe model name.
         cache_dir: Directory for cache files. Defaults to input_path (same directory).
         force_refresh: If True, bypass cache and re-process.
+        normalize: Whether to apply UV/IJ + ch/h normalization.
         **process_kwargs: Additional arguments passed to process_text.
 
     Returns:
@@ -362,7 +370,7 @@ def process_file_with_cache(
     with open(input_path, "r", encoding="utf-8") as f:
         text = f.read()
 
-    response = process_text(text, model=model, **process_kwargs)
+    response = process_text(text, model=model, normalize=normalize, **process_kwargs)
     if isinstance(response, str):
         save_cached_response(cache_path, response)
     return response

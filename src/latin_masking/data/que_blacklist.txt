@@ -9,6 +9,8 @@ cuiuscunque
 cuiusque
 cumque
 denique
+iamque
+iamiamque
 itaque
 namque
 nanque
@@ -46,6 +48,7 @@ quicumque
 quicunque
 quidque
 quique
+quinque
 quisque
 quoadusque
 quocumque
@@ -98,6 +101,7 @@ ubicunque
 oblique
 aeque
 eque
+aque
 ideoque
 quantumcumque
 bineque

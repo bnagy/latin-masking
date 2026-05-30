@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -98,7 +99,9 @@ class MaskingConfig:
 
     model: str = "latin-evalatin24-240520"
     adverb_threshold: int = 200
-    common_adverbs_path: Path | None = None
+    common_adverbs_path: Path = field(
+        default_factory=lambda: Path("common_adverbs.txt")
+    )
     replacement_dict_path: Path | None = None
     cache_dir: Path = field(
         default_factory=lambda: Path.home() / ".cache" / "latin-masking"
@@ -107,6 +110,8 @@ class MaskingConfig:
     strip_punct: bool = True
     remove_macrons: bool = True
     unsafe_certs_ok: bool = True
+    normalize: bool = True
+    preserve_eol: bool = True
 
     def __post_init__(self) -> None:
         """Convert string paths to Path objects if needed."""
@@ -137,3 +142,35 @@ class PipelineResult:
     adverbs_found: int = 0
     cache_hits: int = 0
     extra: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class Stage1Result:
+    """Result from running stage 1 of the pipeline.
+
+    Attributes:
+        adverb_counts: Aggregated adverb counts across all files.
+        sentences_per_file: Mapping of input path to sentence count.
+        common_adverbs_path: Path where the adverb list was written.
+    """
+
+    adverb_counts: Counter[str] = field(default_factory=Counter)
+    sentences_per_file: dict[Path, int] = field(default_factory=dict)
+    common_adverbs_path: Path = field(
+        default_factory=lambda: Path("common_adverbs.txt")
+    )
+
+
+@dataclass
+class Stage2Result:
+    """Result from running stage 2 of the pipeline.
+
+    Attributes:
+        output_files: List of paths to generated masked output files.
+        sentences_processed: Number of sentences processed.
+        cache_hits: Number of times cached responses were used.
+    """
+
+    output_files: list[Path] = field(default_factory=list)
+    sentences_processed: int = 0
+    cache_hits: int = 0

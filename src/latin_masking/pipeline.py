@@ -1,16 +1,23 @@
-"""Full pipeline orchestration for Latin text processing."""
+"""Two-stage pipeline orchestration for Latin text processing.
+
+Stage 1: Normalize → sentence-split → UDPipe → collect adverbs.
+Stage 2: -que split → UDPipe → mask.
+
+The caller reviews common_adverbs.txt between stages.
+"""
 
 from __future__ import annotations
 
 import logging
+from collections import Counter
 from pathlib import Path
-from typing import Any
 
 from latin_masking.adverbs import (
     collect_adverbs,
     generate_adverb_list,
     load_adverb_list,
     normalize_adverb_counts,
+    save_adverb_list,
 )
 from latin_masking.cache import (
     get_cache_path,
@@ -18,194 +25,199 @@ from latin_masking.cache import (
     save_cached_response,
 )
 from latin_masking.clitics import load_que_blacklist, split_que_blacklist
-from latin_masking.client import process_text
+from latin_masking.client import process_file_with_cache
+from latin_masking.conllu import parse_conllu
 from latin_masking.mask import two_pass_mask
-from latin_masking.types import MaskingConfig, PipelineResult
+from latin_masking.normalize import normalize_text
+from latin_masking.sentences import split_sentences
+from latin_masking.types import MaskingConfig, Stage1Result, Stage2Result
 
 logger = logging.getLogger(__name__)
 
 
-def process_file(
-    input_path: Path,
-    output_dir: Path,
-    *,
-    config: MaskingConfig,
-) -> dict[str, Any]:
-    """Process a single file through all pipeline stages.
-
-    Args:
-        input_path: Path to input file.
-        output_dir: Directory for output files.
-        config: Pipeline configuration.
-
-    Returns:
-        Dictionary with processing statistics.
-
-    """
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    # Read input
-    with open(input_path, "r", encoding="utf-8") as f:
-        text = f.read()
-
-    # Check cache
-    cache_path = get_cache_path(input_path, config.cache_dir, config.model)
-    cache_hit = False
-    response: str | None = None
-
-    if cache_path.exists():
-        response = load_cached_response(cache_path)
-        cache_hit = True
-    else:
-        # Process through UDPipe
-        result = process_text(
-            text,
-            model=config.model,
-            presegmented=config.presegmented,
-            strip_punct=config.strip_punct,
-            remove_macrons=config.remove_macrons,
-            raw=True,
-            unsafe_certs_ok=config.unsafe_certs_ok,
-        )
-        if result:
-            response = result if isinstance(result, str) else ""
-            save_cached_response(cache_path, response)
-
-    if not response:
-        return {"sentences": 0, "cache_hit": cache_hit}
-
-    # Parse response
-    from latin_masking.conllu import parse_conllu
-
-    frames, texts = parse_conllu(response)
-
-    # Generate adverbs if needed
-    if config.common_adverbs_path and config.common_adverbs_path.exists():
-        common_adverbs = load_adverb_list(
-            config.common_adverbs_path, config.adverb_threshold
-        )
-    else:
-        # Collect adverbs from this file
-        adv_counter = collect_adverbs(frames)
-        normalized_counter = normalize_adverb_counts(adv_counter)
-        common_adverbs = {
-            adv
-            for adv, _ in generate_adverb_list(
-                normalized_counter, config.adverb_threshold
-            )
-        }
-
-    # Masking with universal UV/IJ normalization
-    masked_sentences = two_pass_mask(
-        frames,
-        common_adverbs=common_adverbs,
-    )
-
-    # Write output
-    output_path = output_dir / f"{input_path.stem}.masked.txt"
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(masked_sentences))
-
-    return {
-        "sentences": len(masked_sentences),
-        "cache_hit": cache_hit,
-        "output_file": str(output_path),
-    }
-
-
-def run_pipeline(
+def run_pipeline_stage1(
     input_paths: list[Path],
     output_dir: Path,
     *,
     config: MaskingConfig,
-) -> PipelineResult:
-    """End-to-end pipeline: sentence split → UDPipe → adverb generation → two-pass mask.
+    preserve_eol: bool = True,
+) -> Stage1Result:
+    """Stage 1: Normalize, sentence-split, UDPipe, collect adverbs.
+
+    Per file:
+    1. Read raw text
+    2. If preserve_eol: join lines with <EOL> tokens
+    3. Apply normalize_text() (UV/IJ + ch/h)
+    4. Sentence-split → write {stem}_sentences.txt
+    5. UDPipe (raw=True, presegmented=True) → populates cache
+    6. Parse CoNLL-U, collect adverbs
+
+    After all files:
+    7. Aggregate → normalize counts → generate list → save common_adverbs.txt
 
     Args:
         input_paths: List of input file paths.
         output_dir: Directory for output files.
         config: Pipeline configuration.
+        preserve_eol: If True, join verse lines with <EOL> tokens.
 
     Returns:
-        PipelineResult with statistics.
-
+        Stage1Result with adverb counts and sentence counts.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    total_sentences = 0
-    total_cache_hits = 0
-    output_files: list[Path] = []
+    all_adverbs: Counter[str] = Counter()
+    sentences_per_file: dict[Path, int] = {}
 
     for input_path in input_paths:
-        result = process_file(input_path, output_dir, config=config)
-        total_sentences += result.get("sentences", 0)
-        if result.get("cache_hit"):
-            total_cache_hits += 1
-        if "output_file" in result:
-            output_files.append(Path(result["output_file"]))
+        logger.info("Stage 1: processing %s", input_path.name)
 
-    return PipelineResult(
-        output_files=output_files,
-        sentences_processed=total_sentences,
-        cache_hits=total_cache_hits,
+        # Read raw text
+        with open(input_path, "r", encoding="utf-8") as f:
+            raw_text = f.read()
+
+        # Optionally preserve verse linebreaks as <EOL> tokens
+        if preserve_eol:
+            raw_lines = [line.strip() for line in raw_text.split("\n")]
+            raw_lines = [line for line in raw_lines if line]
+            text = " <EOL> ".join(raw_lines)
+        else:
+            text = raw_text
+
+        # Normalize (UV/IJ + ch/h) — first processing step
+        text = normalize_text(text)
+
+        # Sentence-split
+        sentences = split_sentences(text)
+        sent_path = output_dir / f"{input_path.stem}_sentences.txt"
+        with open(sent_path, "w", encoding="utf-8") as f:
+            for sent in sentences:
+                f.write(sent + "\n")
+        sentences_per_file[input_path] = len(sentences)
+
+        # UDPipe (with caching)
+        response = process_file_with_cache(
+            sent_path,
+            model=config.model,
+            cache_dir=config.cache_dir,
+            presegmented=config.presegmented,
+            strip_punct=config.strip_punct,
+            remove_macrons=config.remove_macrons,
+            normalize=False,  # already normalized
+            raw=True,
+        )
+
+        # Parse and collect adverbs
+        if response and isinstance(response, str):
+            frames, _ = parse_conllu(response)
+            advs = collect_adverbs(frames)
+            all_adverbs.update(advs)
+
+    # Save adverbs
+    normalized = normalize_adverb_counts(all_adverbs)
+    adv_list = generate_adverb_list(normalized, max_adverbs=config.adverb_threshold)
+    save_adverb_list(adv_list, config.common_adverbs_path)
+
+    return Stage1Result(
+        adverb_counts=all_adverbs,
+        sentences_per_file=sentences_per_file,
+        common_adverbs_path=config.common_adverbs_path,
     )
 
 
-def run_pipeline_with_quesplit(
+def run_pipeline_stage2(
     input_paths: list[Path],
     output_dir: Path,
     *,
     config: MaskingConfig,
     que_blacklist_path: Path | None = None,
-) -> PipelineResult:
-    """Same as run_pipeline but with -que splitting after sentence splitting.
+) -> Stage2Result:
+    """Stage 2: -que split, UDPipe, mask.
 
-    Uses blacklist approach: split all -que words EXCEPT those in the blacklist.
+    Per file:
+    1. Read {stem}_sentences.txt (written by stage 1)
+    2. Load common adverbs; add -que adverbs to effective blacklist
+    3. Apply split_que_blacklist() → write {stem}_sentences.quesplit.txt
+    4. UDPipe (raw=True, presegmented=True) → populates cache
+    5. Parse CoNLL-U → two_pass_mask() → write {stem}_sentences.quesplit.masked.txt
 
     Args:
-        input_paths: List of input file paths.
+        input_paths: List of input file paths (same as stage 1).
         output_dir: Directory for output files.
         config: Pipeline configuration.
         que_blacklist_path: Path to -que blacklist file.
 
     Returns:
-        PipelineResult with statistics.
-
+        Stage2Result with output file paths and statistics.
     """
-    # Load -que blacklist if provided
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Load blacklist
     que_blacklist: set[str] = set()
     if que_blacklist_path and que_blacklist_path.exists():
         que_blacklist = load_que_blacklist(que_blacklist_path)
 
-    output_dir.mkdir(parents=True, exist_ok=True)
+    # Load common adverbs and add -que adverbs to effective blacklist
+    common_adverbs = load_adverb_list(
+        config.common_adverbs_path, config.adverb_threshold
+    )
+    effective_blacklist = set(que_blacklist)
+    for adv in common_adverbs:
+        if adv.endswith("que"):
+            effective_blacklist.add(adv.lower())
 
+    output_files: list[Path] = []
     total_sentences = 0
     total_cache_hits = 0
-    output_files: list[Path] = []
 
     for input_path in input_paths:
-        # Read input
-        with open(input_path, "r", encoding="utf-8") as f:
+        logger.info("Stage 2: processing %s", input_path.name)
+
+        # Read sentence-split file from stage 1
+        sent_path = output_dir / f"{input_path.stem}_sentences.txt"
+        with open(sent_path, "r", encoding="utf-8") as f:
             text = f.read()
 
-        # Apply -que splitting using blacklist approach
-        if que_blacklist:
-            text, _ = split_que_blacklist(text, que_blacklist)
+        # Apply -que splitting
+        qs_text, qs_count = split_que_blacklist(text, effective_blacklist)
+        qs_path = output_dir / f"{input_path.stem}_sentences.quesplit.txt"
+        with open(qs_path, "w", encoding="utf-8") as f:
+            f.write(qs_text)
+        logger.debug("  %s: %d -que splits", input_path.name, qs_count)
 
-        # Write intermediate file
-        intermediate_path = output_dir / f"{input_path.stem}.quesplit.txt"
-        with open(intermediate_path, "w", encoding="utf-8") as f:
-            f.write(text)
+        # UDPipe (with caching)
+        response = process_file_with_cache(
+            qs_path,
+            model=config.model,
+            cache_dir=config.cache_dir,
+            presegmented=config.presegmented,
+            strip_punct=config.strip_punct,
+            remove_macrons=config.remove_macrons,
+            normalize=False,  # already normalized in stage 1
+            raw=True,
+        )
 
-        # Process through rest of pipeline
-        result = process_file(intermediate_path, output_dir, config=config)
-        total_sentences += result.get("sentences", 0)
-        if result.get("cache_hit"):
-            total_cache_hits += 1
-        if "output_file" in result:
-            output_files.append(Path(result["output_file"]))
+        # Parse and mask
+        if response and isinstance(response, str):
+            frames, _ = parse_conllu(response)
+            masked = two_pass_mask(frames, common_adverbs=common_adverbs)
 
-    return PipelineResult(
+            masked_path = (
+                output_dir / f"{input_path.stem}_sentences.quesplit.masked.txt"
+            )
+            with open(masked_path, "w", encoding="utf-8") as f:
+                f.write("\n".join(masked))
+            output_files.append(masked_path)
+            total_sentences += len(masked)
+
+            # Check if this was a cache hit
+            cache_path = get_cache_path(qs_path, config.cache_dir, config.model)
+            if cache_path.exists():
+                cached = load_cached_response(cache_path)
+                if cached is not None:
+                    total_cache_hits += 1
+
+    return Stage2Result(
         output_files=output_files,
         sentences_processed=total_sentences,
         cache_hits=total_cache_hits,

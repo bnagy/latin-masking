@@ -4,49 +4,64 @@ from __future__ import annotations
 
 import argparse
 import sys
-from collections import Counter
 from pathlib import Path
 
 from latin_masking.types import MaskingConfig
-from latin_masking.pipeline import run_pipeline, run_pipeline_with_quesplit
+from latin_masking.pipeline import run_pipeline_stage1, run_pipeline_stage2
 
 
 def _cmd_process(args: argparse.Namespace) -> int:
-    """Handle the process subcommand."""
-    # Default cache dir is a udpipe_cache subdirectory in the input file's directory
+    """Handle the process subcommand (two-stage pipeline)."""
+    # Default cache dir
     if args.cache_dir:
         cache_dir = args.cache_dir
     elif args.regenerate:
         cache_dir = Path("/tmp/latin-masking-nocache")
     else:
-        # Use udpipe_cache subdirectory in the directory containing the first input file
         cache_dir = (
             args.input[0].parent / "udpipe_cache"
             if args.input
             else Path.cwd() / "udpipe_cache"
         )
+
     config = MaskingConfig(
         model=args.model,
         cache_dir=cache_dir,
     )
 
-    # Use default blacklist if --quesplit is set but no custom blacklist provided
+    # Stage 1: normalize, sentence-split, UDPipe, collect adverbs
+    print("=== Stage 1: UDPipe + adverb collection ===")
+    result1 = run_pipeline_stage1(
+        args.input,
+        args.output,
+        config=config,
+        preserve_eol=not args.no_preserve_eol,
+    )
+    print(f"Processed {len(result1.sentences_per_file)} files")
+    print(f"Sentences: {sum(result1.sentences_per_file.values())}")
+    print(f"Adverbs collected: {len(result1.adverb_counts)} unique")
+    print(f"Saved to: {result1.common_adverbs_path}")
+
+    if args.stage1_only:
+        print("\nStage 1 complete. Review common_adverbs.txt before running stage 2.")
+        return 0
+
+    # Stage 2: quesplit, UDPipe, mask
+    print("\n=== Stage 2: -que splitting + masking ===")
+
     que_blacklist_path = args.que_blacklist
-    if args.quesplit and que_blacklist_path is None:
+    if que_blacklist_path is None:
         que_blacklist_path = Path(__file__).parent / "data" / "que_blacklist.txt"
 
-    if args.quesplit:
-        result = run_pipeline_with_quesplit(
-            args.input,
-            args.output,
-            config=config,
-            que_blacklist_path=que_blacklist_path,
-        )
-    else:
-        result = run_pipeline(args.input, args.output, config=config)
-
-    print(f"Processed {result.sentences_processed} sentences")
-    print(f"Cache hits: {result.cache_hits}")
+    result2 = run_pipeline_stage2(
+        args.input,
+        args.output,
+        config=config,
+        que_blacklist_path=que_blacklist_path,
+    )
+    print(f"Processed {result2.sentences_processed} sentences")
+    print(f"Cache hits: {result2.cache_hits}")
+    print(f"Output files: {len(result2.output_files)}")
     return 0
 
 
@@ -72,123 +87,61 @@ def _cmd_split_sentences(args: argparse.Namespace) -> int:
     return 0
 
 
-def _cmd_split_que(args: argparse.Namespace) -> int:
-    """Handle the split-que subcommand."""
-    from latin_masking.clitics import load_que_words, split_que
-
-    que_words = []
-    if args.que_words:
-        que_words = load_que_words(args.que_words)
-
-    with open(args.input, "r", encoding="utf-8") as f:
-        text = f.read()
-
-    new_text, count = split_que(text, que_words)
-    print(f"Made {count} replacements")
-    print(new_text)
-    return 0
-
-
 def _cmd_generate_adverbs(args: argparse.Namespace) -> int:
-    """Handle the generate-adverbs subcommand."""
-    from latin_masking.client import process_text
-    from latin_masking.adverbs import (
-        collect_adverbs,
-        normalize_adverb_counts,
-        generate_adverb_list,
-        save_adverb_list,
-    )
-    from latin_masking.conllu import parse_conllu
-    from latin_masking.cache import get_cache_path, load_cached_response
-
+    """Handle the generate-adverbs subcommand (stage 1 only)."""
     cache_dir = Path.home() / ".cache" / "latin-masking"
-    all_adverbs: Counter[str] = Counter()
-    for input_path in args.input:
-        with open(input_path, "r", encoding="utf-8") as f:
-            text = f.read()
+    config = MaskingConfig(
+        model=args.model,
+        cache_dir=cache_dir,
+    )
 
-        # Check cache first
-        cache_path = get_cache_path(input_path, cache_dir, args.model)
-        response = None
-        if cache_path.exists():
-            response = load_cached_response(cache_path)
+    result = run_pipeline_stage1(
+        args.input,
+        args.output or Path.cwd(),
+        config=config,
+        preserve_eol=False,
+    )
 
-        if not response:
-            response = process_text(
-                text,
-                model=args.model,
-                presegmented=True,
-                raw=True,
-                unsafe_certs_ok=args.unsafe_certs_ok,
-            )
-        if response:
-            frames, _ = parse_conllu(str(response))
-            advs = collect_adverbs(frames)
-            all_adverbs.update(advs)
-
-    normalized = normalize_adverb_counts(all_adverbs)
-    top_advs = generate_adverb_list(normalized, args.max)
-
-    if args.output:
-        args.output.mkdir(parents=True, exist_ok=True)
-        output_path = args.output / "common_adverbs.txt"
-        save_adverb_list(top_advs, output_path)
-        print(f"Saved {len(top_advs)} adverbs to {output_path}")
-    else:
-        for adv, count in top_advs:
-            print(f"{adv}\t{count}")
+    print(f"Collected {len(result.adverb_counts)} unique adverbs")
+    print(f"Saved to: {result.common_adverbs_path}")
     return 0
 
 
 def _cmd_mask(args: argparse.Namespace) -> int:
-    """Handle the mask subcommand."""
-    from latin_masking.client import process_text
-    from latin_masking.conllu import parse_conllu
-    from latin_masking.mask import two_pass_mask
-    from latin_masking.adverbs import load_adverb_list
+    """Handle the mask subcommand (stage 2 only)."""
+    cache_dir = Path.home() / ".cache" / "latin-masking"
+    config = MaskingConfig(
+        model=args.model,
+        cache_dir=cache_dir,
+    )
 
-    common_adverbs = set()
-    if args.adverbs:
-        common_adverbs = load_adverb_list(args.adverbs, 200)
+    que_blacklist_path = args.que_blacklist
+    if que_blacklist_path is None:
+        que_blacklist_path = Path(__file__).parent / "data" / "que_blacklist.txt"
 
-    for input_path in args.input:
-        with open(input_path, "r", encoding="utf-8") as f:
-            text = f.read()
+    result = run_pipeline_stage2(
+        args.input,
+        args.output or Path.cwd(),
+        config=config,
+        que_blacklist_path=que_blacklist_path,
+    )
 
-        response = process_text(
-            text, presegmented=True, raw=True, unsafe_certs_ok=args.unsafe_certs_ok
-        )
-        if response:
-            frames, _ = parse_conllu(str(response))
-
-            masked = two_pass_mask(
-                frames,
-                common_adverbs=common_adverbs,
-            )
-
-            if args.output:
-                args.output.mkdir(parents=True, exist_ok=True)
-                output_path = args.output / f"{input_path.stem}_masked.txt"
-                with open(output_path, "w", encoding="utf-8") as f:
-                    f.write("\n".join(masked))
-                print(f"Wrote {len(masked)} sentences to {output_path}")
-            else:
-                for sent in masked:
-                    print(sent)
+    print(f"Processed {result.sentences_processed} sentences")
+    print(f"Output files: {len(result.output_files)}")
     return 0
 
 
 def main() -> int:
     """Main entry point for CLI."""
     parser = argparse.ArgumentParser(
-        prog="udpipe-mask",
+        prog="latin-mask",
         description="Latin text processing pipeline with UDPipe POS tagging and masking",
     )
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
-    # Process command
+    # Process command (two-stage pipeline)
     process_parser = subparsers.add_parser(
-        "process", help="Process input files through the full pipeline"
+        "process", help="Process input files through the two-stage pipeline"
     )
     process_parser.add_argument("input", nargs="+", type=Path, help="Input files")
     process_parser.add_argument(
@@ -201,19 +154,20 @@ def main() -> int:
         "--cache-dir", type=Path, help="Directory for caching UDPipe responses"
     )
     process_parser.add_argument(
-        "--quesplit", action="store_true", help="Enable -que splitting"
-    )
-    process_parser.add_argument(
         "--que-blacklist", type=Path, help="Path to -que blacklist file"
     )
     process_parser.add_argument(
         "--regenerate", action="store_true", help="Force regeneration (ignore cache)"
     )
     process_parser.add_argument(
-        "--unsafe-certs-ok",
+        "--stage1-only",
         action="store_true",
-        default=True,
-        help="Accept self-signed SSL certificates (default: True for UDPipe)",
+        help="Run only stage 1 (adverb collection)",
+    )
+    process_parser.add_argument(
+        "--no-preserve-eol",
+        action="store_true",
+        help="Do not insert <EOL> tokens between verse lines",
     )
 
     # Split sentences command
@@ -223,38 +177,28 @@ def main() -> int:
     split_parser.add_argument("input", type=Path, help="Input file")
     split_parser.add_argument("--output", "-o", type=Path, help="Output directory")
 
-    # Split que command
-    que_parser = subparsers.add_parser("split-que", help="Split -que enclitics")
-    que_parser.add_argument("input", type=Path, help="Input file")
-    que_parser.add_argument("--que-words", type=Path, help="Path to -que words file")
-
-    # Generate adverbs command
+    # Generate adverbs command (stage 1)
     adv_parser = subparsers.add_parser(
-        "generate-adverbs", help="Generate adverb list from input"
+        "generate-adverbs", help="Generate adverb list from input (stage 1)"
     )
     adv_parser.add_argument("input", nargs="+", type=Path, help="Input files")
     adv_parser.add_argument("--output", "-o", type=Path, help="Output directory")
     adv_parser.add_argument(
-        "--max", type=int, default=200, help="Maximum adverbs to save"
-    )
-    adv_parser.add_argument(
-        "--model", "-m", default="latin-ittb-ud-2.5-191005", help="UDPipe model"
-    )
-    adv_parser.add_argument(
-        "--unsafe-certs-ok",
-        action="store_true",
-        default=True,
-        help="Accept self-signed SSL certificates (default: True for UDPipe)",
+        "--model", "-m", default="latin-evalatin24-240520", help="UDPipe model"
     )
 
-    # Mask command
-    mask_parser = subparsers.add_parser("mask", help="Apply masking to input")
-    mask_parser.add_argument("input", nargs="+", type=Path, help="Input files")
-    mask_parser.add_argument("--adverbs", type=Path, help="Path to adverbs file")
-    mask_parser.add_argument(
-        "--replacements", type=Path, help="Path to replacement dict"
+    # Mask command (stage 2)
+    mask_parser = subparsers.add_parser(
+        "mask", help="Apply -que splitting and masking (stage 2)"
     )
+    mask_parser.add_argument("input", nargs="+", type=Path, help="Input files")
     mask_parser.add_argument("--output", "-o", type=Path, help="Output directory")
+    mask_parser.add_argument(
+        "--que-blacklist", type=Path, help="Path to -que blacklist file"
+    )
+    mask_parser.add_argument(
+        "--model", "-m", default="latin-evalatin24-240520", help="UDPipe model"
+    )
 
     args = parser.parse_args()
 
@@ -265,7 +209,6 @@ def main() -> int:
     commands = {
         "process": _cmd_process,
         "split-sentences": _cmd_split_sentences,
-        "split-que": _cmd_split_que,
         "generate-adverbs": _cmd_generate_adverbs,
         "mask": _cmd_mask,
     }
