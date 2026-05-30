@@ -4,8 +4,8 @@ from __future__ import annotations
 
 # Special case normalizations for ch→h variants
 CH_TO_H_NORMALIZATIONS = {
-    "mihi": "michi",
-    "nihil": "nichil",
+    "michi": "mihi",
+    "nichil": "nihil",
 }
 
 
@@ -25,7 +25,7 @@ def normalize_uv_ij(word: str) -> str:
 
 
 def normalize_ch_h(token: str) -> str:
-    """Special case: normalize mihi→michi, nihil→nichil.
+    """Special case: normalize michi→mihi, nichil→nihil.
 
     Args:
         token: Token to normalize.

@@ -35,17 +35,17 @@ class TestNormalizeUvIj:
 
 
 class TestNormalizeChH:
-    """Tests for normalize_ch_h function."""
+    """Tests for normalize_ch_h function (h→ch normalization)."""
 
-    def test_mihi_to_michi(self) -> None:
-        """Test mihi→michi normalization."""
-        assert normalize_ch_h("mihi") == "michi"
-        assert normalize_ch_h("Mihi") == "Michi"
+    def test_michi_to_mihi(self) -> None:
+        """Test michi→mihi normalization."""
+        assert normalize_ch_h("michi") == "mihi"
+        assert normalize_ch_h("Michi") == "Mihi"
 
-    def test_nihil_to_nichil(self) -> None:
-        """Test nihil→nichil normalization."""
-        assert normalize_ch_h("nihil") == "nichil"
-        assert normalize_ch_h("Nihil") == "Nichil"
+    def test_nichil_to_nihil(self) -> None:
+        """Test nichil→nihil normalization."""
+        assert normalize_ch_h("nichil") == "nihil"
+        assert normalize_ch_h("Nichil") == "Nihil"
 
     def test_no_match_returns_unchanged(self) -> None:
         """Test non-matching words return unchanged."""

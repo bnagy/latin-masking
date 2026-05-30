@@ -37,7 +37,7 @@ def mask_sentence(
         # Step 1: Strip leading ( and trailing ) from tokens
         w_clean = w.lstrip("(").rstrip(")")
 
-        # Step 2: Apply ch→h normalization (mihi→michi, nihil→nichil)
+        # Step 2: Apply h→ch normalization (michi→mihi, nichil→nihil)
         w_norm = normalize_ch_h(w_clean)
 
         # Step 3: Apply POS masking

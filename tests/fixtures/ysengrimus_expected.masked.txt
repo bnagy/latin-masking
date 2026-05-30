@@ -1,17 +1,17 @@
 VERB NOUN mane PROPN ut NOUN NOUN VERB VERB atque sibi VERB ab ADJ PROPN VERB NOUN qui ADJ NOUN VERB VERB NOUN VERB -que NOUN non VERB ante VERB quam nimis VERB VERB NOUN NOUN
 ille ubi ADJ NOUN AUX VERB in NOUN NOUN nil ADJ VERB quam VERB NOUN iam -que NOUN ueluti ADJ VERB VERB NOUN NOUN VERB meo
 VERB NOUN ADV PROPN ut ille ADV ADJ VERB usque suo
-ut VERB michi VERB NOUN VERB
+ut VERB mihi VERB NOUN VERB
 VERB
 in NOUN te VERB tu -que VERB
 ADJ semper non AUX NOUN ADJ VERB
 te VERB VERB ADJ repente VERB
-te michi non VERB VERB ADJ NOUN
+te mihi non VERB VERB ADJ NOUN
 non me hodie primum ADJ VERB NOUN
 unde VERB ADJ PROPN
 non VERB VERB quo VERB ego te longius VERB VERB
 si quid adhuc ADV tibi VERB VERB huc tantum in NOUN VERB meas
-hinc VERB ADJ nobis VERB NOUN scilicet hec NOUN VERB NOUN meo ADJ -que NOUN non hec michi VERB NOUN AUX NOUN VERB AUX atque VERB meis cumque NOUN mee te totum VERB NOUN nec NOUN ADJ tibi AUX nec VERB ADJ
+hinc VERB ADJ nobis VERB NOUN scilicet hec NOUN VERB NOUN meo ADJ -que NOUN non hec mihi VERB NOUN AUX NOUN VERB AUX atque VERB meis cumque NOUN mee te totum VERB NOUN nec NOUN ADJ tibi AUX nec VERB ADJ
 VERB quia sepe NOUN VERB VERB
 AUX VERB NOUN nec ADJ NOUN VERB
 VERB NOUN sed non VERB NOUN VERB NOUN NOUN tota meo
@@ -30,7 +30,7 @@ quid mea quid VERB que NOUN NOUN mee -que VERB NOUN
 non ne AUX palam
 NOUN nostro tibi nunc in NOUN VERB VERB
 VERB NOUN
-AUX NOUN licet ADJ michi VERB tibi AUX
+AUX NOUN licet ADJ mihi VERB tibi AUX
 VERB ut VERB
 VERB VERB VERB
 VERB tibi NOUN quamquam VERB VERB
@@ -43,7 +43,7 @@ PROPN ut VERB non VERB in NOUN ADV ob quicquid ADJ NOUN VERB AUX PROPN
 ha ADJ ADJ -que NOUN qui VERB et NOUN
 ADJ NOUN NOUN VERB usque VERB
 ADJ ADJ ADJ VERB NOUN in NOUN ADJ VERB VERB NOUN
-VERB NOUN VERB quam NOUN illum VERB VERB NOUN inter ADJ nichil
+VERB NOUN VERB quam NOUN illum VERB VERB NOUN inter ADJ nihil
 VERB inde quater NOUN VERB VERB ut super NOUN NOUN VERB VERB
 ne VERB
 meo quos VERB in NOUN NOUN VERB VERB NOUN et NOUN
@@ -89,7 +89,7 @@ NOUN VERB ADJ
 me uelut VERB NOUN NOUN -que VERB
 NOUN NOUN semel si VERB VERB VERB protinus ADJ VERB NOUN
 NOUN VERB ADJ VERB VERB quam tibi VERB VERB AUX
-huc ADJ michi NOUN NOUN AUX NOUN -que VERB VERB ego NOUN atque VERB meos
+huc ADJ mihi NOUN NOUN AUX NOUN -que VERB VERB ego NOUN atque VERB meos
 quid NOUN ergo tibi AUX ADJ in NOUN VERB
 qui tibi NOUN VERB
 qui mea NOUN VERB
@@ -102,15 +102,15 @@ nil nisi me ADJ NOUN AUX VERB
 ADV ADJ non AUX mea NOUN qualem AUX VERB aliter NOUN ego VERB meas
 NOUN VERB ADJ qui VERB ADJ VERB
 VERB ut VERB ADJ ADJ VERB
-michi tam patienter VERB NOUN
-VERB igitur tam ADJ michi quam ADJ VERB nec ADJ VERB quicquid VERB VERB
+mihi tam patienter VERB NOUN
+VERB igitur tam ADJ mihi quam ADJ VERB nec ADJ VERB quicquid VERB VERB
 ADV VERB VERB quo ADJ NOUN AUX
 VERB patienter VERB
 NOUN VERB
-VERB non michi AUX ADJ tui NOUN NOUN nec VERB VERB ADJ NOUN NOUN
+VERB non mihi AUX ADJ tui NOUN NOUN nec VERB VERB ADJ NOUN NOUN
 NOUN VERB numquam ADJ VERB sed non hoc ADJ VERB NOUN NOUN
 quolibet ut NOUN VERB NOUN VERB VERB potius quam NOUN AUX tibi
-quod si NOUN michi VERB tale NOUN VERB NOUN meo sed tua NOUN VERB
+quod si NOUN mihi VERB tale NOUN VERB NOUN meo sed tua NOUN VERB
 ADJ ego et NOUN VERB tu ADJ et ADJ et quidnam NOUN NOUN tibi nostra VERB
 ut VERB NOUN VERB ADJ NOUN VERB sic ADJ VERB NOUN NOUN VERB
 quin heu quanta meo tibi NOUN NOUN VERB
@@ -150,7 +150,7 @@ NOUN VERB VERB VERB VERB VERB neue VERB ibi
 si tibi VERB NOUN AUX aut forte VERB NOUN NOUN VERB utrumque VERB VERB VERB NOUN NOUN VERB VERB VERB ADJ et bene ADJ AUX
 sepe NOUN ADJ ADJ sepe ADJ nunc NOUN NOUN AUX VERB mei
 at uero VERB NOUN ADJ VERB
-iam pro ADJ non ego NOUN VERB ADJ NOUN VERB ADJ ADJ ADJ AUX NOUN ADJ michi NUM VERB tibi
+iam pro ADJ non ego NOUN VERB ADJ NOUN VERB ADJ ADJ ADJ AUX NOUN ADJ mihi NUM VERB tibi
 ille VERB VERB
 NOUN VERB
 ut VERB NOUN ille VERB AUX
@@ -181,7 +181,7 @@ VERB ille NOUN et quam ADJ VERB VERB NOUN tam ADJ VERB
 PROPN VERB VERB VERB VERB VERB VERB VERB VERB ADJ
 nec ADJ VERB VERB fugiensue VERB ambo ADJ NOUN NOUN VERB
 VERB AUX NOUN ADJ si ADJ illum VERB NOUN ADJ parum
-VERB NOUN VERB VERB ADJ NOUN -que VERB NOUN VERB utramque NOUN tunc NOUN NOUN -que simul NOUN -que VERB VERB AUX nichil post sua NOUN NOUN
+VERB NOUN VERB VERB ADJ NOUN -que VERB NOUN VERB utramque NOUN tunc NOUN NOUN -que simul NOUN -que VERB VERB AUX nihil post sua NOUN NOUN
 PROPN VERB VERB VERB NOUN at NOUN VERB NOUN NOUN VERB
 PROPN ADJ VERB NOUN VERB ADJ VERB VERB -que ADJ
 nam nunc ADJ NOUN NOUN VERB NOUN VERB NOUN ADJ VERB nunc ADJ ad hanc NOUN -que VERB ad illam
@@ -222,20 +222,20 @@ ille NOUN VERB NOUN ADJ VERB ADV VERB VERB NOUN VERB
 etenim NOUN
 ADJ adhuc VERB VERB NOUN
 cum VERB cui VERB VERB ADV eam
-quam tua VERB michi AUX si NOUN VERB tam mea nempe tibi AUX
+quam tua VERB mihi AUX si NOUN VERB tam mea nempe tibi AUX
 nec quia VERB VERB ut AUX NOUN te NOUN VERB VERB sic quacumque NOUN NOUN VERB AUX
 ADJ ad VERB NOUN VERB NOUN
 VERB NOUN VERB VERB -que diu
 VERB NOUN NOUN VERB ADJ quo VERB VERB ADJ NOUN NOUN
 ipsa NOUN tota cum NOUN VERB NOUN iam NOUN VERB ADJ adhuc
-VERB ergo ADJ NOUN atque ADV VERB NOUN NOUN ADJ non nimis AUX VERB NOUN pene michi VERB hec NOUN VERB VERB enim nondum VERB AUX ADJ
+VERB ergo ADJ NOUN atque ADV VERB NOUN NOUN ADJ non nimis AUX VERB NOUN pene mihi VERB hec NOUN VERB VERB enim nondum VERB AUX ADJ
 NOUN AUX et NOUN de toto VERB NOUN cur etiam non AUX VERB VERB simul
 ADJ fere ADJ NOUN NOUN VERB unde VERB nullam NOUN ADJ NOUN
 hic nulla NOUN VERB
 VERB NOUN et non ADJ VERB
 cui VERB NOUN VERB VERB
 VERB hec ADJ per ADJ VERB ADJ
-ADJ NOUN AUX adeo non michi NOUN mee et tunc unde tibi NOUN VERB VERB
+ADJ NOUN AUX adeo non mihi NOUN mee et tunc unde tibi NOUN VERB VERB
 NOUN inter NOUN NOUN nulla VERB
 tu quoque VERB si me VERB VERB nil tibi VERB ADV AUX
 VERB VERB VERB VERB ADV ipsa AUX
@@ -244,8 +244,8 @@ uix tamen hanc VERB VERB NOUN VERB sed VERB non AUX unus utrique NOUN ADJ in NOU
 VERB tua hec NOUN AUX et VERB ADV VERB
 non alii leuiter sed tibi tanta VERB
 NOUN NOUN VERB cui VERB illius AUX
-hic aliquid ADJ quam nichil AUX VERB
-quod michi VERB VERB VERB VERB
+hic aliquid ADJ quam nihil AUX VERB
+quod mihi VERB VERB VERB VERB
 VERB NOUN nulla VERB meum
 VERB ADJ ADJ NOUN VERB VERB NOUN VERB tuam
 nunc ego VERB tua quo NOUN VERB
@@ -255,11 +255,11 @@ VERB NOUN quecumque VERB AUX
 ut NOUN NOUN NOUN VERB NOUN VERB
 ergo ego VERB VERB ADV VERB
 VERB NOUN dum ADJ NOUN VERB
-NOUN AUX NOUN NOUN NOUN VERB VERB et nichil AUX quod non NOUN NOUN VERB
+NOUN AUX NOUN NOUN NOUN VERB VERB et nihil AUX quod non NOUN NOUN VERB
 quod si tam ADJ quam ADV VERB AUX et si quam ADJ VERB AUX VERB VERB te saltem quamuis NOUN VERB hec mea non VERB ADJ NOUN NOUN
-NOUN tuus si tanta NOUN VERB quanta non VERB VERB meum NOUN mea VERB ADJ michi NOUN NOUN NOUN plus ADJ NOUN AUX tibi
+NOUN tuus si tanta NOUN VERB quanta non VERB VERB meum NOUN mea VERB ADJ mihi NOUN NOUN NOUN plus ADJ NOUN AUX tibi
 sicut enim AUX ADJ NOUN NOUN VERB non tibi NOUN NOUN VERB VERB
-VERB si tota AUX tibi NOUN meam -que NOUN VERB turpiter ergo VERB NOUN cum tibi AUX VERB et ADJ at michi ADV ADJ VERB in NOUN ADJ
+VERB si tota AUX tibi NOUN meam -que NOUN VERB turpiter ergo VERB NOUN cum tibi AUX VERB et ADJ at mihi ADV ADJ VERB in NOUN ADJ
 si NOUN ad NOUN VERB non ne VERB NOUN NOUN et NOUN ego
 protinus ergo tue VERB NOUN NOUN cum VERB NOUN NOUN ADJ tuo VERB NOUN ADJ NOUN ADJ ADJ tali me NOUN VERB PROPN VERB VERB NOUN ADJ hoc NOUN NOUN ADJ VERB
 VERB hoc NOUN ADJ ADJ NOUN PROPN NOUN inter VERB suam NOUN et in NOUN quoadusque NOUN ADJ VERB NOUN VERB VERB AUX
@@ -282,10 +282,10 @@ NOUN VERB si NOUN VERB NOUN ultra NOUN NOUN VERB VERB
 a quocumque NOUN VERB AUX quod VERB VERB hec VERB plus his non VERB NOUN VERB
 quod VERB VERB NOUN sic ista AUX NOUN NOUN nec secus VERB VERB nec coram PROPN VERB nec NOUN PROPN NOUN uter VERB VERB NOUN
 VERB NOUN NOUN sic ADJ VERB NOUN quid NOUN VERB AUX tuum
-si quibus et quantis VERB VERB VERB et VERB ADJ NOUN NOUN quamuis VERB prope ADJ adusque NOUN et VERB NUM NOUN AUX NOUN non VERB AUX potius ADJ AUX si michi VERB NOUN ADJ super
+si quibus et quantis VERB VERB VERB et VERB ADJ NOUN NOUN quamuis VERB prope ADJ adusque NOUN et VERB NUM NOUN AUX NOUN non VERB AUX potius ADJ AUX si mihi VERB NOUN ADJ super
 VERB NOUN modo NOUN tua ADJ VERB sed NOUN VERB et NOUN VERB
 ADJ adhuc ADV NOUN NOUN -que VERB et non AUX NOUN VERB NOUN meo
-ADJ michi iuxta NOUN VERB VERB VERB NOUN non ADJ meo
+ADJ mihi iuxta NOUN VERB VERB VERB NOUN non ADJ meo
 ADV huc VERB ADJ VERB VERB quam NOUN te ADJ VERB ipse VERB et si non aliter quam VERB VERB AUX VERB ne VERB hoc quod VERB VERB
 VERB foris NOUN ADJ -que VERB NOUN
 NOUN ADJ aliam NOUN tibi VERB NOUN cum NOUN aliquem VERB tibi ADJ VERB ADV VERB NOUN VERB VERB
@@ -303,7 +303,7 @@ VERB ADJ AUX ADJ ipse AUX ADJ
 ADJ NOUN AUX ut VERB VERB
 ADJ ADJ sine NOUN NOUN sine NOUN NOUN ipse sibi VERB pro NOUN NOUN
 ergo si ADJ ADV NOUN VERB non ne NOUN VERB pro NOUN NOUN
-VERB ergo nichil ADJ AUX ut ante
+VERB ergo nihil ADJ AUX ut ante
 tunc ADJ ADJ NOUN VERB VERB nunc VERB VERB -que tibi ADV VERB
 VERB bene sic NOUN VERB usque meis
 si tibi ADJ quam VERB NOUN VERB et mea NOUN NOUN non AUX ADJ meo
@@ -321,14 +321,14 @@ nunc si quid VERB VERB absque NOUN
 cui NOUN VERB ergo NOUN que NOUN ADJ VERB tibi si NOUN ADJ VERB
 sicut ADJ NOUN VERB VERB ADJ sic NOUN NOUN ADJ VERB VERB
 VERB hoc ADV NOUN VERB VERB VERB ADJ recte uix AUX ille NOUN
-at michi nunc NOUN ADJ VERB VERB si VERB tibi NOUN VERB item
+at mihi nunc NOUN ADJ VERB VERB si VERB tibi NOUN VERB item
 te VERB VERB VERB VERB frustra et de NOUN NOUN sero VERB
-si michi VERB ADJ sine NOUN VERB VERB ADJ NOUN ADJ VERB
+si mihi VERB ADJ sine NOUN VERB VERB ADJ NOUN ADJ VERB
 VERB ADJ NOUN
 VERB NOUN cras hodie -que AUX quod AUX heri
 non igitur te cum ADJ rursus VERB
 te nisi solus VERB NOUN nulla VERB
-non ne VERB ADJ ambabus VERB NOUN NOUN pene VERB nichil
+non ne VERB ADJ ambabus VERB NOUN NOUN pene VERB nihil
 et nunc VERB ADV
 immo VERB ne VERB iterum NOUN VERB secus
 non VERB NOUN tibi NOUN tu -que AUX NOUN et non AUX semper VERB NOUN
@@ -342,25 +342,25 @@ heu te ADJ NOUN nec ADJ VERB NOUN siquidem sicut VERB AUX
 te minus AUX ADJ PROPN quecumque VERB
 ille aliquid sed tu nil VERB VERB
 nec NOUN ADJ nec VERB leporue pudorue aut NOUN aut NOUN his VERB NOUN
-ADJ ADV VERB NOUN ADJ VERB quid ADJ adeo VERB ADJ michi
+ADJ ADV VERB NOUN ADJ VERB quid ADJ adeo VERB ADJ mihi
 VERB VERB
 quicquid VERB VERB ultro VERB quid VERB quid VERB VERB
 VERB VERB NUM quecumque VERB nil VERB VERB NOUN VERB -que NOUN
-hec NUM cur VERB quam ADJ NOUN AUX VERB nam NUM his ADJ nemo VERB VERB NOUN michi VERB VERB non VERB VERB et VERB NOUN VERB VERB
+hec NUM cur VERB quam ADJ NOUN AUX VERB nam NUM his ADJ nemo VERB VERB NOUN mihi VERB VERB non VERB VERB et VERB NOUN VERB VERB
 me NOUN ADJ nimis AUX VERB ADJ NOUN ubi VERB nil VERB NOUN
-VERB hoc ADJ VERB ADJ ADV sed non VERB VERB michi
-que -que michi VERB nunc ADV nunc VERB ADV VERB aut VERB VERB illa VERB
-cetera VERB VERB VERB hec VERB NOUN si michi quid VERB ADJ unde VERB
+VERB hoc ADJ VERB ADJ ADV sed non VERB VERB mihi
+que -que mihi VERB nunc ADV nunc VERB ADV VERB aut VERB VERB illa VERB
+cetera VERB VERB VERB hec VERB NOUN si mihi quid VERB ADJ unde VERB
 PROPN ad hec leuiter VERB VERB NOUN tibi VERB nil VERB VERB
 pauca VERB ut VERB et cetera cuncta VERB
 VERB NOUN in quibus ambo AUX
 et ADJ AUX
-tam ADJ ADJ quam ADJ ADJ PROPN quo michi plus VERB hoc minus usque VERB
+tam ADJ ADJ quam ADJ ADJ PROPN quo mihi plus VERB hoc minus usque VERB
 omne ADJ NOUN nemo ADJ nisi ADJ VERB ergo ne VERB VERB item
 NOUN ADJ NOUN VERB VERB
 VERB VERB plurima NOUN NOUN
 NOUN ut reliquis VERB NOUN VERB ADJ ibi hunc illo NOUN VERB VERB
-nec ADJ quisquam quam tu michi VERB AUX tot VERB NOUN VERB NOUN
+nec ADJ quisquam quam tu mihi VERB AUX tot VERB NOUN VERB NOUN
 AUX quamuis in NOUN tuo tam ADJ et ADJ NOUN AUX numquam uel VERB ibi
 ille VERB VERB VERB PROPN
 quid ADV
@@ -374,9 +374,9 @@ quem nunc ergo VERB tu solus VERB NOUN
 NOUN tua ADJ AUX ADJ modo noster AUX et ADJ NOUN VERB NOUN VERB
 VERB NOUN VERB -que NOUN
 ambo ADJ NOUN sed NOUN ADJ VERB hic ADJ NOUN ADJ ille NOUN
-NOUN NOUN in ADJ NOUN VERB utroque his ergo NOUN VERB VERB VERB ADJ etenim nimis VERB hoc michi VERB NOUN NOUN quam procul VERB ADV
+NOUN NOUN in ADJ NOUN VERB utroque his ergo NOUN VERB VERB VERB ADJ etenim nimis VERB hoc mihi VERB NOUN NOUN quam procul VERB ADV
 NOUN cur VERB VERB
-at ille VERB VERB quenam AUX michi NOUN VERB
+at ille VERB VERB quenam AUX mihi NOUN VERB
 quo tibi VERB tam nunc NOUN ADJ
 unde hec NOUN non ne ADJ AUX ut cur VERB VERB quod et ante VERB VERB VERB
 VERB enim
@@ -392,16 +392,16 @@ hinc me ADJ VERB ADJ inde NOUN
 plus NOUN NOUN VERB NOUN NOUN
 VERB ADJ satis AUX NOUN usque parum AUX
 ADV VERB quotiens ADV VERB et NOUN NOUN non VERB mei
-ADJ NOUN michi simul AUX VERB suum -que NOUN NOUN VERB ADJ protinus ADJ VERB VERB -que VERB et nichil AUX VERB preter VERB michi
+ADJ NOUN mihi simul AUX VERB suum -que NOUN NOUN VERB ADJ protinus ADJ VERB VERB -que VERB et nihil AUX VERB preter VERB mihi
 VERB igitur nostro quantum de NOUN VERB ne VERB ADJ ADJ NOUN NOUN
 NOUN NOUN VERB cum ADJ NOUN NOUN VERB VERB VERB NOUN
 NOUN fere ADJ si VERB NOUN ADJ tanta VERB VERB NOUN quanta VERB
 VERB ad hec tua non ne NOUN VERB
 VERB quid VERB NOUN VERB NOUN
 NOUN NUM super NOUN VERB NOUN VERB NOUN me VERB NOUN
-sed ADJ AUX VERB michi quos VERB NOUN
-ni VERB satis AUX VERB VERB nichil
-si ADJ NOUN meis VERB NOUN quot michi VERB in NUM NOUN VERB
+sed ADJ AUX VERB mihi quos VERB NOUN
+ni VERB satis AUX VERB VERB nihil
+si ADJ NOUN meis VERB NOUN quot mihi VERB in NUM NOUN VERB
 VERB NOUN PROPN NOUN quantus VERB ADJ VERB NOUN
 VERB NOUN VERB ADV ibi
 quotiens ego VERB eundem VERB quouis VERB in NOUN NOUN
@@ -414,15 +414,15 @@ VERB temere qui VERB se -que NOUN -que
 interdum NOUN ADJ NOUN VERB
 ne VERB VERB NOUN NOUN VERB
 NOUN NOUN AUX NOUN atque NOUN
-VERB ADV ne quid michi VERB NOUN VERB tibi NOUN NOUN memet VERB
-per NOUN hoc ADJ si tam ADJ NOUN AUX quam michi NOUN NOUN que -que VERB VERB ob hoc quod NOUN nondum VERB VERB NOUN se PROPN hac VERB tenus
+VERB ADV ne quid mihi VERB NOUN VERB tibi NOUN NOUN memet VERB
+per NOUN hoc ADJ si tam ADJ NOUN AUX quam mihi NOUN NOUN que -que VERB VERB ob hoc quod NOUN nondum VERB VERB NOUN se PROPN hac VERB tenus
 VERB NOUN NOUN ADJ NOUN
 non meus hoc VERB VERB -que NOUN
-quo NOUN michi ADJ AUX hoc ADV VERB
+quo NOUN mihi ADJ AUX hoc ADV VERB
 NOUN ADJ AUX PROPN NOUN ADJ NOUN
-ue michi cum subito NOUN NOUN ADJ VERB
+ue mihi cum subito NOUN NOUN ADJ VERB
 VERB longe NOUN NOUN VERB
-tunc primum me NOUN NOUN ADJ VERB cum nichil VERB ADJ NOUN diu
+tunc primum me NOUN NOUN ADJ VERB cum nihil VERB ADJ NOUN diu
 ADJ VERB ADJ AUX NOUN multa VERB
 VERB ADJ super ADJ NOUN NOUN
 NOUN VERB NOUN omnia VERB et VERB
@@ -432,7 +432,7 @@ VERB VERB VERB VERB -que VERB NOUN NOUN NOUN NOUN NOUN
 VERB ac VERB VERB VERB VERB ADV et longe VERB atque VERB
 ADJ qui nulla VERB NOUN nulla VERB VERB et absque NOUN VERB NOUN VERB
 nullus VERB talem nullus VERB VERB
-ergo ego VERB qua michi NOUN VERB
+ergo ego VERB qua mihi NOUN VERB
 NOUN quedam AUX inter ADJ -que NOUN -que cuncta VERB ADJ VERB VERB -que NOUN
 NOUN NOUN VERB VERB non VERB VERB
 ADJ ADJ absque VERB VERB
@@ -440,13 +440,13 @@ at VERB tibi VERB VERB hoc omnis VERB NOUN ADV nos ADJ VERB
 huc me igitur NOUN VERB VERB NOUN -que NOUN -que NOUN me VERB temet VERB VERB
 sic VERB NOUN ne NOUN NOUN VERB
 quid VERB VERB ne VERB quanta VERB
-VERB quecumque michi VERB AUX
-VERB michi VERB cetera VERB tibi
+VERB quecumque mihi VERB AUX
+VERB mihi VERB cetera VERB tibi
 quid uel ubi VERB VERB VERB VERB
 ADJ VERB tu VERB AUX VERB
 VERB bene
 dum VERB VERB VERB NOUN
-VERB tui NOUN VERB ille michi
+VERB tui NOUN VERB ille mihi
 VERB iterum si temet VERB VERB ADV VERB si cuius VERB VERB
 VERB VERB VERB NOUN ADJ cum VERB VERB NOUN ADJ super
 VERB NOUN PROPN ut NOUN ADJ VERB NOUN ADJ NOUN VERB
@@ -457,12 +457,12 @@ VERB ut usque VERB in ADJ NOUN et NOUN NOUN VERB
 VERB ADJ NOUN
 NOUN VERB et NOUN et NOUN VERB ue tibi ADJ NOUN
 ue tibi ADJ NOUN toto ADJ NOUN qua ADJ NOUN NOUN ad NOUN VERB
-cum michi ADJ NOUN uel ADJ NOUN VERB VERB NOUN quem VERB ille PROPN
+cum mihi ADJ NOUN uel ADJ NOUN VERB VERB NOUN quem VERB ille PROPN
 sic NOUN VERB qui me VERB NOUN VERB
 en NOUN VERB NOUN AUX
 non me VERB VERB sed NOUN NOUN VERB VERB VERB ter VERB NUM
 protinus VERB NOUN VERB VERB VERB o NOUN VERB ADJ
-me quicumque VERB pro se VERB VERB et qui ADJ michi NOUN NOUN -que VERB
+me quicumque VERB pro se VERB VERB et qui ADJ mihi NOUN NOUN -que VERB
 NOUN omnes VERB NOUN omnia VERB VERB
 hai
 hai
@@ -480,9 +480,9 @@ non ego ADJ adhuc
 VERB VERB nos nulla NOUN VERB nec NOUN AUX NOUN iudiciiue NOUN
 ad quid VERB NOUN tam VERB repente
 NOUN nunc primum NOUN VERB fere AUX
-VERB tamen an AUX si VERB michi pluris VERB quam VERB NOUN
+VERB tamen an AUX si VERB mihi pluris VERB quam VERB NOUN
 ADJ ille VERB VERB VERB NOUN tibi VERB an VERB VERB VERB post mea NOUN tibi
-non michi VERB VERB forsitan illis VERB sed VERB VERB michi
+non mihi VERB VERB forsitan illis VERB sed VERB VERB mihi
 VERB ADV siquidem VERB VERB
 hic ADJ ADV VERB ille VERB ecce ADJ te cum VERB VERB ADV
 VERB NOUN taliter ipse suo non ego pro NUM NOUN NUM NOUN VERB
@@ -499,7 +499,7 @@ NOUN me NOUN VERB VERB NOUN
 VERB ADJ NOUN
 ADJ quid NOUN
 VERB VERB NOUN ista ADV VERB
-VERB VERB non VERB VERB VERB ad hoc ADJ VERB VERB nichil
+VERB VERB non VERB VERB VERB ad hoc ADJ VERB VERB nihil
 NOUN et NOUN VERB AUX atque NOUN
 qui VERB de te VERB idem
 quid VERB VERB NOUN VERB VERB VERB NOUN NOUN NOUN
@@ -518,11 +518,11 @@ VERB si VERB qui VERB VERB
 ADV VERB et NOUN parum VERB VERB
 VERB ADJ ADJ sepe NOUN
 ADV ergo VERB donec VERB ego VERB
-solus VERB NOUN ADV michi NOUN VERB
+solus VERB NOUN ADV mihi NOUN VERB
 ergo VERB VERB NOUN PROPN VERB
 tam ADJ nil NOUN VERB
-si NOUN VERB saltem VERB NOUN VERB hinc pariter me michi VERB prius
-nulla mei michi NOUN tuo VERB VERB NOUN
+si NOUN VERB saltem VERB NOUN VERB hinc pariter me mihi VERB prius
+nulla mei mihi NOUN tuo VERB VERB NOUN
 PROPN ADV NOUN VERB VERB
 non ego VERB NOUN NOUN VERB si non pluris VERB quam VERB NOUN eam sed cum VERB VERB NOUN NOUN tunc AUX NOUN VERB NOUN
 tu qui non VERB NOUN VERB NOUN VERB NOUN VERB NOUN
@@ -549,7 +549,7 @@ VERB ille VERB NOUN VERB aliquid
 VERB VERB VERB
 sed quia multa VERB NOUN NOUN VERB atque ego VERB ADJ VERB VERB NUM NOUN NOUN VERB non VERB et VERB
 tu VERB hodie cras ego VERB VERB
-ADJ VERB VERB nichil VERB VERB
+ADJ VERB VERB nihil VERB VERB
 PROPN VERB NOUN non ne VERB
 tu VERB adhuc et VERB VERB VERB
 AUX nimis VERB VERB et usque VERB
@@ -565,7 +565,7 @@ VERB ADJ ADV NOUN VERB
 tunc ita NOUN VERB semper tibi NOUN VERB ADV NOUN VERB VERB
 ADV non VERB VERB ADJ NOUN VERB
 si VERB NOUN VERB VERB semel
-VERB te VERB unum si NOUN PROPN VERB VERB NOUN ADJ michi
+VERB te VERB unum si NOUN PROPN VERB VERB NOUN ADJ mihi
 non ego te VERB si me VERB VERB in ADJ NOUN VERB VERB NOUN diu VERB bene te VERB VERB VERB melius VERB NOUN
 NOUN VERB si te VERB VERB me quod AUX ADJ non VERB VERB
 me ADJ VERB NOUN tibi ADJ VERB te -que ADJ VERB NOUN nec modo quod VERB AUX quin prorsus id ipsum quod VERB AUX NOUN VERB mea
@@ -579,7 +579,7 @@ VERB ADV VERB VERB plures
 nil nisi quo VERB NOUN tibi ADJ VERB
 NOUN NOUN NOUN NOUN NOUN NOUN et NOUN VERB NOUN ADJ tuo
 VERB tibi ADJ VERB -que NOUN
-VERB tibi si VERB VERB quia VERB nichil
+VERB tibi si VERB VERB quia VERB nihil
 quod VERB AUX VERB tibi VERB tu autem
 NOUN VERB AUX VERB NOUN NOUN tu au
 ADJ non VERB NOUN NOUN VERB tam prope ADJ NOUN NOUN AUX
@@ -616,11 +616,11 @@ VERB AUX ADJ
 quis NOUN NOUN in NOUN VERB hanc NOUN NOUN VERB ADJ
 ADJ NOUN AUX ADJ AUX ADJ VERB quam VERB NOUN VERB ergo VERB
 VERB NOUN VERB NOUN ADJ VERB
-quid tamen VERB qui nichil VERB AUX VERB NOUN NOUN tale VERB
-VERB ADJ ADJ AUX nichil
+quid tamen VERB qui nihil VERB AUX VERB NOUN NOUN tale VERB
+VERB ADJ ADJ AUX nihil
 hoc NOUN NOUN nullis NOUN AUX
 se male VERB VERB nimis -que diu
-VERB VERB nichil VERB ADJ VERB
+VERB VERB nihil VERB ADJ VERB
 quamuis ADJ AUX NOUN VERB VERB
 si sibi VERB NOUN hac NOUN VERB non minus hoc cuiquam quam sibi VERB NOUN
 VERB sibi non AUX ADJ si NOUN VERB AUX NOUN VERB NOUN AUX VERB
@@ -633,7 +633,7 @@ qualibet a NOUN ADJ NOUN VERB ADV ADJ ad nullam ADJ usque AUX
 PROPN VERB VERB VERB VERB
 nil VERB VERB nil VERB deinde VERB an VERB VERB NOUN VERB VERB
 NOUN VERB VERB NOUN VERB VERB
-VERB ut ipse VERB VERB item -que nichil
+VERB ut ipse VERB VERB item -que nihil
 VERB sepe VERB quod VERB absque NOUN scilicet hoc illum NOUN VERB VERB
 VERB NOUN PROPN NOUN illa VERB quam VERB VERB altera ADJ VERB NOUN ipse AUX ADV VERB illud quod VERB VERB VERB NOUN
 plus VERB hic aliis numquam VERB alter ni prius VERB VERB AUX NOUN
@@ -656,8 +656,8 @@ sic ego ADJ NOUN VERB NOUN VERB in ADJ NOUN NUM NOUN
 iam VERB suas VERB ad NOUN NOUN VERB ADJ VERB NOUN NOUN
 sola PROPN VERB quamuis VERB VERB VERB ni VERB NOUN ante NOUN
 illa NOUN ADJ VERB utraque NOUN et ADJ NOUN NOUN ADJ VERB ADJ NOUN ADJ NOUN VERB NOUN ADJ NOUN -que VERB
-ADJ VERB NOUN VERB ADV NOUN VERB NOUN VERB -que NOUN quam michi PROPN ADJ ADJ ADJ NOUN NOUN tua VERB quam ADJ PROPN ADJ
-VERB tibi hic eadem AUX NOUN utinam -que bis AUX quot michi VERB NOUN VERB tibi
+ADJ VERB NOUN VERB ADV NOUN VERB NOUN VERB -que NOUN quam mihi PROPN ADJ ADJ ADJ NOUN NOUN tua VERB quam ADJ PROPN ADJ
+VERB tibi hic eadem AUX NOUN utinam -que bis AUX quot mihi VERB NOUN VERB tibi
 pro cuiusque NOUN tete NUM NOUN VERB
 NOUN nunc NOUN non VERB ADJ tuis
 VERB VERB NOUN ADV ADJ et NOUN ADJ NOUN VERB ADJ tot VERB VERB VERB NOUN quot VERB ultro si tibi VERB AUX
@@ -727,14 +727,14 @@ PROPN uti quis NOUN VERB ADJ NOUN ADJ NOUN totus AUX
 iam VERB fere uix NOUN NOUN VERB NOUN penitus sub NOUN nulla VERB
 sed non ille tamen tanta tam NOUN VERB quam de PROPN NOUN VERB
 ADJ ergo simul secus NOUN NOUN VERB VERB his VERB NOUN atque NOUN VERB me VERB me VERB VERB ADV
-qui michi non AUX VERB ADJ VERB
+qui mihi non AUX VERB ADJ VERB
 qui VERB meo non AUX ADJ NOUN me sibi ADJ non VERB VERB
 ergo in NOUN VERB VERB VERB ultro VERB VERB VERB VERB ego usque adeo NOUN penitus VERB et VERB NOUN nisi NOUN VERB eam
 illa NOUN VERB VERB me VERB VERB qua NOUN NOUN quem VERB ipse VERB
 o si NOUN NOUN VERB ulla quod VERB hanc ego non VERB qua NOUN ADJ VERB
 ADJ ADJ PROPN VERB NOUN cui nec PROPN ADJ nec PROPN VERB post quam nullus VERB ADJ NOUN VERB NOUN nulla NOUN VERB
 VERB ille NOUN siue VERB NOUN siue VERB NOUN siue VERB VERB NOUN -que VERB VERB VERB -que NOUN siue horum neutrum VERB unus AUX
-ADV hanc VERB NOUN PROPN ut VERB VERB ad tantas VERB NOUN neue VERB VERB NOUN VERB VERB tamquam sponte VERB VERB o VERB michi NOUN NOUN ADJ
+ADV hanc VERB NOUN PROPN ut VERB VERB ad tantas VERB NOUN neue VERB VERB NOUN VERB VERB tamquam sponte VERB VERB o VERB mihi NOUN NOUN ADJ
 NOUN -que inter ADJ NOUN VERB
 non VERB nostros talis NOUN NOUN
 amodo VERB NOUN VERB forsan et NOUN NOUN sepe VERB ergo NOUN ista NOUN ADJ -que NOUN NOUN ADJ VERB VERB a -que
@@ -742,11 +742,11 @@ at VERB PROPN NOUN ADJ NOUN omne quidem NOUN VERB illa tibi
 que cum te VERB quin et tua VERB AUX hec tibi cur gratis VERB uel VERB VERB
 VERB hoc ADJ ADV VERB NOUN et non VERB VERB VERB ADJ NOUN VERB quasi ADJ VERB NOUN tua cum AUX VERB in omne NOUN
 VERB te in NOUN NOUN -que VERB et NOUN VERB hic VERB VERB is ille VERB
-sic michi VERB AUX in NUM NOUN NOUN te VERB nichil VERB tamen
-denique VERB quo NOUN VERB VERB nulla tamen ADJ quam michi NOUN NOUN
+sic mihi VERB AUX in NUM NOUN NOUN te VERB nihil VERB tamen
+denique VERB quo NOUN VERB VERB nulla tamen ADJ quam mihi NOUN NOUN
 sic ego VERB VERB NOUN NOUN NOUN NOUN VERB te -que simul
 NOUN ad hec VERB NOUN sua quodque VERB
-VERB cui VERB NOUN at michi NOUN VERB
+VERB cui VERB NOUN at mihi NOUN VERB
 nil ego VERB VERB ipse
 tibi tamen ADJ omnia VERB dummodo VERB VERB
 te quia VERB ad ADJ NOUN VERB ut VERB ADJ VERB NOUN et tibi quos VERB VERB quosque VERB VERB nullo NOUN VERB VERB
@@ -757,7 +757,7 @@ hoc VERB tu VERB AUX VERB -que VERB VERB NOUN NOUN ADJ meum
 tunc omnes NOUN VERB VERB NOUN in te ut NOUN NOUN ADJ VERB VERB ADJ sub ADJ NOUN NOUN ne VERB te cum NOUN VERB VERB
 VERB quod VERB NOUN VERB uel NOUN VERB quam ADJ NOUN NOUN
 cumque tibi VERB se cum -que VERB VERB NOUN VERB NOUN -que VERB VERB VERB procul
-si ADV AUX NOUN VERB nam michi VERB idem
+si ADV AUX NOUN VERB nam mihi VERB idem
 denique VERB NOUN VERB illis quod VERB NOUN NOUN ADJ super ut tot VERB ne NOUN VERB rursus VERB VERB ADJ
 quod si NOUN tibi cur AUX VERB VERB istius NOUN ADJ NOUN AUX NOUN NOUN VERB sibi quisque VERB ADJ NOUN ADJ AUX quisquis ADJ AUX VERB
 nunc NOUN nunc NOUN VERB nunc NOUN NOUN ADJ o tanti AUX VERB NOUN
@@ -765,7 +765,7 @@ qui VERB AUX ADJ
 tu ADJ multa VERB
 NOUN ADJ VERB magis et ADJ VERB NOUN NOUN ADJ
 idcirco ADV NOUN VERB tibi AUX cum non VERB ADJ NOUN VERB per ADJ VERB ADJ NOUN NOUN
-inde ego plus VERB NOUN quam NOUN AUX VERB et AUX hinc michi NOUN ADJ
+inde ego plus VERB NOUN quam NOUN AUX VERB et AUX hinc mihi NOUN ADJ
 at post tanta NOUN VERB tibi NOUN VERB VERB haut ulla NOUN NOUN ADJ
 omnibus VERB VERB NOUN NOUN
 hec tibi VERB hec tibi NOUN VERB
@@ -822,14 +822,14 @@ ad quid et unde VERB
 ADJ VERB PROPN VERB NOUN VERB NOUN ADJ NOUN AUX iste ADJ
 AUX NOUN ADJ iste aliud quam NOUN VERB VERB nil aliud me nisi NOUN VERB
 AUX ADJ aut nullus
-nullus michi NOUN VERB AUX ADJ ADJ
+nullus mihi NOUN VERB AUX ADJ ADJ
 VERB NOUN VERB AUX
 et NOUN VERB inde suos
 tu -que licet ADJ NOUN NOUN VERB ob NOUN quid in hec VERB NOUN VERB NOUN ut ADJ VERB NOUN VERB qua sibi VERB NOUN quisque tenus
 NOUN NOUN VERB VERB sed NOUN huius quod VERB uobis VERB VERB parum
 VERB NOUN utinam -que AUX ADJ
-NOUN VERB VERB AUX michi
-at nunc NOUN non tam michi VERB VERB quam uos NOUN VERB VERB meo
+NOUN VERB VERB AUX mihi
+at nunc NOUN non tam mihi VERB VERB quam uos NOUN VERB VERB meo
 taliter VERB non VERB in ADJ VERB hanc NOUN si VERB NOUN
 NOUN VERB sed nunc pro NOUN VERB AUX VERB NOUN
 contra PROPN VERB quas NOUN hic NOUN VERB tibi
@@ -837,7 +837,7 @@ VERB NOUN nec ADJ NOUN NOUN ADJ VERB
 ADJ his VERB ADJ ad ADJ VERB VERB VERB NOUN sine NOUN fere
 VERB ADJ sic uos ego VERB VERB
 NOUN his forsan VERB AUX
-VERB quod VERB non sic ego VERB ut AUX cum michi AUX NOUN uos sine NOUN VERB
+VERB quod VERB non sic ego VERB ut AUX cum mihi AUX NOUN uos sine NOUN VERB
 non NOUN sed VERB NOUN VERB NOUN
 VERB VERB VERB ille diu
 ADV enim paucos VERB nullos -que ADV
@@ -849,13 +849,13 @@ VERB hec NOUN NOUN non AUX VERB NOUN VERB NOUN NOUN VERB
 NOUN VERB VERB NOUN NOUN
 unde NOUN AUX NOUN tibi ADJ VERB
 AUX super NOUN ADJ quicumque VERB
-cras VERB VERB tu michi NOUN NOUN
-ille VERB quicquid VERB michi NUM isti hec equidem VERB sed tibi NOUN ego
+cras VERB VERB tu mihi NOUN NOUN
+ille VERB quicquid VERB mihi NUM isti hec equidem VERB sed tibi NOUN ego
 VERB ADJ -que ADJ NOUN NOUN taliter VERB ne VERB VERB
 uos etenim ut VERB ADJ VERB VERB
 PROPN non VERB VERB VERB NOUN
 ADJ VERB NOUN VERB VERB VERB ADJ NOUN NOUN ADJ
-heu michi
+heu mihi
 uos NOUN sine NOUN AUX ego ecce ut NOUN NOUN NOUN NOUN VERB
 et NOUN VERB
 hos VERB NOUN ecce VERB
@@ -874,23 +874,23 @@ VERB ADV PROPN VERB quid cum NOUN tibi
 tu VERB VERB NOUN VERB ad NOUN
 VERB ille VERB uos VERB VERB mei NOUN VERB
 uos unde hec VERB VERB VERB satis
-ADJ AUX NOUN PROPN tua ADJ NOUN hanc michi VERB tu satis VERB ea AUX
-hac utriusque michi NOUN VERB NOUN
+ADJ AUX NOUN PROPN tua ADJ NOUN hanc mihi VERB tu satis VERB ea AUX
+hac utriusque mihi NOUN VERB NOUN
 NOUN VERB adhuc NOUN post NOUN VERB NOUN NOUN VERB utroque NOUN
 at mea ADJ NOUN NOUN VERB VERB NOUN illa PROPN tuis
-PROPN tuo VERB michi NOUN NOUN
-nec uos VERB quid michi NOUN VERB si qua VERB NOUN VERB VERB NOUN michi
+PROPN tuo VERB mihi NOUN NOUN
+nec uos VERB quid mihi NOUN VERB si qua VERB NOUN VERB VERB NOUN mihi
 sin autem ADJ NOUN VERB
 hoc VERB non ADV hec alii NOUN VERB ter quamuis NOUN VERB ipse NUM
-uerum NOUN michi VERB hec sed VERB ut VERB non omnes NOUN VERB AUX ADJ ergo prius VERB VERB non VERB AUX
+uerum NOUN mihi VERB hec sed VERB ut VERB non omnes NOUN VERB AUX ADJ ergo prius VERB VERB non VERB AUX
 hec VERB ADJ NOUN NOUN AUX
 sed quia uos VERB non VERB VERB VERB NOUN hec ADJ VERB
 ADJ VERB nil VERB VERB
 AUX NOUN sua cuique meum AUX quod VERB intus
 non VERB NOUN tam ADJ VERB
-AUX ADJ licet multo michi NOUN NOUN non michi uestra VERB tam VERB NOUN
+AUX ADJ licet multo mihi NOUN NOUN non mihi uestra VERB tam VERB NOUN
 quin NOUN VERB VERB quod intus VERB non VERB ADJ VERB NOUN ADJ
-uos quoque ADV michi ADJ VERB VERB NOUN hoc uestri sepe VERB meis
+uos quoque ADV mihi ADJ VERB VERB NOUN hoc uestri sepe VERB meis
 cumque ego uos VERB ADV atque ADV nunc VERB tantum VERB repente VERB
 omnibus VERB uobis NOUN taliter VERB NOUN ne VERB VERB NOUN
 VERB NOUN quod non VERB VERB et VERB NOUN VERB ADJ -que NOUN
@@ -926,7 +926,7 @@ qui ADJ nostrum AUX NUM VERB NOUN NUM NOUN tantis ADJ NUM AUX
 NOUN nosmet VERB ADJ VERB istas VERB VERB ADJ NOUN NOUN
 VERB NOUN -que VERB NOUN VERB NOUN VERB hac NOUN VERB VERB satis AUX NOUN
 VERB ADV
-ADJ VERB que VERB michi VERB et VERB VERB quosnam VERB non VERB VERB idem
+ADJ VERB que VERB mihi VERB et VERB VERB quosnam VERB non VERB VERB idem
 nil igitur VERB nisi VERB VERB NOUN pauca tamen uobis ante VERB VERB NUM aut unus VERB de uobis NOUN VERB
 NUM VERB unum NUM VERB NUM VERB
 scilicet hoc VERB VERB NOUN recte preter enim sibimet non VERB NOUN VERB
@@ -971,7 +971,7 @@ ADV VERB mea NOUN VERB sua VERB PROPN
 VERB PROPN VERB
 VERB PROPN VERB cur ego NOUN VERB
 mea NOUN VERB
-qui VERB NOUN VERB non michi VERB VERB
+qui VERB NOUN VERB non mihi VERB VERB
 NOUN ergo NOUN ADJ VERB in usque VERB NOUN PROPN tuam
 sic VERB VERB tibi PROPN VERB PROPN an AUX aliter
 sic ego VERB VERB
@@ -1000,7 +1000,7 @@ quam bene NOUN uestri VERB NOUN
 pro hoc NOUN uobis NOUN VERB VERB
 NOUN NUM ADV VERB VERB ADJ idcirco quando VERB AUX
 non alias NOUN hac pro NOUN VERB VERB VERB hic nobis NOUN sic -que VERB
-ADJ VERB michi NOUN iste VERB NOUN non VERB immo VERB VERB
+ADJ VERB mihi NOUN iste VERB NOUN non VERB immo VERB VERB
 VERB AUX uos VERB et illum VERB ADJ cum bene NOUN NOUN
 nunc ubi VERB toto VERB NOUN ADJ NOUN VERB item
 at minus in uosmet quam me VERB in ipsum VERB NOUN VERB NOUN meum
@@ -1021,7 +1021,7 @@ VERB VERB NOUN VERB -que ADV
 inter VERB NOUN ADJ VERB
 ter VERB PROPN VERB NOUN NOUN VERB VERB ADJ VERB tibi VERB NOUN ADJ VERB
 quater VERB in illum ADJ PROPN NOUN ADJ VERB quod VERB VERB VERB non ut VERB VERB
-AUX NOUN ADJ NOUN ADJ michi
+AUX NOUN ADJ NOUN ADJ mihi
 quod ADJ AUX in NOUN ADJ ADJ NOUN VERB
 bis NOUN ADJ PROPN VERB plus tibi NOUN VERB VERB VERB VERB -que PROPN VERB NOUN plura VERB
 si ADJ NOUN VERB NOUN VERB VERB plus VERB non VERB immo VERB
@@ -1076,9 +1076,9 @@ ADJ NOUN ADJ VERB
 hos NOUN quos NOUN VERB VERB et ADJ NOUN VERB
 VERB VERB VERB quicumque VERB
 nullus VERB ADJ nemo VERB VERB
-quid sub NOUN michi nisi VERB
+quid sub NOUN mihi nisi VERB
 illud NOUN ADV NOUN AUX
-nec cuiquam VERB nec quem michi VERB VERB nec quemquam VERB nec VERB ego
+nec cuiquam VERB nec quem mihi VERB VERB nec quemquam VERB nec VERB ego
 PROPN VERB PROPN VERB NOUN dum reliqui NOUN NOUN VERB VERB
 se -que VERB VERB non tot NOUN quot AUX VERB VERB uix NOUN VERB VERB VERB -que alios VERB NOUN NOUN et VERB solus VERB NOUN cetera NOUN VERB
 NOUN AUX nullum uix ADJ NOUN VERB NOUN VERB VERB NOUN
@@ -1090,7 +1090,7 @@ VERB at ultro VERB
 hec saltem NOUN NOUN VERB VERB
 mox VERB quisnam NOUN VERB ADJ et quis VERB ADJ AUX NOUN
 VERB VERB
-NOUN VERB ilico NOUN VERB et VERB NOUN michi NOUN VERB
+NOUN VERB ilico NOUN VERB et VERB NOUN mihi NOUN VERB
 si tibi que VERB NOUN VERB ego VERB NUM in ADJ te ADJ AUX NOUN
 talibus AUX VERB NOUN ADJ -que ADJ -que
 VERB NOUN hinc ADJ et ADJ NOUN
@@ -1099,7 +1099,7 @@ ADJ ad hec minime VERB quod ADJ AUX
 sed uelut hac VERB ADJ NOUN VERB quod nisi tu ADJ NOUN NOUN -que VERB non VERB ADJ NOUN NOUN NOUN
 nam ADJ VERB NOUN NOUN VERB
 hac quoque me si VERB NOUN VERB
-PROPN ADV VERB te ADJ VERB VERB quam AUX ADJ VERB michi
+PROPN ADV VERB te ADJ VERB VERB quam AUX ADJ VERB mihi
 quid VERB VERB
 tamen hanc quam VERB VERB PROPN NOUN non NOUN VERB
 hec atque his VERB VERB ADJ per illum
@@ -1111,7 +1111,7 @@ non ADV VERB hunc VERB tanta AUX ut modo VERB VERB NOUN atque VERB
 tu NOUN hodie cras NOUN VERB VERB talibus hos ADJ NOUN nostra NOUN
 VERB si VERB pariter VERB utrumque
 NOUN NOUN ADJ AUX VERB tibi
-te michi per NOUN NOUN ADJ VERB VERB ut NOUN NOUN utroque simul quamuis alteruter quater AUX quantus uterque AUX si meus AUX hodie qui AUX uter heri me VERB ADJ ADJ NOUN VERB nec illam qui VERB NOUN VERB absque suo
+te mihi per NOUN NOUN ADJ VERB VERB ut NOUN NOUN utroque simul quamuis alteruter quater AUX quantus uterque AUX si meus AUX hodie qui AUX uter heri me VERB ADJ ADJ NOUN VERB nec illam qui VERB NOUN VERB absque suo
 at tibi VERB si cras NOUN usque VERB nunc VERB NOUN VERB ADV VERB
 ast VERB pariter NOUN atque NOUN
 VERB PROPN eos VERB VERB ut VERB VERB NOUN NOUN
@@ -1133,9 +1133,9 @@ sepe VERB ob NOUN ADJ NOUN ADJ
 ut NOUN NOUN sic NOUN VERB
 si NOUN AUX alter VERB alter VERB
 VERB non ADJ sed NOUN NOUN
-omnia te VERB tu nichil ipse VERB
+omnia te VERB tu nihil ipse VERB
 NOUN VERB NOUN et NOUN NOUN ADJ et ADJ NOUN NOUN AUX
-nec si NOUN AUX NOUN VERB VERB cum michi NOUN NOUN VERB VERB
+nec si NOUN AUX NOUN VERB VERB cum mihi NOUN NOUN VERB VERB
 VERB ac VERB NOUN ADJ NOUN
 nemo suis VERB NOUN AUX ADJ
 nam non ut VERB VERB NOUN sed NOUN
@@ -1183,9 +1183,9 @@ ADJ VERB NOUN ADJ NOUN immo tu VERB quem ADJ VERB NOUN
 ADJ NOUN VERB ut ADJ NOUN
 NOUN ergo ipse VERB quem nostri VERB VERB
 hoc VERB nos NOUN non AUX ambo ADJ
-pene nichil VERB ADJ PROPN in NOUN hunc quoque non recte VERB NOUN VERB
+pene nihil VERB ADJ PROPN in NOUN hunc quoque non recte VERB NOUN VERB
 PROPN unde modo AUX
-utinam PROPN VERB ille nichil VERB sed tamen NOUN VERB
+utinam PROPN VERB ille nihil VERB sed tamen NOUN VERB
 VERB enim
 si NOUN PROPN VERB hunc ADV VERB et NOUN VERB te VERB VERB
 hoc ADJ quidem si VERB NOUN in NOUN VERB NOUN non VERB foris
@@ -1206,18 +1206,18 @@ ergo quis AUX ADJ si AUX ADJ
 ille VERB ut VERB non hoc VERB parum
 VERB VERB NOUN uix NOUN VERB NOUN dum VERB ipse VERB VERB
 ille VERB ha VERB ob hoc ADJ
-ista ADV ne ADJ VERB NOUN VERB michi AUX
+ista ADV ne ADJ VERB NOUN VERB mihi AUX
 NOUN nisi me VERB non ADJ NOUN VERB
 VERB quod uel sic AUX ADJ ibi
 qui non AUX NOUN non AUX VERB NOUN nam quibus VERB quisque VERB VERB
 NOUN quibus NOUN VERB NOUN -que VERB VERB NOUN VERB atque NOUN
-hinc michi NOUN NOUN VERB ADJ NOUN NOUN
+hinc mihi NOUN NOUN VERB ADJ NOUN NOUN
 ADJ plus NOUN quam ADJ VERB NOUN
 sed nec VERB quia me ADJ VERB NOUN
 VERB ADJ NOUN quo VERB NOUN ADJ
 ADJ plus NOUN VERB VERB ADJ NOUN quam ADJ
 neutra VERB VERB
-VERB VERB ADV tibi me AUX VERB neue michi VERB VERB quid NOUN adhuc
+VERB VERB ADV tibi me AUX VERB neue mihi VERB VERB quid NOUN adhuc
 sepe sui NOUN NOUN NOUN VERB NOUN NOUN AUX VERB suo
 PROPN ibi nunc NOUN AUX NOUN non VERB ADJ ADJ NOUN AUX
 PROPN NOUN NOUN ad ADJ VERB ADJ NOUN VERB atque ADJ
@@ -1241,7 +1241,7 @@ en ADJ AUX hodie cras ADJ ADJ ultra qui AUX ADJ NOUN pene ADJ
 cum AUX ADJ VERB ADJ NOUN NOUN hinc VERB non prius NOUN VERB
 ADJ NOUN primum post ADJ VERB inde ADJ NOUN denique nulla quidem
 NOUN ADJ ADV tunc ADJ nulla -que nuper
-nunc utinam VERB VERB nichil NOUN VERB NOUN
+nunc utinam VERB VERB nihil NOUN VERB NOUN
 VERB bene NOUN ADV
 VERB ADV NOUN ADJ in hoc
 si quod ego quisquam ADJ pro NOUN VERB ADJ tota illi iam NOUN VERB VERB NOUN -que VERB ADJ hunc a NOUN ADJ VERB hic NOUN VERB atque NOUN
@@ -1253,8 +1253,8 @@ NOUN VERB NOUN dum NOUN VERB et VERB NOUN AUX NOUN NOUN ADJ subito VERB NOUN NOU
 VERB VERB -que tuum NOUN illa VERB
 VERB NOUN VERB quasque tamen
 altera VERB quod adhuc ADJ AUX
-NOUN michi NOUN VERB VERB NOUN NOUN
-NOUN michi NOUN NOUN sola NOUN mox VERB PROPN et VERB in NOUN NOUN tota meum
+NOUN mihi NOUN VERB VERB NOUN NOUN
+NOUN mihi NOUN NOUN sola NOUN mox VERB PROPN et VERB in NOUN NOUN tota meum
 NOUN VERB NOUN ADJ NOUN AUX quasi ADJ NOUN
 NOUN huc VERB NOUN NOUN VERB
 NOUN ADJ VERB tota NOUN VERB ego quibus hinc huc -que VERB inde VERB
@@ -1263,9 +1263,9 @@ VERB eo quo NOUN magis VERB NOUN VERB ADJ ADJ NOUN NOUN
 VERB -que NOUN VERB NOUN VERB VERB
 quid NOUN NOUN AUX
 NOUN tibi nostra VERB
-uix dum VERB tibi VERB NOUN VERB nec NOUN michi que tibi VERB NOUN
-ne VERB in hec NOUN NOUN VERB ter ADV VERB non michi VERB NOUN
-has autem NOUN ADJ michi NOUN NOUN sub cuius VERB NOUN VERB
+uix dum VERB tibi VERB NOUN VERB nec NOUN mihi que tibi VERB NOUN
+ne VERB in hec NOUN NOUN VERB ter ADV VERB non mihi VERB NOUN
+has autem NOUN ADJ mihi NOUN NOUN sub cuius VERB NOUN VERB
 tunc VERB in NOUN VERB quibus undique VERB NOUN VERB tota VERB NOUN
 PROPN ubi ADJ VERB NOUN VERB NOUN NOUN NOUN -que VERB
 an PROPN tibi VERB VERB
@@ -1304,13 +1304,13 @@ illius NOUN NOUN NOUN NOUN tam ADJ ADJ NOUN VERB NOUN ut si VERB eo VERB VERB NO
 ADV ADJ NOUN VERB PROPN VERB VERB semel sic tibi NOUN VERB
 VERB quod VERB ego que -que ADJ VERB
 hic ergo NOUN hic -que NOUN VERB eia nunc subito NOUN NOUN -que VERB
-VERB VERB NOUN VERB NOUN et reliqua interea sic VERB VERB ut NOUN VERB en ego VERB nichil
+VERB VERB NOUN VERB NOUN et reliqua interea sic VERB VERB ut NOUN VERB en ego VERB nihil
 cetera VERB nobis quicumque VERB ADV NOUN en ego VERB meas
 eia quisne VERB NOUN
 VERB VERB
 at illi quisque alium NOUN VERB VERB
 PROPN ad hec ADJ VERB NOUN VERB -que foras VERB AUX ADJ
-quamuis VERB VERB nullum hec michi NOUN NOUN VERB multa VERB VERB
+quamuis VERB VERB nullum hec mihi NOUN NOUN VERB multa VERB VERB
 ut ADJ VERB VERB VERB ADJ sic etiam VERB ADJ VERB ADJ
 VERB et VERB PROPN taliter VERB quo NOUN VERB AUX
 VERB omne quod AUX
@@ -1329,12 +1329,12 @@ PROPN VERB ADJ quarumque NOUN et NUM a ADJ hinc sua VERB NOUN
 VERB hunc
 si VERB ne VERB quod VERB
 non aliquis si non VERB ille VERB
-VERB PROPN michi
+VERB PROPN mihi
 cui VERB ille ADJ quedam que NOUN PROPN VERB et quedam VERB VERB NOUN ADJ NOUN NOUN si VERB ille VERB sed VERB paucorum nisi forte VERB ADJ NOUN AUX NOUN hunc VERB retro
 his NOUN VERB ADV se VERB VERB et nimis ADJ VERB ipse NOUN
 ergo sic VERB ut non VERB VERB VERB ADJ VERB NOUN NOUN VERB enim in NOUN alio VERB illis ADV VERB VERB item -que VERB sed minus usque VERB NOUN quam VERB uno dum se VERB NOUN adusque fere
 VERB hoc NOUN NOUN cuius in NOUN NOUN AUX ADJ ADJ in NOUN NOUN
-NOUN VERB numquam tam ADJ VERB si que VERB VERB sed michi VERB parum
+NOUN VERB numquam tam ADJ VERB si que VERB VERB sed mihi VERB parum
 VERB uel VERB ADV ADV VERB
 quo plus huc VERB hoc ADV NOUN VERB
 ADV VERB uel NOUN VERB ADV
@@ -1384,7 +1384,7 @@ isti VERB NOUN VERB enim
 VERB VERB VERB te sponte VERB ut AUX NOUN NOUN ADJ tuo
 VERB nunc quoniam tibi VERB que VERB illi NOUN ADJ quod NOUN VERB
 ADJ NOUN metuue VERB et ADJ loquensue uel NOUN uel NOUN NOUN omne VERB
-ADJ cum AUX tibi tam VERB frequenter NOUN michi que VERB non tibi VERB AUX
+ADJ cum AUX tibi tam VERB frequenter NOUN mihi que VERB non tibi VERB AUX
 unde NOUN AUX VERB sine NOUN VERB sed tibi NOUN longe quod bene VERB AUX
 has ueluti VERB NOUN VERB VERB VERB NOUN talia namque VERB NOUN VERB VERB eum si tanta VERB quanta mee NOUN NOUN NOUN VERB
 VERB ut VERB NOUN mea NOUN NOUN
@@ -1409,7 +1409,7 @@ nec NOUN ADJ VERB VERB tibi VERB omnes VERB te nobis ADJ que -que VERB
 VERB ut tamquam ADJ NOUN et VERB NOUN NOUN nostro VERB NOUN at tu te VERB ADV minus AUX ADJ VERB NOUN et NOUN NOUN
 unde tibi VERB tot nunc NOUN quando ADJ NOUN non VERB ibi
 VERB si VERB super his VERB NOUN
-VERB ADJ PROPN VERB michi tu -que NOUN atque NOUN
+VERB ADJ PROPN VERB mihi tu -que NOUN atque NOUN
 uos NUM VERB ibidem
 NOUN ADJ non VERB NOUN
 uos quibus ille VERB quique ipsius AUX NOUN VERB uos ADJ VERB VERB enim
@@ -1472,11 +1472,11 @@ sed prius ut VERB VERB VERB VERB
 NOUN NOUN NOUN AUX NOUN VERB quando VERB NOUN tota VERB simul
 VERB NOUN NOUN
 NOUN noster primitus illo VERB NOUN VERB inde meis
-VERB VERB michi
+VERB VERB mihi
 PROPN VERB
 te citius forsan VERB VERB
 per ADJ PROPN
-nichil NOUN VERB
+nihil NOUN VERB
 NOUN suus AUX NOUN NOUN VERB NOUN VERB
 VERB NOUN NOUN -que VERB VERB VERB hec ADJ ADJ NOUN ADJ NOUN VERB NOUN PROPN VERB VERB VERB suppliciumue VERB
 ne tamen hinc aut ADJ VERB aut VERB in NOUN NOUN VERB VERB tu prout ipse VERB te potius NOUN VERB quam NOUN VERB
@@ -1493,7 +1493,7 @@ pene tamen VERB VERB an VERB VERB PROPN et quid si VERB VERB NOUN
 quod si ADJ VERB VERB NOUN NOUN PROPN tu VERB NOUN
 NOUN nec certe VERB ADJ AUX ADJ quam NOUN ADJ VERB NOUN
 ut VERB NOUN ipse VERB porro omnis VERB VERB ad NOUN NOUN uix -que VERB
-ergo michi NOUN VERB sero VERB quam VERB parum NOUN VERB VERB
+ergo mihi NOUN VERB sero VERB quam VERB parum NOUN VERB VERB
 quid ADJ VERB
 nec tu VERB ADJ siue NOUN ADJ NOUN NOUN VERB ipse tuam
 non ne NOUN VERB hodie ter ADJ ad NOUN
@@ -1501,9 +1501,9 @@ quis VERB hic PROPN VERB NOUN semel
 non sine NOUN VERB ADJ VERB
 numquam pro nichilo VERB sic VERB ADJ
 si VERB certe tu NOUN sponte VERB quod VERB VERB hoc VERB VERB
-me ADJ quod ADJ michi NOUN VERB NOUN NOUN ADJ NOUN mei
+me ADJ quod ADJ mihi NOUN VERB NOUN NOUN ADJ NOUN mei
 PROPN VERB NOUN NOUN PROPN non ut VERB VERB AUX
-non VERB michi plus quam VERB VERB sed te nulla tue NOUN NOUN VERB
+non VERB mihi plus quam VERB VERB sed te nulla tue NOUN NOUN VERB
 hinc VERB VERB sibi PROPN NOUN non VERB ADJ NOUN VERB VERB ADJ NOUN ADJ NOUN ADJ NOUN AUX VERB ego NOUN AUX longe ADJ NOUN ADJ -que quam NOUN NOUN ADJ -que NOUN
 me AUX ADJ VERB ADJ -que VERB sed non et ADJ NOUN mea NOUN VERB
 NOUN VERB NOUN VERB subito -que VERB ADJ NOUN VERB VERB ADJ
@@ -1554,8 +1554,8 @@ ergo NOUN tua NOUN VERB VERB
 cui NOUN tantus non VERB NOUN
 PROPN temere ADJ NOUN VERB
 NOUN tibi VERB NOUN tu ADV VERB
-NOUN si VERB NOUN michi NOUN VERB ut tua nunc NOUN sic michi ADV AUX
-ADJ michi de te NOUN VERB a quo VERB VERB NOUN NOUN NOUN
+NOUN si VERB NOUN mihi NOUN VERB ut tua nunc NOUN sic mihi ADV AUX
+ADJ mihi de te NOUN VERB a quo VERB VERB NOUN NOUN NOUN
 VERB quod ADJ AUX VERB NOUN ADJ VERB AUX ADJ uelut ADJ NOUN VERB tibi AUX
 quis cuiquam VERB
 AUX NUM NOUN VERB nec tibi me VERB VERB ADV
@@ -1563,7 +1563,7 @@ non VERB NOUN VERB ADJ NOUN immo tui NOUN ADJ NOUN VERB
 nam sine NOUN tua VERB NOUN VERB forsan tu nisi VERB NOUN ADJ AUX
 amodo NOUN ut VERB VERB VERB
 VERB illud VERB hoc sine me ADV VERB VERB NOUN VERB NOUN adhuc tibi VERB NOUN
-ADV VERB nil VERB ille tibi nec michi VERB donec tibi VERB ipse
+ADV VERB nil VERB ille tibi nec mihi VERB donec tibi VERB ipse
 VERB adhuc saltem me tibi ADJ VERB
 VERB quo VERB
 non hic tibi NOUN VERB
@@ -1572,11 +1572,11 @@ VERB quidem citius quam ADJ tibi illud VERB saltem quo sua NOUN VERB
 non super ADJ VERB ADJ NOUN VERB NOUN NOUN mei ADV ADJ cum me VERB ipse NOUN inter NOUN VERB NOUN nec VERB nostra ADV NOUN VERB se prius huc ADJ VERB VERB NOUN
 NOUN ADJ sue NOUN VERB NOUN NOUN breuiter VERB talibus NOUN NOUN qua PROPN VERB VERB PROPN ADJ NOUN -que VERB nostra NOUN VERB
 VERB NOUN ipsum sibi VERB ecce
-VERB has aliquis non VERB ipse michi
-tu PROPN alterutrum VERB uel VERB nostro NOUN NOUN uel michi VERB tuam
+VERB has aliquis non VERB ipse mihi
+tu PROPN alterutrum VERB uel VERB nostro NOUN NOUN uel mihi VERB tuam
 VERB ad hec NOUN ADV VERB NOUN
 ADV VERB ADV AUX tibi pluris VERB
-VERB hec PROPN PROPN NOUN quid horum VERB memet NOUN VERB satis ADJ VERB NOUN mea NOUN VERB AUX enim ADJ ADJ -que michi sed ne NOUN meo VERB VERB NOUN VERB ADJ ADJ VERB NOUN NOUN
+VERB hec PROPN PROPN NOUN quid horum VERB memet NOUN VERB satis ADJ VERB NOUN mea NOUN VERB AUX enim ADJ ADJ -que mihi sed ne NOUN meo VERB VERB NOUN VERB ADJ ADJ VERB NOUN NOUN
 VERB ergo suum cui NOUN AUX ADJ NOUN et NOUN NOUN VERB ille sua
 non hec NOUN NOUN NOUN VERB AUX NOUN nec NOUN NOUN VERB VERB
 sed nec NOUN PROPN NOUN -que VERB quod de VERB VERB AUX VERB
@@ -1637,7 +1637,7 @@ ambo VERB
 VERB hec NOUN VERB nisi VERB ADV hactenus et ADV VERB ille VERB
 VERB ulterius iam VERB
 ecce ADJ quod modo VERB VERB ipse fere
-tunc VERB NOUN sic VERB NOUN ADJ PROPN nichil ADV VERB
+tunc VERB NOUN sic VERB NOUN ADJ PROPN nihil ADV VERB
 quam AUX PROPN diu ADJ aut ubi VERB VERB ADJ NOUN VERB ADV
 tam bene si NOUN VERB NOUN ADJ ter NUM mox VERB ADJ VERB PROPN
 huic tamen NOUN NOUN ut NOUN ADJ ac NOUN NOUN VERB NOUN VERB
@@ -1646,7 +1646,7 @@ ADV at ADV ADV -que VERB
 VERB super VERB NOUN ADJ NOUN
 VERB VERB VERB usque NOUN
 et ne VERB VERB NOUN talem quocumque VERB NOUN AUX NOUN
-PROPN VERB potius michi PROPN VERB NOUN NOUN non VERB suo
+PROPN VERB potius mihi PROPN VERB NOUN NOUN non VERB suo
 nil VERB minus quam VERB VERB VERB
 NOUN NOUN NOUN VERB
 VERB PROPN NOUN
@@ -1662,7 +1662,7 @@ hactenus AUX NOUN VERB denique NOUN
 unde NOUN tanta AUX NOUN tam -que ADJ
 nec AUX ADJ NOUN
 VERB NOUN et VERB ego NOUN sin aliter VERB VERB NOUN VERB
-VERB paucis preter michi VERB tibi -que o NOUN ADJ NOUN VERB NOUN
+VERB paucis preter mihi VERB tibi -que o NOUN ADJ NOUN VERB NOUN
 si NUM nos illi NOUN VERB VERB NOUN VERB nulla NOUN AUX
 scilicet VERB NOUN ADJ NOUN VERB VERB ADJ NOUN
 VERB hec NOUN
@@ -1670,7 +1670,7 @@ eadem PROPN et illi VERB se VERB VERB diu et NOUN ADJ VERB NOUN NOUN sepius VERB
 iam NOUN VERB VERB NOUN NOUN NOUN ut ADJ VERB NOUN NOUN ADJ et NOUN NOUN VERB ab ADJ ADJ NOUN NOUN totus AUX
 VERB VERB NOUN per totum VERB ADV VERB NOUN NOUN VERB atque VERB et quia VERB NOUN uel VERB NOUN NOUN VERB NOUN nostra VERB
 VERB enim cum tanta NOUN NOUN uos aliud VERB VERB VERB
-non VERB PROPN plus VERB VERB NOUN nec NOUN ADJ tam VERB NOUN quam NOUN bis VERB VERB de qua iste VERB ante quidem non nunc NOUN ipse michi
+non VERB PROPN plus VERB VERB NOUN nec NOUN ADJ tam VERB NOUN quam NOUN bis VERB VERB de qua iste VERB ante quidem non nunc NOUN ipse mihi
 quis NOUN ADJ VERB AUX ADJ
 ADV NOUN NOUN ADJ -que VERB
 donec VERB AUX ADJ NOUN ADJ VERB hunc VERB non VERB mei
@@ -1714,7 +1714,7 @@ NOUN tibi ADJ VERB ne ADJ VERB
 NOUN sub ADJ NOUN NUM VERB ADJ NOUN ADJ NOUN VERB
 ADJ VERB contra PROPN quid VERB
 VERB ADJ qui VERB ADJ VERB
-AUX licet ADJ NOUN VERB quod ipsum tam VERB ei quam mea NOUN michi
+AUX licet ADJ NOUN VERB quod ipsum tam VERB ei quam mea NOUN mihi
 tam AUX ille diu VERB NOUN ADJ NOUN hoc ADJ non VERB VERB
 VERB VERB NOUN NOUN utraque VERB NOUN ADJ ADJ ante NOUN VERB -que NOUN VERB ADJ NOUN NOUN VERB NOUN VERB
 VERB ut NOUN VERB VERB VERB VERB ADJ NOUN ADJ VERB sic
@@ -1731,7 +1731,7 @@ VERB NOUN NOUN ADJ atque NOUN
 PROPN VERB NOUN VERB NOUN
 VERB o ADJ ADJ NOUN NOUN
 in NOUN o NOUN hoc NOUN VERB VERB
-heu michi quos NOUN NOUN iste VERB
+heu mihi quos NOUN NOUN iste VERB
 ADJ AUX NOUN tamen ADJ NOUN NOUN NOUN VERB atque meis
 nunc -que ADJ NOUN et NOUN NOUN VERB
 NOUN NOUN quis ista VERB
@@ -1740,12 +1740,12 @@ his potius NOUN ADJ NOUN VERB
 quis tibi VERB PROPN VERB priusquam NOUN me VERB que VERB AUX
 VERB me hec ADJ VERB NOUN certe VERB longe VERB foris
 tunc tibi NOUN forsan NOUN VERB VERB qui uix nunc aliquo VERB VERB
-VERB michi NOUN quidnam super hoc VERB AUX NOUN
+VERB mihi NOUN quidnam super hoc VERB AUX NOUN
 NOUN ADJ NOUN VERB
 NOUN etenim VERB me sua NOUN VERB
 ADJ AUX VERB VERB nec NOUN ADJ tam VERB NOUN quam ADJ VERB
 ergo NOUN VERB VERB PROPN VERB -que
-PROPN NOUN VERB VERB tuam tam quia me ADJ NOUN VERB ADJ quam michi quod AUX VERB sero VERB
+PROPN NOUN VERB VERB tuam tam quia me ADJ NOUN VERB ADJ quam mihi quod AUX VERB sero VERB
 nec quia non VERB NOUN inficiorue mororue
 NOUN non gratis quando VERB VERB
 VERB licet VERB ADJ VERB NOUN
@@ -1753,10 +1753,10 @@ cum VERB NOUN NOUN pluris AUX
 siue igitur VERB seu VERB VERB VERB ne quicquam hic VERB ADJ VERB tibi si VERB VERB NOUN postquam VERB VERB protinus NOUN VERB NOUN
 si VERB quacumque NOUN VERB ADV VERB VERB VERB tibi
 ADJ VERB NOUN NOUN suum -que ad NOUN pro se talia VERB VERB NOUN me ADV tibi VERB VERB ADJ quem propter VERB NOUN VERB
-VERB ille nichil nec tam sibi VERB VERB NOUN VERB quam VERB VERB
+VERB ille nihil nec tam sibi VERB VERB NOUN VERB quam VERB VERB
 quin VERB VERB ibi NOUN -que ADJ VERB iterum VERB inde VERB
 NOUN NOUN NOUN NOUN NOUN NOUN NOUN quisque sua ADJ NOUN VERB VERB eia nunc VERB nunc ADJ NOUN nunc VERB ADJ NOUN NOUN
-VERB nichil ille VERB -que VERB NOUN tamquam non VERB VERB
+VERB nihil ille VERB -que VERB NOUN tamquam non VERB VERB
 NOUN PROPN ubi VERB VERB NOUN NOUN sub ADJ ADJ NOUN VERB
 VERB et VERB NOUN VERB -que repente hinc NOUN VERB inde NOUN VERB
 mox NOUN ADJ NOUN NOUN ADJ NOUN PROPN VERB ADJ VERB ut NOUN VERB NOUN aut VERB et NOUN ut AUX NOUN VERB -que VERB VERB -que ADJ NOUN VERB atque VERB ADV aut cur NOUN VERB ibi
@@ -1782,7 +1782,7 @@ forsitan NOUN VERB meis
 neue ADJ VERB ADJ NOUN NOUN sola VERB NOUN non VERB VERB
 PROPN NOUN ADJ ADV VERB VERB NOUN VERB -que ADJ ADJ NOUN VERB NOUN ADJ -que VERB non nisi VERB ADJ VERB
 PROPN si ADJ VERB VERB numquam NOUN ADJ
-ADJ nichil AUX quam VERB NOUN
+ADJ nihil AUX quam VERB NOUN
 quisque quod AUX VERB NOUN ADJ AUX NOUN NOUN NOUN AUX VERB
 ADJ VERB NOUN VERB VERB NOUN
 VERB VERB NOUN ADJ utroque VERB
@@ -1812,7 +1812,7 @@ NOUN NOUN -que super VERB NOUN NOUN ADJ ADV NOUN VERB sic -que VERB NOUN NOUN VE
 VERB inde omnes ex toto NOUN NOUN et ter VERB VERB ter -que VERB
 VERB et NOUN NOUN sibi NUM VERB
 proh NOUN
-hic VERB NOUN VERB michi AUX
+hic VERB NOUN VERB mihi AUX
 o quale NOUN nunc VERB ADJ NOUN
 VERB VERB VERB qualibet NOUN VERB
 VERB ADJ saltem NOUN NOUN NOUN suis VERB
@@ -1837,8 +1837,8 @@ VERB ad NOUN NOUN NOUN VERB VERB VERB -que suam ADJ NOUN NOUN VERB -que NOUN NOU
 VERB hunc PROPN VERB NOUN ADJ ADJ VERB NOUN NOUN ADJ
 NOUN ADJ VERB NOUN ADJ
 VERB NOUN NOUN NOUN NOUN
-NOUN ADJ tantum VERB NOUN ADJ ut VERB ADV ADJ VERB quid michi VERB VERB nisi NOUN VERB
-NOUN ADV michi AUX tua VERB VERB
+NOUN ADJ tantum VERB NOUN ADJ ut VERB ADV ADJ VERB quid mihi VERB VERB nisi NOUN VERB
+NOUN ADV mihi AUX tua VERB VERB
 VERB non NOUN VERB NOUN NOUN
 NOUN VERB NOUN NOUN NOUN VERB
 VERB NOUN VERB paulatim VERB NOUN VERB NOUN NOUN suas cumque VERB PROPN ADJ VERB NOUN VERB NOUN NOUN atque NOUN ADJ NOUN VERB
@@ -1852,17 +1852,17 @@ primitus VERB ueluti VERB quando repente NOUN aut NOUN NOUN ADJ VERB
 mox simul VERB AUX uno non pluribus NOUN NOUN et NOUN NOUN ADJ VERB
 me quibus AUX post NOUN NOUN ADJ AUX NOUN
 uos super NOUN ne VERB meo
-VERB NOUN VERB michi NOUN NOUN -que
+VERB NOUN VERB mihi NOUN NOUN -que
 VERB hoc NOUN VERB NOUN meis AUX NOUN NOUN NOUN AUX ADJ NOUN
 NOUN NOUN VERB sed NOUN VERB
 ergo AUX ADJ NOUN ADJ AUX NOUN NOUN
 NOUN et VERB AUX VERB NOUN
 ADJ in ADJ olim et ADJ VERB tam bene nunc VERB quam ADJ ante AUX
-nec michi tam quosquam quam uos VERB ADJ AUX
+nec mihi tam quosquam quam uos VERB ADJ AUX
 plus quibus VERB plus NOUN VERB
 huc quoque me uestri VERB NOUN VERB
 usque VERB PROPN uester ego AUX NOUN
-VERB ADJ NOUN VERB NOUN VERB michi ADJ NOUN ADJ NOUN
+VERB ADJ NOUN VERB NOUN VERB mihi ADJ NOUN ADJ NOUN
 namque is ADJ VERB NOUN VERB NOUN enim ADJ non VERB NOUN
 VERB ADJ VERB NOUN NOUN
 quemlibet hic VERB non VERB AUX NOUN VERB ADJ NOUN VERB
@@ -1871,7 +1871,7 @@ VERB alii forsitan ille VERB
 qui NOUN in NOUN VERB VERB in hisdem in quibus et VERB ADV VERB
 VERB VERB NOUN VERB VERB hic me siue NOUN siue NOUN VERB
 nam VERB hic NOUN NOUN
-VERB nostras NOUN VERB NOUN nec NOUN aut NOUN NOUN michi ADJ VERB
+VERB nostras NOUN VERB NOUN nec NOUN aut NOUN NOUN mihi ADJ VERB
 nullus VERB NOUN adeo VERB umquam quin hunc sub NOUN me -que VERB AUX super
 nil VERB hac NOUN NOUN VERB VERB
 VERB NOUN et cur non NOUN VERB adhuc
@@ -1883,7 +1883,7 @@ PROPN VERB NOUN in NOUN VERB
 non quales VERB VERB AUX AUX
 VERB ne NOUN aliquis VERB VERB
 si VERB VERB si minus VERB VERB
-denique si qua michi VERB AUX NOUN VERB et nobis VERB rite VERB idem
+denique si qua mihi VERB AUX NOUN VERB et nobis VERB rite VERB idem
 VERB PROPN VERB cuncti -que NOUN quos ego me VERB plus VERB tibi
 VERB VERB PROPN VERB VERB et VERB VERB VERB VERB NOUN
 NOUN quo VERB VERB AUX NOUN ADJ
@@ -1898,13 +1898,13 @@ VERB si NOUN AUX NOUN NOUN VERB
 o utinam NOUN VERB ille VERB
 NOUN PROPN ueluti VERB ab ipso VERB que VERB talibus NOUN VERB
 NOUN VERB minus quam NOUN VERB NOUN ADJ NOUN talibus AUX VERB
-NOUN NOUN NOUN NOUN ADJ atque suum VERB taliter VERB ADV ADJ nichil nisi sola NOUN VERB illis
+NOUN NOUN NOUN NOUN ADJ atque suum VERB taliter VERB ADV ADJ nihil nisi sola NOUN VERB illis
 AUX VERB ADJ omnia ADJ NOUN
 VERB NOUN VERB NOUN AUX ut NOUN VERB
 in isto NOUN VERB NOUN
 ipse VERB
 has NOUN VERB VERB NOUN sibi -que non VERB VERB ADJ VERB ita AUX VERB VERB nil VERB nil -que VERB
-NOUN NOUN VERB et tua ADJ michi
+NOUN NOUN VERB et tua ADJ mihi
 VERB ADJ suis ADJ NOUN omnia VERB
 nil VERB PROPN et ADJ usque VERB
 NOUN ADJ AUX NOUN VERB NOUN
@@ -1917,8 +1917,8 @@ ille VERB ADV prius VERB NOUN quale quoslibet ad VERB NOUN ADJ VERB nil NOUN hic
 hic NOUN AUX ADJ ADV -que VERB
 ne nimium VERB
 ADV VERB VERB
-si michi VERB et ADJ VERB
-VERB michi PROPN non his ADJ VERB
+si mihi VERB et ADJ VERB
+VERB mihi PROPN non his ADJ VERB
 omnia PROPN VERB aliis -que VERB
 PROPN VERB VERB NOUN VERB
 quid VERB VERB VERB quibus ipsa VERB
@@ -1941,7 +1941,7 @@ VERB ex ADJ NUM
 ille VERB ADJ et VERB idem porro hoc NOUN VERB atque NOUN desuper VERB VERB ante NOUN
 hoc VERB NOUN nuper VERB ADJ
 non hoc VERB NOUN ad NOUN mei
-hoc ADJ nichil AUX quo ADJ NOUN VERB
+hoc ADJ nihil AUX quo ADJ NOUN VERB
 NOUN NOUN NOUN NOUN -que NOUN VERB
 o NOUN hoc PROPN VERB quam ADJ VERB -que quam AUX NOUN ADJ que -que sue
 huic ADJ ADJ NOUN PROPN VERB NOUN in NOUN talia ADJ VERB
@@ -1963,12 +1963,12 @@ VERB ADJ VERB NOUN NOUN
 tunc primum VERB NOUN VERB VERB
 haut umquam ADJ VERB ante NOUN
 quis me VERB PROPN NOUN VERB ad istos
-heu michi quo VERB NOUN VERB NOUN
+heu mihi quo VERB NOUN VERB NOUN
 quid ADJ NOUN
 PROPN et iste VERB porro parum ADJ AUX VERB NOUN quin VERB NOUN NOUN -que VERB -que VERB huc NOUN
 hoc NOUN ADJ VERB VERB
 NOUN ad hec hoc ergo ADJ PROPN VERB
-non michi NOUN equidem VERB ista semel
+non mihi NOUN equidem VERB ista semel
 si VERB NOUN NUM NOUN ADJ illo VERB atque ipsi NOUN NOUN tibi
 NOUN AUX VERB ADJ semper in NOUN
 et VERB ADJ NOUN VERB NOUN
@@ -1976,7 +1976,7 @@ VERB ter VERB VERB NOUN atque repente NOUN VERB in sua NOUN VERB VERB -que diu N
 ADJ VERB ADJ NOUN VERB VERB et VERB NOUN VERB VERB
 NOUN ni VERB VERB VERB ADJ
 VERB NOUN NOUN NOUN tui
-ille nichil NOUN VERB cetera VERB ADJ NOUN NOUN VERB VERB
+ille nihil NOUN VERB cetera VERB ADJ NOUN NOUN VERB VERB
 nec prius VERB qui tunc AUX NOUN VERB
 NOUN minus VERB quam NOUN VERB ADJ
 tunc ita NOUN quid NOUN VERB
@@ -1986,7 +1986,7 @@ quis PROPN umquam VERB NOUN ADJ VERB tot NOUN in NOUN VERB NOUN suos
 non ne ADJ AUX NOUN ADJ suum -que
 NOUN contra ADJ ista VERB NOUN nec ADJ sub NOUN VERB
 nec AUX ADJ cum VERB NOUN
-que michi quid ADJ NOUN quidue VERB inde
+que mihi quid ADJ NOUN quidue VERB inde
 et quid ego ADJ que tibi NOUN NOUN
 cum tua NOUN nobis et nostra tibi VERB NOUN hec nostris non tibi NOUN VERB
 NOUN me -que VERB coram et NOUN NOUN -que
@@ -2022,7 +2022,7 @@ ADJ VERB NOUN VERB ADJ
 cur VERB VERB cui non VERB VERB
 VERB VERB te VERB magis
 NOUN potius non VERB VERB quam nimis VERB VERB NOUN
-quid si NOUN se VERB ut tibi VERB ADJ ADJ VERB nichil
+quid si NOUN se VERB ut tibi VERB ADJ ADJ VERB nihil
 VERB ut NOUN VERB
 quando VERB VERB ADV
 ter VERB ante NOUN
@@ -2052,10 +2052,10 @@ NOUN AUX ADJ sed NOUN ADJ
 huius NOUN me VERB AUX sed ipsum ipsius aut NOUN non VERB VERB
 VERB tamen NOUN quod NOUN VERB eodem quod ADJ NOUN VERB NOUN -que NOUN
 VERB NOUN quemcumque VERB ADJ
-NOUN VERB NOUN tanta meis VERB AUX ADJ quidem michi NOUN NOUN
+NOUN VERB NOUN tanta meis VERB AUX ADJ quidem mihi NOUN NOUN
 NOUN NOUN NOUN ADJ VERB
 NOUN ADJ NOUN ADJ VERB NOUN
-VERB VERB nulla AUX hic michi NOUN NOUN
+VERB VERB nulla AUX hic mihi NOUN NOUN
 VERB ADJ NOUN NOUN VERB ADJ quos VERB NOUN VERB atque NOUN
 taliter ADJ NOUN NOUN VERB VERB ADJ NOUN NOUN VERB huc subito huc NOUN NOUN et NOUN NOUN -que
 NOUN NOUN VERB VERB mei
@@ -2067,7 +2067,7 @@ NOUN VERB quia nos VERB VERB AUX utque iterum VERB VERB quando VERB
 PROPN ad has NOUN hec NOUN VERB NOUN NOUN non VERB VERB VERB NOUN VERB satis ADJ eo -que
 ante satis VERB non modo plura VERB
 NOUN VERB quicumque suas VERB VERB
-nil NOUN AUX VERB preter VERB michi
+nil NOUN AUX VERB preter VERB mihi
 talia VERB NOUN VERB ADJ NOUN VERB VERB ADJ NOUN VERB
 patrinusne tibi AUX NOUN meus
 eius NOUN que AUX illi AUX VERB tibi ut cum VERB si nos ipse NOUN VERB non eadem VERB VERB AUX sibi
@@ -2079,10 +2079,10 @@ NOUN PROPN ADV VERB VERB VERB ADJ NOUN NOUN VERB NOUN VERB quid si VERB VERB VER
 ADJ PROPN VERB ergo VERB
 per ADJ quos VERB nisi mea VERB VERB non AUX NOUN NOUN VERB tuo
 totas VERB NOUN ADJ PROPN VERB NOUN ne VERB VERB ADJ enim AUX
-PROPN ADJ tu si qua VERB illum te prius VERB quam VERB michi
+PROPN ADJ tu si qua VERB illum te prius VERB quam VERB mihi
 NOUN ADV VERB VERB NOUN
 NOUN mea VERB qualia VERB VERB
-multa VERB VERB VERB VERB NOUN VERB ista NOUN nichil scilicet VERB hac NOUN NOUN NOUN VERB mea te NOUN VERB
+multa VERB VERB VERB VERB NOUN VERB ista NOUN nihil scilicet VERB hac NOUN NOUN NOUN VERB mea te NOUN VERB
 nil VERB aut VERB ADJ VERB absque VERB quod VERB
 quod VERB absque VERB VERB
 si plus VERB meus ut tuus VERB NOUN
@@ -2108,7 +2108,7 @@ quid VERB hic
 alio VERB VERB VERB
 NOUN si VERB non VERB adhuc
 nullius hic NOUN ADJ VERB VERB ADJ me NOUN talia tot -que VERB
-nec VERB hic VERB NOUN nec VERB quod ipsum hic VERB NOUN quas michi VERB VERB
+nec VERB hic VERB NOUN nec VERB quod ipsum hic VERB NOUN quas mihi VERB VERB
 VERB NOUN VERB NOUN ADJ
 NOUN et NOUN quem VERB NOUN VERB
 VERB tibi NOUN PROPN VERB VERB sane nec VERB cuinam quilibet illud VERB
@@ -2119,7 +2119,7 @@ NOUN VERB
 VERB tu nempe VERB VERB NOUN
 non NOUN VERB ADJ tuis
 VERB eum me VERB VERB
-VERB enim ipse VERB non ultro hoc VERB quin prius ipse michi
+VERB enim ipse VERB non ultro hoc VERB quin prius ipse mihi
 tu saltem PROPN VERB
 tunc NOUN NOUN non ne VERB VERB
 si VERB VERB VERB
@@ -2140,7 +2140,7 @@ ADJ ad hec nondumne VERB
 cur ergo VERB VERB
 utque VERB me NOUN VERB ADJ
 PROPN non ne VERB
-michi VERB VERB VERB
+mihi VERB VERB VERB
 VERB ille tibi quando VERB VERB
 ille VERB adhuc
 cur hinc ADJ VERB
@@ -2150,7 +2150,7 @@ VERB et sola NOUN mea NOUN VERB
 si VERB me cum nunc NOUN NOUN VERB
 VERB NOUN VERB
 non VERB ADV ADV
-hic michi non tota NOUN VERB VERB
+hic mihi non tota NOUN VERB VERB
 tu bene VERB sed id VERB VERB alter at tibi NOUN PROPN nemo VERB VERB
 VERB his PROPN si VERB VERB et iste
 VERB NOUN estne NOUN
@@ -2226,15 +2226,15 @@ VERB hec ad NOUN NOUN NOUN -que VERB VERB VERB VERB VERB VERB PROPN tuos
 ego VERB nostros
 nondum VERB VERB NOUN meis
 in NOUN VERB meos multum -que ADJ VERB ADJ VERB NOUN
-VERB ADJ ADV ADJ -que VERB AUX NOUN VERB ADJ VERB michi
+VERB ADJ ADV ADJ -que VERB AUX NOUN VERB ADJ VERB mihi
 nunc VERB iste suam nunc ADJ ille NOUN et NOUN in NOUN ADJ NOUN VERB
 non bene VERB NOUN NOUN solus in NUM alterius NOUN cras NOUN ADJ AUX
 ADJ mei VERB ad NOUN NOUN qui NOUN secus ac NOUN et NOUN VERB
 NOUN cur ADJ VERB
-hactenus ut AUX tu michi semper AUX
+hactenus ut AUX tu mihi semper AUX
 NOUN AUX NOUN ad VERB VERB
 quod si NOUN nostros VERB NOUN hic quod VERB VERB AUX
-unde VERB nichil
+unde VERB nihil
 quamuis ipse VERB ob qualem VERB NOUN ADV tibi ADJ AUX NUM AUX quater
 omnis eo VERB NOUN VERB ut isto NOUN VERB si VERB VERB
 ergo ut qualis AUX VERB te NOUN VERB NOUN NOUN hoc tibi nostra VERB
@@ -2256,14 +2256,14 @@ ADJ VERB NOUN NOUN quibusque NOUN
 multa in NOUN quid hoc VERB
 VERB ADV
 taliter haut aliter uos VERB sicut NOUN
-nec michi NOUN satis AUX VERB VERB
+nec mihi NOUN satis AUX VERB VERB
 NOUN hoc VERB NOUN ADJ meis
-olim non AUX NOUN michi NOUN VERB VERB quis VERB nunc michi NOUN NOUN
+olim non AUX NOUN mihi NOUN VERB VERB quis VERB nunc mihi NOUN NOUN
 ADJ ADJ ADJ non VERB NOUN
 ADJ AUX ADJ VERB NOUN NOUN
 NOUN mea ADJ AUX NOUN ego atque NOUN
 cras NOUN VERB VERB item
-quam michi uestra AUX NOUN VERB VERB cum AUX NOUN NOUN VERB mee
+quam mihi uestra AUX NOUN VERB VERB cum AUX NOUN NOUN VERB mee
 si non VERB VERB ADJ saltem ADJ PROPN VERB atque NOUN
 VERB inde NOUN VERB VERB NOUN VERB NOUN NOUN NOUN -que ADJ
 tunc VERB NOUN ADV PROPN VERB ADJ ne ADJ VERB NOUN NOUN
@@ -2304,11 +2304,11 @@ PROPN et PROPN tandem VERB nisi uix sua VERB NOUN VERB NOUN
 ADV NOUN VERB AUX omnes post NOUN VERB qui nisi AUX VERB diu
 sic NOUN VERB PROPN VERB NOUN unius et NOUN omnibus VERB NOUN
 ADJ NOUN VERB VERB NOUN et NOUN tot NOUN VERB NOUN AUX NOUN iam -que VERB NOUN VERB AUX VERB NOUN NOUN NOUN
-VERB igitur ADJ VERB NOUN PROPN NOUN VERB ita atque VERB ADJ nimis iste michi PROPN VERB nec nos in ADJ NOUN AUX
+VERB igitur ADJ VERB NOUN PROPN NOUN VERB ita atque VERB ADJ nimis iste mihi PROPN VERB nec nos in ADJ NOUN AUX
 ADJ non AUX ubi AUX NOUN VERB
 VERB VERB uel minus NOUN VERB
-ad nostram VERB NOUN VERB ADV ADV NOUN ADJ VERB AUX michi
-VERB NOUN nichil VERB ADJ AUX nam NOUN ADJ AUX VERB -que NOUN NOUN
+ad nostram VERB NOUN VERB ADV ADV NOUN ADJ VERB AUX mihi
+VERB NOUN nihil VERB ADJ AUX nam NOUN ADJ AUX VERB -que NOUN NOUN
 NOUN VERB AUX cui VERB VERB
 NOUN NOUN ADJ -que NOUN nec VERB NOUN PROPN NOUN VERB
 omnia AUX isto VERB NOUN
@@ -2323,14 +2323,14 @@ VERB tibi quod VERB NOUN ante tuis
 VERB adhuc VERB VERB NOUN NOUN
 NOUN VERB postquam VERB AUX ADJ
 ad NOUN VERB VERB NOUN
-AUX nichil NOUN preter VERB VERB
+AUX nihil NOUN preter VERB VERB
 nec sibi dum VERB VERB quam pluribus VERB
 hac NOUN atque NOUN VERB VERB
 clam VERB NOUN et subito AUX
 si VERB NOUN VERB NOUN VERB NOUN
 ille VERB VERB VERB et VERB unde NOUN NOUN
 non ne VERB NOUN
-VERB hic NOUN tu nondum NOUN VERB tu michi VERB sane quod NOUN AUX tibi
+VERB hic NOUN tu nondum NOUN VERB tu mihi VERB sane quod NOUN AUX tibi
 VERB ADJ NOUN que NOUN VERB VERB ubi NOUN AUX NOUN atque NOUN
 ADJ ADJ VERB VERB ADJ quando VERB AUX at ADJ NOUN VERB utrumque sua
 este penes NOUN VERB coram NOUN VERB
@@ -2342,7 +2342,7 @@ ADV VERB ADJ VERB NOUN
 non uos pro ADJ NOUN VERB foras
 nunc VERB ADJ VERB NOUN NOUN ut ADJ NOUN NOUN VERB VERB
 neue NOUN ADJ quamuis AUX ADJ VERB
-ADJ nichil VERB qui nichil ADJ VERB
+ADJ nihil VERB qui nihil ADJ VERB
 PROPN ad hec VERB que VERB et ac si ADJ VERB cetera VERB VERB
 VERB enim quod nostris protinus NOUN VERB ADJ NOUN VERB NOUN
 ergo quod VERB nos VERB VERB ADJ AUX nam nos non VERB VERB VERB tibi quin ne nos NOUN tibi VERB VERB nec tua NOUN nobis sed tibi nostra VERB
@@ -2357,7 +2357,7 @@ heus
 VERB PROPN NOUN cur solus VERB omnibus ADJ ADJ -que tui
 VERB saltem licet ADJ VERB VERB ubi NOUN VERB AUX
 en egomet ADJ VERB NOUN tandem uix isto VERB te VERB NOUN
-ille VERB frustra VERB sponte VERB cum NOUN VERB VERB VERB michi
+ille VERB frustra VERB sponte VERB cum NOUN VERB VERB VERB mihi
 VERB NOUN ita AUX sed solum VERB VERB heu VERB nostrum nemo tibi AUX NOUN
 me VERB quem semper VERB te semper VERB
 cetera se VERB te VERB VERB NOUN ADJ -que VERB nimis per te VERB VERB et nullo donec VERB VERB VERB
@@ -2389,21 +2389,21 @@ ADJ hoc AUX quisque VERB quo ADJ NOUN ADJ NOUN ADJ VERB
 nam tuus ille NOUN uno NOUN VERB et NUM VERB NOUN NOUN ADJ VERB
 VERB PROPN idem VERB VERB -que se -que VERB ADJ VERB VERB NOUN
 VERB ille tui NOUN nunc ADJ AUX VERB at NOUN plus VERB VERB
-NOUN nichil de te VERB nec VERB ADJ an ADJ AUX NOUN VERB NOUN
+NOUN nihil de te VERB nec VERB ADJ an ADJ AUX NOUN VERB NOUN
 ADJ NOUN ADJ NOUN AUX siue ADJ sed non VERB VERB
 ecce meo multum VERB tuus ille NOUN et NOUN omnes VERB NOUN NOUN ADJ ADJ VERB in uno VERB NOUN NOUN VERB utramque NOUN qua NOUN usque VERB aliquid NOUN ADJ et ultra VERB VERB NUM NUM quater
 NOUN idem VERB VERB utraque NOUN VERB quem citius ADJ VERB ille NOUN VERB -que suo VERB NOUN namque omnis VERB ut VERB se VERB AUX quod AUX
 ADJ PROPN NOUN
-sic ADJ VERB NOUN michi ADV sic VERB NOUN
+sic ADJ VERB NOUN mihi ADV sic VERB NOUN
 porro quid VERB VERB VERB
 VERB NOUN VERB et VERB VERB
-VERB sed nimium ADJ hoc michi NOUN VERB ADJ NOUN pluribus AUX NOUN
+VERB sed nimium ADJ hoc mihi NOUN VERB ADJ NOUN pluribus AUX NOUN
 quid si quis VERB VERB NOUN ADV qui tibi cum VERB VERB adhuc
 idcirco VERB NOUN VERB VERB
 VERB AUX NOUN ut clam VERB ibi VERB tuis AUX NOUN NOUN illic et tua qui VERB NOUN nullus AUX
 VERB VERB NOUN ADJ VERB VERB NOUN quam VERB VERB non quia te VERB VERB quemue tuorum
 hoc VERB ADJ ADV tibi VERB idem
-VERB VERB NOUN nil VERB de te ni quod si VERB sponte michi ipse VERB
+VERB VERB NOUN nil VERB de te ni quod si VERB sponte mihi ipse VERB
 non NOUN VERB NOUN NOUN -que VERB ADJ VERB ADJ tui
 hoc quod ADJ tui AUX NOUN quod ADJ VERB quod NOUN VERB NOUN -que NOUN
 taliter VERB VERB NOUN NOUN NOUN NOUN ADJ VERB
@@ -2432,7 +2432,7 @@ etenim VERB
 VERB VERB quidem
 tu me VERB AUX ADJ usque NOUN
 te VERB hic saltem ADJ AUX semel sic igitur VERB tu me VERB VERB quid NOUN VERB
-NOUN VERB michi AUX et me VERB VERB NOUN ADJ VERB
+NOUN VERB mihi AUX et me VERB VERB NOUN ADJ VERB
 si VERB cuius NOUN nisi VERB meam
 sic NOUN AUX a NOUN meo VERB et iste nunc ADJ NOUN NOUN VERB
 te sin AUX ut AUX ADJ NOUN ADJ NOUN VERB hoc VERB ADJ NOUN NOUN
@@ -2447,8 +2447,8 @@ sed quia tam subito VERB tam -que ADV ADJ si VERB hinc tibi NOUN VERB
 VERB et ADJ VERB NOUN NOUN ADJ et ADJ ADJ -que VERB
 VERB VERB VERB NOUN NOUN NOUN ADJ sic NOUN VERB o NOUN PROPN tui NOUN NOUN -que
 ADJ et ADJ ADJ NOUN -que NOUN
-non VERB si NOUN michi ADV VERB ADJ NOUN cum michi sepe VERB
-sed non nunc michi NOUN VERB
+non VERB si NOUN mihi ADV VERB ADJ NOUN cum mihi sepe VERB
+sed non nunc mihi NOUN VERB
 tu VERB donec VERB VERB ADV AUX an ne NOUN
 VERB iterum nobis VERB ADJ ADJ aut nostrum VERB quilibet NOUN NOUN
 ADJ quandoque VERB ADJ item -que NOUN ADJ ADJ NOUN
@@ -2508,7 +2508,7 @@ NOUN VERB NOUN VERB
 NOUN NOUN VERB -que NOUN VERB NOUN -que VERB
 VERB ADJ et VERB NOUN
 NOUN ADJ VERB non ne VERB AUX
-VERB ADJ ADJ NOUN hic NOUN NOUN NOUN NUM VERB NOUN NOUN hic ADJ VERB ille ADJ quid michi NOUN que non NOUN VERB
+VERB ADJ ADJ NOUN hic NOUN NOUN NOUN NUM VERB NOUN NOUN hic ADJ VERB ille ADJ quid mihi NOUN que non NOUN VERB
 NOUN VERB ADJ NOUN VERB NOUN
 denique NOUN VERB ADJ sub NOUN multos
 ADJ haut VERB an AUX ADJ ADJ
@@ -2517,7 +2517,7 @@ NOUN NOUN NOUN VERB NOUN nil nisi NOUN non VERB VERB
 NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN NOUN VERB NOUN NOUN NOUN -que NOUN NOUN NOUN NOUN NOUN que -que his VERB et que ADJ VERB omnia ADJ AUX NOUN NOUN
 omnia VERB ADJ ADJ NUM VERB NOUN NOUN VERB et ipse NOUN
 primitus hoc NOUN NOUN denique NOUN non modo NOUN NOUN quoque ipse VERB
-NOUN PROPN et ADJ NOUN VERB eadem sed VERB nichil
+NOUN PROPN et ADJ NOUN VERB eadem sed VERB nihil
 ADJ NOUN NOUN VERB paucas NOUN NOUN ADJ iste VERB
 non VERB NOUN NOUN sed VERB NOUN plura VERB VERB in ADJ NOUN
 ADJ ADJ VERB ADJ NOUN ADJ PROPN NOUN VERB NOUN
@@ -2549,13 +2549,13 @@ VERB me ille VERB VERB
 ego VERB tibi ipse
 VERB me ADJ quod VERB VERB VERB
 ut de te VERB VERB memet ego ipsum
-tam michi ADJ quam VERB tibi AUX
+tam mihi ADJ quam VERB tibi AUX
 inter VERB egomet VERB VERB
 uix NOUN VERB dum VERB simul
 VERB enim ADV VERB VERB
 NOUN ADJ nos VERB VERB VERB
 et VERB quam VERB
-VERB VERB tamen quoadusque VERB an VERB ultro ADJ AUX michi
+VERB VERB tamen quoadusque VERB an VERB ultro ADJ AUX mihi
 et ueluti VERB tibi me VERB VERB sic me VERB qua NOUN VERB
 VERB et hac in NOUN NOUN VERB NOUN
 taliter VERB VERB ille ADJ ADJ ut VERB AUX NOUN VERB NOUN VERB et quidam ADJ NOUN VERB
@@ -2573,9 +2573,9 @@ VERB VERB VERB VERB VERB
 si VERB VERB at ne VERB VERB VERB coram NOUN sero nimis
 in NOUN VERB qui NOUN VERB VERB
 quid NOUN VERB cum VERB ipse sibi
-VERB michi VERB NOUN scilicet uni sub quibus hec NOUN AUX ADJ michi NOUN AUX
-VERB ADJ VERB NOUN VERB ADJ hac NOUN NOUN VERB NOUN PROPN VERB michi ADJ VERB VERB ADV qualiter usque VERB
-ADV ADJ VERB michi VERB quendam
+VERB mihi VERB NOUN scilicet uni sub quibus hec NOUN AUX ADJ mihi NOUN AUX
+VERB ADJ VERB NOUN VERB ADJ hac NOUN NOUN VERB NOUN PROPN VERB mihi ADJ VERB VERB ADV qualiter usque VERB
+ADV ADJ VERB mihi VERB quendam
 VERB quod multas VERB ille NOUN
 ADV ADJ plures NOUN eius ADJ VERB VERB NOUN quanta VERB
 illius a NOUN ADJ que NOUN VERB VERB et AUX ADJ quod VERB ipse super
@@ -2608,10 +2608,10 @@ ADV PROPN VERB ADV ut NOUN NOUN ADJ VERB VERB quin PROPN VERB dum NOUN iste VERB
 VERB ADJ NOUN tanta VERB
 tu -que bene VERB si VERB VERB NOUN quam tibi
 dum VERB NOUN iste mane
-NOUN ad hec potius VERB NOUN VERB nam michi ADV VERB VERB VERB
+NOUN ad hec potius VERB NOUN VERB nam mihi ADV VERB VERB VERB
 VERB -que ADV VERB NOUN NOUN at te NOUN ADJ VERB
 VERB NOUN NOUN AUX VERB NOUN -que NOUN NOUN VERB unde VERB
-tu michi non VERB VERB et tantus VERB
+tu mihi non VERB VERB et tantus VERB
 VERB ADJ hic ADJ protinus VERB simul
 VERB huc ambo solus VERB VERB
 taliter VERB VERB ille VERB VERB VERB NOUN PROPN AUX sed nondum NOUN VERB VERB
@@ -2644,11 +2644,11 @@ NOUN his VERB VERB ille suas non huc me NOUN NOUN aut NOUN NOUN VERB nec VERB AU
 tunc sic VERB NOUN PROPN ADV VERB ADJ turpiter ergo VERB
 turpiter hinc certe VERB ut NOUN ADJ et VERB meo NOUN ego ipse tuum
 NOUN VERB si non VERB ADV pro qua te VERB ADJ NOUN VERB
-NOUN michi tu VERB VERB VERB NOUN
+NOUN mihi tu VERB VERB VERB NOUN
 si VERB hec NOUN NOUN VERB tuo
-VERB ille NOUN forsan VERB NOUN -que quo VERB VERB NOUN michi
+VERB ille NOUN forsan VERB NOUN -que quo VERB VERB NOUN mihi
 VERB inde VERB ut qui non AUX VERB VERB an VERB VERB NOUN
-post ADJ ille ADJ NOUN VERB ADV heu michi quam ADJ AUX NOUN VERB NOUN
+post ADJ ille ADJ NOUN VERB ADV heu mihi quam ADJ AUX NOUN VERB NOUN
 NOUN suo NOUN VERB PROPN VERB -que PROPN adhuc leuiter VERB eum
 NOUN VERB VERB NOUN
 VERB ADV
@@ -2687,8 +2687,8 @@ quas VERB in NOUN VERB cum NOUN VERB VERB et nulla VERB ille NOUN
 sed quo ADJ VERB NOUN NOUN VERB NOUN NOUN ipse NOUN et VERB semel VERB ADV illum NOUN ADJ NOUN -que NOUN -que VERB VERB -que prius quam se VERB VERB NOUN per ADJ VERB NOUN
 VERB igitur ADV ADJ NOUN quod sibi VERB talia ADJ VERB in NOUN PROPN AUX
 NOUN NOUN VERB an ADJ AUX NOUN quasi ADJ tamen
-ADJ VERB que michi VERB AUX VERB
-VERB equidem quis michi VERB VERB
+ADJ VERB que mihi VERB AUX VERB
+VERB equidem quis mihi VERB VERB
 atque huc VERB VERB et illuc ADJ in NOUN VERB VERB suo
 VERB -que ego VERB VERB VERB VERB atque fere NOUN VERB AUX meis
 VERB tamen ADV VERB VERB
@@ -2696,7 +2696,7 @@ nam nisi VERB VERB AUX VERB
 intus adhuc VERB NOUN quem NOUN VERB sed ADJ NOUN nil VERB ADJ
 VERB VERB NOUN NOUN
 proh satis atque ultra VERB VERB ADJ
-VERB solum uentusne VERB VERB VERB VERB sed VERB michi
+VERB solum uentusne VERB VERB VERB VERB sed VERB mihi
 VERB AUX hic in quod VERB VERB NOUN
 VERB scilicet ipse
 VERB procul ille VERB NOUN quasi VERB ADJ ADJ VERB NOUN VERB NOUN NOUN non ADV VERB ADJ NOUN VERB et ADJ NOUN nostra NOUN
@@ -2727,7 +2727,7 @@ NOUN ADJ NOUN tibi ADJ VERB
 ne NOUN NOUN VERB VERB VERB VERB ADV NOUN ad NOUN NOUN
 ADJ ad hec ADJ nisi memet VERB NOUN NOUN nulli VERB
 ADJ VERB
-hunc michi qui nunc AUX NOUN NOUN VERB illic ultra VERB NOUN ADJ AUX
+hunc mihi qui nunc AUX NOUN NOUN VERB illic ultra VERB NOUN ADJ AUX
 VERB nullum NOUN cui ADV VERB NOUN uel cuius ADV NOUN VERB
 tunc ADJ PROPN VERB quod sepe VERB NOUN VERB tibi NOUN ADJ VERB
 nil igitur VERB tibi nunc nisi VERB cuius NOUN VERB AUX NOUN ibi
@@ -2741,7 +2741,7 @@ NOUN is ADJ NOUN VERB illuc in quibus NOUN PROPN unus AUX
 NOUN uel NOUN unus AUX sed nullus eorum VERB NOUN et NOUN NOUN
 quo super PROPN NOUN NOUN ADJ NOUN VERB VERB NOUN VERB NOUN NOUN VERB NOUN VERB -que VERB ADJ et VERB VERB VERB -que ADJ VERB
 VERB VERB -que tibi ADJ VERB NOUN ADJ id VERB VERB VERB NOUN
-ADJ ADJ quam VERB VERB tam VERB VERB at michi ADJ quidem VERB VERB -que VERB
+ADJ ADJ quam VERB VERB tam VERB VERB at mihi ADJ quidem VERB VERB -que VERB
 hoc alios inter VERB NOUN et istum NOUN VERB AUX aliis huic VERB NOUN
 quos VERB VERB NOUN VERB et NOUN ut VERB alia NOUN AUX VERB
 o ADJ NOUN NOUN -que NOUN ADJ
@@ -2767,14 +2767,14 @@ ADJ cum VERB VERB ille tamen
 VERB nimis NOUN NOUN tu ADJ VERB NOUN ADJ te NOUN VERB
 ADV NOUN VERB
 ADV NOUN VERB
-cur michi non VERB
-nil michi ADJ VERB
-ADJ ADJ VERB NOUN et NOUN ADJ ne VERB VERB NOUN VERB michi
+cur mihi non VERB
+nil mihi ADJ VERB
+ADJ ADJ VERB NOUN et NOUN ADJ ne VERB VERB NOUN VERB mihi
 ADV ergo VERB NOUN PROPN at ille VERB NOUN ADJ PROPN atque PROPN utraque ADJ VERB NOUN ADJ et ADJ VERB alterutram sed sine NOUN NOUN
 quos se NOUN VERB quos NOUN VERB hos VERB VERB hos VERB ipse VERB
-ADJ sic ADJ VERB VERB NOUN ut nichil VERB NOUN amorue VERB
+ADJ sic ADJ VERB VERB NOUN ut nihil VERB NOUN amorue VERB
 tu quoque ne qua tue NOUN NOUN VERB VERB NOUN VERB sine NOUN NOUN
-VERB ecce NOUN VERB michi VERB ADV
+VERB ecce NOUN VERB mihi VERB ADV
 tam sua VERB NOUN quam NOUN ambo VERB
 hec NUM NOUN NOUN NOUN NOUN VERB ut VERB quas VERB ADJ
 scilicet hinc VERB ADV ad NOUN NOUN pluribus NOUN hic VERB VERB
@@ -2782,7 +2782,7 @@ hi NUM NOUN VERB VERB in ipsas quas a NOUN NOUN rursus ad NOUN VERB quas ADJ ade
 sed quibus huc VERB ADJ NOUN hisdem de ADJ NOUN NOUN VERB item
 his coram VERB alii ADJ -que VERB post NOUN VERB NOUN atque NOUN nec modo se ADJ sese VERB VERB NOUN sed nec NOUN AUX sua
 VERB VERB diu ADJ VERB NOUN
-VERB NOUN pluribus atque michi
+VERB NOUN pluribus atque mihi
 ut AUX VERB VERB NOUN NOUN VERB me in tanto NOUN VERB parum
 PROPN AUX NOUN dudum -que VERB VERB NOUN VERB ipse NOUN
 ille VERB quod NOUN VERB VERB NOUN
@@ -2813,11 +2813,11 @@ ut VERB sic VERB licet bene multa VERB non VERB NOUN NOUN tota meum
 VERB ADJ post NOUN VERB NOUN quodque VERB ADJ NOUN ADJ NOUN
 NOUN NOUN NOUN NOUN aut NOUN VERB unius aut VERB NOUN NOUN VERB
 has autem ADJ NOUN VERB NOUN NOUN nimium VERB AUX ADJ
-NOUN NOUN NOUN -que VERB NOUN VERB VERB NOUN nichil
+NOUN NOUN NOUN -que VERB NOUN VERB VERB NOUN nihil
 uix -que quot NOUN VERB NOUN ADJ NUM NOUN VERB VERB VERB
 ADJ ADV NOUN hoc NOUN VERB
 cur igitur pluris VERB NOUN NOUN
-NOUN VERB michi NOUN NUM NOUN omnibus VERB uix VERB VERB
+NOUN VERB mihi NOUN NUM NOUN omnibus VERB uix VERB VERB
 nam NOUN his numquam NOUN VERB VERB
 ut NOUN in NOUN VERB NOUN VERB
 quod si quin NUM NOUN VERB nostri cuique ADV NOUN NUM totidem NOUN NOUN suam tunc NOUN sui non VERB NOUN ullum
@@ -2868,7 +2868,7 @@ me solum VERB cetera nulla quidem
 me sibi non VERB VERB NOUN ADJ ADJ VERB
 quotiens VERB VERB VERB
 AUX ADJ AUX ADJ quidem nisi VERB NOUN NOUN ADJ VERB quicquid VERB
-quid uero VERB quod non michi NOUN VERB me nisi ADJ non AUX NOUN VERB
+quid uero VERB quod non mihi NOUN VERB me nisi ADJ non AUX NOUN VERB
 non mea me NOUN NOUN VERB ADJ
 quid NOUN et VERB
 non ne VERB NOUN
@@ -2881,14 +2881,14 @@ NOUN alia NOUN NOUN ADJ VERB
 tunc sic quo NOUN uos VERB NOUN VERB
 ADV VERB NOUN hinc VERB
 NOUN VERB et quando VERB uel quando rursus VERB
-VERB AUX ADJ VERB ADJ michi
+VERB AUX ADJ VERB ADJ mihi
 VERB NOUN nos VERB VERB ullum
 NOUN VERB atque AUX
 en VERB ex nobis quos AUX VERB ADV NOUN adhuc etenim VERB ut ipse VERB
 at NOUN ipse NOUN VERB VERB nobis
 NOUN VERB NOUN VERB item
 at tibi si quid VERB NOUN VERB nostro quisquis AUX o ADJ NOUN VERB iste VERB
-VERB NOUN et hic VERB michi NOUN uobis
+VERB NOUN et hic VERB mihi NOUN uobis
 quam primum ut VERB VERB ego
 o quam ADJ uos VERB NOUN NOUN ne VERB ADJ NOUN NOUN
 ADJ NOUN AUX nec ADJ VERB VERB VERB
@@ -2899,7 +2899,7 @@ uos NOUN ADJ NOUN VERB ADJ
 VERB ne ADJ NOUN VERB VERB
 ante suam VERB NOUN ADJ NOUN
 me NOUN et NOUN NOUN -que VERB VERB cum uos VERB VERB NOUN NOUN
-quod uos VERB frustra VERB illis VERB ne VERB VERB michi
+quod uos VERB frustra VERB illis VERB ne VERB VERB mihi
 tunc sua NOUN VERB et utroque NOUN ADJ VERB hoc VERB AUX non ne ADJ VERB
 VERB ADJ NOUN VERB
 uobis VERB hec NOUN NOUN VERB meis
@@ -2912,11 +2912,11 @@ cur ergo VERB NOUN VERB sic VERB ADV
 non VERB NOUN tu meus NOUN AUX
 turpiter NOUN NOUN VERB VERB
 NOUN te VERB VERB VERB parum
-ante michi VERB et VERB VERB NOUN -que NOUN NOUN VERB michi
+ante mihi VERB et VERB VERB NOUN -que NOUN NOUN VERB mihi
 ille VERB NOUN VERB VERB me VERB sero
 NOUN VERB VERB NOUN
 VERB -que VERB VERB VERB VERB NOUN NOUN
-nil -que VERB VERB VERB cur VERB VERB NOUN michi
+nil -que VERB VERB VERB cur VERB VERB NOUN mihi
 NOUN ADJ AUX VERB
 illa ADV VERB VERB post NOUN ADJ ante NOUN VERB ADJ VERB ad quorum NOUN PROPN ADV VERB VERB NOUN VERB NOUN
 NOUN idem VERB VERB VERB VERB NOUN VERB NOUN se -que VERB et NOUN VERB NOUN VERB atque NOUN
@@ -2951,7 +2951,7 @@ VERB quis VERB ADJ me NOUN ADJ meumat tu NOUN VERB NOUN
 quasi VERB quid NOUN NOUN hic NOUN VERB boniilla NOUN VERB PROPN ADV VERB ADJ que de te NOUN VERB agissi tibi qualis VERB NOUN NOUN VERB ADJ penes NOUN VERB ADV egomet VERB tuos VERB NOUN NOUN si ADV ADJ AUX VERB NOUN VERB his NOUN illam et NOUN NOUN VERB suum
 sic sua PROPN VERB NOUN VERB sed NOUN VERB ADJ NOUN ADJ
 VERB ADJ NOUN NOUN -que VERB PROPN NOUN ADJ ADJ VERB
-ADJ NOUN ADJ NOUN VERB VERB quid VERB tu michi NOUN VERB
+ADJ NOUN ADJ NOUN VERB VERB quid VERB tu mihi NOUN VERB
 mox uno ADJ -que ADV NUM inde VERB VERB ut VERB non tamen ille VERB
 cur VERB NOUN VERB VERB NOUN
 VERB NOUN NOUN id iste VERB
@@ -2988,7 +2988,7 @@ NOUN NOUN VERB VERB ADJ VERB NOUN -que VERB ADJ NOUN VERB VERB VERB
 hoc VERB VERB si VERB AUX
 illius VERB NOUN NOUN VERB VERB NOUN te VERB NOUN VERB
 NOUN ADJ adhuc VERB quid AUX VERB VERB NOUN NOUN suis non AUX hoc aliud cur tanto NOUN VERB
-heu VERB PROPN VERB nemo michi
+heu VERB PROPN VERB nemo mihi
 VERB iam VERB VERB NOUN nobis VERB VERB VERB quicquid id AUX
 si saltem VERB AUX VERB VERB VERB PROPN
 si secus AUX en VERB VERB
@@ -3005,7 +3005,7 @@ VERB semel ipse VERB
 VERB in NOUN VERB AUX NOUN ADJ VERB
 VERB qui NOUN AUX VERB VERB eum
 VERB in NOUN ADV ille VERB sic -que VERB NOUN NOUN ADJ VERB
-VERB michi hic NOUN AUX quod cras VERB in NOUN NOUN sed NOUN AUX VERB foris
+VERB mihi hic NOUN AUX quod cras VERB in NOUN NOUN sed NOUN AUX VERB foris
 ADJ NOUN nimis ADJ NOUN AUX
 alter in NOUN VERB AUX
 ADJ ergo NOUN VERB VERB NOUN
@@ -3028,12 +3028,12 @@ hoc ADJ NOUN VERB idem -que NOUN
 multa VERB NOUN plus NUM ipse NOUN
 VERB NOUN quod NOUN VERB ipsum
 quid VERB ADJ me sua NOUN VERB
-NOUN AUX mei non ipsum VERB et cur quos VERB NOUN VERB ille michi
-ADJ nichil AUX quam quod sibi VERB et in me VERB NOUN ADJ NOUN suo
+NOUN AUX mei non ipsum VERB et cur quos VERB NOUN VERB ille mihi
+ADJ nihil AUX quam quod sibi VERB et in me VERB NOUN ADJ NOUN suo
 nemo sue NOUN VERB VERB NOUN
 ADJ ADJ NOUN AUX
 NOUN noster ADJ ADJ -que ut NOUN ADJ NOUN sic NOUN NOUN VERB
-at michi non VERB NOUN ADJ AUX ergo VERB VERB VERB VERB ADJ
+at mihi non VERB NOUN ADJ AUX ergo VERB VERB VERB VERB ADJ
 NOUN NOUN -que simul NOUN VERB si qui plura VERB ADJ AUX VERB
 me NOUN VERB VERB ADV VERB non VERB me ADJ quid VERB VERB
 VERB nimium postquam VERB VERB VERB me si quid VERB AUX super
@@ -3063,18 +3063,18 @@ ergo NOUN VERB NOUN NOUN ADJ NOUN uobis VERB meum
 NOUN ex nostri NOUN plerique VERB NOUN quorum AUX NOUN VERB palam qui quanta VERB NOUN NOUN NOUN -que quam VERB ADJ NOUN VERB que NOUN que NOUN VERB que NOUN ADV omnia VERB VERB sibi NOUN NOUN NOUN NOUN NOUN NOUN -que et quibus NOUN VERB NOUN -que NOUN -que NOUN
 NOUN VERB de NOUN hec NOUN ADV VERB et ADV ceu VERB VERB
 omnia non VERB ADJ VERB NOUN VERB VERB plura VERB VERB
-VERB idcirco NOUN NOUN ADJ ADJ NOUN quorum AUX VERB NOUN nichil qui primum VERB tunc VERB denique VERB uere his NOUN NOUN tota VERB
+VERB idcirco NOUN NOUN ADJ ADJ NOUN quorum AUX VERB NOUN nihil qui primum VERB tunc VERB denique VERB uere his NOUN NOUN tota VERB
 NOUN VERB VERB ego NOUN hisdem VERB NOUN VERB VERB VERB
 ADJ -que NOUN una NOUN VERB VERB VERB omnia NOUN NOUN
 ADV ADV -que VERB VERB NOUN NOUN quotiens ADJ VERB eum
 propterea VERB NOUN VERB ADJ NOUN subito VERB VERB ut si NOUN ob hoc AUX quis forte VERB quod ADV VERB VERB ADJ ego
-si quid adhuc VERB VERB NOUN ADV -que NOUN atque michi VERB VERB
+si quid adhuc VERB VERB NOUN ADV -que NOUN atque mihi VERB VERB
 quod si NOUN VERB ADJ VERB NOUN hoc ADJ mee AUX NOUN NOUN
 amodo nil VERB nisi AUX quod VERB VERB quamquam non VERB VERB ADJ
 ADJ VERB quam ADJ NOUN VERB si VERB ADJ NOUN ADJ NOUN
 et VERB semel ADJ NOUN ADJ VERB uos NOUN ADJ AUX VERB
 at ADV VERB NOUN VERB VERB
-saltem ubi nulla VERB AUX NOUN VERB et michi VERB NOUN ADJ VERB quamuis NOUN VERB illa meo
+saltem ubi nulla VERB AUX NOUN VERB et mihi VERB NOUN ADJ VERB quamuis NOUN VERB illa meo
 nam cum VERB VERB VERB -que VERB ADJ VERB NOUN NOUN NOUN tunc quod AUX certe NOUN NOUN -que VERB NOUN NOUN ADJ AUX
 ADJ NOUN VERB NOUN NOUN NOUN quidam ADJ ad hec NOUN VERB VERB NOUN VERB foras
 VERB ADV VERB NOUN quam VERB
@@ -3098,7 +3098,7 @@ nulla umquam melius NOUN absque NOUN VERB
 nunc NOUN VERB VERB NOUN bene AUX
 ADJ VERB NOUN VERB ut VERB sui -que NOUN NOUN ter -que quater -que VERB
 VERB hic NOUN ADJ NOUN NOUN ADJ et mea ADV NOUN VERB VERB
-VERB michi ADJ VERB NOUN
+VERB mihi ADJ VERB NOUN
 nec NOUN NOUN ADJ VERB NOUN NOUN cunctis ADV ille VERB
 VERB decies NOUN NOUN ADJ et VERB totiens ADJ -que VERB
 tunc ADJ VERB ADJ NOUN NOUN ADJ NOUN VERB ista sue ADJ ut VERB nisi VERB AUX NOUN ut super ADJ VERB VERB
@@ -3140,7 +3140,7 @@ ne tibi VERB NOUN ne qualibet NOUN VERB VERB AUX ADJ ipse tui
 qui minus VERB VERB NOUN quam VERB VERB talibus hic ADJ VERB AUX NOUN
 hanc igitur NOUN quia me VERB VERB NOUN
 adhuc VERB ADJ VERB VERB
-si michi post NOUN VERB nulla ADV VERB te ADJ NOUN VERB NOUN
+si mihi post NOUN VERB nulla ADV VERB te ADJ NOUN VERB NOUN
 NOUN PROPN VERB
 si tibi VERB NOUN ADJ et NOUN quid nisi NOUN VERB me -que VERB VERB
 te potius ADJ ut VERB VERB VERB VERB NOUN quam VERB VERB
@@ -3158,7 +3158,7 @@ tunc quasi VERB NOUN PROPN quid hoc AUX
 non ne VERB NOUN AUX
 quis tibi VERB ADJ NOUN NOUN
 atque tibi AUX ADV VERB NOUN nimis
-VERB ex multis VERB o michi ADJ NOUN
+VERB ex multis VERB o mihi ADJ NOUN
 me ueluti VERB VERB atque VERB
 me nisi VERB non te mea NOUN VERB NOUN sed hec ADJ VERB NOUN
 non hec NOUN et NOUN VERB NOUN
@@ -3168,21 +3168,21 @@ ADJ ADJ nostri VERB utrique NOUN
 VERB nostri ADJ NOUN NOUN NOUN VERB NOUN NOUN ego
 interea nostre NOUN ADJ NOUN VERB quam subito VERB NOUN VERB VERB
 non AUX hoc ADJ VERB ADJ et omnis NOUN cum ADJ NOUN VERB eam
-quippe tuam VERB michi te hic VERB VERB NOUN VERB atque illud VERB diu sed VERB cur ADJ AUX NOUN VERB
+quippe tuam VERB mihi te hic VERB VERB NOUN VERB atque illud VERB diu sed VERB cur ADJ AUX NOUN VERB
 nunc NOUN VERB NOUN tuo
 VERB NOUN
 VERB cum nostra VERB utram VERB
 NOUN NOUN NOUN VERB
-et de NOUN tua nam tunc quoque ADJ et ADJ ADV VERB VERB NOUN ADJ michi
-non hoc VERB michi tu NOUN VERB VERB ADV ut VERB uix modo NOUN VERB
+et de NOUN tua nam tunc quoque ADJ et ADJ ADV VERB VERB NOUN ADJ mihi
+non hoc VERB mihi tu NOUN VERB VERB ADV ut VERB uix modo NOUN VERB
 non NOUN aut NOUN VERB tibi VERB ADV NOUN NOUN VERB VERB NOUN
 VERB NOUN tibi NOUN sine VERB ADV NOUN NOUN NOUN tibi VERB VERB
-non VERB quia te VERB VERB VERB quin ADJ VERB ADJ NOUN VERB quem prius VERB NOUN VERB tantis NOUN NOUN NOUN VERB ipse mee quasque michi NOUN NOUN VERB VERB et illi ADJ VERB NOUN NOUN
+non VERB quia te VERB VERB VERB quin ADJ VERB ADJ NOUN VERB quem prius VERB NOUN VERB tantis NOUN NOUN NOUN VERB ipse mee quasque mihi NOUN NOUN VERB VERB et illi ADJ VERB NOUN NOUN
 PROPN ADJ NOUN VERB VERB et NOUN
 non AUX a NOUN ista VERB diu
 NOUN VERB non AUX VERB NOUN VERB
 AUX VERB tanto ADJ NOUN parum
-sed sine NOUN nichil AUX ADJ VERB
+sed sine NOUN nihil AUX ADJ VERB
 hic tibi ADJ AUX undique NOUN NOUN nec NOUN te NOUN VERB VERB VERB ut VERB illic ADJ ab NOUN NOUN
 VERB NOUN tibi AUX nimium -que NOUN VERB
 te NOUN NOUN nulla AUX VERB
@@ -3190,7 +3190,7 @@ VERB VERB NOUN VERB NOUN in NOUN ut VERB te NOUN ADJ VERB
 VERB si VERB ADV VERB NOUN
 ADJ NOUN me VERB AUX palam
 in talis VERB meis NOUN VERB
-cui NOUN hoc nichil AUX ne nisi ADJ VERB
+cui NOUN hoc nihil AUX ne nisi ADJ VERB
 nam quotiens ADV VERB NOUN ADJ VERB NOUN NOUN ADJ VERB
 nulla tibi VERB NOUN VERB si qua AUX
 PROPN NOUN VERB VERB -que VERB
@@ -3204,10 +3204,10 @@ quod ADJ AUX VERB et AUX NOUN ADJ
 hunc NOUN VERB VERB AUX tui
 VERB AUX NOUN VERB ADJ NOUN VERB AUX
 VERB VERB ADJ
-VERB NOUN michi satis AUX ADV VERB
+VERB NOUN mihi satis AUX ADV VERB
 quolibet VERB NOUN tibi ADJ AUX
 ille VERB non VERB VERB NOUN VERB et si VERB NOUN NOUN et NOUN tuo
-quoque michi NOUN quam NOUN ADJ VERB NOUN NOUN tam super NOUN VERB
+quoque mihi NOUN quam NOUN ADJ VERB NOUN NOUN tam super NOUN VERB
 postquam nil ADJ NOUN VERB illis NOUN alia VERB NOUN suos VERB ADJ AUX hec NOUN VERB VERB quater ADV -que PROPN
 inter ADJ NOUN NOUN -que gehen ne VERB tuum bis NOUN NUM NOUN
 quod NOUN nostris omnes VERB NOUN VERB NOUN
@@ -3219,7 +3219,7 @@ qui ADJ AUX VERB ADJ ADV VERB
 qui sibi VERB VERB VERB et ipse NOUN
 uel VERB NOUN uel VERB VERB omnes
 quisque sui dum quem VERB AUX ADJ
-VERB VERB VERB nec me VERB ADJ AUX nec VERB VERB NOUN michi
+VERB VERB VERB nec me VERB ADJ AUX nec VERB VERB NOUN mihi
 ADV huc VERB
 VERB NOUN -que ADJ
 in NOUN VERB NOUN -que VERB
@@ -3248,10 +3248,10 @@ VERB NOUN quia PROPN qui VERB NOUN cum PROPN VERB hoc NOUN VERB
 ADJ AUX me NOUN me NOUN VERB NOUN et NOUN NOUN mee
 PROPN VERB sic nullus NOUN VERB
 NOUN quis AUX NOUN
-AUX NOUN NOUN michi
+AUX NOUN NOUN mihi
 plus me NOUN VERB sed NOUN NOUN ADJ sed VERB NOUN NOUN -que AUX ADJ
 id -que NOUN VERB etenim AUX ADJ NOUN ADJ NOUN ADJ nostra quidem
-quam NOUN NOUN quam NOUN NOUN NOUN tam NOUN NOUN tam michi NOUN VERB
+quam NOUN NOUN quam NOUN NOUN NOUN tam NOUN NOUN tam mihi NOUN VERB
 protinus ergo simul VERB NOUN NOUN PROPN NOUN VERB tuo
 talibus VERB ADJ VERB NOUN NOUN VERB AUX ad sua quisque VERB
 VERB PROPN ubi PROPN VERB NOUN parum VERB et NOUN VERB AUX sed nimium NOUN ADJ NOUN VERB VERB VERB NOUN VERB VERB quorum VERB longe NOUN tamquam ADJ NOUN NOUN ADJ VERB
@@ -3293,37 +3293,37 @@ quem totiens VERB VERB
 VERB ADJ
 quis nobis NOUN NOUN VERB in hoc
 NOUN VERB VERB qui VERB VERB NOUN
-non michi VERB NOUN NOUN AUX VERB
+non mihi VERB NOUN NOUN AUX VERB
 ADV VERB numquid ADJ VERB NOUN
 hinc procul NOUN NOUN huius VERB
-hec NOUN michi NOUN VERB VERB
+hec NOUN mihi NOUN VERB VERB
 nil ego NOUN tibi preter ADJ VERB
 quilibet ADJ qui nobis VERB VERB NOUN VERB nostras VERB NOUN
 et quid NOUN VERB
 potuitue ADJ NOUN ADJ -que tuos ullus VERB NOUN
-VERB NOUN VERB si non michi ADJ VERB AUX tuus NOUN quam AUX ante meo
+VERB NOUN VERB si non mihi ADJ VERB AUX tuus NOUN quam AUX ante meo
 nec ADJ nec ADJ AUX
 si ADV illud quicquid AUX VERB VERB bene VERB NOUN
 NOUN nunc VERB quot AUX tibi VERB
 ego istos NUM quater NOUN te NOUN VERB
 ergo NOUN omnes VERB VERB NOUN
 VERB ADJ quam NOUN AUX tibi
-nil michi siue meis VERB ADJ NOUN
-uix michi tam VERB VERB VERB NOUN
+nil mihi siue meis VERB ADJ NOUN
+uix mihi tam VERB VERB VERB NOUN
 si me ADV totum VERB VERB
 sed NOUN NOUN VERB VERB hic NOUN VERB NOUN VERB NOUN -que
 si VERB NOUN NOUN VERB tua AUX
 AUX NOUN NOUN ADJ
 NOUN nostri NOUN VERB nulla tibi VERB
-VERB mea NOUN VERB ad NOUN VERB retro -que VERB NOUN atque bene VERB in NOUN VERB NOUN inde michi tota VERB NOUN NOUN quam ADV VERB VERB NOUN VERB
+VERB mea NOUN VERB ad NOUN VERB retro -que VERB NOUN atque bene VERB in NOUN VERB NOUN inde mihi tota VERB NOUN NOUN quam ADV VERB VERB NOUN VERB
 NOUN ubique VERB quam AUX PROPN VERB
 nunc VERB ADV VERB VERB bene
 ADJ ADJ VERB in tua NOUN NOUN
 NOUN talem NOUN tibi nulla VERB
 nil VERB nisi in NOUN VERB plures
 VERB si VERB VERB hisce semel
-si bene VERB NOUN michi funditus ADV
-hoc tibi NOUN VERB atque michi
+si bene VERB NOUN mihi funditus ADV
+hoc tibi NOUN VERB atque mihi
 tunc non VERB ubi VERB VERB NOUN -que NOUN quosque VERB tui
 VERB ille NOUN NOUN NOUN -que ADV VERB NOUN ADV NOUN VERB
 NOUN si VERB NOUN in NOUN VERB VERB ADJ NOUN NOUN tenus
@@ -3342,7 +3342,7 @@ cibusne VERB VERB NOUN sisne ADJ
 hoc VERB ante NOUN NOUN ADJ
 VERB NOUN quid VERB tunc quoque VERB VERB
 VERB ne non toto VERB in NOUN ADV NOUN me VERB VERB
-siue ADJ siue ADJ VERB AUX NOUN VERB michi VERB VERB satis atque super
+siue ADJ siue ADJ VERB AUX NOUN VERB mihi VERB VERB satis atque super
 PROPN ADJ NOUN ADJ AUX PROPN VERB si NOUN AUX ADJ
 VERB NOUN PROPN tuo VERB ADV
 namque VERB NOUN NOUN VERB VERB
@@ -3403,7 +3403,7 @@ si bene VERB AUX ADJ VERB tibi
 NOUN hec ADJ NUM cuia AUX
 tua ADJ mi NOUN
 et cuius ADJ AUX
-NOUN ego VERB michi hanc
+NOUN ego VERB mihi hanc
 NOUN adhuc sed uix VERB NOUN VERB
 PROPN NOUN
 NOUN tunc tota VERB nec VERB NOUN VERB ille diu a NOUN NOUN ADV VERB illi
@@ -3418,7 +3418,7 @@ quod si me VERB ADJ tibi VERB NOUN hunc VERB NOUN VERB tuum
 non VERB coram NOUN absque NOUN NOUN ADJ VERB NOUN suas
 hoc NOUN NOUN nos NUM ADV VERB NOUN -que licet NOUN tu quasi noster VERB
 hic sua si VERB tibi NOUN VERB ipsemet ADJ VERB AUX
-me ADJ hic PROPN tuus VERB VERB qualiter VERB non VERB michi
+me ADJ hic PROPN tuus VERB VERB qualiter VERB non VERB mihi
 sero fere VERB VERB tamen
 ipse NOUN si quid VERB NOUN VERB in NOUN sue
 me cui VERB VERB AUX ADJ VERB ADV
@@ -3439,7 +3439,7 @@ VERB VERB potius quam VERB ADV -que VERB ADJ et ADV NOUN
 VERB ADJ NOUN AUX nil VERB sane preter quod merito VERB AUX meum
 VERB VERB NOUN meus atque VERB VERB NOUN VERB ergo VERB
 quicquid VERB VERB
-quoadusque VERB illi quod male VERB VERB nichil
+quoadusque VERB illi quod male VERB VERB nihil
 omne NOUN illi pariter NOUN -que VERB et tibi VERB NOUN
 VERB sicut NOUN
 tunc ADV ADJ VERB PROPN NOUN VERB sed non NOUN ADJ ADJ ex NOUN ADJ -que et pene sine NOUN NOUN ADJ aliis ADJ utrisque VERB
@@ -3471,7 +3471,7 @@ VERB NOUN o tibi NOUN tuus AUX
 VERB ut ADJ NOUN ADJ VERB tuis
 quisnam te VERB VERB taliter
 VERB
-per michi quod VERB et tibi NOUN ego
+per mihi quod VERB et tibi NOUN ego
 me VERB VERB adhuc non pauca quod ADV ADV ADV VERB NOUN iste meus
 et cum VERB cur non sibi VERB id ipsum
 propter PROPN non AUX VERB idem
@@ -3537,7 +3537,7 @@ VERB ADJ NOUN VERB
 non VERB NOUN PROPN VERB NOUN
 VERB ADJ ADJ NOUN
 ADJ ADJ et ADJ AUX ut NOUN ADJ ADJ ADJ NOUN NOUN VERB
-NOUN michi ADJ NOUN VERB VERB
+NOUN mihi ADJ NOUN VERB VERB
 VERB ille sue NOUN NOUN
 VERB ADJ ADJ NOUN VERB VERB
 ADJ me NOUN VERB VERB
@@ -3548,8 +3548,8 @@ ille VERB ADJ quod VERB AUX ADJ VERB VERB NOUN NOUN
 VERB te PROPN ADJ cui VERB AUX
 tu meus AUX NOUN tu meus NOUN item
 at VERB ADV -que tuis VERB VERB
-VERB tamen ueluti AUX michi ADJ adhuc
-NOUN ni VERB NOUN michi VERB ille PROPN et NOUN AUX hac michi VERB tenus
+VERB tamen ueluti AUX mihi ADJ adhuc
+NOUN ni VERB NOUN mihi VERB ille PROPN et NOUN AUX hac mihi VERB tenus
 NOUN NOUN mee VERB ADJ NOUN VERB tam VERB me tibi ADJ magis
 hac NOUN AUX NOUN ADJ VERB
 NOUN VERB NOUN
@@ -3557,14 +3557,14 @@ ad NOUN NOUN qualibet NOUN VERB
 protinus VERB NOUN VERB NOUN NOUN NOUN nec VERB ille VERB
 VERB NOUN NOUN ADJ VERB NOUN ADJ ter VERB NOUN VERB
 NOUN ADV hoc ADJ AUX
-si me VERB VERB iam michi VERB NOUN mea VERB NOUN
+si me VERB VERB iam mihi VERB NOUN mea VERB NOUN
 nunc tam VERB VERB quam ADJ VERB VERB -que denuo ne VERB
 nunc VERB VERB
 nil tibi me VERB NOUN PROPN VERB
 VERB VERB
 quod NOUN ADJ VERB VERB
 NOUN NOUN VERB item -que VERB VERB NOUN bis VERB ille VERB
-VERB VERB paucis VERB NOUN ADV VERB hic VERB VERB michi ADJ ob hoc VERB huc
+VERB VERB paucis VERB NOUN ADV VERB hic VERB VERB mihi ADJ ob hoc VERB huc
 NOUN ergo VERB si AUX NOUN NOUN -que VERB
 ADV NOUN NOUN NOUN -que VERB
 VERB NOUN VERB ADJ meo NOUN VERB quod tanto NOUN VERB et tu cuius eum VERB VERB VERB
@@ -3586,9 +3586,9 @@ NOUN PROPN quidem NOUN tibi ADJ et ipso ADJ atque NOUN ADJ illa AUX
 at tibi NOUN amborum VERB NOUN -que NOUN ADV quod tibi VERB VERB
 hec ubi ADJ NOUN VERB NOUN NOUN et NOUN VERB NOUN item
 PROPN item -que VERB VERB ADJ VERB
-hoc AUX NOUN NOUN michi VERB meam
+hoc AUX NOUN NOUN mihi VERB meam
 quis tibi VERB melius
-mea VERB secusne ac michi VERB VERB VERB
+mea VERB secusne ac mihi VERB VERB VERB
 NOUN ADJ aliquando VERB NOUN VERB multum
 ADV huc NOUN VERB pauca VERB
 VERB ille NOUN
@@ -3600,7 +3600,7 @@ NOUN ut NOUN non VERB VERB NOUN et NOUN ADJ VERB NOUN
 VERB
 VERB sed que VERB VERB VERB
 NOUN VERB
-NOUN ADJ VERB nec michi PROPN nisi ADJ VERB VERB
+NOUN ADJ VERB nec mihi PROPN nisi ADJ VERB VERB
 te quoque si ADJ AUX quod VERB VERB
 VERB enim quia quicquid VERB ADJ ultro si VERB VERB preciperesue VERB
 VERB si ADJ VERB per quemlibet illi VERB ADJ ADV AUX VERB
@@ -3623,11 +3623,11 @@ VERB bene PROPN quod non VERB VERB
 VERB NOUN VERB VERB eum
 non VERB NOUN
 si sic VERB VERB PROPN VERB VERB VERB
-protinus VERB quoscumque VERB illi VERB enim preter VERB VERB nichil
+protinus VERB quoscumque VERB illi VERB enim preter VERB VERB nihil
 denique quid ADV tibi VERB VERB
 tot NOUN pro te VERB usque NOUN
-VERB toto si NOUN michi ADJ AUX
-quis michi NOUN VERB
+VERB toto si NOUN mihi ADJ AUX
+quis mihi NOUN VERB
 ADJ VERB
 NOUN NOUN VERB ADV VERB
 VERB AUX ad NOUN
@@ -3674,7 +3674,7 @@ ut VERB ADJ VERB NOUN NUM ADJ VERB VERB quomodo NOUN ita AUX
 ADV NOUN et NOUN
 NOUN unius VERB id cuius in NOUN VERB
 NOUN at NOUN VERB parum AUX
-ille suos VERB NOUN sibi NOUN VERB NOUN et NOUN ne VERB VERB nunc NOUN nichil nisi solam VERB NOUN VERB michi ADJ NOUN AUX super
+ille suos VERB NOUN sibi NOUN VERB NOUN et NOUN ne VERB VERB nunc NOUN nihil nisi solam VERB NOUN VERB mihi ADJ NOUN AUX super
 ADJ ergo NOUN quid VERB VERB et VERB VERB NOUN NOUN ADJ mee VERB tu -que VERB NOUN
 iam -que VERB ad illam paulatim ueluti NOUN ADJ VERB
 VERB penitus VERB NOUN ibi
@@ -3690,15 +3690,15 @@ VERB mea NOUN PROPN nec ADV VERB NOUN tibi ADJ PROPN AUX
 VERB VERB donec VERB NOUN
 VERB VERB VERB NOUN NOUN
 non NOUN me NOUN sed NOUN VERB VERB
-AUX michi non PROPN sed NOUN NOUN NOUN
+AUX mihi non PROPN sed NOUN NOUN NOUN
 AUX NOUN quod VERB cum VERB ille VERB
 VERB si VERB semper mea NOUN NOUN quando sub VERB NOUN NOUN AUX
 nunc NOUN atque NOUN VERB NOUN VERB VERB nimium ADJ NOUN NOUN
 VERB NOUN VERB tam NOUN modo ADJ quam propter ADJ NOUN PROPN VERB
-ADJ NOUN NOUN hac michi ADJ VERB AUX cum VERB NOUN NOUN ADJ NOUN
+ADJ NOUN NOUN hac mihi ADJ VERB AUX cum VERB NOUN NOUN ADJ NOUN
 taliter VERB tua NOUN NOUN
 omnia VERB intus nulla -que NOUN foris
-tam meus ADJ VERB michi NOUN NOUN NOUN quoque ut ADJ ni NOUN VERB VERB
+tam meus ADJ VERB mihi NOUN NOUN NOUN quoque ut ADJ ni NOUN VERB VERB
 nec AUX NOUN NOUN VERB ADV etsi VERB NOUN ADJ eam
 VERB quod VERB non VERB NOUN ADJ an ADJ VERB si VERB NOUN tibi
 NOUN VERB VERB ne nostro VERB NOUN
@@ -3711,7 +3711,7 @@ si cui VERB NOUN sine NOUN VERB VERB NOUN VERB decenter ego
 hoc infra ADJ VERB NOUN
 VERB idem neu ADJ VERB VERB NOUN super VERB NUM ADJ adhuc
 ADV NOUN VERB NOUN VERB VERB sed VERB NOUN VERB sola ADJ
-huc VERB VERB -que michi VERB fortiter NOUN ut tua VERB NOUN NOUN VERB
+huc VERB VERB -que mihi VERB fortiter NOUN ut tua VERB NOUN NOUN VERB
 NOUN quorum ADJ ac ADJ NOUN VERB VERB NOUN VERB meos NOUN ADJ quibus ADJ VERB NOUN cum VERB NOUN VERB NOUN VERB
 NOUN VERB VERB tibi VERB NOUN
 uix VERB NOUN ADJ NOUN meos
@@ -3730,7 +3730,7 @@ donec VERB NOUN nostra mane
 nec si NOUN VERB VERB NOUN NOUN
 NOUN ter ADJ VERB VERB NOUN bis -que NOUN ADJ VERB NOUN NOUN VERB quis NOUN ADJ ADV VERB at ADJ in nostro iam NOUN VERB NOUN
 VERB ADJ ADJ nostra NOUN
-NOUN quandoque VERB ter NUM NUM NOUN is -que VERB nostri NOUN AUX NOUN PROPN michi NOUN VERB inde PROPN NOUN ADJ NOUN ADV VERB
+NOUN quandoque VERB ter NUM NUM NOUN is -que VERB nostri NOUN AUX NOUN PROPN mihi NOUN VERB inde PROPN NOUN ADJ NOUN ADV VERB
 ADJ uero NOUN NOUN meus ADJ NOUN quid ADJ VERB qualiter ille VERB
 ADJ quotiens VERB NOUN siue NOUN VERB ADJ ADJ NOUN hic ADJ NOUN VERB sub NOUN PROPN et NOUN PROPN VERB NOUN ADJ
 dum sic ADJ VERB NOUN NOUN VERB ADJ NOUN ADJ NOUN cetera NOUN NOUN VERB NOUN VERB NOUN ADJ VERB atque VERB
@@ -3755,7 +3755,7 @@ VERB ab NOUN parum
 VERB NOUN VERB ADV ADJ VERB NOUN
 VERB VERB ADV adhuc
 NOUN VERB fere AUX
-forsan ni VERB NOUN me VERB nichil ADJ NOUN VERB
+forsan ni VERB NOUN me VERB nihil ADJ NOUN VERB
 VERB tua NOUN satis VERB ADV VERB ADV NOUN ADJ nimis
 ADV tu VERB nostros VERB NOUN
 VERB NOUN adhuc NOUN nulla VERB
@@ -3770,7 +3770,7 @@ NOUN ADJ NOUN VERB VERB sed VERB ADJ ADJ NOUN VERB
 non ne NOUN AUX NOUN NOUN -que VERB
 NOUN VERB sola PROPN meam
 NOUN ergo NOUN si uobis VERB VERB NOUN meo primum NOUN VERB AUX
-si tibi VERB NOUN PROPN ADJ ADJ VERB ADV quam michi VERB VERB
+si tibi VERB NOUN PROPN ADJ ADJ VERB ADV quam mihi VERB VERB
 ne ADJ NOUN VERB VERB uel NOUN NOUN hec nostri NOUN et NOUN AUX
 nec VERB
 ubi ADJ VERB non VERB ADJ
@@ -3788,10 +3788,10 @@ sed NOUN multus AUX dum -que omnes VERB VERB iam ADJ ADJ VERB NOUN NOUN procul V
 ADJ VERB solos ADJ NOUN ADJ quidam NOUN ADJ VERB
 VERB VERB NOUN nec NOUN quamuis ADJ AUX ADJ NOUN VERB VERB
 NOUN VERB VERB PROPN NOUN ADJ NOUN VERB ista VERB quid VERB ADJ
-VERB nichil unde VERB
-VERB hunc NOUN VERB VERB michi
+VERB nihil unde VERB
+VERB hunc NOUN VERB VERB mihi
 NOUN ADJ sic uos VERB VERB
-NOUN hoc uestris non michi VERB VERB
+NOUN hoc uestris non mihi VERB VERB
 sic VERB ei qui sic NOUN VERB VERB et NOUN NOUN sicut ego
 VERB ut ADJ male VERB iste ADV NOUN ADJ uos VERB AUX NOUN
 VERB ADV NOUN VERB VERB VERB sane sicut ADJ NOUN
@@ -3834,25 +3834,25 @@ ergo tuam VERB NOUN nostri VERB NOUN quam quo VERB si VERB VERB VERB semel
 VERB nobis cum VERB ADJ an ultro
 nil nisi te raro nos penes AUX VERB
 talibus VERB ADJ VERB atque VERB ADJ ADJ PROPN NOUN
-VERB uos -que VERB michi VERB NOUN
+VERB uos -que VERB mihi VERB NOUN
 non hodie ADV noster NOUN VERB
-VERB quam michi VERB VERB NOUN iste VERB
+VERB quam mihi VERB VERB NOUN iste VERB
 hunc VERB et plures NOUN VERB adhuc
 NOUN ADV VERB AUX
 VERB ille ADV NOUN NOUN sed non sponte VERB ibi
 NOUN ADJ VERB VERB tue
 scilicet hoc saltem nostri VERB NOUN VERB
 et ADJ VERB illa NOUN ADJ -que VERB NOUN
-VERB NOUN quo NOUN VERB VERB et michi NOUN se AUX NOUN VERB
+VERB NOUN quo NOUN VERB VERB et mihi NOUN se AUX NOUN VERB
 NOUN ADJ AUX omnes VERB NOUN
 ADJ ADJ VERB VERB NOUN
 ADJ NOUN ADJ VERB NOUN
-ADJ VERB NOUN VERB michi
-NOUN PROPN VERB michi AUX
+ADJ VERB NOUN VERB mihi
+NOUN PROPN VERB mihi AUX
 ADJ NOUN unius NOUN VERB NOUN VERB ADV donec VERB VERB
 VERB VERB VERB VERB parum
 VERB ille VERB VERB NOUN VERB ADJ VERB aliis non bene VERB ADJ
-en VERB nec NOUN VERB michi ADJ AUX
+en VERB nec NOUN VERB mihi ADJ AUX
 NOUN ADJ NOUN AUX ista meis
 ADJ NOUN ADJ numquam VERB VERB AUX
 NOUN omnes ADJ VERB ADJ NOUN
@@ -3890,7 +3890,7 @@ hec VERB ille mee NOUN NOUN NOUN amplius AUX illi non VERB VERB
 VERB ADJ ADJ NOUN NOUN illius NOUN NOUN AUX VERB cuius ut NOUN NOUN NOUN sicut ADJ AUX NOUN NOUN NOUN NOUN NOUN NOUN NOUN VERB NOUN NOUN VERB ut NOUN ante NOUN NOUN post VERB ille NOUN
 sub quo NOUN VERB VERB PROPN et NOUN NOUN que -que quid huius VERB
 VERB quid VERB NOUN PROPN NOUN nulla umquam NOUN AUX NOUN VERB meo nemo tuo NOUN
-VERB NOUN utrimque AUX michi tu PROPN et tibi PROPN ego
+VERB NOUN utrimque AUX mihi tu PROPN et tibi PROPN ego
 ecce VERB satis AUX tibi sicut NOUN VERB in NOUN VERB meum
 VERB ergo meam ADJ ADJ -que NOUN
 NOUN NOUN omne VERB tui
@@ -3902,15 +3902,15 @@ ADJ NOUN non VERB unus NOUN hi post NOUN diu tu -que VERB VERB
 nec NOUN NOUN VERB NOUN tuis VERB enim iam ADJ VERB iam ADJ VERB NOUN iam ADJ ADJ NOUN VERB
 si VERB NOUN quam ADJ VERB illud ut VERB VERB si VERB ipsa VERB nam NOUN VERB quod VERB VERB NOUN omnis VERB NOUN ADJ VERB NOUN AUX
 hoc VERB NOUN
-si quonam VERB in NOUN quis michi NOUN meo ADJ NOUN VERB
+si quonam VERB in NOUN quis mihi NOUN meo ADJ NOUN VERB
 me NOUN me sepe NOUN me NOUN VERB
 hunc NOUN ne VERB NOUN VERB
 namque hic cuncta mei VERB NOUN NOUN
 quod NOUN quod ADV quod VERB NOUN VERB quodque magis ADJ AUX hoc VERB ADJ illi ut ADJ ADJ NOUN NOUN VERB
-ADJ hoc NOUN AUX quo ADV NOUN VERB nec michi te VERB ADJ NOUN quis AUX
+ADJ hoc NOUN AUX quo ADV NOUN VERB nec mihi te VERB ADJ NOUN quis AUX
 ergo ego VERB ADJ VERB NOUN
-quam michi VERB VERB VERB
-tu michi VERB ADJ VERB in NOUN ut mea sepe NOUN NOUN tibi ADJ tuum
+quam mihi VERB VERB VERB
+tu mihi VERB ADJ VERB in NOUN ut mea sepe NOUN NOUN tibi ADJ tuum
 utque ADJ VERB NOUN nos VERB in omnes
 non VERB tanta sola NOUN VERB
 VERB ergo simul ADJ VERB NOUN
@@ -3930,14 +3930,14 @@ VERB NOUN NOUN NOUN et ipsam ne quid NOUN VERB iste NOUN
 VERB NOUN NOUN tu -que NOUN NOUN VERB NOUN NOUN modo ADJ VERB
 taliter VERB ADJ PROPN
 ego autem ut NOUN VERB ADJ AUX VERB
-uix michi quam penitus VERB si VERB VERB
-ut michi VERB uix VERB VERB
+uix mihi quam penitus VERB si VERB VERB
+ut mihi VERB uix VERB VERB
 NOUN minus ADJ NOUN VERB VERB si AUX NOUN VERB in NUM NOUN
 NOUN NOUN NOUN sed NOUN ADJ NOUN omnes te VERB VERB PROPN NOUN VERB hic NOUN olim NOUN -que AUX quamquam VERB NOUN AUX ADJ
 qualibus NOUN NOUN ADJ VERB
 nil VERB NOUN NOUN NOUN -que male VERB namque NOUN AUX
 sed NOUN ADJ NOUN NOUN ADJ et ADJ NOUN VERB
-PROPN NOUN michi VERB licet meus iste AUX NOUN si semel VERB quod NOUN NOUN non me NOUN AUX VERB NOUN NOUN
+PROPN NOUN mihi VERB licet meus iste AUX NOUN si semel VERB quod NOUN NOUN non me NOUN AUX VERB NOUN NOUN
 hunc NOUN numquam VERB VERB NOUN ergo ADJ VERB NOUN postquam VERB cuius NOUN ADJ AUX
 numquid ADJ quod AUX NOUN NOUN VERB PROPN ADJ NOUN
 quo magis ADJ VERB ADJ magis ADJ VERB et ADJ ex ADJ VERB ad ADJ NOUN
@@ -3973,7 +3973,7 @@ VERB cur NOUN sed tibi VERB VERB
 an NOUN ADJ meo NOUN VERB ADV
 si super hoc VERB VERB VERB simul
 namque VERB PROPN NOUN NOUN unde VERB
-VERB michi PROPN VERB quid VERB mea NOUN NOUN
+VERB mihi PROPN VERB quid VERB mea NOUN NOUN
 VERB NOUN quid nisi ADJ meo
 nil ego uos VERB VERB ADJ AUX ni VERB NOUN uos VERB VERB
 sic quasi VERB PROPN VERB VERB omnia -que VERB ADV inde VERB
@@ -3999,7 +3999,7 @@ nil nisi non VERB NOUN VERB VERB
 VERB dum NOUN VERB ADJ NOUN
 non VERB NOUN sed NOUN in NOUN VERB
 NOUN NOUN ADJ VERB VERB
-NOUN in ADJ NOUN VERB VERB at michi NOUN eadem cras hodie -que VERB
+NOUN in ADJ NOUN VERB VERB at mihi NOUN eadem cras hodie -que VERB
 NOUN ADJ NOUN VERB VERB
 NOUN ADJ VERB qua NOUN VERB
 postquam VERB NOUN et tota PROPN NOUN NOUN ADJ VERB ADJ NOUN
