@@ -103,3 +103,65 @@ class TestNormalizeText:
         """Test that jamque normalizes to iamque (not jamaque)."""
         result = normalize_text("jamque")
         assert result == "iamque"
+
+
+class TestProtectedTokens:
+    """Tests for protect_tokens and restore_tokens."""
+
+    def test_protect_eol(self) -> None:
+        """Test that <EOL> is replaced with a placeholder."""
+        from latin_masking.types import protect_tokens
+
+        text = "Arma <EOL> cano"
+        result, mapping = protect_tokens(text)
+        assert "<EOL>" not in result
+        assert "<EOL>" in mapping.values()
+
+    def test_restore_eol(self) -> None:
+        """Test that <EOL> is restored from placeholder."""
+        from latin_masking.types import protect_tokens, restore_tokens
+
+        text = "Arma <EOL> cano"
+        protected, mapping = protect_tokens(text)
+        restored = restore_tokens(protected, mapping)
+        assert restored == text
+
+    def test_protect_multiple_eols(self) -> None:
+        """Test that multiple <EOL> tokens are all protected."""
+        from latin_masking.types import protect_tokens, restore_tokens
+
+        text = "Arma <EOL> cano <EOL> Troiae"
+        protected, mapping = protect_tokens(text)
+        # Both <EOL> tokens are replaced with the same placeholder
+        assert protected.count("__PROTECTED_0__") == 2
+        assert "<EOL>" not in protected
+        restored = restore_tokens(protected, mapping)
+        assert restored == text
+
+    def test_protect_custom_tokens(self) -> None:
+        """Test protecting custom tokens."""
+        from latin_masking.types import protect_tokens, restore_tokens
+
+        text = "Arma <CUSTOM> cano"
+        protected, mapping = protect_tokens(text, tokens={"<CUSTOM>"})
+        assert "<CUSTOM>" not in protected
+        restored = restore_tokens(protected, mapping)
+        assert restored == text
+
+    def test_protect_empty_text(self) -> None:
+        """Test protecting empty text."""
+        from latin_masking.types import protect_tokens, restore_tokens
+
+        text = ""
+        protected, mapping = protect_tokens(text)
+        assert protected == ""
+        assert mapping == {}
+
+    def test_protect_no_protected_tokens(self) -> None:
+        """Test text with no protected tokens."""
+        from latin_masking.types import protect_tokens, restore_tokens
+
+        text = "Arma virumque cano"
+        protected, mapping = protect_tokens(text)
+        assert protected == text
+        assert mapping == {}

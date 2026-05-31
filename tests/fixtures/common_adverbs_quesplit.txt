@@ -3,18 +3,18 @@ tum	18
 sic	16
 nunc	14
 hinc	10
-hic	9
 ubi	8
-eol	7
+hic	7
 simul	6
 primum	6
 unde	5
 olim	5
 interea	5
 late	4
+circum	4
+forte	4
 huc	4
 contra	3
-circum	3
 uix	3
 quippe	3
 praeterea	3
@@ -22,7 +22,6 @@ bis	3
 subito	3
 ter	3
 iamque	3
-forte	3
 intus	3
 tam	3
 quoque	2
@@ -30,6 +29,7 @@ longe	2
 etiam	2
 mene	2
 dehinc	2
+post	2
 saepe	2
 desuper	2
 prius	2
@@ -46,14 +46,13 @@ repente	2
 multum	1
 tantaene	1
 magis	1
-necdum	1
+insuper	1
 una	1
 extemplo	1
 terque	1
 ibidem	1
 grauiter	1
 tantane	1
-post	1
 citius	1
 forsan	1
 illic	1
@@ -63,7 +62,6 @@ quando	1
 longius	1
 inde	1
 quin	1
-mecumque	1
 quam	1
 clam	1
 diu	1
@@ -78,7 +76,6 @@ melius	1
 procul	1
 suppliciter	1
 uero	1
-coram	1
 propius	1
 adhuc	1
 saltem	1
@@ -87,6 +84,7 @@ adeo	1
 pariter	1
 utinam	1
 iamdudum	1
+coram	1
 ubique	1
 usquam	1
 semper	1
@@ -94,6 +92,7 @@ tune	1
 quare	1
 demum	1
 minus	1
+neque	1
 ergo	1
 quo	1
 quocirca	1

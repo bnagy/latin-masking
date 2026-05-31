@@ -130,3 +130,59 @@ class TestTwoPassMask:
         )
         result = two_pass_mask([df], common_adverbs=set())
         assert len(result) == 1
+
+
+class TestProtectedTokens:
+    """Tests for protected token handling in mask_sentence."""
+
+    def test_eol_preserved_in_mask_sentence(self) -> None:
+        """Test that <EOL> tokens are preserved as-is during masking."""
+        words = ["Arma", "<EOL>", "cano"]
+        pos_tags = ["NOUN", "X", "VERB"]
+        result = mask_sentence(words, pos_tags, common_adverbs=set())
+        assert "<EOL>" in result
+
+    def test_eol_not_lowercased(self) -> None:
+        """Test that <EOL> is not lowercased to <eol>."""
+        words = ["<EOL>"]
+        pos_tags = ["X"]
+        result = mask_sentence(words, pos_tags, common_adverbs=set())
+        assert result == ["<EOL>"]
+        assert "<eol>" not in result
+
+    def test_eol_preserved_in_mask_corpus(self) -> None:
+        """Test that <EOL> survives mask_corpus."""
+        df = pd.DataFrame(
+            {
+                "word": ["Arma", "<EOL>", "cano"],
+                "POS": ["NOUN", "X", "VERB"],
+            }
+        )
+        result = mask_corpus([df], common_adverbs=set())
+        assert "<EOL>" in result[0]
+
+    def test_eol_preserved_in_two_pass_mask(self) -> None:
+        """Test that <EOL> survives two_pass_mask."""
+        df = pd.DataFrame(
+            {
+                "word": ["Arma", "<EOL>", "cano"],
+                "POS": ["NOUN", "X", "VERB"],
+            }
+        )
+        result = two_pass_mask([df], common_adverbs=set())
+        assert "<EOL>" in result[0]
+
+    def test_custom_protected_tokens(self) -> None:
+        """Test that custom protected tokens can be added."""
+        from latin_masking.types import PROTECTED_TOKENS
+
+        original = PROTECTED_TOKENS.copy()
+        try:
+            PROTECTED_TOKENS.add("<CUSTOM>")
+            words = ["<CUSTOM>", "verbum"]
+            pos_tags = ["X", "NOUN"]
+            result = mask_sentence(words, pos_tags, common_adverbs=set())
+            assert "<CUSTOM>" in result
+        finally:
+            PROTECTED_TOKENS.clear()
+            PROTECTED_TOKENS.update(original)

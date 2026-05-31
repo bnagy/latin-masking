@@ -28,7 +28,7 @@ from latin_masking.clitics import load_que_blacklist, split_que_blacklist
 from latin_masking.client import process_file_with_cache
 from latin_masking.conllu import parse_conllu
 from latin_masking.mask import two_pass_mask
-from latin_masking.normalize import normalize_text
+from latin_masking.preprocessor import preprocess
 from latin_masking.sentences import split_sentences
 from latin_masking.types import MaskingConfig, Stage1Result, Stage2Result
 
@@ -37,7 +37,6 @@ logger = logging.getLogger(__name__)
 
 def run_pipeline_stage1(
     input_paths: list[Path],
-    output_dir: Path,
     *,
     config: MaskingConfig,
     preserve_eol: bool = True,
@@ -47,23 +46,24 @@ def run_pipeline_stage1(
     Per file:
     1. Read raw text
     2. If preserve_eol: join lines with <EOL> tokens
-    3. Apply normalize_text() (UV/IJ + ch/h)
-    4. Sentence-split → write {stem}_sentences.txt
-    5. UDPipe (raw=True, presegmented=True) → populates cache
-    6. Parse CoNLL-U, collect adverbs
+    3. Sentence-split (raw, no mangling yet)
+    4. Preprocess each sentence (normalize, macrons, punct) — protected tokens preserved
+    5. Write {stem}_sentences.txt to config.output_dir
+    6. UDPipe (raw=True, presegmented=True) → populates cache
+    7. Parse CoNLL-U, collect adverbs
 
     After all files:
-    7. Aggregate → normalize counts → generate list → save common_adverbs.txt
+    8. Aggregate → normalize counts → generate list → save common_adverbs.txt
 
     Args:
         input_paths: List of input file paths.
-        output_dir: Directory for output files.
-        config: Pipeline configuration.
+        config: Pipeline configuration (includes output_dir, cache_dir, model).
         preserve_eol: If True, join verse lines with <EOL> tokens.
 
     Returns:
         Stage1Result with adverb counts and sentence counts.
     """
+    output_dir = config.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
 
     all_adverbs: Counter[str] = Counter()
@@ -84,26 +84,26 @@ def run_pipeline_stage1(
         else:
             text = raw_text
 
-        # Normalize (UV/IJ + ch/h) — first processing step
-        text = normalize_text(text)
-
-        # Sentence-split
+        # Sentence-split (raw, no mangling yet)
         sentences = split_sentences(text)
+
+        # Apply all text mangling (normalize, macrons, punct) in one place.
+        # Protected tokens (<EOL>) are preserved throughout.
+        mangled_sentences = [preprocess(sent) for sent in sentences]
+
         sent_path = output_dir / f"{input_path.stem}_sentences.txt"
         with open(sent_path, "w", encoding="utf-8") as f:
-            for sent in sentences:
+            for sent in mangled_sentences:
                 f.write(sent + "\n")
-        sentences_per_file[input_path] = len(sentences)
+        sentences_per_file[input_path] = len(mangled_sentences)
+        print(f"  {input_path.name}: {len(mangled_sentences)} sentences")
 
-        # UDPipe (with caching)
+        # UDPipe (with caching) — text is already sentence-split, always presegmented
         response = process_file_with_cache(
             sent_path,
             model=config.model,
             cache_dir=config.cache_dir,
-            presegmented=config.presegmented,
-            strip_punct=config.strip_punct,
-            remove_macrons=config.remove_macrons,
-            normalize=False,  # already normalized
+            presegmented=True,
             raw=True,
         )
 
@@ -112,6 +112,7 @@ def run_pipeline_stage1(
             frames, _ = parse_conllu(response)
             advs = collect_adverbs(frames)
             all_adverbs.update(advs)
+            print(f"    {len(advs)} adverbs collected")
 
     # Save adverbs
     normalized = normalize_adverb_counts(all_adverbs)
@@ -127,7 +128,6 @@ def run_pipeline_stage1(
 
 def run_pipeline_stage2(
     input_paths: list[Path],
-    output_dir: Path,
     *,
     config: MaskingConfig,
     que_blacklist_path: Path | None = None,
@@ -143,28 +143,26 @@ def run_pipeline_stage2(
 
     Args:
         input_paths: List of input file paths (same as stage 1).
-        output_dir: Directory for output files.
-        config: Pipeline configuration.
+        config: Pipeline configuration (includes output_dir, cache_dir, model).
         que_blacklist_path: Path to -que blacklist file.
 
     Returns:
         Stage2Result with output file paths and statistics.
     """
+    output_dir = config.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Load blacklist
-    que_blacklist: set[str] = set()
+    # Load blacklist: use custom file if provided, otherwise None (triggers default)
+    que_blacklist: set[str] | None = None
     if que_blacklist_path and que_blacklist_path.exists():
         que_blacklist = load_que_blacklist(que_blacklist_path)
 
-    # Load common adverbs and add -que adverbs to effective blacklist
+    # Load common adverbs; -que adverbs are passed to split_que_blacklist
+    # which adds them to the effective blacklist automatically
     common_adverbs = load_adverb_list(
         config.common_adverbs_path, config.adverb_threshold
     )
-    effective_blacklist = set(que_blacklist)
-    for adv in common_adverbs:
-        if adv.endswith("que"):
-            effective_blacklist.add(adv.lower())
+    common_adverbs_que = {adv for adv in common_adverbs if adv.endswith("que")}
 
     output_files: list[Path] = []
     total_sentences = 0
@@ -179,21 +177,20 @@ def run_pipeline_stage2(
             text = f.read()
 
         # Apply -que splitting
-        qs_text, qs_count = split_que_blacklist(text, effective_blacklist)
+        qs_text, qs_count = split_que_blacklist(
+            text, que_blacklist, common_adverbs=common_adverbs_que
+        )
         qs_path = output_dir / f"{input_path.stem}_sentences.quesplit.txt"
         with open(qs_path, "w", encoding="utf-8") as f:
             f.write(qs_text)
-        logger.debug("  %s: %d -que splits", input_path.name, qs_count)
+        print(f"  {input_path.name}: {qs_count} -que splits")
 
-        # UDPipe (with caching)
+        # UDPipe (with caching) — text is already sentence-split, always presegmented
         response = process_file_with_cache(
             qs_path,
             model=config.model,
             cache_dir=config.cache_dir,
-            presegmented=config.presegmented,
-            strip_punct=config.strip_punct,
-            remove_macrons=config.remove_macrons,
-            normalize=False,  # already normalized in stage 1
+            presegmented=True,
             raw=True,
         )
 
@@ -209,6 +206,7 @@ def run_pipeline_stage2(
                 f.write("\n".join(masked))
             output_files.append(masked_path)
             total_sentences += len(masked)
+            print(f"    {len(masked)} masked sentences -> {masked_path.name}")
 
             # Check if this was a cache hit
             cache_path = get_cache_path(qs_path, config.cache_dir, config.model)

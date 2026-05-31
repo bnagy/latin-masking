@@ -6,24 +6,8 @@ from unittest.mock import MagicMock, patch, mock_open
 
 import pytest
 
-from latin_masking.client import list_models, process_text, _remove_macrons
+from latin_masking.client import list_models, process_text
 from latin_masking.types import UDPipeError, UDPipeInputError
-
-
-class TestRemoveMacrons:
-    """Tests for _remove_macrons function."""
-
-    def test_remove_macron(self) -> None:
-        """Test macron removal."""
-        text = "mārcus"
-        result = _remove_macrons(text)
-        assert "ā" not in result
-
-    def test_no_macrons(self) -> None:
-        """Test text without macrons unchanged."""
-        text = "marcus"
-        result = _remove_macrons(text)
-        assert result == text
 
 
 class TestProcessText:
@@ -76,23 +60,13 @@ class TestProcessTextEdgeCases:
     """Tests for process_text edge cases."""
 
     @patch("latin_masking.client._perform_request")
-    def test_strip_punctuation(self, mock_request: MagicMock) -> None:
-        """Test punctuation stripping."""
+    def test_process_text_sends_clean_text(self, mock_request: MagicMock) -> None:
+        """Test that process_text sends text to UDPipe as-is."""
         mock_request.return_value = {
             "model": "latin-ittb",
             "result": "# text = test\n1\ttest\ttest\tNOUN\t_\t_\t0\troot\t_\t_\n",
         }
-        result = process_text("test [word] <here>", raw=True)
-        assert result is not None
-
-    @patch("latin_masking.client._perform_request")
-    def test_remove_macrons_flag(self, mock_request: MagicMock) -> None:
-        """Test macron removal flag."""
-        mock_request.return_value = {
-            "model": "latin-ittb",
-            "result": "# text = test\n1\ttest\ttest\tNOUN\t_\t_\t0\troot\t_\t_\n",
-        }
-        result = process_text("mārcus", remove_macrons=True, raw=True)
+        result = process_text("test", raw=True)
         assert result is not None
 
     @patch("latin_masking.client._perform_request")
@@ -125,31 +99,6 @@ class TestProcessTextEdgeCases:
 
         with pytest.raises(UDPipeError):
             process_text("test", raw=True)
-
-
-class TestRemoveMacronsEdgeCases:
-    """Tests for _remove_macrons edge cases."""
-
-    def test_mixed_macron_no_macron(self) -> None:
-        """Test text with mixed macron and non-macron characters."""
-        text = "mārcus vīta"
-        result = _remove_macrons(text)
-        assert "ā" not in result
-        assert "ī" not in result
-        assert "v" in result
-
-    def test_empty_string(self) -> None:
-        """Test empty string."""
-        text = ""
-        result = _remove_macrons(text)
-        assert result == ""
-
-    def test_only_macrons(self) -> None:
-        """Test string with only macron characters."""
-        text = "āē"
-        result = _remove_macrons(text)
-        assert "ā" not in result
-        assert "ē" not in result
 
 
 class TestProcessTextRawFalse:
@@ -208,70 +157,6 @@ class TestProcessTextPresegmented:
         assert method == "process"
         assert "tokenizer" in params
         assert "presegmented" in params["tokenizer"]
-
-
-class TestProcessTextStripPunctuation:
-    """Tests for process_text punctuation stripping."""
-
-    @patch("latin_masking.client._perform_request")
-    def test_brackets_stripped(self, mock_request: MagicMock) -> None:
-        """Test that brackets are stripped from input."""
-        mock_request.return_value = {
-            "model": "latin-ittb",
-            "result": "# text = test\n1\ttest\ttest\tNOUN\t_\t_\t0\troot\t_\t_\n",
-        }
-        process_text("test [bracket]", raw=True)
-
-        # Check that the call was made with stripped text
-        call_args = mock_request.call_args
-        assert call_args is not None
-        params = call_args[0][1]
-        assert "[" not in params["data"]
-        assert "]" not in params["data"]
-
-    @patch("latin_masking.client._perform_request")
-    def test_angle_brackets_stripped(self, mock_request: MagicMock) -> None:
-        """Test that angle brackets are stripped from input."""
-        mock_request.return_value = {
-            "model": "latin-ittb",
-            "result": "# text = test\n1\ttest\ttest\tNOUN\t_\t_\t0\troot\t_\t_\n",
-        }
-        process_text("test <angle>", raw=True)
-
-        call_args = mock_request.call_args
-        assert call_args is not None
-        params = call_args[0][1]
-        assert "<" not in params["data"]
-        assert ">" not in params["data"]
-
-    @patch("latin_masking.client._perform_request")
-    def test_curly_braces_stripped(self, mock_request: MagicMock) -> None:
-        """Test that curly braces are stripped from input."""
-        mock_request.return_value = {
-            "model": "latin-ittb",
-            "result": "# text = test\n1\ttest\ttest\tNOUN\t_\t_\t0\troot\t_\t_\n",
-        }
-        process_text("test {curly}", raw=True)
-
-        call_args = mock_request.call_args
-        assert call_args is not None
-        params = call_args[0][1]
-        assert "{" not in params["data"]
-        assert "}" not in params["data"]
-
-    @patch("latin_masking.client._perform_request")
-    def test_dagger_stripped(self, mock_request: MagicMock) -> None:
-        """Test that dagger symbol is stripped from input."""
-        mock_request.return_value = {
-            "model": "latin-ittb",
-            "result": "# text = test\n1\ttest\ttest\tNOUN\t_\t_\t0\troot\t_\t_\n",
-        }
-        process_text("test †dagger", raw=True)
-
-        call_args = mock_request.call_args
-        assert call_args is not None
-        params = call_args[0][1]
-        assert "†" not in params["data"]
 
 
 class TestRetryLogic:

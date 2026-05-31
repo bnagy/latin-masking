@@ -9,14 +9,16 @@ import json
 import logging
 import ssl
 import time
-import unicodedata
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 
-from latin_masking.normalize import normalize_text
-from latin_masking.types import UDPipeAPIError, UDPipeError, UDPipeInputError
+from latin_masking.types import (
+    UDPipeAPIError,
+    UDPipeError,
+    UDPipeInputError,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -47,19 +49,6 @@ def _get_ssl_context(unsafe_certs_ok: bool = False) -> ssl.SSLContext:
 
 # Default SSL context (strict verification)
 SSL_CONTEXT = _get_ssl_context(unsafe_certs_ok=True)
-
-
-def _remove_macrons(text: str) -> str:
-    """Remove macrons from Latin text.
-
-    Args:
-        text: Text to process.
-
-    Returns:
-        Text without macrons.
-
-    """
-    return unicodedata.normalize("NFD", text).replace("\u0304", "")
 
 
 def _perform_request(
@@ -204,24 +193,22 @@ def process_text(
     tokenizer: str = "",
     input_type: str = "conllu",
     presegmented: bool = False,
-    strip_punct: bool = True,
-    remove_macrons: bool = True,
-    normalize: bool = True,
     raw: bool = True,
     service_url: str = DEFAULT_SERVICE_URL,
     unsafe_certs_ok: bool = True,
 ) -> str | tuple[list[pd.DataFrame], list[str]]:
     """Process text through UDPipe API.
 
+    Text should already be preprocessed (normalized, macrons removed,
+    punctuation stripped) before calling this function. Use
+    :func:`latin_masking.preprocessor.preprocess` for that.
+
     Args:
-        text: Text to process.
+        text: Preprocessed text to send to UDPipe.
         model: UDPipe model name.
         tokenizer: Tokenizer settings.
         input_type: Input type for UDPipe.
         presegmented: Whether text is already pre-segmented (one sentence per line).
-        strip_punct: Whether to strip punctuation characters.
-        remove_macrons: Whether to remove macrons from input.
-        normalize: Whether to apply UV/IJ + ch/h normalization.
         raw: Whether to return raw CoNLL-U response or parsed DataFrames.
         service_url: Base URL for the UDPipe service.
         unsafe_certs_ok: If True, accept self-signed certificates (default: True for UDPipe).
@@ -236,15 +223,6 @@ def process_text(
     """
     if not text or not text.strip():
         raise UDPipeInputError("Input text is empty")
-
-    if normalize:
-        text = normalize_text(text)
-
-    if strip_punct:
-        text = text.translate(str.maketrans("", "", r"[]<>{}†'\""))
-
-    if remove_macrons:
-        text = _remove_macrons(text)
 
     data: dict[str, Any] = {
         "input": input_type,
@@ -321,19 +299,18 @@ def process_file_with_cache(
     model: str,
     cache_dir: Path | None = None,
     force_refresh: bool = False,
-    normalize: bool = True,
     **process_kwargs,
 ) -> str | tuple[list[pd.DataFrame], list[str]]:
     """Process a file through UDPipe with automatic caching.
 
     Reads file content, derives cache path automatically, and handles caching.
+    Text should already be preprocessed before calling this function.
 
     Args:
         input_path: Path to the input file.
         model: UDPipe model name.
         cache_dir: Directory for cache files. Defaults to input_path (same directory).
         force_refresh: If True, bypass cache and re-process.
-        normalize: Whether to apply UV/IJ + ch/h normalization.
         **process_kwargs: Additional arguments passed to process_text.
 
     Returns:
@@ -370,7 +347,7 @@ def process_file_with_cache(
     with open(input_path, "r", encoding="utf-8") as f:
         text = f.read()
 
-    response = process_text(text, model=model, normalize=normalize, **process_kwargs)
+    response = process_text(text, model=model, **process_kwargs)
     if isinstance(response, str):
         save_cached_response(cache_path, response)
     return response

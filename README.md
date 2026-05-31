@@ -1,6 +1,6 @@
 # latin-masking
 
-A self-contained Python package for Latin text processing: plain text → sentence splitting → adverb generation → -que clitic splitting → UDPipe POS tagging → CoNLL-U parsing → POS masking.
+A self-contained Python package for Latin text processing: plain text → normalization → sentence splitting → UDPipe POS tagging → adverb collection → -que clitic splitting → POS masking.
 
 ## Installation
 
@@ -20,130 +20,109 @@ pip install -e ".[dev]"
 
 ### Command Line
 
-The CLI tool is `udpipe-mask`. It provides four subcommands:
+The CLI tool is `latin-mask`. It provides four subcommands:
 
 ```bash
-# Full pipeline: sentence split → adverb generation → -que split → POS tag → mask
-udpipe-mask process input.txt --output ./output --quesplit
+# Full two-stage pipeline (normalize → sentence-split → UDPipe → adverbs → quesplit → mask)
+latin-mask process input.txt --output ./output
+
+# Run only stage 1 (adverb collection) — review common_adverbs.txt before stage 2
+latin-mask process input.txt --output ./output --stage1-only
+
+# Generate an adverb frequency list from a corpus (stage 1 only)
+latin-mask generate-adverbs input1.txt input2.txt --output ./output
+
+# Apply -que splitting and masking (stage 2 only)
+latin-mask mask input.txt --output ./output
 
 # Sentence splitting only
-udpipe-mask split-sentences input.txt --output ./output
-
-# Generate an adverb frequency list from a corpus
-udpipe-mask generate-adverbs input1.txt input2.txt --output ./output --max 200
-
-# Apply POS masking to pre-tagged text
-udpipe-mask mask input.txt --adverbs adverbs.txt --output ./output
+latin-mask split-sentences input.txt --output ./output
 ```
 
-Use `--model` to specify a UDPipe model (default: `latin-evalatin24-240520`). Use `--regenerate` to bypass the cache.
+Use `--model` to specify a UDPipe model (default: `latin-evalatin24-240520`). Use `--regenerate` to bypass the cache. Use `--no-preserve-eol` to disable `<EOL>` token insertion between verse lines.
 
 ### Python API
 
-Below is a minimal walkthrough:
+The pipeline has two stages with a manual review point between them:
 
 ```python
 from pathlib import Path
-from collections import Counter
+from latin_masking import run_pipeline_stage1, run_pipeline_stage2
+from latin_masking.types import MaskingConfig
 
-from latin_masking import process_file_with_cache
-from latin_masking.sentences import split_sentences
-from latin_masking.conllu import parse_conllu
-from latin_masking.adverbs import (
-    collect_adverbs,
-    normalize_adverb_counts,
-    generate_adverb_list,
-    save_adverb_list,
-)
-from latin_masking.clitics import split_que_blacklist
-from latin_masking.mask import two_pass_mask
-
-INPUT_DIR = Path("./data")
+INPUT_FILES = [Path("poem1.txt"), Path("poem2.txt")]
+OUTPUT_DIR = Path("./output")
 MODEL = "latin-evalatin24-240520"
-ADVERB_THRESHOLD = 200
 
-# --- Step 1: Sentence splitting ---
-with open("input.txt", "r", encoding="utf-8") as f:
-    text = f.read()
-sentences = split_sentences(text)
+config = MaskingConfig(model=MODEL, cache_dir=OUTPUT_DIR / "udpipe_cache")
 
-sentences_file = INPUT_DIR / "input_sentences.txt"
-with open(sentences_file, "w", encoding="utf-8") as f:
-    for sent in sentences:
-        f.write(sent + "\n")
+# ── Stage 1: Normalize → sentence-split → UDPipe → collect adverbs ──
+result1 = run_pipeline_stage1(INPUT_FILES, OUTPUT_DIR, config=config)
+print(f"Collected {len(result1.adverb_counts)} unique adverbs")
+print(f"Saved to: {result1.common_adverbs_path}")
 
-# --- Step 2: Generate common adverbs ---
-cache_dir = INPUT_DIR / "udpipe_cache"
-cache_dir.mkdir(exist_ok=True)
+# 🛑 Review common_adverbs.txt and que_blacklist.txt before proceeding
 
-response = process_file_with_cache(
-    sentences_file,
-    MODEL,
-    cache_dir=cache_dir,
-    presegmented=True,
-    raw=True,
-    unsafe_certs_ok=True,
-)
-frames, _ = parse_conllu(response)
-adverbs = collect_adverbs(frames)
-
-# --- Step 3: Build and save the common adverbs list ---
-normalized = normalize_adverb_counts(Counter(adverbs))
-top_adverbs = generate_adverb_list(normalized, ADVERB_THRESHOLD)
-save_adverb_list(top_adverbs, Path("common_adverbs.txt"))
-
-# --- Step 4: -que splitting ---
-from latin_masking.adverbs import load_adverb_list
-
-common_adverbs = load_adverb_list(Path("common_adverbs.txt"), ADVERB_THRESHOLD)
-quesplit_text, n = split_que_blacklist(text, common_adverbs=common_adverbs)
-
-quesplit_file = INPUT_DIR / "input_sentences.quesplit.txt"
-with open(quesplit_file, "w", encoding="utf-8") as f:
-    f.write(quesplit_text)
-
-# --- Step 5: POS tagging and masking ---
-response = process_file_with_cache(
-    quesplit_file,
-    MODEL,
-    cache_dir=cache_dir,
-    presegmented=True,
-    raw=True,
-    unsafe_certs_ok=True,
-)
-frames, _ = parse_conllu(response)
-masked = two_pass_mask(frames, common_adverbs=common_adverbs)
-
-with open("output_masked.txt", "w", encoding="utf-8") as f:
-    f.write("\n".join(masked))
+# ── Stage 2: -que split → UDPipe → mask ──
+result2 = run_pipeline_stage2(INPUT_FILES, OUTPUT_DIR, config=config)
+print(f"Processed {result2.sentences_processed} sentences")
+print(f"Output files: {[f.name for f in result2.output_files]}")
 ```
 
-## Pipeline Stages
+### Low-Level API
 
-The pipeline runs in this order:
-
-1. **Sentence Splitting** — Uses spaCy `la_senter` with colon handling; falls back to NLTK Punkt for Latin.
-2. **Adverb Generation** — Processes sentences through UDPipe, collects adverbs by frequency, and builds a common-adverbs list. This list is needed in the next step.
-3. **-que Splitting** — Splits -que enclitics (e.g. *efficiuntque* → *efficiunt -que*) using the common-adverbs list as a blacklist, so that words like *itaque*, *neque*, *quoque* are left intact.
-4. **UDPipe Processing** — Sends the -que-split text to the [UDPipe REST API](https://lindat.mff.cuni.cz/services/udpipe/api) for POS tagging and lemmatization.
-5. **CoNLL-U Parsing** — Parses UDPipe output into structured DataFrames.
-6. **POS Masking** — Replaces tokens with their POS tags while preserving common adverbs.
-
-## Caching
-
-`process_file_with_cache` automatically caches UDPipe responses to disk as pickle files. The cache filename is derived from a **SHA-256 hash of the file content** and the model name, so the cache remains valid as long as the file content hasn't changed — regardless of modification time.
+For finer control, use the individual functions:
 
 ```python
+from latin_masking import normalize_text, process_file_with_cache
+from latin_masking.sentences import split_sentences
+from latin_masking.conllu import parse_conllu
+from latin_masking.mask import two_pass_mask
+from latin_masking.clitics import split_que_blacklist
+
+# Normalize text (UV/IJ + ch/h) — applied automatically by the pipeline
+normalized = normalize_text("jam in horto")  # → "iam in horto"
+
+# Sentence splitting
+sentences = split_sentences(normalized)
+
+# UDPipe processing with caching
 response = process_file_with_cache(
     Path("input.txt"),
     "latin-evalatin24-240520",
     cache_dir=Path("udpipe_cache"),
     presegmented=True,
     raw=True,
-    unsafe_certs_ok=True,
-    force_refresh=False,  # set True to bypass cache
 )
+
+# CoNLL-U parsing
+frames, texts = parse_conllu(response)
+
+# POS masking
+masked = two_pass_mask(frames, common_adverbs={"itaque", "namque", "saepe"})
 ```
+
+## Pipeline Stages
+
+The pipeline runs in two stages with a manual review point:
+
+### Stage 1 — UDPipe + Adverb Collection
+1. **Text Normalization** — UV/IJ and ch/h normalization (e.g. *jam* → *iam*, *virumque* → *uirumque*)
+2. **Sentence Splitting** — Uses spaCy `la_senter` with colon handling; falls back to NLTK Punkt for Latin
+3. **UDPipe Processing** — Sends sentences to the [UDPipe REST API](https://lindat.mff.cuni.cz/services/udpipe/api) for POS tagging
+4. **Adverb Collection** — Collects adverbs by frequency across all files, builds a common-adverbs list, writes `common_adverbs.txt`
+
+### 🛑 Manual Review
+Review `common_adverbs.txt` and `que_blacklist.txt` before proceeding to stage 2.
+
+### Stage 2 — Quesplit + Masking
+5. **-que Splitting** — Splits -que enclitics (e.g. *efficiuntque* → *efficiunt -que*) using the blacklist + common adverbs as protection
+6. **UDPipe Processing** — Sends the -que-split text to UDPipe for POS tagging
+7. **POS Masking** — Replaces tokens with their POS tags while preserving common adverbs
+
+## Caching
+
+`process_file_with_cache` automatically caches UDPipe responses to disk as pickle files. The cache filename is derived from a **SHA-256 hash of the file content** and the model name, so the cache remains valid as long as the file content hasn't changed — regardless of modification time.
 
 Cache files are stored in the specified `cache_dir` with names like `input_<hash>.pkl`. To invalidate, either delete the cache file or use `force_refresh=True`.
 

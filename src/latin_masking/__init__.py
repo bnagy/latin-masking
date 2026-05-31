@@ -16,8 +16,8 @@ from latin_masking.clitics import (
     split_que_blacklist,
 )
 from latin_masking.client import process_file_with_cache
-from latin_masking.normalize import normalize_text
 from latin_masking.pipeline import run_pipeline_stage1, run_pipeline_stage2
+from latin_masking.preprocessor import preprocess
 from latin_masking.types import (
     MaskingConfig,
     Stage1Result,
@@ -34,7 +34,7 @@ __all__ = [
     "load_que_blacklist",
     "split_que_blacklist",
     "process_file_with_cache",
-    "normalize_text",
+    "preprocess",
     "run_pipeline_stage1",
     "run_pipeline_stage2",
     "MaskingConfig",

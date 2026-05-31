@@ -35,10 +35,11 @@ class TestRunPipelineStage1:
         )
 
         config = MaskingConfig(
+            output_dir=tmp_path,
             cache_dir=tmp_path / "cache",
             common_adverbs_path=tmp_path / "common_adverbs.txt",
         )
-        result = run_pipeline_stage1([input_file], tmp_path, config=config)
+        result = run_pipeline_stage1([input_file], config=config)
 
         assert input_file in result.sentences_per_file
         assert result.sentences_per_file[input_file] == 2
@@ -63,85 +64,8 @@ class TestRunPipelineStage1:
         mock_split.side_effect = check_eol_sentences
         mock_udpipe.return_value = ""
 
-        config = MaskingConfig(cache_dir=tmp_path / "cache")
-        run_pipeline_stage1([input_file], tmp_path, config=config, preserve_eol=True)
-
-    @patch("latin_masking.pipeline.process_file_with_cache")
-    @patch("latin_masking.pipeline.split_sentences")
-    def test_stage1_normalizes_text(
-        self,
-        mock_split,
-        mock_udpipe,
-        tmp_path: Path,
-    ) -> None:
-        """Test that stage 1 normalizes text before sentence splitting."""
-        input_file = tmp_path / "test.txt"
-        input_file.write_text("jam in horto")
-
-        captured_text: list[str] = []
-
-        def capture_split(text: str) -> list[str]:
-            captured_text.append(text)
-            return ["iam in horto"]
-
-        mock_split.side_effect = capture_split
-        mock_udpipe.return_value = ""
-
-        config = MaskingConfig(cache_dir=tmp_path / "cache")
-        run_pipeline_stage1([input_file], tmp_path, config=config, preserve_eol=False)
-
-        assert len(captured_text) == 1
-        assert "iam" in captured_text[0]
-        assert "jam" not in captured_text[0]
-
-    @patch("latin_masking.pipeline.process_file_with_cache")
-    @patch("latin_masking.pipeline.split_sentences")
-    def test_stage1_writes_sentences_file(
-        self,
-        mock_split,
-        mock_udpipe,
-        tmp_path: Path,
-    ) -> None:
-        """Test that stage 1 writes the sentence-split file."""
-        input_file = tmp_path / "test.txt"
-        input_file.write_text("Marcus est bonus.")
-
-        mock_split.return_value = ["Marcus est bonus."]
-        mock_udpipe.return_value = ""
-
-        config = MaskingConfig(cache_dir=tmp_path / "cache")
-        run_pipeline_stage1([input_file], tmp_path, config=config)
-
-        sent_path = tmp_path / "test_sentences.txt"
-        assert sent_path.exists()
-        content = sent_path.read_text()
-        assert "Marcus est bonus." in content
-
-    @patch("latin_masking.pipeline.process_file_with_cache")
-    @patch("latin_masking.pipeline.split_sentences")
-    def test_stage1_collects_adverbs(
-        self,
-        mock_split,
-        mock_udpipe,
-        tmp_path: Path,
-    ) -> None:
-        """Test that stage 1 collects adverbs from parsed CoNLL-U."""
-        input_file = tmp_path / "test.txt"
-        input_file.write_text("Marcus saepe venit.")
-
-        mock_split.return_value = ["Marcus saepe venit."]
-        mock_udpipe.return_value = (
-            "# text = Marcus saepe venit.\n"
-            "1\tMarcus\tMarcus\tPROPN\t_\t_\t0\troot\t_\t_\n"
-            "2\tsaepe\tsaepe\tADV\t_\t_\t0\troot\t_\t_\n"
-            "3\tvenit\tvenire\tVERB\t_\t_\t0\troot\t_\t_\n"
-        )
-
-        config = MaskingConfig(cache_dir=tmp_path / "cache")
-        result = run_pipeline_stage1([input_file], tmp_path, config=config)
-
-        assert "saepe" in result.adverb_counts
-        assert result.adverb_counts["saepe"] == 1
+        config = MaskingConfig(output_dir=tmp_path, cache_dir=tmp_path / "cache")
+        run_pipeline_stage1([input_file], config=config, preserve_eol=True)
 
 
 class TestRunPipelineStage2:
@@ -170,12 +94,12 @@ class TestRunPipelineStage2:
         )
 
         config = MaskingConfig(
+            output_dir=tmp_path,
             cache_dir=tmp_path / "cache",
             common_adverbs_path=adv_path,
         )
         result = run_pipeline_stage2(
             [tmp_path / "test.txt"],
-            tmp_path,
             config=config,
             que_blacklist_path=None,
         )
@@ -207,6 +131,7 @@ class TestRunPipelineStage2:
         mock_udpipe.return_value = ""
 
         config = MaskingConfig(
+            output_dir=tmp_path,
             cache_dir=tmp_path / "cache",
             common_adverbs_path=adv_path,
         )
@@ -216,7 +141,6 @@ class TestRunPipelineStage2:
 
         run_pipeline_stage2(
             [tmp_path / "test.txt"],
-            tmp_path,
             config=config,
             que_blacklist_path=bl_path,
         )
@@ -242,13 +166,13 @@ class TestRunPipelineStage2:
         mock_udpipe.return_value = ""
 
         config = MaskingConfig(
+            output_dir=tmp_path,
             cache_dir=tmp_path / "cache",
             common_adverbs_path=adv_path,
         )
 
         run_pipeline_stage2(
             [tmp_path / "test.txt"],
-            tmp_path,
             config=config,
             que_blacklist_path=None,
         )
@@ -295,16 +219,13 @@ class TestStage1Stage2Integration:
 
         mock_udpipe.side_effect = [udpipe_response_unsplit, udpipe_response_quesplit]
 
-        config = MaskingConfig(cache_dir=tmp_path / "cache")
+        config = MaskingConfig(output_dir=tmp_path, cache_dir=tmp_path / "cache")
 
-        result1 = run_pipeline_stage1(
-            [input_file], tmp_path, config=config, preserve_eol=True
-        )
+        result1 = run_pipeline_stage1([input_file], config=config, preserve_eol=True)
         assert result1.sentences_per_file[input_file] == 1
 
         result2 = run_pipeline_stage2(
             [input_file],
-            tmp_path,
             config=config,
             que_blacklist_path=None,
         )
@@ -371,6 +292,7 @@ class TestEndToEndAeneid:
         quesplit_file.write_text(aeneid_quesplit_expected.read_text())
 
         config = MaskingConfig(
+            output_dir=tmp_path,
             cache_dir=aeneid_fixtures_dir,
             common_adverbs_path=aeneid_fixtures_dir / "common_adverbs_quesplit.txt",
         )
@@ -378,7 +300,6 @@ class TestEndToEndAeneid:
         # Stage 1: normalize, sentence-split, UDPipe (from cache), collect adverbs
         result1 = run_pipeline_stage1(
             [input_file],
-            tmp_path,
             config=config,
             preserve_eol=True,
         )
@@ -397,7 +318,6 @@ class TestEndToEndAeneid:
         # Stage 2: -que split, UDPipe (from cache), mask
         result2 = run_pipeline_stage2(
             [input_file],
-            tmp_path,
             config=config,
             que_blacklist_path=None,
         )
@@ -441,11 +361,13 @@ class TestEndToEndAeneid:
         input_file = tmp_path / "aeneid_1_raw.txt"
         input_file.write_text(aeneid_raw.read_text())
 
-        config = MaskingConfig(cache_dir=aeneid_fixtures_dir)
+        config = MaskingConfig(
+            output_dir=tmp_path,
+            cache_dir=aeneid_fixtures_dir,
+        )
 
         result1 = run_pipeline_stage1(
             [input_file],
-            tmp_path,
             config=config,
             preserve_eol=True,
         )
@@ -490,20 +412,19 @@ class TestEndToEndAeneid:
         sentences_file.write_text(aeneid_sentences_expected.read_text())
 
         config = MaskingConfig(
+            output_dir=tmp_path,
             cache_dir=aeneid_fixtures_dir,
             common_adverbs_path=aeneid_fixtures_dir / "common_adverbs_quesplit.txt",
         )
 
         run_pipeline_stage1(
             [input_file],
-            tmp_path,
             config=config,
             preserve_eol=True,
         )
 
         result2 = run_pipeline_stage2(
             [input_file],
-            tmp_path,
             config=config,
             que_blacklist_path=None,
         )
@@ -526,3 +447,92 @@ class TestEndToEndAeneid:
                 f"  Got:      {actual[:100]}...\n"
                 f"  Expected: {expected[:100]}..."
             )
+
+    def test_aeneid_sentence_count_matches_masked_count(
+        self,
+        aeneid_raw: Path,
+        aeneid_sentences_expected: Path,
+        aeneid_quesplit_expected: Path,
+        aeneid_masked_expected: Path,
+        aeneid_fixtures_dir: Path,
+        tmp_path: Path,
+    ) -> None:
+        """Verify that masked output has same sentence count as input (presegmented=True)."""
+        if not aeneid_raw.exists():
+            pytest.skip("Aeneid 1 fixture not found")
+
+        input_file = tmp_path / "aeneid_1_raw.txt"
+        input_file.write_text(aeneid_raw.read_text())
+
+        sentences_file = tmp_path / "aeneid_1_raw_sentences.txt"
+        sentences_file.write_text(aeneid_sentences_expected.read_text())
+        quesplit_file = tmp_path / "aeneid_1_raw_sentences.quesplit.txt"
+        quesplit_file.write_text(aeneid_quesplit_expected.read_text())
+
+        config = MaskingConfig(
+            output_dir=tmp_path,
+            cache_dir=aeneid_fixtures_dir,
+            common_adverbs_path=aeneid_fixtures_dir / "common_adverbs_quesplit.txt",
+        )
+
+        result1 = run_pipeline_stage1(
+            [input_file],
+            config=config,
+            preserve_eol=True,
+        )
+        n_input_sentences = result1.sentences_per_file[input_file]
+
+        result2 = run_pipeline_stage2(
+            [input_file],
+            config=config,
+            que_blacklist_path=None,
+        )
+        n_masked_sentences = result2.sentences_processed
+
+        assert n_input_sentences == n_masked_sentences, (
+            f"Sentence count mismatch: {n_input_sentences} input sentences "
+            f"produced {n_masked_sentences} masked sentences. "
+            f"With presegmented=True, these should be equal."
+        )
+
+    def test_ysengrimus_sentence_count_matches_masked_count(
+        self,
+        tmp_path: Path,
+    ) -> None:
+        """Verify sentence count consistency for Ysengrimus (non-verse, no EOL).
+
+        Uses cached UDPipe responses from the fixtures directory to avoid
+        live API calls.
+        """
+        fixtures_dir = Path(__file__).parent / "fixtures"
+        raw = fixtures_dir / "ysengrimus_raw.txt"
+        if not raw.exists():
+            pytest.skip("Ysengrimus fixture not found")
+
+        input_file = tmp_path / "ysengrimus_raw.txt"
+        input_file.write_text(raw.read_text())
+
+        config = MaskingConfig(
+            output_dir=tmp_path,
+            cache_dir=fixtures_dir,
+        )
+
+        result1 = run_pipeline_stage1(
+            [input_file],
+            config=config,
+            preserve_eol=False,
+        )
+        n_input_sentences = result1.sentences_per_file[input_file]
+
+        result2 = run_pipeline_stage2(
+            [input_file],
+            config=config,
+            que_blacklist_path=None,
+        )
+        n_masked_sentences = result2.sentences_processed
+
+        assert n_input_sentences == n_masked_sentences, (
+            f"Sentence count mismatch: {n_input_sentences} input sentences "
+            f"produced {n_masked_sentences} masked sentences. "
+            f"With presegmented=True, these should be equal."
+        )

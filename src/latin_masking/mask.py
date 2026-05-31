@@ -1,10 +1,15 @@
-"""POS masking for Latin text."""
+"""POS masking for Latin text.
+
+Text should already be preprocessed (normalized, macrons removed,
+punctuation stripped) before masking. Use
+:func:`latin_masking.preprocessor.preprocess` for that.
+"""
 
 from __future__ import annotations
 
 import pandas as pd
 
-from latin_masking.normalize import normalize_ch_h, normalize_uv_ij
+from latin_masking.types import PROTECTED_TOKENS
 
 
 def mask_sentence(
@@ -13,13 +18,15 @@ def mask_sentence(
     *,
     common_adverbs: set[str],
 ) -> list[str]:
-    """Apply masking rules to one sentence.
+    """Apply POS masking rules to one sentence.
 
     - NOUN/VERB/ADJ/PROPN/NUM/AUX → POS tag
-    - ADV → lowercased normalized word (if in common_adverbs) else "ADV"
-    - Everything else → lowercased normalized word
+    - ADV → lowercased word (if in common_adverbs) else "ADV"
+    - Protected tokens (e.g. <EOL>) → preserved as-is
+    - Everything else → lowercased word
 
-    UV/IJ normalization (v→u, j→i) is applied universally after lowercasing.
+    No normalization or macron removal is performed — text should
+    already be clean.
 
     Args:
         words: List of words in the sentence.
@@ -34,25 +41,22 @@ def mask_sentence(
     final = []
 
     for i, w in enumerate(words):
-        # Step 1: Strip leading ( and trailing ) from tokens
+        # Strip leading ( and trailing ) from tokens
         w_clean = w.lstrip("(").rstrip(")")
 
-        # Step 2: Apply h→ch normalization (michi→mihi, nichil→nihil)
-        w_norm = normalize_ch_h(w_clean)
-
-        # Step 3: Apply POS masking
-        if pos_tags[i] in pos_mask_tags:
+        # Preserve protected tokens (e.g. <EOL>) as-is
+        if w_clean in PROTECTED_TOKENS:
+            final.append(w_clean)
+        elif pos_tags[i] in pos_mask_tags:
             final.append(pos_tags[i])
         elif pos_tags[i] == "ADV":
-            # Normalize adverb for lookup (v→u, j→i) to match adverbs file format
-            w_norm_lower = normalize_uv_ij(w_norm.lower())
-            if w_norm_lower in common_adverbs:
-                final.append(w_norm_lower)
+            w_lower = w_clean.lower()
+            if w_lower in common_adverbs:
+                final.append(w_lower)
             else:
                 final.append("ADV")
         else:
-            # Lowercase and normalize all non-POS, non-ADV tokens
-            final.append(normalize_uv_ij(w_norm.lower()))
+            final.append(w_clean.lower())
 
     return final
 
