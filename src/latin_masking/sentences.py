@@ -173,7 +173,11 @@ def split_paren_content(content: str) -> list[str]:
     return sentences
 
 
-def split_sentences(text: str) -> list[str]:
+def split_sentences(
+    text: str,
+    *,
+    preprocess: bool = True,
+) -> list[str]:
     """Split text into sentences using la_senter model.
 
     Filters out sentences containing square brackets (editorial markers)
@@ -181,8 +185,17 @@ def split_sentences(text: str) -> list[str]:
 
     Handles parenthetical content by extracting and splitting it into sentences.
 
+    When ``preprocess`` is True (the default), each sentence is run through
+    :func:`latin_masking.preprocessor.preprocess` after splitting, which
+    applies UV/IJ normalization, ch/h normalization, macron removal, and
+    punctuation stripping.  This ensures downstream consumers (UDPipe,
+    masking) always receive clean text.  Since preprocessing is idempotent,
+    calling it again on already-preprocessed text is a no-op.
+
     Args:
         text: Text to split into sentences.
+        preprocess: Apply text preprocessing (normalize, macrons, punct)
+            to each sentence after splitting.  Defaults to True.
 
     Returns:
         List of sentence strings.
@@ -221,5 +234,12 @@ def split_sentences(text: str) -> list[str]:
             continue
 
         sentences.append(sent_text)
+
+    # Apply text preprocessing (normalize, macrons, punct) to each sentence.
+    # This is idempotent, so calling it on already-preprocessed text is safe.
+    if preprocess:
+        from latin_masking.preprocessor import preprocess as _preprocess
+
+        sentences = [_preprocess(s) for s in sentences]
 
     return sentences

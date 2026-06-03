@@ -142,3 +142,44 @@ class TestSplitSentences:
         """Test empty input returns empty list."""
         result = split_sentences("")
         assert result == []
+
+    def test_preprocess_true_normalizes(self) -> None:
+        """Test that preprocess=True (default) normalizes UV/IJ in output."""
+        text = "Servus vivit. Jam venit."
+        result = split_sentences(text, preprocess=True)
+        # After preprocessing, v→u and j→i
+        for sent in result:
+            assert "v" not in sent.split()  # no standalone v in words
+            assert "j" not in sent.split()  # no standalone j in words
+
+    def test_preprocess_false_preserves_raw(self) -> None:
+        """Test that preprocess=False returns raw (unnormalized) sentences."""
+        text = "Servus vivit. Jam venit."
+        result = split_sentences(text, preprocess=False)
+        # Without preprocessing, v and j should still be present
+        joined = " ".join(result)
+        assert "v" in joined  # 'v' from Servus/vivit/venit
+        assert "J" in joined  # 'J' from Jam (uppercase)
+
+    def test_preprocess_default_is_true(self) -> None:
+        """Test that preprocess defaults to True."""
+        text = "Servus vivit."
+        result_default = split_sentences(text)
+        result_explicit = split_sentences(text, preprocess=True)
+        assert result_default == result_explicit
+
+    def test_preprocess_strips_punctuation_chars(self) -> None:
+        """Test that preprocess=True strips editorial punctuation chars."""
+        text = "Marcus est †bonus†."
+        result = split_sentences(text, preprocess=True)
+        # † should be stripped by preprocess
+        for sent in result:
+            assert "†" not in sent
+
+    def test_preprocess_normalizes_michi(self) -> None:
+        """Test that preprocess=True normalizes michi→mihi."""
+        text = "Michi nichil dico."
+        result = split_sentences(text, preprocess=True)
+        joined = " ".join(result)
+        assert "Mihi" in joined  # capitalized form
+        assert "nihil" in joined
