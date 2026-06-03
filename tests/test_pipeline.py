@@ -28,10 +28,13 @@ class TestRunPipelineStage1:
 
         mock_split.return_value = ["Marcus est bonus.", "Puella legit."]
         mock_udpipe.return_value = (
-            "# text = Marcus est bonus.\n"
-            "1\tMarcus\tMarcus\tPROPN\t_\t_\t0\troot\t_\t_\n"
-            "2\test\tsum\tVERB\t_\t_\t0\troot\t_\t_\n"
-            "3\tbonus\tbonus\tADJ\t_\t_\t0\troot\t_\t_\n"
+            (
+                "# text = Marcus est bonus.\n"
+                "1\tMarcus\tMarcus\tPROPN\t_\t_\t0\troot\t_\t_\n"
+                "2\test\tsum\tVERB\t_\t_\t0\troot\t_\t_\n"
+                "3\tbonus\tbonus\tADJ\t_\t_\t0\troot\t_\t_\n"
+            ),
+            False,
         )
 
         config = MaskingConfig(
@@ -62,7 +65,7 @@ class TestRunPipelineStage1:
             return ["Arma virumque cano. <EOL> Troiae qui primus ab oris."]
 
         mock_split.side_effect = check_eol_sentences
-        mock_udpipe.return_value = ""
+        mock_udpipe.return_value = ("", False)
 
         config = MaskingConfig(output_dir=tmp_path, cache_dir=tmp_path / "cache")
         run_pipeline_stage1([input_file], config=config, preserve_eol=True)
@@ -85,12 +88,15 @@ class TestRunPipelineStage2:
         adv_path.write_text("saepe\t10\nbene\t5\n")
 
         mock_udpipe.return_value = (
-            "# text = Marcus etiam -que in horto.\n"
-            "1\tMarcus\tMarcus\tPROPN\t_\t_\t0\troot\t_\t_\n"
-            "2\tetiam\tetiam\tADV\t_\t_\t0\troot\t_\t_\n"
-            "3\t-que\t-que\tADV\t_\t_\t0\troot\t_\t_\n"
-            "4\tin\tin\tADP\t_\t_\t0\troot\t_\t_\n"
-            "5\thorto\thortus\tNOUN\t_\t_\t0\troot\t_\t_\n"
+            (
+                "# text = Marcus etiam -que in horto.\n"
+                "1\tMarcus\tMarcus\tPROPN\t_\t_\t0\troot\t_\t_\n"
+                "2\tetiam\tetiam\tADV\t_\t_\t0\troot\t_\t_\n"
+                "3\t-que\t-que\tADV\t_\t_\t0\troot\t_\t_\n"
+                "4\tin\tin\tADP\t_\t_\t0\troot\t_\t_\n"
+                "5\thorto\thortus\tNOUN\t_\t_\t0\troot\t_\t_\n"
+            ),
+            False,
         )
 
         config = MaskingConfig(
@@ -128,7 +134,7 @@ class TestRunPipelineStage2:
         adv_path = tmp_path / "common_adverbs.txt"
         adv_path.write_text("saepe\t10\n")
 
-        mock_udpipe.return_value = ""
+        mock_udpipe.return_value = ("", False)
 
         config = MaskingConfig(
             output_dir=tmp_path,
@@ -163,7 +169,7 @@ class TestRunPipelineStage2:
         adv_path = tmp_path / "common_adverbs.txt"
         adv_path.write_text("itaque\t10\n")
 
-        mock_udpipe.return_value = ""
+        mock_udpipe.return_value = ("", False)
 
         config = MaskingConfig(
             output_dir=tmp_path,
@@ -203,18 +209,24 @@ class TestStage1Stage2Integration:
         ]
 
         udpipe_response_unsplit = (
-            "# text = Arma uirumque cano. <EOL> Troiae qui primus ab oris.\n"
-            "1\tArma\tarma\tNOUN\t_\t_\t0\troot\t_\t_\n"
-            "2\tuirumque\tuirumque\tNOUN\t_\t_\t0\troot\t_\t_\n"
-            "3\tcano\tcano\tVERB\t_\t_\t0\troot\t_\t_\n"
+            (
+                "# text = Arma uirumque cano. <EOL> Troiae qui primus ab oris.\n"
+                "1\tArma\tarma\tNOUN\t_\t_\t0\troot\t_\t_\n"
+                "2\tuirumque\tuirumque\tNOUN\t_\t_\t0\troot\t_\t_\n"
+                "3\tcano\tcano\tVERB\t_\t_\t0\troot\t_\t_\n"
+            ),
+            False,
         )
 
         udpipe_response_quesplit = (
-            "# text = Arma uirum -que cano. <EOL> Troiae qui primus ab oris.\n"
-            "1\tArma\tarma\tNOUN\t_\t_\t0\troot\t_\t_\n"
-            "2\tuirum\tuirum\tNOUN\t_\t_\t0\troot\t_\t_\n"
-            "3\t-que\t-que\tADV\t_\t_\t0\troot\t_\t_\n"
-            "4\tcano\tcano\tVERB\t_\t_\t0\troot\t_\t_\n"
+            (
+                "# text = Arma uirum -que cano. <EOL> Troiae qui primus ab oris.\n"
+                "1\tArma\tarma\tNOUN\t_\t_\t0\troot\t_\t_\n"
+                "2\tuirum\tuirum\tNOUN\t_\t_\t0\troot\t_\t_\n"
+                "3\t-que\t-que\tADV\t_\t_\t0\troot\t_\t_\n"
+                "4\tcano\tcano\tVERB\t_\t_\t0\troot\t_\t_\n"
+            ),
+            False,
         )
 
         mock_udpipe.side_effect = [udpipe_response_unsplit, udpipe_response_quesplit]

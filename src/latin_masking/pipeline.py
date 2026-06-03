@@ -96,16 +96,18 @@ def run_pipeline_stage1(
             for sent in mangled_sentences:
                 f.write(sent + "\n")
         sentences_per_file[input_path] = len(mangled_sentences)
-        print(f"  {input_path.name}: {len(mangled_sentences)} sentences")
 
         # UDPipe (with caching) — text is already sentence-split, always presegmented
-        response = process_file_with_cache(
+        response, cache_hit = process_file_with_cache(
             sent_path,
             model=config.model,
             cache_dir=config.cache_dir,
             presegmented=True,
             raw=True,
         )
+
+        cache_label = "cached" if cache_hit else "fetched"
+        print(f"  {input_path.name}: {len(mangled_sentences)} sentences ({cache_label})")
 
         # Parse and collect adverbs
         if response and isinstance(response, str):
@@ -183,16 +185,17 @@ def run_pipeline_stage2(
         qs_path = output_dir / f"{input_path.stem}_sentences.quesplit.txt"
         with open(qs_path, "w", encoding="utf-8") as f:
             f.write(qs_text)
-        print(f"  {input_path.name}: {qs_count} -que splits")
-
         # UDPipe (with caching) — text is already sentence-split, always presegmented
-        response = process_file_with_cache(
+        response, cache_hit = process_file_with_cache(
             qs_path,
             model=config.model,
             cache_dir=config.cache_dir,
             presegmented=True,
             raw=True,
         )
+
+        cache_label = "cached" if cache_hit else "fetched"
+        print(f"  {input_path.name}: {qs_count} -que splits ({cache_label})")
 
         # Parse and mask
         if response and isinstance(response, str):
@@ -208,12 +211,8 @@ def run_pipeline_stage2(
             total_sentences += len(masked)
             print(f"    {len(masked)} masked sentences -> {masked_path.name}")
 
-            # Check if this was a cache hit
-            cache_path = get_cache_path(qs_path, config.cache_dir, config.model)
-            if cache_path.exists():
-                cached = load_cached_response(cache_path)
-                if cached is not None:
-                    total_cache_hits += 1
+            if cache_hit:
+                total_cache_hits += 1
 
     return Stage2Result(
         output_files=output_files,

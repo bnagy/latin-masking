@@ -232,12 +232,13 @@ class TestProcessFileWithCache:
             with patch.object(Path, "exists", return_value=True):
                 with patch.object(Path, "is_dir", return_value=False):
                     with patch("builtins.open", mock_open(read_data="test text")):
-                        result = process_file_with_cache(
+                        result, cache_hit = process_file_with_cache(
                             Path("/source/test.txt"),
                             "test-model",
                         )
 
         assert result == "cached result"
+        assert cache_hit is True
         mock_process.assert_not_called()
 
     @patch("latin_masking.client.process_text")
@@ -261,12 +262,13 @@ class TestProcessFileWithCache:
             with patch.object(Path, "exists", return_value=True):
                 with patch.object(Path, "is_dir", return_value=False):
                     with patch("builtins.open", mock_open(read_data="test text")):
-                        result = process_file_with_cache(
+                        result, cache_hit = process_file_with_cache(
                             Path("/source/test.txt"),
                             "test-model",
                         )
 
         assert result == "new result"
+        assert cache_hit is False
         mock_save.assert_called_once()
 
     @patch("latin_masking.client.process_text")
@@ -323,13 +325,14 @@ class TestProcessFileWithCache:
             with patch.object(Path, "exists", return_value=True):
                 with patch.object(Path, "is_dir", return_value=False):
                     with patch("builtins.open", mock_open(read_data="test text")):
-                        result = process_file_with_cache(
+                        result, cache_hit = process_file_with_cache(
                             Path("/source/test.txt"),
                             "test-model",
                             force_refresh=True,
                         )
 
         assert result == "fresh result"
+        assert cache_hit is False
 
     def test_missing_input_file_raises_error(self) -> None:
         """Test that missing input file raises FileNotFoundError."""

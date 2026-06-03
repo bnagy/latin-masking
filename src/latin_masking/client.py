@@ -263,7 +263,7 @@ def _process_text_with_cache(
     cache_path: Path,
     source_path: Path,
     **process_kwargs,
-) -> str | tuple[list[pd.DataFrame], list[str]]:
+) -> tuple[str | tuple[list[pd.DataFrame], list[str]], bool]:
     """Process text through UDPipe with automatic caching.
 
     Checks cache validity before processing, saves result after processing.
@@ -275,7 +275,9 @@ def _process_text_with_cache(
         **process_kwargs: Additional arguments passed to process_text.
 
     Returns:
-        Raw CoNLL-U string if raw=True, otherwise tuple of (list of DataFrames, list of texts).
+        Tuple of (response, cache_hit) where response is a raw CoNLL-U
+        string if raw=True, otherwise a tuple of (list of DataFrames, list
+        of texts), and cache_hit is True if the response was served from cache.
 
     """
     from latin_masking.cache import (
@@ -286,12 +288,12 @@ def _process_text_with_cache(
     if cache_path.exists():
         cached = load_cached_response(cache_path)
         if cached is not None:
-            return cached
+            return cached, True
 
     response = process_text(text, **process_kwargs)
     if isinstance(response, str):
         save_cached_response(cache_path, response)
-    return response
+    return response, False
 
 
 def process_file_with_cache(
@@ -300,7 +302,7 @@ def process_file_with_cache(
     cache_dir: Path | None = None,
     force_refresh: bool = False,
     **process_kwargs,
-) -> str | tuple[list[pd.DataFrame], list[str]]:
+) -> tuple[str | tuple[list[pd.DataFrame], list[str]], bool]:
     """Process a file through UDPipe with automatic caching.
 
     Reads file content, derives cache path automatically, and handles caching.
@@ -314,7 +316,9 @@ def process_file_with_cache(
         **process_kwargs: Additional arguments passed to process_text.
 
     Returns:
-        Raw CoNLL-U string if raw=True, otherwise tuple of (list of DataFrames, list of texts).
+        Tuple of (response, cache_hit) where response is a raw CoNLL-U
+        string if raw=True, otherwise a tuple of (list of DataFrames, list
+        of texts), and cache_hit is True if the response was served from cache.
 
     Raises:
         FileNotFoundError: If input file doesn't exist.
@@ -342,7 +346,7 @@ def process_file_with_cache(
     if not force_refresh and cache_path.exists():
         cached = load_cached_response(cache_path)
         if cached is not None:
-            return cached
+            return cached, True
 
     with open(input_path, "r", encoding="utf-8") as f:
         text = f.read()
@@ -350,4 +354,4 @@ def process_file_with_cache(
     response = process_text(text, model=model, **process_kwargs)
     if isinstance(response, str):
         save_cached_response(cache_path, response)
-    return response
+    return response, False
