@@ -56,19 +56,71 @@ class TestRunPipelineStage1:
         mock_udpipe,
         tmp_path: Path,
     ) -> None:
-        """Test that preserve_eol inserts <EOL> tokens."""
+        """Test that preserve_eol inserts <EOL> tokens at sentence boundaries."""
         input_file = tmp_path / "poem.txt"
         input_file.write_text("Arma virumque cano.\nTroiae qui primus ab oris.")
 
-        def check_eol_sentences(text: str) -> list[str]:
-            assert "<EOL>" in text
-            return ["Arma virumque cano. <EOL> Troiae qui primus ab oris."]
-
-        mock_split.side_effect = check_eol_sentences
+        # Simulate the sentence splitter producing a leading <EOL> on the
+        # second sentence (as happens when the splitter breaks at the line
+        # boundary).
+        mock_split.return_value = [
+            "Arma virumque cano.",
+            "<EOL> Troiae qui primus ab oris.",
+        ]
         mock_udpipe.return_value = ("", False)
 
         config = MaskingConfig(output_dir=tmp_path, cache_dir=tmp_path / "cache")
         run_pipeline_stage1([input_file], config=config, preserve_eol=True)
+
+        # After _fix_eol_placement, the <EOL> should be at the end of the
+        # first sentence, not the start of the second.
+        sent_path = tmp_path / "poem_sentences.txt"
+        if sent_path.exists():
+            lines = sent_path.read_text(encoding="utf-8").strip().split("\n")
+            assert len(lines) == 2
+            assert lines[0].endswith("<EOL>")
+            assert not lines[1].startswith("<EOL>")
+
+    def test_fix_eol_placement(self, tmp_path: Path) -> None:
+        """Unit test for _fix_eol_placement helper."""
+        from latin_masking.pipeline import _fix_eol_placement
+
+        # Leading <EOL> on second sentence → moved to end of first.
+        result = _fix_eol_placement([
+            "Arma virumque cano.",
+            "<EOL> Troiae qui primus ab oris.",
+        ])
+        assert result == [
+            "Arma virumque cano. <EOL>",
+            "Troiae qui primus ab oris.",
+        ]
+
+        # Multiple sentences with leading <EOL>.
+        result = _fix_eol_placement([
+            "First sentence.",
+            "<EOL> Second sentence.",
+            "<EOL> Third sentence.",
+        ])
+        assert result == [
+            "First sentence. <EOL>",
+            "Second sentence. <EOL>",
+            "Third sentence.",
+        ]
+
+        # No <EOL> tags — unchanged.
+        result = _fix_eol_placement(["One.", "Two."])
+        assert result == ["One.", "Two."]
+
+        # Single sentence — unchanged.
+        result = _fix_eol_placement(["Only sentence."])
+        assert result == ["Only sentence."]
+
+        # Empty list.
+        assert _fix_eol_placement([]) == []
+
+        # Sentence that is only <EOL> — removed.
+        result = _fix_eol_placement(["First.", "<EOL>", "Third."])
+        assert result == ["First. <EOL>", "Third."]
 
 
 class TestRunPipelineStage2:
@@ -317,9 +369,9 @@ class TestEndToEndAeneid:
         )
 
         expected_sentences = [
-            l.strip()
-            for l in aeneid_sentences_expected.read_text().splitlines()
-            if l.strip()
+            line.strip()
+            for line in aeneid_sentences_expected.read_text().splitlines()
+            if line.strip()
         ]
         assert result1.sentences_per_file[input_file] == len(expected_sentences), (
             f"Sentence count mismatch: got {result1.sentences_per_file[input_file]}, "
@@ -338,9 +390,9 @@ class TestEndToEndAeneid:
 
         actual_masked = result2.output_files[0].read_text().strip().splitlines()
         expected_masked = [
-            l.strip()
-            for l in aeneid_masked_expected.read_text().splitlines()
-            if l.strip()
+            line.strip()
+            for line in aeneid_masked_expected.read_text().splitlines()
+            if line.strip()
         ]
 
         assert len(actual_masked) == len(expected_masked), (
@@ -378,7 +430,7 @@ class TestEndToEndAeneid:
             cache_dir=aeneid_fixtures_dir,
         )
 
-        result1 = run_pipeline_stage1(
+        run_pipeline_stage1(
             [input_file],
             config=config,
             preserve_eol=True,
@@ -386,12 +438,12 @@ class TestEndToEndAeneid:
 
         sent_path = tmp_path / "aeneid_1_raw_sentences.txt"
         actual_sentences = [
-            l.strip() for l in sent_path.read_text().splitlines() if l.strip()
+            line.strip() for line in sent_path.read_text().splitlines() if line.strip()
         ]
         expected_sentences = [
-            l.strip()
-            for l in aeneid_sentences_expected.read_text().splitlines()
-            if l.strip()
+            line.strip()
+            for line in aeneid_sentences_expected.read_text().splitlines()
+            if line.strip()
         ]
 
         assert len(actual_sentences) == len(expected_sentences)
@@ -435,18 +487,18 @@ class TestEndToEndAeneid:
             preserve_eol=True,
         )
 
-        result2 = run_pipeline_stage2(
+        run_pipeline_stage2(
             [input_file],
             config=config,
             que_blacklist_path=None,
         )
 
         qs_path = tmp_path / "aeneid_1_raw_sentences.quesplit.txt"
-        actual_qs = [l.strip() for l in qs_path.read_text().splitlines() if l.strip()]
+        actual_qs = [line.strip() for line in qs_path.read_text().splitlines() if line.strip()]
         expected_qs = [
-            l.strip()
-            for l in aeneid_quesplit_expected.read_text().splitlines()
-            if l.strip()
+            line.strip()
+            for line in aeneid_quesplit_expected.read_text().splitlines()
+            if line.strip()
         ]
 
         assert len(actual_qs) == len(expected_qs)

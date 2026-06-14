@@ -19,11 +19,6 @@ from latin_masking.adverbs import (
     normalize_adverb_counts,
     save_adverb_list,
 )
-from latin_masking.cache import (
-    get_cache_path,
-    load_cached_response,
-    save_cached_response,
-)
 from latin_masking.clitics import load_que_blacklist, split_que_blacklist
 from latin_masking.client import process_file_with_cache
 from latin_masking.conllu import parse_conllu
@@ -33,6 +28,49 @@ from latin_masking.sentences import split_sentences
 from latin_masking.types import MaskingConfig, Stage1Result, Stage2Result
 
 logger = logging.getLogger(__name__)
+
+_EOL_TAG: str = "<EOL>"
+
+
+def _fix_eol_placement(sentences: list[str]) -> list[str]:
+    """Move leading <EOL> tags to the end of the preceding sentence.
+
+    When ``preserve_eol`` joins lines with ``" <EOL> ".join(...)``, a
+    sentence boundary may fall right at the line break.  After splitting,
+    the ``<EOL>`` token ends up at the **start** of the next sentence
+    (e.g. ``"<EOL> Troiae qui primus ab oris."``).  This function detects
+    such leading tags and appends them to the **end** of the previous
+    sentence instead, so the tag always appears as the last token of the
+    sentence it terminates.
+
+    Args:
+        sentences: Raw sentence strings from the sentence splitter.
+
+    Returns:
+        Sentences with leading <EOL> tags relocated.
+    """
+    if not sentences:
+        return sentences
+
+    fixed: list[str] = [sentences[0]]
+
+    for sent in sentences[1:]:
+        stripped = sent.lstrip()
+        if stripped.startswith(_EOL_TAG):
+            # Remove the leading <EOL> tag and any surrounding whitespace.
+            remainder = stripped[len(_EOL_TAG):].lstrip()
+            # Append <EOL> to the previous sentence
+            if fixed:
+                fixed[-1] = fixed[-1].rstrip() + " " + _EOL_TAG
+            # The current sentence loses its leading <EOL>
+            sent = remainder
+        fixed.append(sent)
+
+    # Remove any empty strings that may result from sentences that were
+    # only an <EOL> tag.
+    fixed = [s for s in fixed if s.strip()]
+
+    return fixed
 
 
 def run_pipeline_stage1(
@@ -86,6 +124,13 @@ def run_pipeline_stage1(
 
         # Sentence-split (raw, no mangling yet)
         sentences = split_sentences(text)
+
+        # Fix EOL placement: move leading <EOL> tags from the start of a
+        # sentence to the end of the previous sentence.  This ensures that
+        # <EOL> tags that happen to fall right at a sentence boundary appear
+        # as the last token of the preceding sentence rather than the first
+        # token of the following one.
+        sentences = _fix_eol_placement(sentences)
 
         # Apply all text mangling (normalize, macrons, punct) in one place.
         # Protected tokens (<EOL>) are preserved throughout.
