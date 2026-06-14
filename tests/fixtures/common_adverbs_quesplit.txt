@@ -4,15 +4,14 @@ sic	16
 nunc	14
 hinc	10
 ubi	8
-hic	7
+hic	8
 simul	6
 primum	6
 unde	5
 olim	5
+circum	5
 interea	5
 late	4
-circum	4
-forte	4
 huc	4
 contra	3
 uix	3
@@ -22,6 +21,7 @@ bis	3
 subito	3
 ter	3
 iamque	3
+forte	3
 intus	3
 tam	3
 quoque	2
