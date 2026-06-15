@@ -221,19 +221,27 @@ def split_sentences(
             continue
 
         # Check for parenthetical placeholders and restore them
-        restored = False
+        paren_found = False
         for placeholder, content in paren_map.items():
             if placeholder in sent_text:
-                # Split the parenthetical content into sentences
+                # Remove the placeholder from the sentence, leaving the
+                # surrounding text intact.
+                cleaned = sent_text.replace(placeholder, " ")
+                cleaned = re.sub(r"\s+", " ", cleaned).strip()
+
+                # Add the cleaned sentence (without the parenthetical) if
+                # it still has meaningful content.
+                if cleaned and re.search(r"[a-zA-ZÀ-ÿ]", cleaned):
+                    sentences.append(cleaned)
+
+                # Then add the parenthetical content as its own sentence(s).
                 paren_sentences = split_paren_content(content)
                 sentences.extend(paren_sentences)
-                restored = True
+                paren_found = True
                 break
 
-        if restored:
-            continue
-
-        sentences.append(sent_text)
+        if not paren_found:
+            sentences.append(sent_text)
 
     # Apply text preprocessing (normalize, macrons, punct) to each sentence.
     # This is idempotent, so calling it on already-preprocessed text is safe.

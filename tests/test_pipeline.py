@@ -73,13 +73,15 @@ class TestRunPipelineStage1:
         run_pipeline_stage1([input_file], config=config, preserve_eol=True)
 
         # After _fix_eol_placement, the <EOL> should be at the end of the
-        # first sentence, not the start of the second.
+        # first sentence, not the start of the second. The last sentence
+        # should also get <EOL> appended (end-of-poem marker).
         sent_path = tmp_path / "poem_sentences.txt"
         if sent_path.exists():
             lines = sent_path.read_text(encoding="utf-8").strip().split("\n")
             assert len(lines) == 2
             assert lines[0].endswith("<EOL>")
             assert not lines[1].startswith("<EOL>")
+            assert lines[1].endswith("<EOL>")
 
     def test_fix_eol_placement(self, tmp_path: Path) -> None:
         """Unit test for _fix_eol_placement helper."""
@@ -92,7 +94,7 @@ class TestRunPipelineStage1:
         ])
         assert result == [
             "Arma virumque cano. <EOL>",
-            "Troiae qui primus ab oris.",
+            "Troiae qui primus ab oris. <EOL>",
         ]
 
         # Multiple sentences with leading <EOL>.
@@ -104,23 +106,51 @@ class TestRunPipelineStage1:
         assert result == [
             "First sentence. <EOL>",
             "Second sentence. <EOL>",
-            "Third sentence.",
+            "Third sentence. <EOL>",
         ]
 
-        # No <EOL> tags — unchanged.
+        # No <EOL> tags — last sentence gets <EOL> appended.
         result = _fix_eol_placement(["One.", "Two."])
-        assert result == ["One.", "Two."]
+        assert result == ["One.", "Two. <EOL>"]
 
-        # Single sentence — unchanged.
+        # Single sentence — gets <EOL> appended.
         result = _fix_eol_placement(["Only sentence."])
-        assert result == ["Only sentence."]
+        assert result == ["Only sentence. <EOL>"]
 
         # Empty list.
         assert _fix_eol_placement([]) == []
 
         # Sentence that is only <EOL> — removed.
         result = _fix_eol_placement(["First.", "<EOL>", "Third."])
-        assert result == ["First. <EOL>", "Third."]
+        assert result == ["First. <EOL>", "Third. <EOL>"]
+
+        # Last sentence should get <EOL> appended (end of poem marker).
+        # When lines are joined with " <EOL> ".join(...), the last line
+        # doesn't have a trailing <EOL>. We need to add it.
+        result = _fix_eol_placement([
+            "Arma virumque cano. <EOL>",
+            "Troiae qui primus ab oris.",
+        ])
+        assert result == [
+            "Arma virumque cano. <EOL>",
+            "Troiae qui primus ab oris. <EOL>",
+        ]
+
+        # Single sentence poem — gets <EOL> appended.
+        result = _fix_eol_placement(["Only sentence."])
+        assert result == ["Only sentence. <EOL>"]
+
+        # Multiple sentences, last one without <EOL> — gets <EOL> appended.
+        result = _fix_eol_placement([
+            "First sentence. <EOL>",
+            "Second sentence. <EOL>",
+            "Third sentence.",
+        ])
+        assert result == [
+            "First sentence. <EOL>",
+            "Second sentence. <EOL>",
+            "Third sentence. <EOL>",
+        ]
 
 
 class TestRunPipelineStage2:

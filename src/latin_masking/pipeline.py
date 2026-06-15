@@ -70,6 +70,12 @@ def _fix_eol_placement(sentences: list[str]) -> list[str]:
     # only an <EOL> tag.
     fixed = [s for s in fixed if s.strip()]
 
+    # Append <EOL> to the last sentence to mark the end of the poem.
+    # When lines are joined with " <EOL> ".join(...), the last line
+    # doesn't have a trailing <EOL>, so we add it here.
+    if fixed and not fixed[-1].rstrip().endswith(_EOL_TAG):
+        fixed[-1] = fixed[-1].rstrip() + " " + _EOL_TAG
+
     return fixed
 
 
@@ -108,7 +114,9 @@ def run_pipeline_stage1(
     sentences_per_file: dict[Path, int] = {}
 
     for input_path in input_paths:
-        logger.info("Stage 1: processing %s", input_path.name)
+        work_name = input_path.name
+        print(f"\u2192 {work_name}")
+        logger.info("Stage 1: processing %s", work_name)
 
         # Read raw text
         with open(input_path, "r", encoding="utf-8") as f:
@@ -152,7 +160,7 @@ def run_pipeline_stage1(
         )
 
         cache_label = "cached" if cache_hit else "fetched"
-        print(f"  {input_path.name}: {len(mangled_sentences)} sentences ({cache_label})")
+        print(f"\u2713 {work_name}: {len(mangled_sentences)} sentences ({cache_label})")
 
         # Parse and collect adverbs
         if response and isinstance(response, str):
@@ -216,7 +224,9 @@ def run_pipeline_stage2(
     total_cache_hits = 0
 
     for input_path in input_paths:
-        logger.info("Stage 2: processing %s", input_path.name)
+        work_name = input_path.name
+        print(f"\u2192 {work_name}")
+        logger.info("Stage 2: processing %s", work_name)
 
         # Read sentence-split file from stage 1
         sent_path = output_dir / f"{input_path.stem}_sentences.txt"
@@ -240,7 +250,7 @@ def run_pipeline_stage2(
         )
 
         cache_label = "cached" if cache_hit else "fetched"
-        print(f"  {input_path.name}: {qs_count} -que splits ({cache_label})")
+        print(f"\u2713 {work_name}: {qs_count} -que splits ({cache_label})")
 
         # Parse and mask
         if response and isinstance(response, str):

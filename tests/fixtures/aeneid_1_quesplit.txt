@@ -106,12 +106,14 @@ nunc eadem fortuna uiros tot casibus actos <EOL> insequitur.
 Quem das finem, rex magne, laborum? <EOL>
 Antenor potuit, mediis elapsus Achiuis, <EOL> Illyricos penetrare sinus, atque intima tutus <EOL> regna Liburnorum, et fontem superare Timaui, <EOL> unde per ora nouem uasto cum murmure montis <EOL> it mare proruptum et pelago premit arua sonanti. <EOL>
 Hic tamen ille urbem Pataui sedes -que locauit <EOL> Teucrorum, et genti nomen dedit, arma -que fixit <EOL> Troia;
+nunc placida compostus pace quiescit: <EOL> nos, tua progenies, caeli quibus adnuis arcem, <EOL> nauibus amissis, unius ob iram <EOL> prodimur atque Italis longe disiungimur oris.
 infandum <EOL>
 Hic pietatis honos?
 Sic nos in sceptra reponis? <EOL>
 Olli subridens hominum sator atque deorum, <EOL> uultu, quo caelum tempestates -que serenat, <EOL> oscula libauit natae, dehinc talia fatur: <EOL> Parce metu, Cytherea: manent immota tuorum <EOL> fata tibi;
 cernes urbem et promissa Lauini <EOL> moenia, sublimem -que feres ad sidera caeli <EOL> magnanimum Aenean;
-neque me sententia uertit.
+neque me sententia uertit. <EOL>
+Hic tibi <EOL> bellum ingens geret Italia, populos -que ferocis <EOL> contundet, mores -que uiris et moenia ponet, <EOL> tertia dum Latio regnantem uiderit aestas, <EOL> terna -que transierint Rutulis hiberna subactis.
 fabor enim, quando haec te cura remordet, <EOL> longius et uoluens fatorum arcana mouebo <EOL>
 At puer Ascanius, cui nunc cognomen Iulo <EOL> additur, Ilus erat, dum res stetit Ilia regno, <EOL> triginta magnos uoluendis mensibus orbis <EOL> imperio explebit, regnum -que ab sede Lauini <EOL> transferet, et longam multa ui muniet Albam. <EOL>
 Hic iam ter centum totos regnabitur annos <EOL> gente sub Hectorea, donec regina sacerdos, <EOL> Marte grauis, geminam partu dabit Ilia prolem. <EOL>
@@ -277,7 +279,8 @@ Non ignara mali, miseris succurrere disco. <EOL>
 Sic memorat;
 simul Aenean in regia ducit <EOL> tecta, simul diuum templis indicit honorem. <EOL>
 Nec minus interea sociis ad litora mittit <EOL> uiginti tauros, magnorum horrentia centum <EOL> terga suum, pinguis centum cum matribus agnos, <EOL> munera laetitiam -que dii. <EOL>
-At domus interior regali splendida luxu <EOL> instruitur, mediis -que parant conuiuia tectis: <EOL> arte laboratae uestes ostro -que superbo, <EOL> ingens argentum mensis, caelata -que in auro <EOL> fortia facta patrum, series longissima rerum <EOL> per tot ducta uiros antiqua ab origine gentis.
+At domus interior regali splendida luxu <EOL> instruitur, mediis -que parant conuiuia tectis: <EOL> arte laboratae uestes ostro -que superbo, <EOL> ingens argentum mensis, caelata -que in auro <EOL> fortia facta patrum, series longissima rerum <EOL> per tot ducta uiros antiqua ab origine gentis. <EOL>
+Aeneas rapidum ad nauis praemittit Achaten, <EOL> Ascanio ferat haec, ipsum -que ad moenia ducat;
 neque enim patrius consistere mentem <EOL> passus amor <EOL>
 omnis in Ascanio cari stat cura parentis. <EOL>
 Munera praeterea, Iliacis erepta ruinis, <EOL> ferre iubet, pallam signis auro -que rigentem, <EOL> et circumtextum croceo uelamen acantho, <EOL> ornatus Argiuae Helenae, quos illa Mycenis, <EOL> Pergama cum peteret inconcessos -que hymenaeos, <EOL> extulerat, matris Ledae mirabile donum: <EOL> praeterea sceptrum, Ilione quod gesserat olim, <EOL> maxima natarum Priami, collo -que monile <EOL> bacatum, et duplicem gemmis auro -que coronam. <EOL>
@@ -324,4 +327,4 @@ Ingeminant plausu Tyrii, Troes -que sequuntur. <EOL>
 Nec non et uario noctem sermone trahebat <EOL> infelix Dido, longum -que bibebat amorem, <EOL> multa super Priamo rogitans, super Hectore multa; <EOL>
 nunc quibus Aurorae uenisset filius armis, <EOL> nunc quales Diomedis equi, nunc quantus Achilles. <EOL>
 Immo age, et a prima dic, hospes, origine nobis <EOL> insidias, inquit, Danaum, casus -que tuorum, <EOL> errores -que tuos;
-nam te iam septima portat <EOL> omnibus errantem terris et fluctibus aestas.
+nam te iam septima portat <EOL> omnibus errantem terris et fluctibus aestas. <EOL>

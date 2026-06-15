@@ -1,10 +1,10 @@
 iam	20
 tum	18
 sic	16
-nunc	14
+nunc	15
 hinc	10
+hic	9
 ubi	8
-hic	8
 simul	6
 primum	6
 unde	5
@@ -14,6 +14,7 @@ interea	5
 late	4
 huc	4
 contra	3
+longe	3
 uix	3
 quippe	3
 praeterea	3
@@ -25,7 +26,6 @@ forte	3
 intus	3
 tam	3
 quoque	2
-longe	2
 etiam	2
 mene	2
 dehinc	2
