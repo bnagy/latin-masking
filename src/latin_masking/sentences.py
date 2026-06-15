@@ -6,7 +6,7 @@ import re
 from functools import lru_cache
 from typing import Any
 
-from spacy.language import Language
+from spacy.language import Language  # pyright: ignore[reportMissingImports]
 
 # Latin abbreviations for NLTK PunktSentenceTokenizer
 LT_ABBREV = {
@@ -36,7 +36,7 @@ def get_senter() -> Any:
         Configured spaCy Language pipeline with prevent_colon_split component.
 
     """
-    import la_senter
+    import la_senter  # pyright: ignore[reportMissingImports]
 
     senter = la_senter.load()
     # Double the default max_length to handle longer texts (default: 1,000,000)
@@ -224,9 +224,18 @@ def split_sentences(
         paren_found = False
         for placeholder, content in paren_map.items():
             if placeholder in sent_text:
-                # Remove the placeholder from the sentence, leaving the
-                # surrounding text intact.
-                cleaned = sent_text.replace(placeholder, " ")
+                # Check if the placeholder is immediately followed by
+                # <EOL> in the senter output.  If so, that <EOL> belongs
+                # to the parenthetical (it marks the verse line break
+                # after the closing paren), so we keep it on the paren
+                # content rather than the cleaned sentence.
+                eol_after = placeholder + " <EOL>"
+                if eol_after in sent_text:
+                    cleaned = sent_text.replace(eol_after, " ")
+                    paren_content = content + " <EOL>"
+                else:
+                    cleaned = sent_text.replace(placeholder, " ")
+                    paren_content = content
                 cleaned = re.sub(r"\s+", " ", cleaned).strip()
 
                 # Add the cleaned sentence (without the parenthetical) if
@@ -235,7 +244,7 @@ def split_sentences(
                     sentences.append(cleaned)
 
                 # Then add the parenthetical content as its own sentence(s).
-                paren_sentences = split_paren_content(content)
+                paren_sentences = split_paren_content(paren_content)
                 sentences.extend(paren_sentences)
                 paren_found = True
                 break

@@ -3,20 +3,15 @@
 from __future__ import annotations
 
 import argparse
-import sys
 from pathlib import Path
 from unittest.mock import MagicMock, patch
-
-import pytest
 
 from latin_masking.cli import (
     _cmd_generate_adverbs,
     _cmd_mask,
     _cmd_process,
-    _cmd_split_sentences,
     main,
 )
-from latin_masking.types import MaskingConfig
 
 
 class TestCmdProcess:

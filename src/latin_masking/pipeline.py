@@ -9,6 +9,7 @@ The caller reviews common_adverbs.txt between stages.
 from __future__ import annotations
 
 import logging
+import re
 from collections import Counter
 from pathlib import Path
 
@@ -35,12 +36,12 @@ _EOL_TAG: str = "<EOL>"
 def _fix_eol_placement(sentences: list[str]) -> list[str]:
     """Move leading <EOL> tags to the end of the preceding sentence.
 
-    When ``preserve_eol`` joins lines with ``" <EOL> ".join(...)``, a
+    When lines are joined with <EOL> before sentence splitting, a
     sentence boundary may fall right at the line break.  After splitting,
-    the ``<EOL>`` token ends up at the **start** of the next sentence
+    the <EOL> token ends up at the **start** of the next sentence
     (e.g. ``"<EOL> Troiae qui primus ab oris."``).  This function detects
     such leading tags and appends them to the **end** of the previous
-    sentence instead, so the tag always appears as the last token of the
+    sentence instead, so the tag always appears at the end of the
     sentence it terminates.
 
     Args:
@@ -59,11 +60,23 @@ def _fix_eol_placement(sentences: list[str]) -> list[str]:
         if stripped.startswith(_EOL_TAG):
             # Remove the leading <EOL> tag and any surrounding whitespace.
             remainder = stripped[len(_EOL_TAG):].lstrip()
-            # Append <EOL> to the previous sentence
-            if fixed:
-                fixed[-1] = fixed[-1].rstrip() + " " + _EOL_TAG
-            # The current sentence loses its leading <EOL>
-            sent = remainder
+            # Find the most recent sentence that ends with sentence-
+            # terminating punctuation.  Parenthetical extractions (e.g.
+            # "ignoscite, Musae") don't end with punctuation and would
+            # incorrectly absorb the <EOL> tag.
+            target_idx = -1
+            for ti in range(len(fixed) - 1, -1, -1):
+                if re.search(r"[.!?;]\s*$", fixed[ti].rstrip()):
+                    target_idx = ti
+                    break
+            if target_idx >= 0:
+                fixed[target_idx] = fixed[target_idx].rstrip() + " " + _EOL_TAG
+                sent = remainder
+            else:
+                # No suitable target — keep <EOL> on this sentence.
+                sent = stripped
+                fixed.append(sent)
+                continue
         fixed.append(sent)
 
     # Remove any empty strings that may result from sentences that were
@@ -134,10 +147,7 @@ def run_pipeline_stage1(
         sentences = split_sentences(text)
 
         # Fix EOL placement: move leading <EOL> tags from the start of a
-        # sentence to the end of the previous sentence.  This ensures that
-        # <EOL> tags that happen to fall right at a sentence boundary appear
-        # as the last token of the preceding sentence rather than the first
-        # token of the following one.
+        # sentence to the end of the previous sentence.
         sentences = _fix_eol_placement(sentences)
 
         # Apply all text mangling (normalize, macrons, punct) in one place.

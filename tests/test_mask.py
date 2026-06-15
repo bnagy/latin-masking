@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import pandas as pd
+import pandas as pd  # pyright: ignore[reportMissingImports]
 
 from latin_masking.mask import (
     collect_lowercase_words,

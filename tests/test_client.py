@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from unittest.mock import MagicMock, patch, mock_open
 
-import pytest
+import pytest  # pyright: ignore[reportMissingImports]
 
 from latin_masking.client import list_models, process_text
 from latin_masking.types import UDPipeError, UDPipeInputError
@@ -349,8 +350,6 @@ class TestProcessFileWithCache:
 
     def test_directory_input_raises_error(self, tmp_path: Path) -> None:
         """Test that directory input raises IsADirectoryError."""
-        from pathlib import Path
-
         from latin_masking.client import process_file_with_cache
 
         with pytest.raises(IsADirectoryError):

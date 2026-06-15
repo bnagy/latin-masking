@@ -150,7 +150,7 @@ class TestProtectedTokens:
 
     def test_protect_empty_text(self) -> None:
         """Test protecting empty text."""
-        from latin_masking.types import protect_tokens, restore_tokens
+        from latin_masking.types import protect_tokens
 
         text = ""
         protected, mapping = protect_tokens(text)
@@ -159,7 +159,7 @@ class TestProtectedTokens:
 
     def test_protect_no_protected_tokens(self) -> None:
         """Test text with no protected tokens."""
-        from latin_masking.types import protect_tokens, restore_tokens
+        from latin_masking.types import protect_tokens
 
         text = "Arma virumque cano"
         protected, mapping = protect_tokens(text)

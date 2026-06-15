@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
+import pytest  # pyright: ignore[reportMissingImports]
 
 # Sample CoNLL-U response for testing
 SAMPLE_CONLLU = """# text = Marcus est in horto.

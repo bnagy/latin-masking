@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-import pandas as pd
+import pandas as pd  # pyright: ignore[reportMissingImports]
 
 # Type aliases
 Token = str

@@ -9,8 +9,6 @@ masking) receive text that needs no further mangling.
 
 from __future__ import annotations
 
-import re
-
 from latin_masking.normalize import normalize_ch_h, normalize_uv_ij
 from latin_masking.types import PROTECTED_TOKENS, protect_tokens, restore_tokens
 

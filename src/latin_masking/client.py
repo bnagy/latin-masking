@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-import pandas as pd
+import pandas as pd  # pyright: ignore[reportMissingImports]
 
 from latin_masking.types import (
     UDPipeAPIError,

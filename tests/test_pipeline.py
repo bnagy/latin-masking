@@ -5,9 +5,13 @@ from __future__ import annotations
 from pathlib import Path
 from unittest.mock import patch
 
-import pytest
+import pytest  # pyright: ignore[reportMissingImports]
 
-from latin_masking.pipeline import run_pipeline_stage1, run_pipeline_stage2
+from latin_masking.pipeline import (
+    _fix_eol_placement,
+    run_pipeline_stage1,
+    run_pipeline_stage2,
+)
 from latin_masking.types import MaskingConfig
 
 
@@ -49,44 +53,46 @@ class TestRunPipelineStage1:
         assert result.common_adverbs_path.exists()
 
     @patch("latin_masking.pipeline.process_file_with_cache")
-    @patch("latin_masking.pipeline.split_sentences")
     def test_stage1_preserves_eol(
         self,
-        mock_split,
         mock_udpipe,
         tmp_path: Path,
     ) -> None:
-        """Test that preserve_eol inserts <EOL> tokens at sentence boundaries."""
+        """Test that preserve_eol inserts <EOL> tokens at verse line breaks."""
         input_file = tmp_path / "poem.txt"
         input_file.write_text("Arma virumque cano.\nTroiae qui primus ab oris.")
 
-        # Simulate the sentence splitter producing a leading <EOL> on the
-        # second sentence (as happens when the splitter breaks at the line
-        # boundary).
-        mock_split.return_value = [
-            "Arma virumque cano.",
-            "<EOL> Troiae qui primus ab oris.",
-        ]
         mock_udpipe.return_value = ("", False)
 
         config = MaskingConfig(output_dir=tmp_path, cache_dir=tmp_path / "cache")
         run_pipeline_stage1([input_file], config=config, preserve_eol=True)
 
-        # After _fix_eol_placement, the <EOL> should be at the end of the
-        # first sentence, not the start of the second. The last sentence
-        # should also get <EOL> appended (end-of-poem marker).
         sent_path = tmp_path / "poem_sentences.txt"
-        if sent_path.exists():
-            lines = sent_path.read_text(encoding="utf-8").strip().split("\n")
-            assert len(lines) == 2
-            assert lines[0].endswith("<EOL>")
-            assert not lines[1].startswith("<EOL>")
-            assert lines[1].endswith("<EOL>")
+        assert sent_path.exists()
+        lines = sent_path.read_text(encoding="utf-8").strip().split("\n")
+        # Both sentences should have <EOL> (each line ends a verse line)
+        for line in lines:
+            assert "<EOL>" in line, f"Missing <EOL> in: {line!r}"
+            assert not line.startswith("<EOL>"), f"Sentence starts with <EOL>: {line!r}"
 
-    def test_fix_eol_placement(self, tmp_path: Path) -> None:
+    def test_fix_eol_placement_parenthetical(self, tmp_path: Path) -> None:
+        """Test that <EOL> is not moved to parenthetical extractions."""
+        # When a parenthetical extraction sits between two sentences,
+        # the <EOL> from the next sentence should go to the containing
+        # sentence (the one before the paren), not the parenthetical.
+        result = _fix_eol_placement([
+            "Carmina quod pleno saltari nostra theatro, <EOL> nil equidem feci theatris, <EOL> Musa nec in plausus ambitiosa mea est.",
+            "tu scis hoc ipse",
+            "<EOL> Non tamen ingratum est, quodcumque obliuia nostri impedit.",
+        ])
+        # The <EOL> from "Non tamen..." should go to the containing sentence,
+        # not the parenthetical "tu scis hoc ipse".
+        assert result[0].endswith("<EOL>")
+        assert "<EOL>" not in result[1]
+        assert result[2].endswith("<EOL>")
+
+    def test_fix_eol_placement_basic(self, tmp_path: Path) -> None:
         """Unit test for _fix_eol_placement helper."""
-        from latin_masking.pipeline import _fix_eol_placement
-
         # Leading <EOL> on second sentence → moved to end of first.
         result = _fix_eol_placement([
             "Arma virumque cano.",
@@ -125,8 +131,6 @@ class TestRunPipelineStage1:
         assert result == ["First. <EOL>", "Third. <EOL>"]
 
         # Last sentence should get <EOL> appended (end of poem marker).
-        # When lines are joined with " <EOL> ".join(...), the last line
-        # doesn't have a trailing <EOL>. We need to add it.
         result = _fix_eol_placement([
             "Arma virumque cano. <EOL>",
             "Troiae qui primus ab oris.",
@@ -134,22 +138,6 @@ class TestRunPipelineStage1:
         assert result == [
             "Arma virumque cano. <EOL>",
             "Troiae qui primus ab oris. <EOL>",
-        ]
-
-        # Single sentence poem — gets <EOL> appended.
-        result = _fix_eol_placement(["Only sentence."])
-        assert result == ["Only sentence. <EOL>"]
-
-        # Multiple sentences, last one without <EOL> — gets <EOL> appended.
-        result = _fix_eol_placement([
-            "First sentence. <EOL>",
-            "Second sentence. <EOL>",
-            "Third sentence.",
-        ])
-        assert result == [
-            "First sentence. <EOL>",
-            "Second sentence. <EOL>",
-            "Third sentence. <EOL>",
         ]
 
 

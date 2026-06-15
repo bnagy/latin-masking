@@ -33,7 +33,6 @@ def _cmd_process(args: argparse.Namespace) -> int:
     print("=== Stage 1: UDPipe + adverb collection ===")
     result1 = run_pipeline_stage1(
         args.input,
-        args.output,
         config=config,
         preserve_eol=not args.no_preserve_eol,
     )
@@ -55,7 +54,6 @@ def _cmd_process(args: argparse.Namespace) -> int:
 
     result2 = run_pipeline_stage2(
         args.input,
-        args.output,
         config=config,
         que_blacklist_path=que_blacklist_path,
     )
@@ -97,7 +95,6 @@ def _cmd_generate_adverbs(args: argparse.Namespace) -> int:
 
     result = run_pipeline_stage1(
         args.input,
-        args.output or Path.cwd(),
         config=config,
         preserve_eol=False,
     )
@@ -121,7 +118,6 @@ def _cmd_mask(args: argparse.Namespace) -> int:
 
     result = run_pipeline_stage2(
         args.input,
-        args.output or Path.cwd(),
         config=config,
         que_blacklist_path=que_blacklist_path,
     )

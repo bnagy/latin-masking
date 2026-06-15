@@ -5,9 +5,7 @@ from __future__ import annotations
 import re
 from typing import Iterator
 
-import pandas as pd
-
-from latin_masking.types import ConlluFrame
+import pandas as pd  # pyright: ignore[reportMissingImports]
 
 
 def _cap_diff(x: int) -> str:
@@ -43,7 +41,7 @@ def _get_token(x: pd.Series) -> str:
 
 def _process_frame(
     this_frame: list[list[str]],
-    frames: list[ConlluFrame],
+    frames: list[pd.DataFrame],
     cols: list[str],
 ) -> None:
     """Process accumulated frame data into DataFrame and append to frames list.
@@ -75,7 +73,7 @@ def _process_frame(
     this_frame.clear()
 
 
-def parse_conllu(response: str) -> tuple[list[ConlluFrame], list[str]]:
+def parse_conllu(response: str) -> tuple[list[pd.DataFrame], list[str]]:
     """Parse CoNLL-U response into DataFrames (one per sentence) + sentence texts.
 
     Filters out "header words" from clitic splits (rows where parent == "_").
@@ -88,7 +86,7 @@ def parse_conllu(response: str) -> tuple[list[ConlluFrame], list[str]]:
         Tuple of (list of DataFrames, list of sentence texts).
 
     """
-    frames: list[ConlluFrame] = []
+    frames: list[pd.DataFrame] = []
     texts: list[str] = []
     gather = False
     this_frame: list[list[str]] = []

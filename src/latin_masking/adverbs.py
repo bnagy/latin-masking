@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections import Counter
 from pathlib import Path
 
-import pandas as pd
+import pandas as pd  # pyright: ignore[reportMissingImports]
 
 from latin_masking.normalize import normalize_uv_ij
 
