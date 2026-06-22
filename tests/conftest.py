@@ -28,6 +28,14 @@ SAMPLE_CONLLU = """# text = Marcus est in horto.
 5	.	.	PUNCT	_	_	3	punct	_	_
 """
 
+SAMPLE_CONLLU_RICH_FEATS = """# text = Marcus est in horto.
+1\tMarcus\tMarcus\tPROPN\t_\tCase=Nom|Gender=Masc|Number=Sing|InflClass=IndEurO\t2\tnsubj\t_\t_
+2\test\tsum\tVERB\t_\tMood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act\t0\troot\t_\t_
+3\tin\tin\tADP\t_\t_\t2\tcase\t_\t_
+4\thorto\thortus\tNOUN\t_\tCase=Abl|Gender=Masc|Number=Sing|InflClass=IndEurO\t2\tnmod\t_\t_
+5\t.\t.\tPUNCT\t_\t_\t2\tpunct\t_\t_
+"""
+
 SAMPLE_SENTENCES = [
     "Marcus est in horto.",
     "Puella librum legit.",
@@ -49,6 +57,12 @@ SAMPLE_QUE_WORDS = [
 def sample_conllu() -> str:
     """Return sample CoNLL-U response."""
     return SAMPLE_CONLLU
+
+
+@pytest.fixture
+def sample_conllu_rich_feats() -> str:
+    """Return sample CoNLL-U response with rich morphological features."""
+    return SAMPLE_CONLLU_RICH_FEATS
 
 
 @pytest.fixture

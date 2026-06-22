@@ -212,3 +212,65 @@ def iter_conllu_sentences(
     # Yield the final sentence
     if words:
         yield (words, pos_tags, text)
+
+
+def extract_full_features(
+    frames: list[pd.DataFrame],
+) -> list[list[str]]:
+    """Extract all morphological features from parsed CoNLL-U DataFrames.
+
+    For each sentence, splits the pipe-delimited Feats column into
+    individual feature strings (e.g., "Case=Nom", "Gender=Masc",
+    "InflClass=IndEurO"). Returns ALL features found in the CoNLL-U
+    response — no filtering.
+
+    Args:
+        frames: List of per-sentence DataFrames from parse_conllu().
+
+    Returns:
+        List of lists. Each inner list contains the individual feature
+        strings for one sentence, in token order. Tokens with no
+        features (Feats="_") contribute nothing to the list.
+
+    Example:
+        >>> frames, texts = parse_conllu(response)
+        >>> features = extract_full_features(frames)
+        >>> features[0]
+        ['Case=Nom', 'Gender=Masc', 'Number=Sing', 'InflClass=IndEurO', ...]
+    """
+    result: list[list[str]] = []
+    for frame in frames:
+        sentence_features: list[str] = []
+        for feats in frame["Feats"]:
+            if feats and feats != "_":
+                sentence_features.extend(feats.split("|"))
+        result.append(sentence_features)
+    return result
+
+
+def extract_features_by_type(
+    frames: list[pd.DataFrame],
+) -> list[dict[str, list[str]]]:
+    """Extract morphological features grouped by feature type.
+
+    Args:
+        frames: List of per-sentence DataFrames from parse_conllu().
+
+    Returns:
+        List of dicts, one per sentence. Each dict maps feature type
+        names to lists of values. E.g.:
+        [{"Case": ["Nom"], "Gender": ["Masc"], "Number": ["Sing"],
+          "InflClass": ["IndEurO"]}, ...]
+    """
+    result: list[dict[str, list[str]]] = []
+    for frame in frames:
+        type_dict: dict[str, list[str]] = {}
+        for feats in frame["Feats"]:
+            if feats and feats != "_":
+                for feat in feats.split("|"):
+                    key, value = feat.split("=", 1)
+                    if key not in type_dict:
+                        type_dict[key] = []
+                    type_dict[key].append(value)
+        result.append(type_dict)
+    return result
