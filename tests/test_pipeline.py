@@ -259,6 +259,155 @@ class TestRunPipelineStage2:
         assert "-que" not in qs_content
 
 
+class TestEosToken:
+    """Tests for eos_token functionality."""
+
+    @patch("latin_masking.pipeline.process_file_with_cache")
+    def test_stage2_default_eos_token(
+        self,
+        mock_udpipe,
+        tmp_path: Path,
+    ) -> None:
+        """Test that default eos_token='<EOS>' appends <EOS> to masked output."""
+        sent_path = tmp_path / "test_sentences.txt"
+        sent_path.write_text("Marcus etiamque in horto.\n")
+
+        adv_path = tmp_path / "common_adverbs.txt"
+        adv_path.write_text("saepe\t10\nbene\t5\n")
+
+        mock_udpipe.return_value = (
+            (
+                "# text = Marcus etiam -que in horto.\n"
+                "1\tMarcus\tMarcus\tPROPN\t_\t_\t0\troot\t_\t_\n"
+                "2\tetiam\tetiam\tADV\t_\t_\t0\troot\t_\t_\n"
+                "3\t-que\t-que\tADV\t_\t_\t0\troot\t_\t_\n"
+                "4\tin\tin\tADP\t_\t_\t0\troot\t_\t_\n"
+                "5\thorto\thortus\tNOUN\t_\t_\t0\troot\t_\t_\n"
+            ),
+            False,
+        )
+
+        config = MaskingConfig(
+            output_dir=tmp_path,
+            cache_dir=tmp_path / "cache",
+            common_adverbs_path=adv_path,
+        )
+        run_pipeline_stage2(
+            [tmp_path / "test.txt"],
+            config=config,
+            que_blacklist_path=None,
+        )
+
+        masked_path = tmp_path / "test_sentences.quesplit.masked.txt"
+        assert masked_path.exists()
+        lines = masked_path.read_text(encoding="utf-8").strip().split("\n")
+        for line in lines:
+            assert line.endswith("<EOS>"), f"Line missing <EOS>: {line!r}"
+
+    @patch("latin_masking.pipeline.process_file_with_cache")
+    def test_stage2_eos_token_none(
+        self,
+        mock_udpipe,
+        tmp_path: Path,
+    ) -> None:
+        """Test that eos_token=None does not append anything."""
+        sent_path = tmp_path / "test_sentences.txt"
+        sent_path.write_text("Marcus etiamque in horto.\n")
+
+        adv_path = tmp_path / "common_adverbs.txt"
+        adv_path.write_text("saepe\t10\nbene\t5\n")
+
+        mock_udpipe.return_value = (
+            (
+                "# text = Marcus etiam -que in horto.\n"
+                "1\tMarcus\tMarcus\tPROPN\t_\t_\t0\troot\t_\t_\n"
+                "2\tetiam\tetiam\tADV\t_\t_\t0\troot\t_\t_\n"
+                "3\t-que\t-que\tADV\t_\t_\t0\troot\t_\t_\n"
+                "4\tin\tin\tADP\t_\t_\t0\troot\t_\t_\n"
+                "5\thorto\thortus\tNOUN\t_\t_\t0\troot\t_\t_\n"
+            ),
+            False,
+        )
+
+        config = MaskingConfig(
+            output_dir=tmp_path,
+            cache_dir=tmp_path / "cache",
+            common_adverbs_path=adv_path,
+            eos_token=None,
+        )
+        run_pipeline_stage2(
+            [tmp_path / "test.txt"],
+            config=config,
+            que_blacklist_path=None,
+            eos_token=None,
+        )
+
+        masked_path = tmp_path / "test_sentences.quesplit.masked.txt"
+        assert masked_path.exists()
+        lines = masked_path.read_text(encoding="utf-8").strip().split("\n")
+        for line in lines:
+            assert not line.endswith("<EOS>"), f"Line has <EOS> when disabled: {line!r}"
+
+    @patch("latin_masking.pipeline.process_file_with_cache")
+    def test_stage2_custom_eos_token(
+        self,
+        mock_udpipe,
+        tmp_path: Path,
+    ) -> None:
+        """Test that a custom eos_token string is appended."""
+        sent_path = tmp_path / "test_sentences.txt"
+        sent_path.write_text("Marcus etiamque in horto.\n")
+
+        adv_path = tmp_path / "common_adverbs.txt"
+        adv_path.write_text("saepe\t10\nbene\t5\n")
+
+        mock_udpipe.return_value = (
+            (
+                "# text = Marcus etiam -que in horto.\n"
+                "1\tMarcus\tMarcus\tPROPN\t_\t_\t0\troot\t_\t_\n"
+                "2\tetiam\tetiam\tADV\t_\t_\t0\troot\t_\t_\n"
+                "3\t-que\t-que\tADV\t_\t_\t0\troot\t_\t_\n"
+                "4\tin\tin\tADP\t_\t_\t0\troot\t_\t_\n"
+                "5\thorto\thortus\tNOUN\t_\t_\t0\troot\t_\t_\n"
+            ),
+            False,
+        )
+
+        config = MaskingConfig(
+            output_dir=tmp_path,
+            cache_dir=tmp_path / "cache",
+            common_adverbs_path=adv_path,
+            eos_token="<SENT>",
+        )
+        run_pipeline_stage2(
+            [tmp_path / "test.txt"],
+            config=config,
+            que_blacklist_path=None,
+            eos_token="<SENT>",
+        )
+
+        masked_path = tmp_path / "test_sentences.quesplit.masked.txt"
+        assert masked_path.exists()
+        lines = masked_path.read_text(encoding="utf-8").strip().split("\n")
+        for line in lines:
+            assert line.endswith("<SENT>"), f"Line missing <SENT>: {line!r}"
+
+    def test_masking_config_default_eos_token(self) -> None:
+        """Test that MaskingConfig default eos_token is '<EOS>'."""
+        config = MaskingConfig()
+        assert config.eos_token == "<EOS>"
+
+    def test_masking_config_eos_token_none(self) -> None:
+        """Test that MaskingConfig accepts eos_token=None."""
+        config = MaskingConfig(eos_token=None)
+        assert config.eos_token is None
+
+    def test_masking_config_eos_token_custom(self) -> None:
+        """Test that MaskingConfig accepts a custom eos_token."""
+        config = MaskingConfig(eos_token="<SENT>")
+        assert config.eos_token == "<SENT>"
+
+
 class TestStage1Stage2Integration:
     """Integration tests for stage 1 + stage 2."""
 
@@ -377,6 +526,7 @@ class TestEndToEndAeneid:
             output_dir=tmp_path,
             cache_dir=aeneid_fixtures_dir,
             common_adverbs_path=aeneid_fixtures_dir / "common_adverbs_quesplit.txt",
+            eos_token=None,
         )
 
         # Stage 1: normalize, sentence-split, UDPipe (from cache), collect adverbs
@@ -402,6 +552,7 @@ class TestEndToEndAeneid:
             [input_file],
             config=config,
             que_blacklist_path=None,
+            eos_token=None,
         )
 
         assert len(result2.output_files) == 1

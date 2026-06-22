@@ -97,6 +97,7 @@ def run_pipeline_stage1(
     *,
     config: MaskingConfig,
     preserve_eol: bool = True,
+    eos_token: str | None = "<EOS>",
 ) -> Stage1Result:
     """Stage 1: Normalize, sentence-split, UDPipe, collect adverbs.
 
@@ -196,6 +197,7 @@ def run_pipeline_stage2(
     *,
     config: MaskingConfig,
     que_blacklist_path: Path | None = None,
+    eos_token: str | None = "<EOS>",
 ) -> Stage2Result:
     """Stage 2: -que split, UDPipe, mask.
 
@@ -266,6 +268,9 @@ def run_pipeline_stage2(
         if response and isinstance(response, str):
             frames, _ = parse_conllu(response)
             masked = two_pass_mask(frames, common_adverbs=common_adverbs)
+
+            if eos_token:
+                masked = [line + " " + eos_token for line in masked]
 
             masked_path = (
                 output_dir / f"{input_path.stem}_sentences.quesplit.masked.txt"

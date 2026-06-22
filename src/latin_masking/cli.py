@@ -24,9 +24,12 @@ def _cmd_process(args: argparse.Namespace) -> int:
             else Path.cwd() / "udpipe_cache"
         )
 
+    eos_token = args.eos_token if args.eos_token else None
+
     config = MaskingConfig(
         model=args.model,
         cache_dir=cache_dir,
+        eos_token=eos_token,
     )
 
     # Stage 1: normalize, sentence-split, UDPipe, collect adverbs
@@ -35,6 +38,7 @@ def _cmd_process(args: argparse.Namespace) -> int:
         args.input,
         config=config,
         preserve_eol=not args.no_preserve_eol,
+        eos_token=eos_token,
     )
     print(f"Processed {len(result1.sentences_per_file)} files")
     print(f"Sentences: {sum(result1.sentences_per_file.values())}")
@@ -56,6 +60,7 @@ def _cmd_process(args: argparse.Namespace) -> int:
         args.input,
         config=config,
         que_blacklist_path=que_blacklist_path,
+        eos_token=eos_token,
     )
     print(f"Processed {result2.sentences_processed} sentences")
     print(f"Cache hits: {result2.cache_hits}")
@@ -88,15 +93,18 @@ def _cmd_split_sentences(args: argparse.Namespace) -> int:
 def _cmd_generate_adverbs(args: argparse.Namespace) -> int:
     """Handle the generate-adverbs subcommand (stage 1 only)."""
     cache_dir = Path.home() / ".cache" / "latin-masking"
+    eos_token = args.eos_token if args.eos_token else None
     config = MaskingConfig(
         model=args.model,
         cache_dir=cache_dir,
+        eos_token=eos_token,
     )
 
     result = run_pipeline_stage1(
         args.input,
         config=config,
         preserve_eol=False,
+        eos_token=eos_token,
     )
 
     print(f"Collected {len(result.adverb_counts)} unique adverbs")
@@ -107,9 +115,11 @@ def _cmd_generate_adverbs(args: argparse.Namespace) -> int:
 def _cmd_mask(args: argparse.Namespace) -> int:
     """Handle the mask subcommand (stage 2 only)."""
     cache_dir = Path.home() / ".cache" / "latin-masking"
+    eos_token = args.eos_token if args.eos_token else None
     config = MaskingConfig(
         model=args.model,
         cache_dir=cache_dir,
+        eos_token=eos_token,
     )
 
     que_blacklist_path = args.que_blacklist
@@ -120,6 +130,7 @@ def _cmd_mask(args: argparse.Namespace) -> int:
         args.input,
         config=config,
         que_blacklist_path=que_blacklist_path,
+        eos_token=eos_token,
     )
 
     print(f"Processed {result.sentences_processed} sentences")
@@ -165,6 +176,12 @@ def main() -> int:
         action="store_true",
         help="Do not insert <EOL> tokens between verse lines",
     )
+    process_parser.add_argument(
+        "--eos-token",
+        default="<EOS>",
+        help="End-of-sentence token to append to each line of masked output. "
+             "Use '' to disable. Default: '<EOS>'.",
+    )
 
     # Split sentences command
     split_parser = subparsers.add_parser(
@@ -182,6 +199,12 @@ def main() -> int:
     adv_parser.add_argument(
         "--model", "-m", default="latin-evalatin24-240520", help="UDPipe model"
     )
+    adv_parser.add_argument(
+        "--eos-token",
+        default="<EOS>",
+        help="End-of-sentence token to append to each line of masked output. "
+             "Use '' to disable. Default: '<EOS>'.",
+    )
 
     # Mask command (stage 2)
     mask_parser = subparsers.add_parser(
@@ -194,6 +217,12 @@ def main() -> int:
     )
     mask_parser.add_argument(
         "--model", "-m", default="latin-evalatin24-240520", help="UDPipe model"
+    )
+    mask_parser.add_argument(
+        "--eos-token",
+        default="<EOS>",
+        help="End-of-sentence token to append to each line of masked output. "
+             "Use '' to disable. Default: '<EOS>'.",
     )
 
     args = parser.parse_args()

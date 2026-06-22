@@ -134,6 +134,8 @@ class MaskingConfig:
         cache_dir: Directory for caching UDPipe responses. Defaults to
             output_dir / "udpipe_cache".
         unsafe_certs_ok: Whether to accept self-signed SSL certificates.
+        eos_token: End-of-sentence token to append to each line of masked
+            output. Set to None or "" to disable. Default: "<EOS>".
 
     """
 
@@ -145,6 +147,7 @@ class MaskingConfig:
     )
     cache_dir: Path = field(default_factory=lambda: Path("udpipe_cache"))
     unsafe_certs_ok: bool = True
+    eos_token: str | None = "<EOS>"
 
     def __post_init__(self) -> None:
         """Convert string paths to Path objects if needed."""

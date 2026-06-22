@@ -47,6 +47,7 @@ class TestCmdProcess:
             no_preserve_eol=False,
             que_blacklist=None,
             cache_dir=None,
+            eos_token="<EOS>",
         )
 
         result = _cmd_process(args)
@@ -79,6 +80,7 @@ class TestCmdProcess:
             no_preserve_eol=False,
             que_blacklist=None,
             cache_dir=None,
+            eos_token="<EOS>",
         )
 
         result = _cmd_process(args)
@@ -117,6 +119,7 @@ class TestCmdProcess:
             no_preserve_eol=False,
             que_blacklist=None,
             cache_dir=custom_cache,
+            eos_token="<EOS>",
         )
 
         result = _cmd_process(args)
@@ -156,6 +159,7 @@ class TestCmdProcess:
             no_preserve_eol=False,
             que_blacklist=None,
             cache_dir=None,
+            eos_token="<EOS>",
         )
 
         result = _cmd_process(args)
@@ -358,6 +362,7 @@ class TestCmdProcessRegenerate:
             no_preserve_eol=False,
             que_blacklist=None,
             cache_dir=None,
+            eos_token="<EOS>",
         )
 
         result = _cmd_process(args)
@@ -400,6 +405,7 @@ class TestCmdProcessNoPreserveEol:
             no_preserve_eol=True,
             que_blacklist=None,
             cache_dir=None,
+            eos_token="<EOS>",
         )
 
         result = _cmd_process(args)
@@ -444,6 +450,7 @@ class TestCmdProcessCustomBlacklist:
             no_preserve_eol=False,
             que_blacklist=custom_bl,
             cache_dir=None,
+            eos_token="<EOS>",
         )
 
         result = _cmd_process(args)
@@ -475,6 +482,7 @@ class TestCmdGenerateAdverbsFunctional:
             input=[input_file],
             output=output_dir,
             model="test-model",
+            eos_token="<EOS>",
         )
 
         result = _cmd_generate_adverbs(args)
@@ -502,6 +510,7 @@ class TestCmdGenerateAdverbsFunctional:
             input=[input_file],
             output=None,
             model="test-model",
+            eos_token="<EOS>",
         )
 
         result = _cmd_generate_adverbs(args)
@@ -531,6 +540,7 @@ class TestCmdMaskFunctional:
             output=output_dir,
             que_blacklist=None,
             model="test-model",
+            eos_token="<EOS>",
         )
 
         result = _cmd_mask(args)
@@ -560,6 +570,7 @@ class TestCmdMaskFunctional:
             output=output_dir,
             que_blacklist=custom_bl,
             model="test-model",
+            eos_token="<EOS>",
         )
 
         result = _cmd_mask(args)
@@ -585,6 +596,7 @@ class TestCmdMaskFunctional:
             output=None,
             que_blacklist=None,
             model="test-model",
+            eos_token="<EOS>",
         )
 
         result = _cmd_mask(args)
