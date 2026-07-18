@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "latin-masking"
-version = "0.1.0"
+version = "1.3.0"
 description = "A self-contained Python package for Latin text processing pipeline"
 readme = "README.md"
 license = {text = "MIT"}
