@@ -35,16 +35,17 @@ LT_ABBREV = {
 def get_senter(version: str | None = "3.9.2") -> Any:
     """Get configured spaCy Latin senter with colon handling.
 
-    By default loads the vendored ``la_senter`` 3.9.2 model directly from its
-    wheel in ``vendor/``. Pass ``version`` (e.g. ``"3.8.0"``) to load a
-    specific model version instead, so multiple model versions can be compared
-    without reinstalling.  Pass ``None`` to load whatever ``la_senter`` package
-    is importable in the environment.
+    By default loads the vendored ``la_senter`` 3.9.2 model, which is bundled
+    as a sub-package under ``latin_masking/_vendor/la_senter`` (no separate
+    install or wheel extraction required). Pass ``version`` (e.g.
+    ``"3.8.0"``) to load a specific model version instead, so multiple model
+    versions can be compared.  Pass ``None`` to load whatever ``la_senter``
+    package is importable in the environment.
 
     Args:
         version: Optional ``la_senter`` version string. If given (including the
-            default ``"3.9.2"``), the model is loaded from
-            ``vendor/la_senter-{version}-py3-none-any.whl``.
+            default ``"3.9.2"``), the model is loaded from the bundled
+            sub-package ``latin_masking/_vendor/la_senter/la_senter-{version}``.
 
     Returns:
         Configured spaCy Language pipeline.
@@ -57,23 +58,16 @@ def get_senter(version: str | None = "3.9.2") -> Any:
 
         senter = la_senter.load()
     else:
-        # Load a specific model version directly from its vendored wheel,
-        # without installing it into the environment. Extract the wheel to a
-        # local cache dir and load the model package from there.
-        vendor_dir = Path(__file__).resolve().parent.parent.parent / "vendor"
-        wheel = vendor_dir / f"la_senter-{version}-py3-none-any.whl"
-        extract_dir = vendor_dir / f".extracted_la_senter-{version}"
-        extract_dir.mkdir(parents=True, exist_ok=True)
-        import zipfile
-
-        with zipfile.ZipFile(wheel) as zf:
-            zf.extractall(extract_dir)
-        # The vendored wheel's fixers module registers the `token_fix`
-        # factory used by newer la_senter versions (3.9.x). Import it so the
-        # model config can resolve the component.
+        # Load a specific model version directly from the bundled sub-package,
+        # without installing it into the environment. The vendored model's
+        # fixers module registers the `token_fix` factory used by newer
+        # la_senter versions (3.9.x); import it so the model config can resolve
+        # the component.
+        vendor_dir = Path(__file__).resolve().parent / "_vendor" / "la_senter"
+        model_dir = vendor_dir / f"la_senter-{version}"
         import importlib.util
 
-        fixers_path = extract_dir / "la_senter" / "fixers.py"
+        fixers_path = vendor_dir / "fixers.py"
         fixers_spec = importlib.util.spec_from_file_location(
             "la_senter_fixers_tmp", fixers_path
         )
@@ -81,9 +75,7 @@ def get_senter(version: str | None = "3.9.2") -> Any:
             raise RuntimeError(f"Could not load fixers module from {fixers_path}")
         fixers_mod = importlib.util.module_from_spec(fixers_spec)
         fixers_spec.loader.exec_module(fixers_mod)
-        senter = load_model_from_path(
-            extract_dir / "la_senter" / f"la_senter-{version}"
-        )
+        senter = load_model_from_path(model_dir)
 
     # Double the default max_length to handle longer texts (default: 1,000,000)
     senter.max_length = 2000000

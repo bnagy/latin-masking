@@ -27,7 +27,6 @@ dependencies = [
     "spacy>=3.7.0",
     "nltk>=3.8",
     "pandas>=2.0.0",
-    "la_senter @ file:vendor/la_senter-3.8.0-py3-none-any.whl",
 ]
 
 [project.optional-dependencies]
@@ -47,6 +46,23 @@ latin-mask = "latin_masking.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"latin_masking" = ["data/**/*"]
+"latin_masking._vendor.la_senter" = [
+    "la_senter-3.9.2/**/*",
+    "meta.json",
+    "fixers.py",
+]
+
+[tool.ruff]
+# Vendored third-party code (la_senter) and non-package artifacts are excluded
+# from linting; they are not part of the project's own source.
+exclude = [
+    "src/latin_masking/_vendor",
+    "Quickstart.ipynb",
+    "verify_que_blacklist_v2.py",
+]
 
 [tool.mypy]
 python_version = "3.12"
