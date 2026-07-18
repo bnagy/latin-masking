@@ -29,7 +29,7 @@ from latin_masking.types import (
     UDPipeParseError,
 )
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 __all__ = [
     "get_default_blacklist",
     "load_que_blacklist",
