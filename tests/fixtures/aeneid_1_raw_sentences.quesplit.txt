@@ -53,7 +53,7 @@ Iam ualidam Ilionei nauem, iam fortis Achatae, <EOL> et qua uectus Abas, et qua 
 laxis laterum compagibus omnes <EOL> accipiunt inimicum imbrem, rimis -que fatiscunt. <EOL>
 Interea magno misceri murmure pontum, <EOL> emissam -que hiemem sensit Neptunus, et imis <EOL> stagna refusa uadis, grauiter commotus;
 et alto <EOL> prospiciens, summa placidum caput extulit unda. <EOL>
-Disiectam Aeneae, toto uidet aequore classem, <EOL> fluctibus oppressos Troas caeli -que ruina, <EOL> nec latuere doli fratrem Iunonis et irae. <EOL>
+Disiectam Aeneae toto uidet aequore classem, <EOL> fluctibus oppressos Troas caeli -que ruina, <EOL> nec latuere doli fratrem Iunonis et irae. <EOL>
 Eurum ad se Zephyrum -que uocat, dehinc talia fatur: <EOL> Tantane uos generis tenuit fiducia uestri? <EOL>
 Iam caelum terram -que meo sine numine, uenti, <EOL> miscere, et tantas audetis tollere moles? <EOL>
 Quos ego sed motos praestat componere fluctus. <EOL>
@@ -65,7 +65,7 @@ Sic ait, et dicto citius tumida aequora placat, <EOL> collectas -que fugat nubes
 Cymothoe simul et Triton adnixus acuto <EOL> detrudunt nauis scopulo;
 leuat ipse tridenti; <EOL>
 et uastas aperit Syrtis, et temperat aequor, <EOL> atque rotis summas leuibus perlabitur undas. <EOL>
-Ac ueluti magno in populo cum saepe coorta est <EOL> seditio, saeuit -que animis ignobile uulgus, <EOL> iamque faces et saxa uolant furor arma ministrat; <EOL>
+Ac ueluti magno in populo cum saepe coorta est <EOL> seditio, saeuit -que animis ignobile uulgus, <EOL> iamque faces et saxa uolant, furor arma ministrat; <EOL>
 tum, pietate grauem ac meritis si forte uirum quem <EOL> conspexere, silent, arrectis -que auribus adstant; <EOL>
 ille regit dictis animos, et pectora mulcet, <EOL> sic cunctus pelagi cecidit fragor, aequora postquam <EOL> prospiciens genitor caelo -que inuectus aperto <EOL> flectit equos, curru -que uolans dat lora secundo. <EOL>
 Defessi Aeneadae, quae proxima litora, cursu <EOL> contendunt petere, et Libyae uertuntur ad oras. <EOL>
@@ -106,14 +106,14 @@ nunc eadem fortuna uiros tot casibus actos <EOL> insequitur.
 Quem das finem, rex magne, laborum? <EOL>
 Antenor potuit, mediis elapsus Achiuis, <EOL> Illyricos penetrare sinus, atque intima tutus <EOL> regna Liburnorum, et fontem superare Timaui, <EOL> unde per ora nouem uasto cum murmure montis <EOL> it mare proruptum et pelago premit arua sonanti. <EOL>
 Hic tamen ille urbem Pataui sedes -que locauit <EOL> Teucrorum, et genti nomen dedit, arma -que fixit <EOL> Troia;
-nunc placida compostus pace quiescit: <EOL> nos, tua progenies, caeli quibus adnuis arcem, <EOL> nauibus amissis, unius ob iram <EOL> prodimur atque Italis longe disiungimur oris.
-infandum <EOL>
+nunc placida compostus pace quiescit: <EOL> nos, tua progenies, caeli quibus adnuis arcem, <EOL> nauibus amissis, unius ob iram <EOL> prodimur atque Italis longe disiungimur oris. <EOL>
+infandum!
 Hic pietatis honos?
 Sic nos in sceptra reponis? <EOL>
 Olli subridens hominum sator atque deorum, <EOL> uultu, quo caelum tempestates -que serenat, <EOL> oscula libauit natae, dehinc talia fatur: <EOL> Parce metu, Cytherea: manent immota tuorum <EOL> fata tibi;
 cernes urbem et promissa Lauini <EOL> moenia, sublimem -que feres ad sidera caeli <EOL> magnanimum Aenean;
 neque me sententia uertit. <EOL>
-Hic tibi <EOL> bellum ingens geret Italia, populos -que ferocis <EOL> contundet, mores -que uiris et moenia ponet, <EOL> tertia dum Latio regnantem uiderit aestas, <EOL> terna -que transierint Rutulis hiberna subactis.
+Hic tibi bellum ingens geret Italia, populos -que ferocis <EOL> contundet, mores -que uiris et moenia ponet, <EOL> tertia dum Latio regnantem uiderit aestas, <EOL> terna -que transierint Rutulis hiberna subactis. <EOL>
 fabor enim, quando haec te cura remordet, <EOL> longius et uoluens fatorum arcana mouebo <EOL>
 At puer Ascanius, cui nunc cognomen Iulo <EOL> additur, Ilus erat, dum res stetit Ilia regno, <EOL> triginta magnos uoluendis mensibus orbis <EOL> imperio explebit, regnum -que ab sede Lauini <EOL> transferet, et longam multa ui muniet Albam. <EOL>
 Hic iam ter centum totos regnabitur annos <EOL> gente sub Hectorea, donec regina sacerdos, <EOL> Marte grauis, geminam partu dabit Ilia prolem. <EOL>
@@ -132,7 +132,8 @@ Furor impius intus, <EOL> saeua sedens super arma, et centum uinctus aenis <EOL>
 Haec ait, et Maia genitum demittit ab alto, <EOL> ut terrae, utque nouae pateant Karthaginis arces <EOL> hospitio Teucris, ne fati nescia Dido <EOL> finibus arceret: uolat ille per aera magnum <EOL> remigio alarum, ac Libyae citus adstitit oris. <EOL>
 Et iam iussa facit, ponunt -que ferocia Poeni <EOL> corda uolente deo;
 in primis regina quietum <EOL> accipit in Teucros animum mentem -que benignam. <EOL>
-At pius Aeneas, per noctem plurima uoluens, <EOL> ut primum lux alma data est, exire locos -que <EOL> explorare nouos, quas uento accesserit oras, <EOL> qui teneant, nam inculta uidet, hominesne feraene, <EOL> quaerere constituit, sociis -que exacta referre <EOL> Classem in conuexo nemorum sub rupe cauata <EOL> arboribus clausam circum atque horrentibus umbris <EOL> occulit;
+At pius Aeneas, per noctem plurima uoluens, <EOL> ut primum lux alma data est, exire locos -que <EOL> explorare nouos, quas uento accesserit oras, <EOL> qui teneant, nam inculta uidet, hominesne feraene, <EOL> quaerere constituit, sociis -que exacta referre. <EOL>
+Classem in conuexo nemorum sub rupe cauata <EOL> arboribus clausam circum atque horrentibus umbris <EOL> occulit;
 ipse uno graditur comitatus Achate, <EOL> bina manu lato crispans hastilia ferro. <EOL>
 cui mater media sese tulit obuia silua, <EOL> uirginis os habitum -que gerens, et uirginis arma <EOL> Spartanae, uel qualis equos Threissa fatigat <EOL> Harpalyce, uolucrem -que fuga praeuertitur Hebrum. <EOL>
 Namque umeris de more habilem suspenderat arcum <EOL> uenatrix, dederat -que comam diffundere uentis, <EOL> nuda genu, nodo -que sinus collecta fluentis. <EOL>
@@ -182,9 +183,11 @@ Ipsa Paphum sublimis abit, sedes -que reuisit <EOL> laeta suas, ubi templum illi
 Corripuere uiam interea, qua semita monstrat. <EOL>
 Iamque ascendebant collem, qui plurimus urbi <EOL> imminet, aduersas -que aspectat desuper arces. <EOL>
 Miratur molem Aeneas, magalia quondam, <EOL> miratur portas strepitum -que et strata uiarum. <EOL>
-Instant ardentes Tyrii pars ducere muros, <EOL> moliri -que arcem et manibus subuoluere saxa, <EOL> pars optare locum tecto et concludere sulco.
+Instant ardentes Tyrii pars ducere muros, <EOL> moliri -que arcem et manibus subuoluere saxa, <EOL> pars optare locum tecto et concludere sulco. <EOL>
+Iura magistratus -que legunt sanctum -que senatum; <EOL>
+hic portus alii effodiunt;
 hic alta theatris <EOL> fundamenta locant alii, immanis -que columnas <EOL> rupibus excidunt, scaenis decora alta futuris. <EOL>
-Qualis apes aestate noua per florea rura <EOL> exercet sub sole labor, cum gentis adultos <EOL> educunt fetus, aut cum liquentia mella <EOL> stipant et dulci distendunt nectare cellas, <EOL> aut onera accipiunt uenientum, aut agmine facto <EOL> ignauum fucos pecus a praesepibus arcent: <EOL> feruet opus, redolent -que thymo fraglantia mella. <EOL>
+Qualis apes aestate noua per florea rura <EOL> exercet sub sole labor, cum gentis adultos <EOL> educunt fetus, aut cum liquentia mella <EOL> stipant et dulci distendunt nectare cellas, <EOL> aut onera accipiunt uenientum, aut agmine facto <EOL> ignauum fucos pecus a praesepibus arcent: <EOL> feruet opus, redolent -que thymo fragrantia mella. <EOL>
 O fortunati, quorum iam moenia surgunt! <EOL>
 Aeneas ait, et fastigia suspicit urbis. <EOL>
 Infert se saeptus nebula, mirabile dictu, <EOL> per medios, miscet -que uiris, neque cernitur ulli. <EOL>
@@ -215,7 +218,7 @@ Qualis in Eurotae ripis aut per iuga Cynthi <EOL> exercet Diana choros, quam mil
 illa pharetram <EOL> fert umero, gradiens -que deas supereminet omnis: <EOL> Latonae tacitum pertemptant gaudia pectus: <EOL> talis erat Dido, talem se laeta ferebat <EOL> per medios, instans operi regnis -que futuris. <EOL>
 Tum foribus diuae, media testudine templi, <EOL> saepta armis, solio -que alte subnixa resedit. <EOL>
 Iura dabat leges -que uiris, operum -que laborem <EOL> partibus aequabat iustis, aut sorte trahebat: <EOL> cum subito Aeneas concursu accedere magno <EOL> Anthea Sergestum -que uidet fortem -que Cloanthum, <EOL> Teucrorum -que alios, ater quos aequore turbo <EOL> dispulerat penitus -que alias auexerat oras. <EOL>
-Obstipuit simul ipse simul percussus Achates <EOL> laetitia -que metu -que;
+Obstipuit simul ipse, simul percussus Achates <EOL> laetitia -que metu -que;
 auidi coniungere dextras <EOL> ardebant;
 sed res animos incognita turbat. <EOL>
 Dissimulant, et nube caua speculantur amicti, <EOL> quae fortuna uiris, classem quo litore linquant, <EOL> quid ueniant;
@@ -280,8 +283,8 @@ Sic memorat;
 simul Aenean in regia ducit <EOL> tecta, simul diuum templis indicit honorem. <EOL>
 Nec minus interea sociis ad litora mittit <EOL> uiginti tauros, magnorum horrentia centum <EOL> terga suum, pinguis centum cum matribus agnos, <EOL> munera laetitiam -que dii. <EOL>
 At domus interior regali splendida luxu <EOL> instruitur, mediis -que parant conuiuia tectis: <EOL> arte laboratae uestes ostro -que superbo, <EOL> ingens argentum mensis, caelata -que in auro <EOL> fortia facta patrum, series longissima rerum <EOL> per tot ducta uiros antiqua ab origine gentis. <EOL>
-Aeneas rapidum ad nauis praemittit Achaten, <EOL> Ascanio ferat haec, ipsum -que ad moenia ducat;
-neque enim patrius consistere mentem <EOL> passus amor <EOL>
+Aeneas rapidum ad nauis praemittit Achaten, <EOL> Ascanio ferat haec, ipsum -que ad moenia ducat; <EOL>
+neque enim patrius consistere mentem <EOL> passus amor
 omnis in Ascanio cari stat cura parentis. <EOL>
 Munera praeterea, Iliacis erepta ruinis, <EOL> ferre iubet, pallam signis auro -que rigentem, <EOL> et circumtextum croceo uelamen acantho, <EOL> ornatus Argiuae Helenae, quos illa Mycenis, <EOL> Pergama cum peteret inconcessos -que hymenaeos, <EOL> extulerat, matris Ledae mirabile donum: <EOL> praeterea sceptrum, Ilione quod gesserat olim, <EOL> maxima natarum Priami, collo -que monile <EOL> bacatum, et duplicem gemmis auro -que coronam. <EOL>
 Haec celerans iter ad nauis tendebat Achates. <EOL>
@@ -306,6 +309,8 @@ Dant manibus famuli lymphas, Cererem -que canistris <EOL> expediunt, tonsis -que
 Quinquaginta intus famulae, quibus ordine longam <EOL> cura penum struere, et flammis adolere Penatis; <EOL>
 centum aliae totidem -que pares aetate ministri, <EOL> qui dapibus mensas onerent et pocula ponant. <EOL>
 Nec non et Tyrii per limina laeta frequentes <EOL> conuenere, toris iussi discumbere pictis. <EOL>
+Mirantur dona Aeneae, mirantur Iulum <EOL> flagrantis -que dei uultus simulata -que uerba, <EOL> pallam -que et pictum croceo uelamen acantho. <EOL>
+Praecipue infelix, pesti deuota futurae, <EOL> expleri mentem nequit ardescit -que tuendo <EOL> Phoenissa, et pariter puero donis -que mouetur. <EOL>
 Ille ubi complexu Aeneae collo -que pependit <EOL> et magnum falsi impleuit genitoris amorem, <EOL> reginam petit haec oculis, haec pectore toto <EOL> haeret et interdum gremio fouet, inscia Dido, <EOL> insidat quantus miserae deus;
 at memor ille <EOL> matris Acidaliae paulatim abolere Sychaeum <EOL> incipit, et uiuo temptat praeuertere amore <EOL> iam pridem resides animos desueta -que corda. <EOL>
 Postquam prima quies epulis, mensae -que remotae, <EOL> crateras magnos statuunt et uina coronant. <EOL>
@@ -316,7 +321,8 @@ tum facta silentia tectis: <EOL> Iuppiter, hospitibus nam te dare iura loquuntur
 Adsit laetitiae Bacchus dator, et bona Iuno; <EOL>
 et uos, O, coetum, Tyrii, celebrate fauentes. <EOL>
 Dixit, et in mensam laticum libauit honorem, <EOL> prima -que, libato, summo tenus attigit ore, <EOL> tum Bitiae dedit increpitans;
-ille impiger hausit <EOL> spumantem pateram, et pleno se proluit auro <EOL> post alii proceres.
+ille impiger hausit <EOL> spumantem pateram, et pleno se proluit auro; <EOL>
+post alii proceres.
 Cithara crinitus Iopas <EOL> personat aurata, docuit quem maximus Atlas. <EOL>
 Hic canit errantem lunam solis -que labores; <EOL>
 unde hominum genus et pecudes;

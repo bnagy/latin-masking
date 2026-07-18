@@ -1,0 +1,42 @@
+{
+  "lang":"la",
+  "name":"senter",
+  "version":"3.9.2",
+  "description":"Latin sentence segmentation model for LatinCy. Trained on Universal Dependencies treebanks (Perseus, PROIEL, ITTB, LLCT, UDante) with spaCy 3.8.x.",
+  "author":"Patrick J. Burns",
+  "email":"pjb311@nyu.edu",
+  "url":"https://github.com/diyclassics/latincy",
+  "license":"MIT",
+  "spacy_version":">=3.8.11,<3.9.0",
+  "spacy_git_version":"e7a662a",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":null
+  },
+  "labels":{
+
+  },
+  "pipeline":[
+    "senter",
+    "token_fix"
+  ],
+  "components":[
+    "senter",
+    "token_fix"
+  ],
+  "disabled":[
+
+  ],
+  "performance":{
+    "sents_f":0.9965670436,
+    "sents_p":0.9955618318,
+    "sents_r":0.9975742874,
+    "senter_loss":36.2972924755
+  },
+  "parent_package":"spacy",
+  "requirements":[
+    "spacy>=3.8.11,<3.9.0"
+  ]
+}

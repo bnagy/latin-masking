@@ -2,13 +2,18 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from latin_masking.sentences import (
+    check_paren_balance,
+    clean_text,
     has_sufficient_punctuation,
+    normalize_dashes,
     normalize_whitespace,
-    preprocess_text,
-    split_paren_content,
     split_sentences,
 )
+
+FIXTURES = Path(__file__).parent / "fixtures"
 
 
 class TestHasSufficientPunctuation:
@@ -66,51 +71,51 @@ class TestNormalizeWhitespace:
         assert result == "Word1 Word2"
 
 
-class TestPreprocessText:
-    """Tests for preprocess_text function."""
+class TestNormalizeDashes:
+    """Tests for normalize_dashes (dash-drop bug fix)."""
 
-    def test_quote_removal(self) -> None:
-        """Test quotation marks are removed."""
-        text = 'He said "hello" to me.'
-        result, _ = preprocess_text(text)
-        assert '"' not in result
+    def test_em_dash_to_space(self) -> None:
+        """Em dash is replaced with a single space."""
+        assert normalize_dashes("a—b") == "a b"
 
-    def test_unicode_quote_removal(self) -> None:
-        """Test unicode quotation marks are removed."""
-        text = "He said «hello» to me."
-        result, _ = preprocess_text(text)
-        assert "«" not in result
-        assert "»" not in result
+    def test_en_dash_to_space(self) -> None:
+        """En dash is replaced with a single space."""
+        assert normalize_dashes("a–b") == "a b"
 
-    def test_dash_after_punctuation(self) -> None:
-        """Test dashes after punctuation are removed."""
-        text = "Sentence. -Next sentence."
-        result, _ = preprocess_text(text)
-        assert "-Next" not in result
+    def test_no_double_space_when_flanked(self) -> None:
+        """A dash already surrounded by spaces does not create a double space."""
+        assert normalize_dashes("a — b") == "a b"
+        assert normalize_dashes("a – b") == "a b"
 
-    def test_parenthesis_protection(self) -> None:
-        """Test parenthetical content is protected."""
-        text = "Text (parenthetical content) more text."
-        result, paren_map = preprocess_text(text)
-        assert "__PAREN_" in result
-        assert "parenthetical content" in paren_map.values()
+    def test_other_punctuation_untouched(self) -> None:
+        """Sentence punctuation is preserved."""
+        assert normalize_dashes("a! b? c; d.") == "a! b? c; d."
 
 
-class TestSplitParenContent:
-    """Tests for split_paren_content function."""
+class TestCleanTextDashDrop:
+    """Regression tests for the la_senter dash-drop bug."""
 
-    def test_basic_split(self) -> None:
-        """Test basic parenthetical content splitting."""
-        content = "First. Second; Third!"
-        result = split_paren_content(content)
-        assert len(result) == 3
+    def test_clean_text_keeps_dash_word(self) -> None:
+        """A word glued to a trailing em dash is preserved (no dash)."""
+        result = clean_text("sanguis meus!—")
+        assert "meus!" in result
+        assert "—" not in result
 
-    def test_colon_not_boundary(self) -> None:
-        """Test colons are not treated as sentence boundaries."""
-        content = "First: second"
-        result = split_paren_content(content)
-        # Colon should not split
-        assert len(result) == 1
+    def test_split_sentences_preserves_eol(self) -> None:
+        """A line ending in a dash keeps its word and gets an <EOL> token."""
+        text = "prōice tēla manū, sanguis meus!—\narma uirumque cano"
+        result = split_sentences(text)
+        flat = " ".join(result)
+        assert "meus! <EOL>" in flat
+        # No token was dropped: the first line has 5 words + EOL.
+        assert "meus!" in flat
+
+    def test_split_sentences_dash_after_terminator_splits(self) -> None:
+        """A dash after '!' still yields a sentence boundary via the '!'."""
+        text = "auguria!– expāvit vitreō sub gurgite rēmōs."
+        result = split_sentences(text)
+        assert any(s.startswith("auguria!") for s in result)
+        assert any(s.startswith("expauit") for s in result)
 
 
 class TestSplitSentences:
@@ -143,43 +148,93 @@ class TestSplitSentences:
         result = split_sentences("")
         assert result == []
 
-    def test_preprocess_true_normalizes(self) -> None:
-        """Test that preprocess=True (default) normalizes UV/IJ in output."""
-        text = "Servus vivit. Jam venit."
-        result = split_sentences(text, preprocess=True)
-        # After preprocessing, v→u and j→i
-        for sent in result:
-            assert "v" not in sent.split()  # no standalone v in words
-            assert "j" not in sent.split()  # no standalone j in words
-
-    def test_preprocess_false_preserves_raw(self) -> None:
-        """Test that preprocess=False returns raw (unnormalized) sentences."""
-        text = "Servus vivit. Jam venit."
-        result = split_sentences(text, preprocess=False)
-        # Without preprocessing, v and j should still be present
-        joined = " ".join(result)
-        assert "v" in joined  # 'v' from Servus/vivit/venit
-        assert "J" in joined  # 'J' from Jam (uppercase)
-
-    def test_preprocess_default_is_true(self) -> None:
-        """Test that preprocess defaults to True."""
-        text = "Servus vivit."
-        result_default = split_sentences(text)
-        result_explicit = split_sentences(text, preprocess=True)
-        assert result_default == result_explicit
-
-    def test_preprocess_strips_punctuation_chars(self) -> None:
-        """Test that preprocess=True strips editorial punctuation chars."""
+    def test_strips_editorial_punctuation(self) -> None:
+        """Test that editorial punctuation chars (e.g. †) are stripped."""
         text = "Marcus est †bonus†."
-        result = split_sentences(text, preprocess=True)
-        # † should be stripped by preprocess
+        result = split_sentences(text)
         for sent in result:
             assert "†" not in sent
 
-    def test_preprocess_normalizes_michi(self) -> None:
-        """Test that preprocess=True normalizes michi→mihi."""
+    def test_normalizes_michi(self) -> None:
+        """Test that michi→mihi and nichil→nihil normalization always runs."""
         text = "Michi nichil dico."
-        result = split_sentences(text, preprocess=True)
+        result = split_sentences(text)
         joined = " ".join(result)
         assert "Mihi" in joined  # capitalized form
         assert "nihil" in joined
+
+    def test_normalizes_uv_ij(self) -> None:
+        """Test that UV/IJ normalization (v→u, j→i) always runs."""
+        text = "Servus vivit. Jam venit."
+        result = split_sentences(text)
+        joined = " ".join(result)
+        assert "v" not in joined.split()  # no standalone v in words
+        assert "j" not in joined.split()  # no standalone j in words
+
+
+class TestSplitSentencesFragments:
+    """End-to-end segmentation of real verse fragments.
+
+    These run the normal library ``split_sentences`` on raw verse text and
+    compare against manually-reviewed expected output (the ported
+    segmentation logic should reproduce them exactly).
+    """
+
+    def _run(self, stem: str) -> list[str]:
+        raw = (FIXTURES / f"{stem}_raw.txt").read_text(encoding="utf-8")
+        expected = (FIXTURES / f"{stem}_expected.txt").read_text(encoding="utf-8")
+        result = split_sentences(raw)
+        assert result == expected.splitlines()
+        return result
+
+    def test_aeneid_1_242_266(self) -> None:
+        """Vergil Aeneid 1.242-266 (single-token and multi-line parens)."""
+        self._run("aeneid_1_242_266")
+
+    def test_horace_epistulae_1_15(self) -> None:
+        """Horace Epistulae 1.15 (large multi-sentence paren)."""
+        self._run("horace_epistulae_1_15")
+
+
+class TestCheckParenBalance:
+    """Pre-flight check that every '(' is matched by a ')'."""
+
+    def test_balanced_parens_ok(self) -> None:
+        """Balanced parentheses raise nothing."""
+        check_paren_balance("uos (infandum!) amissis, unius ob iram.")
+
+    def test_nested_parens_ok(self) -> None:
+        """Nested parentheses are accepted."""
+        check_paren_balance("hic (fabor enim, (quando haec) te cura) remordet.")
+
+    def test_unmatched_open_reports_line(self) -> None:
+        """An unmatched '(' names the line where it opened."""
+        text = "prima linea.\n(Heu michi! uos, fratres, sine dentibus estis.\nultima linea."
+        try:
+            check_paren_balance(text)
+        except ValueError as exc:
+            assert "line 2" in str(exc)
+            assert "(Heu" in str(exc)
+        else:
+            raise AssertionError("expected ValueError for unmatched '('")
+
+    def test_unmatched_close_reports_line(self) -> None:
+        """An unmatched ')' names the line where it appears."""
+        text = "prima linea.\nclausit) et dixit.\nultima linea."
+        try:
+            check_paren_balance(text)
+        except ValueError as exc:
+            assert "line 2" in str(exc)
+            assert "clausit)" in str(exc)
+        else:
+            raise AssertionError("expected ValueError for unmatched ')'")
+
+    def test_split_sentences_refuses_unbalanced(self) -> None:
+        """split_sentences raises on unbalanced parens before any work."""
+        text = "apertum (infandum remordet.\nsecunda linea."
+        try:
+            split_sentences(text)
+        except ValueError as exc:
+            assert "line 1" in str(exc)
+        else:
+            raise AssertionError("expected ValueError for unbalanced parens")

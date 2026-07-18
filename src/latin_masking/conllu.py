@@ -7,6 +7,8 @@ from typing import Iterator
 
 import pandas as pd  # pyright: ignore[reportMissingImports]
 
+from latin_masking.types import PROTECTED_TOKENS
+
 
 def _cap_diff(x: int) -> str:
     """Format difference value for tok_3 column.
@@ -66,6 +68,14 @@ def _process_frame(
     )
     df["tok_3"] = df.apply(_get_token, axis=1)
     df.drop(["POS2", "junk", "junk2"], inplace=True, axis=1)
+    # UDPipe sometimes tags protected tokens (e.g. <EOL>) as PUNCT, which
+    # would drop them in the strip below and lose verse-line markers. Force
+    # their POS to "X" so they survive and stay consistent with the masking
+    # stage, which treats them as unknown symbols.
+    mask = pd.Series(
+        [w in PROTECTED_TOKENS for w in df["word"]], index=df.index
+    )
+    df.loc[mask, "POS"] = "X"
     stripped_df = df[df["POS"] != "PUNCT"]
     # Sometimes you have a sentence that is just punctuation
     if len(stripped_df) > 0:

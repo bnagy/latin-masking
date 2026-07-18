@@ -1,0 +1,2 @@
+[spacy_models]
+la_senter = la_senter

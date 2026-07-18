@@ -9,6 +9,7 @@ from latin_masking.conllu import (
     parse_conllu,
     parse_conllu_light,
 )
+from latin_masking.types import PROTECTED_TOKENS
 
 
 class TestParseConllu:
@@ -186,3 +187,66 @@ class TestExtractFeaturesByType:
         result = extract_features_by_type(frames + frames)
         assert len(result) == 2
         assert result[0] == result[1]
+
+
+class TestProtectedTokens:
+    """Tests that protected tokens survive the PUNCT strip in parse_conllu.
+
+    UDPipe sometimes tags protected tokens (e.g. <EOL>) as PUNCT. They must
+    be preserved (with POS forced to "X") so verse-line markers are not lost.
+    """
+
+    def test_protected_token_preserved_when_tagged_punct(
+        self, sample_conllu_protected_punct: str
+    ) -> None:
+        """A protected token tagged PUNCT must not be dropped."""
+        frames, _ = parse_conllu(sample_conllu_protected_punct)
+        protected_rows = [
+            row
+            for frame in frames
+            for _, row in frame.iterrows()
+            if row["word"] in PROTECTED_TOKENS
+        ]
+        # Both <EOL> tokens (one tagged X, one tagged PUNCT) must survive.
+        assert len(protected_rows) == 2
+        assert all(r["word"] in PROTECTED_TOKENS for r in protected_rows)
+
+    def test_protected_token_pos_forced_to_x(
+        self, sample_conllu_protected_punct: str
+    ) -> None:
+        """Protected tokens must have POS forced to 'X', not 'PUNCT'."""
+        frames, _ = parse_conllu(sample_conllu_protected_punct)
+        for frame in frames:
+            for _, row in frame.iterrows():
+                if row["word"] in PROTECTED_TOKENS:
+                    assert row["POS"] == "X"
+
+    def test_genuine_punct_still_filtered(
+        self, sample_conllu_protected_punct: str
+    ) -> None:
+        """Real punctuation (not protected) must still be filtered out."""
+        frames, _ = parse_conllu(sample_conllu_protected_punct)
+        for frame in frames:
+            assert "PUNCT" not in frame["POS"].values
+            # No bare period tokens should remain.
+            assert "." not in frame["word"].values
+
+    def test_protected_token_count_matches_input(
+        self, sample_conllu_protected_punct: str
+    ) -> None:
+        """All protected tokens present in the response survive parsing."""
+        # Count only real token rows (lines starting with "<idx>\t"), not the
+        # "# text = ... <EOL>" comment lines, which are metadata, not tokens.
+        n_input = sum(
+            1
+            for line in sample_conllu_protected_punct.splitlines()
+            if line.split("\t")[0].isdigit() and "<EOL>" in line
+        )
+        frames, _ = parse_conllu(sample_conllu_protected_punct)
+        n_output = sum(
+            1
+            for frame in frames
+            for _, row in frame.iterrows()
+            if row["word"] in PROTECTED_TOKENS
+        )
+        assert n_output == n_input

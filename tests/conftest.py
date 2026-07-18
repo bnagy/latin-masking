@@ -65,6 +65,38 @@ def sample_conllu_rich_feats() -> str:
     return SAMPLE_CONLLU_RICH_FEATS
 
 
+# CoNLL-U where a protected token (<EOL>) is tagged PUNCT by UDPipe. Without
+# the fix, the PUNCT strip in parse_conllu would drop it and lose the
+# verse-line marker. The <EOL> parent points at a real token (1) so the
+# parent_rel computation stays in bounds.
+SAMPLE_CONLLU_PROTECTED_PUNCT = """# text = Nondum solis equos declinis mitigat aestas. <EOL>
+1	Nondum	Nondum	ADV	_	_	0	root	_	_
+2	solis	sol	NOUN	_	_	1	nmod	_	_
+3	equos	equus	NOUN	_	_	1	obj	_	_
+4	declinis	declinis	ADJ	_	_	1	amod	_	_
+5	mitigat	mitigo	VERB	_	_	1	advcl	_	_
+6	aestas	aestas	NOUN	_	_	5	nsubj	_	_
+7	.	.	PUNCT	_	_	1	punct	_	_
+8	<EOL>	_	X	_	_	1	punct	_	_
+
+# text = Quamvis et madidis incumbant prela racemis. <EOL>
+1	Quamvis	quamvis	SCONJ	_	_	0	root	_	_
+2	et	et	CCONJ	_	_	1	cc	_	_
+3	madidis	madidus	ADJ	_	_	1	amod	_	_
+4	incumbant	incumbo	VERB	_	_	1	advcl	_	_
+5	prela	prelum	NOUN	_	_	4	nsubj	_	_
+6	racemis	racemus	NOUN	_	_	4	obl	_	_
+7	.	.	PUNCT	_	_	1	punct	_	_
+8	<EOL>	_	PUNCT	_	_	1	punct	_	_
+"""
+
+
+@pytest.fixture
+def sample_conllu_protected_punct() -> str:
+    """Return CoNLL-U where a protected token is tagged PUNCT by UDPipe."""
+    return SAMPLE_CONLLU_PROTECTED_PUNCT
+
+
 @pytest.fixture
 def sample_sentences() -> list[str]:
     """Return sample sentences for testing."""

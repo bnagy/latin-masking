@@ -9,7 +9,6 @@ The caller reviews common_adverbs.txt between stages.
 from __future__ import annotations
 
 import logging
-import re
 from collections import Counter
 from pathlib import Path
 
@@ -30,68 +29,6 @@ from latin_masking.types import MaskingConfig, Stage1Result, Stage2Result
 
 logger = logging.getLogger(__name__)
 
-_EOL_TAG: str = "<EOL>"
-
-
-def _fix_eol_placement(sentences: list[str]) -> list[str]:
-    """Move leading <EOL> tags to the end of the preceding sentence.
-
-    When lines are joined with <EOL> before sentence splitting, a
-    sentence boundary may fall right at the line break.  After splitting,
-    the <EOL> token ends up at the **start** of the next sentence
-    (e.g. ``"<EOL> Troiae qui primus ab oris."``).  This function detects
-    such leading tags and appends them to the **end** of the previous
-    sentence instead, so the tag always appears at the end of the
-    sentence it terminates.
-
-    Args:
-        sentences: Raw sentence strings from the sentence splitter.
-
-    Returns:
-        Sentences with leading <EOL> tags relocated.
-    """
-    if not sentences:
-        return sentences
-
-    fixed: list[str] = [sentences[0]]
-
-    for sent in sentences[1:]:
-        stripped = sent.lstrip()
-        if stripped.startswith(_EOL_TAG):
-            # Remove the leading <EOL> tag and any surrounding whitespace.
-            remainder = stripped[len(_EOL_TAG):].lstrip()
-            # Find the most recent sentence that ends with sentence-
-            # terminating punctuation.  Parenthetical extractions (e.g.
-            # "ignoscite, Musae") don't end with punctuation and would
-            # incorrectly absorb the <EOL> tag.
-            target_idx = -1
-            for ti in range(len(fixed) - 1, -1, -1):
-                if re.search(r"[.!?;]\s*$", fixed[ti].rstrip()):
-                    target_idx = ti
-                    break
-            if target_idx >= 0:
-                fixed[target_idx] = fixed[target_idx].rstrip() + " " + _EOL_TAG
-                sent = remainder
-            else:
-                # No suitable target — keep <EOL> on this sentence.
-                sent = stripped
-                fixed.append(sent)
-                continue
-        fixed.append(sent)
-
-    # Remove any empty strings that may result from sentences that were
-    # only an <EOL> tag.
-    fixed = [s for s in fixed if s.strip()]
-
-    # Append <EOL> to the last sentence to mark the end of the poem.
-    # When lines are joined with " <EOL> ".join(...), the last line
-    # doesn't have a trailing <EOL>, so we add it here.
-    if fixed and not fixed[-1].rstrip().endswith(_EOL_TAG):
-        fixed[-1] = fixed[-1].rstrip() + " " + _EOL_TAG
-
-    return fixed
-
-
 def run_pipeline_stage1(
     input_paths: list[Path],
     *,
@@ -103,20 +40,22 @@ def run_pipeline_stage1(
 
     Per file:
     1. Read raw text
-    2. If preserve_eol: join lines with <EOL> tokens
-    3. Sentence-split (raw, no mangling yet)
-    4. Preprocess each sentence (normalize, macrons, punct) — protected tokens preserved
-    5. Write {stem}_sentences.txt to config.output_dir
-    6. UDPipe (raw=True, presegmented=True) → populates cache
-    7. Parse CoNLL-U, collect adverbs
+    2. Sentence-split (split_sentences handles verse-line <EOL> placement
+       when *preserve_eol* is True, or treats line breaks as meaningless
+       prose when False)
+    3. Preprocess each sentence (normalize, macrons, punct) — protected tokens preserved
+    4. Write {stem}_sentences.txt to config.output_dir
+    5. UDPipe (raw=True, presegmented=True) → populates cache
+    6. Parse CoNLL-U, collect adverbs
 
     After all files:
-    8. Aggregate → normalize counts → generate list → save common_adverbs.txt
+    7. Aggregate → normalize counts → generate list → save common_adverbs.txt
 
     Args:
         input_paths: List of input file paths.
         config: Pipeline configuration (includes output_dir, cache_dir, model).
-        preserve_eol: If True, join verse lines with <EOL> tokens.
+        preserve_eol: If True (verse), emit <EOL> tokens at verse line breaks;
+            if False (prose), line breaks are meaningless and no <EOL> is emitted.
 
     Returns:
         Stage1Result with adverb counts and sentence counts.
@@ -136,20 +75,10 @@ def run_pipeline_stage1(
         with open(input_path, "r", encoding="utf-8") as f:
             raw_text = f.read()
 
-        # Optionally preserve verse linebreaks as <EOL> tokens
-        if preserve_eol:
-            raw_lines = [line.strip() for line in raw_text.split("\n")]
-            raw_lines = [line for line in raw_lines if line]
-            text = " <EOL> ".join(raw_lines)
-        else:
-            text = raw_text
-
-        # Sentence-split (raw, no mangling yet)
-        sentences = split_sentences(text)
-
-        # Fix EOL placement: move leading <EOL> tags from the start of a
-        # sentence to the end of the previous sentence.
-        sentences = _fix_eol_placement(sentences)
+        # Sentence-split.  split_sentences splits on newlines and emits <EOL>
+        # tokens at verse-line ends when preserve_eol is True; for prose it
+        # treats line breaks as meaningless and emits no <EOL>.
+        sentences = split_sentences(raw_text, preserve_eol=preserve_eol)
 
         # Apply all text mangling (normalize, macrons, punct) in one place.
         # Protected tokens (<EOL>) are preserved throughout.

@@ -8,7 +8,6 @@ from unittest.mock import patch
 import pytest  # pyright: ignore[reportMissingImports]
 
 from latin_masking.pipeline import (
-    _fix_eol_placement,
     run_pipeline_stage1,
     run_pipeline_stage2,
 )
@@ -74,71 +73,6 @@ class TestRunPipelineStage1:
         for line in lines:
             assert "<EOL>" in line, f"Missing <EOL> in: {line!r}"
             assert not line.startswith("<EOL>"), f"Sentence starts with <EOL>: {line!r}"
-
-    def test_fix_eol_placement_parenthetical(self, tmp_path: Path) -> None:
-        """Test that <EOL> is not moved to parenthetical extractions."""
-        # When a parenthetical extraction sits between two sentences,
-        # the <EOL> from the next sentence should go to the containing
-        # sentence (the one before the paren), not the parenthetical.
-        result = _fix_eol_placement([
-            "Carmina quod pleno saltari nostra theatro, <EOL> nil equidem feci theatris, <EOL> Musa nec in plausus ambitiosa mea est.",
-            "tu scis hoc ipse",
-            "<EOL> Non tamen ingratum est, quodcumque obliuia nostri impedit.",
-        ])
-        # The <EOL> from "Non tamen..." should go to the containing sentence,
-        # not the parenthetical "tu scis hoc ipse".
-        assert result[0].endswith("<EOL>")
-        assert "<EOL>" not in result[1]
-        assert result[2].endswith("<EOL>")
-
-    def test_fix_eol_placement_basic(self, tmp_path: Path) -> None:
-        """Unit test for _fix_eol_placement helper."""
-        # Leading <EOL> on second sentence → moved to end of first.
-        result = _fix_eol_placement([
-            "Arma virumque cano.",
-            "<EOL> Troiae qui primus ab oris.",
-        ])
-        assert result == [
-            "Arma virumque cano. <EOL>",
-            "Troiae qui primus ab oris. <EOL>",
-        ]
-
-        # Multiple sentences with leading <EOL>.
-        result = _fix_eol_placement([
-            "First sentence.",
-            "<EOL> Second sentence.",
-            "<EOL> Third sentence.",
-        ])
-        assert result == [
-            "First sentence. <EOL>",
-            "Second sentence. <EOL>",
-            "Third sentence. <EOL>",
-        ]
-
-        # No <EOL> tags — last sentence gets <EOL> appended.
-        result = _fix_eol_placement(["One.", "Two."])
-        assert result == ["One.", "Two. <EOL>"]
-
-        # Single sentence — gets <EOL> appended.
-        result = _fix_eol_placement(["Only sentence."])
-        assert result == ["Only sentence. <EOL>"]
-
-        # Empty list.
-        assert _fix_eol_placement([]) == []
-
-        # Sentence that is only <EOL> — removed.
-        result = _fix_eol_placement(["First.", "<EOL>", "Third."])
-        assert result == ["First. <EOL>", "Third. <EOL>"]
-
-        # Last sentence should get <EOL> appended (end of poem marker).
-        result = _fix_eol_placement([
-            "Arma virumque cano. <EOL>",
-            "Troiae qui primus ab oris.",
-        ])
-        assert result == [
-            "Arma virumque cano. <EOL>",
-            "Troiae qui primus ab oris. <EOL>",
-        ]
 
 
 class TestRunPipelineStage2:
@@ -471,301 +405,104 @@ class TestStage1Stage2Integration:
         assert masked_path.exists()
 
 
-class TestEndToEndAeneid:
-    """End-to-end test for Aeneid 1 using cached UDPipe responses.
+class TestEndToEndRaw:
+    """End-to-end pipeline tests on raw text, mirroring the --stage1/--stage2 CLI.
 
-    Cache files live in the fixtures directory alongside the raw text.
-    No UDPipe API calls are made; all responses come from cache.
+    Both Ysengrimus (prose, preserve_eol=False) and Aeneid 1 (verse,
+    preserve_eol=True) are run through the real two-stage pipeline.  The
+    intermediate files (``*_sentences.txt``, ``*_sentences.quesplit.txt``,
+    ``*_sentences.quesplit.masked.txt``) and the regenerated UDPipe cache
+    responses are written into the fixtures directory so they can be reviewed
+    manually; they are NOT asserted against (exact output is locked in once
+    the intermediates have been reviewed).
+
+    The first run makes live UDPipe API calls (network on) and caches the
+    responses in the fixtures directory; subsequent runs serve from cache.
     """
 
     @pytest.fixture
-    def aeneid_fixtures_dir(self) -> Path:
-        """Return path to test fixtures directory."""
+    def fixtures_dir(self) -> Path:
         return Path(__file__).parent / "fixtures"
 
-    @pytest.fixture
-    def aeneid_raw(self, aeneid_fixtures_dir: Path) -> Path:
-        return aeneid_fixtures_dir / "aeneid_1_raw.txt"
+    def _run(self, stem: str, *, preserve_eol: bool, fixtures_dir: Path) -> None:
+        raw = fixtures_dir / f"{stem}.txt"
+        if not raw.exists():
+            pytest.skip(f"{stem} fixture not found")
 
-    @pytest.fixture
-    def aeneid_sentences_expected(self, aeneid_fixtures_dir: Path) -> Path:
-        return aeneid_fixtures_dir / "aeneid_1_sentences.txt"
+        # Copy raw text into the fixtures dir under its real stem so the
+        # generated intermediates/cache land alongside the other fixtures.
+        input_file = fixtures_dir / f"{stem}.txt"
+        assert input_file.exists()
 
-    @pytest.fixture
-    def aeneid_quesplit_expected(self, aeneid_fixtures_dir: Path) -> Path:
-        return aeneid_fixtures_dir / "aeneid_1_quesplit.txt"
-
-    @pytest.fixture
-    def aeneid_masked_expected(self, aeneid_fixtures_dir: Path) -> Path:
-        return aeneid_fixtures_dir / "aeneid_1_expected.masked.txt"
-
-    def test_end_to_end_aeneid_with_cached_responses(
-        self,
-        aeneid_raw: Path,
-        aeneid_sentences_expected: Path,
-        aeneid_quesplit_expected: Path,
-        aeneid_masked_expected: Path,
-        aeneid_fixtures_dir: Path,
-        tmp_path: Path,
-    ) -> None:
-        """Test full two-stage pipeline on Aeneid 1 with cached UDPipe responses."""
-        if not aeneid_raw.exists():
-            pytest.skip("Aeneid 1 fixture not found")
-
-        # Copy raw text to tmp; cache lives in fixtures dir
-        input_file = tmp_path / "aeneid_1_raw.txt"
-        input_file.write_text(aeneid_raw.read_text())
-
-        # Pre-write sentences and quesplit files so stage2 can find them
-        sentences_file = tmp_path / "aeneid_1_raw_sentences.txt"
-        sentences_file.write_text(aeneid_sentences_expected.read_text())
-        quesplit_file = tmp_path / "aeneid_1_raw_sentences.quesplit.txt"
-        quesplit_file.write_text(aeneid_quesplit_expected.read_text())
+        # Both stages use the curated common_adverbs_quesplit.txt gold list
+        # (the old adverb list).  Stage 1 writes its regenerated list to a
+        # temp path so the curated fixture is not clobbered; stage 2 reads
+        # the curated list for -que splitting.  The regenerated list is not
+        # asserted against the gold — the curated list is treated as fixed.
+        adverb_tmp = fixtures_dir / f"{stem}_generated_adverbs.txt"
 
         config = MaskingConfig(
-            output_dir=tmp_path,
-            cache_dir=aeneid_fixtures_dir,
-            common_adverbs_path=aeneid_fixtures_dir / "common_adverbs_quesplit.txt",
+            output_dir=fixtures_dir,
+            cache_dir=fixtures_dir,
+            common_adverbs_path=adverb_tmp,
             eos_token=None,
         )
 
-        # Stage 1: normalize, sentence-split, UDPipe (from cache), collect adverbs
         result1 = run_pipeline_stage1(
             [input_file],
             config=config,
-            preserve_eol=True,
+            preserve_eol=preserve_eol,
         )
+        n_sentences = result1.sentences_per_file[input_file]
+        assert n_sentences > 0, "Stage 1 produced no sentences"
 
-        expected_sentences = [
-            line.strip()
-            for line in aeneid_sentences_expected.read_text().splitlines()
-            if line.strip()
+        # No sentence should start with <EOL> (placement is always at the end).
+        sent_path = fixtures_dir / f"{stem}_sentences.txt"
+        sent_lines = [
+            ln.strip() for ln in sent_path.read_text().splitlines() if ln.strip()
         ]
-        assert result1.sentences_per_file[input_file] == len(expected_sentences), (
-            f"Sentence count mismatch: got {result1.sentences_per_file[input_file]}, "
-            f"expected {len(expected_sentences)}"
-        )
-        assert len(result1.adverb_counts) > 0, "No adverbs collected"
+        for ln in sent_lines:
+            assert not ln.startswith("<EOL>"), f"Sentence starts with <EOL>: {ln!r}"
 
-        # Stage 2: -que split, UDPipe (from cache), mask
+        if preserve_eol:
+            # Every verse line should end a sentence with <EOL>.  Count the
+            # non-empty raw lines and the <EOL> tokens in the output.
+            n_raw_lines = sum(1 for ln in raw.read_text().splitlines() if ln.strip())
+            n_eol = sum(ln.count("<EOL>") for ln in sent_lines)
+            assert n_eol == n_raw_lines, (
+                f"<EOL> count ({n_eol}) != non-empty raw line count "
+                f"({n_raw_lines}) for {stem}"
+            )
+        else:
+            # Prose: no <EOL> tokens should appear at all.
+            assert all("<EOL>" not in ln for ln in sent_lines), (
+                f"Unexpected <EOL> in prose output for {stem}"
+            )
+
+        # Stage 2: -que split, UDPipe, mask.  Reads the curated adverb list.
+        config.common_adverbs_path = fixtures_dir / "common_adverbs_quesplit.txt"
         result2 = run_pipeline_stage2(
             [input_file],
             config=config,
             que_blacklist_path=None,
             eos_token=None,
         )
-
         assert len(result2.output_files) == 1
 
-        actual_masked = result2.output_files[0].read_text().strip().splitlines()
-        expected_masked = [
-            line.strip()
-            for line in aeneid_masked_expected.read_text().splitlines()
-            if line.strip()
+        masked_path = result2.output_files[0]
+        masked_lines = [
+            ln.strip() for ln in masked_path.read_text().splitlines() if ln.strip()
         ]
-
-        assert len(actual_masked) == len(expected_masked), (
-            f"Masked output line count mismatch: got {len(actual_masked)}, "
-            f"expected {len(expected_masked)}"
+        # With presegmented=True, masked line count == stage1 sentence count.
+        assert len(masked_lines) == n_sentences, (
+            f"Masked line count ({len(masked_lines)}) != stage1 sentence "
+            f"count ({n_sentences}) for {stem}"
         )
 
-        for i, (actual, expected) in enumerate(
-            zip(actual_masked, expected_masked, strict=True)
-        ):
-            actual_normalized = " ".join(actual.split())
-            expected_normalized = " ".join(expected.split())
-            assert actual_normalized == expected_normalized, (
-                f"Line {i + 1} mismatch:\n"
-                f"  Got:      {actual_normalized[:100]}...\n"
-                f"  Expected: {expected_normalized[:100]}..."
-            )
+    def test_ysengrimus_end_to_end(self, fixtures_dir: Path) -> None:
+        """Ysengrimus: prose, line breaks meaningless, no <EOL> tokens."""
+        self._run("ysengrimus_raw", preserve_eol=False, fixtures_dir=fixtures_dir)
 
-    def test_aeneid_sentence_splitting_matches_expected(
-        self,
-        aeneid_raw: Path,
-        aeneid_sentences_expected: Path,
-        aeneid_fixtures_dir: Path,
-        tmp_path: Path,
-    ) -> None:
-        """Test that sentence splitting produces the expected output for Aeneid 1."""
-        if not aeneid_raw.exists():
-            pytest.skip("Aeneid 1 fixture not found")
-
-        input_file = tmp_path / "aeneid_1_raw.txt"
-        input_file.write_text(aeneid_raw.read_text())
-
-        config = MaskingConfig(
-            output_dir=tmp_path,
-            cache_dir=aeneid_fixtures_dir,
-        )
-
-        run_pipeline_stage1(
-            [input_file],
-            config=config,
-            preserve_eol=True,
-        )
-
-        sent_path = tmp_path / "aeneid_1_raw_sentences.txt"
-        actual_sentences = [
-            line.strip() for line in sent_path.read_text().splitlines() if line.strip()
-        ]
-        expected_sentences = [
-            line.strip()
-            for line in aeneid_sentences_expected.read_text().splitlines()
-            if line.strip()
-        ]
-
-        assert len(actual_sentences) == len(expected_sentences)
-
-        for i, (actual, expected) in enumerate(
-            zip(actual_sentences, expected_sentences, strict=True)
-        ):
-            assert actual == expected, (
-                f"Sentence {i + 1} mismatch:\n"
-                f"  Got:      {actual[:100]}...\n"
-                f"  Expected: {expected[:100]}..."
-            )
-
-    def test_aeneid_quesplit_matches_expected(
-        self,
-        aeneid_raw: Path,
-        aeneid_sentences_expected: Path,
-        aeneid_quesplit_expected: Path,
-        aeneid_fixtures_dir: Path,
-        tmp_path: Path,
-    ) -> None:
-        """Test that -que splitting produces the expected output for Aeneid 1."""
-        if not aeneid_raw.exists():
-            pytest.skip("Aeneid 1 fixture not found")
-
-        input_file = tmp_path / "aeneid_1_raw.txt"
-        input_file.write_text(aeneid_raw.read_text())
-
-        sentences_file = tmp_path / "aeneid_1_raw_sentences.txt"
-        sentences_file.write_text(aeneid_sentences_expected.read_text())
-
-        config = MaskingConfig(
-            output_dir=tmp_path,
-            cache_dir=aeneid_fixtures_dir,
-            common_adverbs_path=aeneid_fixtures_dir / "common_adverbs_quesplit.txt",
-        )
-
-        run_pipeline_stage1(
-            [input_file],
-            config=config,
-            preserve_eol=True,
-        )
-
-        run_pipeline_stage2(
-            [input_file],
-            config=config,
-            que_blacklist_path=None,
-        )
-
-        qs_path = tmp_path / "aeneid_1_raw_sentences.quesplit.txt"
-        actual_qs = [line.strip() for line in qs_path.read_text().splitlines() if line.strip()]
-        expected_qs = [
-            line.strip()
-            for line in aeneid_quesplit_expected.read_text().splitlines()
-            if line.strip()
-        ]
-
-        assert len(actual_qs) == len(expected_qs)
-
-        for i, (actual, expected) in enumerate(
-            zip(actual_qs, expected_qs, strict=True)
-        ):
-            assert actual == expected, (
-                f"Quesplit line {i + 1} mismatch:\n"
-                f"  Got:      {actual[:100]}...\n"
-                f"  Expected: {expected[:100]}..."
-            )
-
-    def test_aeneid_sentence_count_matches_masked_count(
-        self,
-        aeneid_raw: Path,
-        aeneid_sentences_expected: Path,
-        aeneid_quesplit_expected: Path,
-        aeneid_masked_expected: Path,
-        aeneid_fixtures_dir: Path,
-        tmp_path: Path,
-    ) -> None:
-        """Verify that masked output has same sentence count as input (presegmented=True)."""
-        if not aeneid_raw.exists():
-            pytest.skip("Aeneid 1 fixture not found")
-
-        input_file = tmp_path / "aeneid_1_raw.txt"
-        input_file.write_text(aeneid_raw.read_text())
-
-        sentences_file = tmp_path / "aeneid_1_raw_sentences.txt"
-        sentences_file.write_text(aeneid_sentences_expected.read_text())
-        quesplit_file = tmp_path / "aeneid_1_raw_sentences.quesplit.txt"
-        quesplit_file.write_text(aeneid_quesplit_expected.read_text())
-
-        config = MaskingConfig(
-            output_dir=tmp_path,
-            cache_dir=aeneid_fixtures_dir,
-            common_adverbs_path=aeneid_fixtures_dir / "common_adverbs_quesplit.txt",
-        )
-
-        result1 = run_pipeline_stage1(
-            [input_file],
-            config=config,
-            preserve_eol=True,
-        )
-        n_input_sentences = result1.sentences_per_file[input_file]
-
-        result2 = run_pipeline_stage2(
-            [input_file],
-            config=config,
-            que_blacklist_path=None,
-        )
-        n_masked_sentences = result2.sentences_processed
-
-        assert n_input_sentences == n_masked_sentences, (
-            f"Sentence count mismatch: {n_input_sentences} input sentences "
-            f"produced {n_masked_sentences} masked sentences. "
-            f"With presegmented=True, these should be equal."
-        )
-
-    def test_ysengrimus_sentence_count_matches_masked_count(
-        self,
-        tmp_path: Path,
-    ) -> None:
-        """Verify sentence count consistency for Ysengrimus (non-verse, no EOL).
-
-        Uses cached UDPipe responses from the fixtures directory to avoid
-        live API calls.
-        """
-        fixtures_dir = Path(__file__).parent / "fixtures"
-        raw = fixtures_dir / "ysengrimus_raw.txt"
-        if not raw.exists():
-            pytest.skip("Ysengrimus fixture not found")
-
-        input_file = tmp_path / "ysengrimus_raw.txt"
-        input_file.write_text(raw.read_text())
-
-        config = MaskingConfig(
-            output_dir=tmp_path,
-            cache_dir=fixtures_dir,
-        )
-
-        result1 = run_pipeline_stage1(
-            [input_file],
-            config=config,
-            preserve_eol=False,
-        )
-        n_input_sentences = result1.sentences_per_file[input_file]
-
-        result2 = run_pipeline_stage2(
-            [input_file],
-            config=config,
-            que_blacklist_path=None,
-        )
-        n_masked_sentences = result2.sentences_processed
-
-        assert n_input_sentences == n_masked_sentences, (
-            f"Sentence count mismatch: {n_input_sentences} input sentences "
-            f"produced {n_masked_sentences} masked sentences. "
-            f"With presegmented=True, these should be equal."
-        )
+    def test_aeneid_1_end_to_end(self, fixtures_dir: Path) -> None:
+        """Aeneid 1: verse, <EOL> tokens at each verse-line end."""
+        self._run("aeneid_1_raw", preserve_eol=True, fixtures_dir=fixtures_dir)

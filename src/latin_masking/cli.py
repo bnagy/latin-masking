@@ -139,7 +139,15 @@ def _cmd_mask(args: argparse.Namespace) -> int:
 
 
 def main() -> int:
-    """Main entry point for CLI."""
+    """Main entry point for CLI.
+
+    Parses command-line arguments and dispatches to the appropriate
+    subcommand handler (process, split-sentences, generate-adverbs, mask).
+
+    Returns:
+        Process exit code (0 on success).
+
+    """
     parser = argparse.ArgumentParser(
         prog="latin-mask",
         description="Latin text processing pipeline with UDPipe POS tagging and masking",
